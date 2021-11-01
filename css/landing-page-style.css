@@ -48,6 +48,7 @@ header{
     display: flex;
     width: 70%;
     align-self: self-end;
+    background: rgba(10, 10, 10, 0.2);
 }
 
 nav{
@@ -63,20 +64,21 @@ nav{
     width: 30%;
 }
 
-ul{
+.ul-nav{
     display: inline-flex;
     justify-content: start;
-    list-style: none;
 }
 
-li{
+.ul-nav li{
     margin: 0px 13px;
+    list-style: none;
 }
 
 a{
     text-decoration: none;
     color: white;
 }
+
 a:hover{
     cursor: pointer;
     padding: 5px;
