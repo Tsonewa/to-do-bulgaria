@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css//login-style.css">
+    <title>Login</title>
+</head>
+<body>
+
+  <div class="profile-icon-container">
+    <img class="profile-img" src="/images/flag-round-250.png"></img>
+    <a class="profile-manu-btn"><i class="fas fa-angle-down" ></i></a>
+    <button class="login-btn btn" class="open-button" onclick="openForm()">Log in</button>
+    <div class="form-popup" id="myForm">
+        <div class="img-wrapper">
+            <img class="login-img" src="/images//login-img.jfif"></img>
+        </div>
+        <form action="/action_page.php" class="form-container">
+          <h1 class="login-h1">Login</h1>
+          <label for="email"><b>Username</b></label>
+          <input type="text" placeholder="Enter Email" name="email" required>
+      
+          <label for="psw"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="psw" required>
+          <h7 class="sign-in-href">You don't have an account?<a href="/register.html">Sign in</a></h7>
+          <button type="submit" class="btn wide-btn">Login</button>
+          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+      </div>
+      <script>
+        function openForm() {
+          document.getElementById("myForm").style.display = "block";
+        }
+        
+        function closeForm() {
+          document.getElementById("myForm").style.display = "none";
+        }
+        </script>
+        
+</body>
+</html>

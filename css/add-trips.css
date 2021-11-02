@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Montserrat&display=swap');
+@import url("https://use.fontawesome.com/releases/v5.13.0/css/all.css");
+
+.full-nav{
+    width: 100%;
+}
+
+
+#msform{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+label{
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+fieldset {
+	background: white;
+	border: 0 none;
+	border-radius: 3px;
+	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+	padding: 20px 30px;
+	box-sizing: border-box;
+	width: 28%;
+	margin: 0 10%;
+
+}
+
+#msform input, #msform textarea, #msform select{
+	padding: 15px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	margin-bottom: 10px;
+    margin-top: 10px;
+    height: 50px;
+	width: 100%;
+	box-sizing: border-box;
+	font-family: montserrat;
+	color: #2C3E50;
+	font-size: 13px;
+}
+
+#msform textarea{
+    height: 70px;
+}
+
+.btn{
+    background-color: #FF9900;
+    color: white;
+    border-radius: 10px;
+    padding: 8px 27px;
+    border: none;
+    margin: 0px 60px;
+
+}
