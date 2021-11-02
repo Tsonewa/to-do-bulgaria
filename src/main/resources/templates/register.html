@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css//login-style.css">
+    <link rel="stylesheet" href="/css//register.css">
+    <title>Register Page</title>
+</head>
+<body>
+<div class="modal" id="myModal"></div>
+<div class="form-popup" id="myForm">
+    <div class="img-wrapper">
+        <img class="login-img" src="/images//register-pic.jpg"></img>
+    </div>
+    <form action="/action_page.php" class="form-container">
+        <h1 class="login-h1">Register</h1>
+        <label for="email"><b>Username</b></label>
+        <input type="text" placeholder="Enter Email" name="email" required>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
+        <button type="submit" class="btn wide-btn">Register</button>
+        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+    </form>
+</div>
+<footer>
+    <p>Wish me luck</p>
+</footer>
+</body>
+</html>

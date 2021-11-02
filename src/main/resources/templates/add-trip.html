@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css//auth-home.css">
+    <link rel="stylesheet" href="/css//add-trips.css">
+    <!-- <link rel="stylesheet" href="/css//add-trips-style.css"> -->
+    <link rel="stylesheet" href="/css//landing-page-style.css">
+    <!-- <script src="jquery-3.5.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+    <title>Add trip</title>
+</head>
+<body>
+<header class="full-nav">
+    <div class="logo-wrapper">
+        <img class="logo-pic" src="/images/logo.jpg" alt="logo">
+    </div>
+    <nav>
+        <ul class="ul-nav">
+            <li>
+                <a href="#">Home</a>
+            </li>
+            <li>
+                <a href="#">About us</a>
+            </li>
+            <li>
+                <a href="#">Popular trips</a>
+            </li>
+        </ul>
+        <div class="dropdown-wrapper">
+            <div class="dropdown">
+                <div class="dropdown-div">
+                    <a href="javascript:void(0)" class="fav-btn"><i class="far fa-heart"></i></a>
+                    <img class="profile-img" src="/images/flag-round-250.png"></img>
+                </div>
+                <span>Pesho</span>
+                <div class="dropdown-content">
+                    <p>
+                        <button class="btn create-btn">Add trip</button>
+                    </p>
+                    <hr>
+                    <a class="dropdown-a"><i class="fas fa-id-card"></i>Profile</a>
+                    <a class="dropdown-a"><i class="fab fa-font-awesome-flag"></i> My trips</a>
+                    <a class="dropdown-a"><i class="fas fa-cog"></i>Settings</a>
+                    <hr>
+                    <a class="dropdown-a"><i class="fas fa-sign-out-alt"></i>Exit</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <!-- multistep form -->
+    <form id="msform">
+        <!-- progressbar -->
+        <!-- <ul id="progressbar">
+          <li class="active">General info</li>
+          <li>Social Profiles</li>
+          <li>Personal Details</li>
+        </ul> --> -->
+        <!-- fieldsets -->
+        <!-- General info form -->
+        <!-- <fieldset>
+          <h2 class="fs-title">Create your trip</h2>
+          <label>Region</label>
+          <input type="text" name="region" placeholder="South Coast" />
+          <label>Type</label>
+          <select name="type" placeholder="Seaside" >
+              <option>Seaside</option>
+              <option>Mountain</option>
+              <option>City</option>
+              <option>Eco-friendly</option>
+          </select>
+          <label>Duration</label>
+          <input type="number" name="duration" placeholder="100" />
+          <label>Pictures</label>
+          <input type="file"></input>
+          <button type="button" name="next" class="btn" value="Next">Next</button>
+       // </fieldset> -->
+        <!-- <fieldset>
+          <h2 class="fs-title">Day 1</h2>
+          <label>Town</label>
+          <input type="text" name="townName" placeholder="Sofia" />
+          <label>Breakfast</label>
+          <input type="text" name="breakfastPlace" placeholder="Mekitsa&Coffee" />
+          <label>Coffee</label>
+          <input type="text" name="coffeePlace" placeholder="CoffeeBar" />
+          <label>Hotel</label>
+          <input type="text" name="hotel" placeholder="Grand Hotel Sofia" />
+          <label>Dinner</label>
+          <input type="text" name="dinnerPlace" placeholder="Blue House" />
+          <label>Attractions</label>
+          <input type="text" name="attractions" placeholder="National Palace of Culture"/>
+         // TODO add interactive btn for jenerating more input field for additional attractions using js-->
+        <!-- <button type="button" name="previous" class="btn" value="Previous">Previous</button>
+        <button type="button" name="previous" class="btn" value="Next">Next</button>
+      </fieldset> -->
+        <fieldset>
+            <h2 class="fs-title">Details</h2>
+            <label>Equipment</label>
+            <textarea type="text" name="equipment" placeholder="Equipment"></textarea>
+            <label>Must See Attractions</label>
+            <textarea type="text" name="mustSee" placeholder="MustSee"></textarea>
+            <label>Festivals information</label>
+            <textarea type="text" name="festivals" placeholder="Rose Festival"></textarea>
+            <label>Foto tips</label>
+            <textarea type="text" name="equipment" placeholder="Fotographer tip"></textarea>
+            <button type="button" name="previous" class="btn" value="Previous">Previous</button>
+            <button type="button" name="previous" class="btn" value="Submit">Submit</button>
+        </fieldset>
+    </form>
+
+</main>
+<footer>
+    <p>Wish me luck</p>
+</footer>
+</body>
+</html>
