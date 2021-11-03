@@ -4,15 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-          <link rel="stylesheet" href="/css//landing-page-style.css">
-          <link rel="stylesheet" href="/css//login-style.css">
-    <title>Login</title>
+    <link rel="stylesheet" href="/css//login-style.css">
+    <link rel="stylesheet" href="/css//landing-page-style.css">
+    <title>Login page</title>
 </head>
 <body>
-<div class="modal" id="myModal"></div>
-<header>
+<header id="full-size">
     <div class="logo-wrapper">
         <img class="logo-pic" src="/images/logo.jpg" alt="logo">
     </div>
@@ -28,101 +25,30 @@
                 <a href="#">Popular trips</a>
             </li>
         </ul>
-        <div class="form-popup" id="myForm">
-            <div class="img-wrapper">
-                <img class="login-img" src="/images//login-img.jfif">
-            </div>
-            <form action="/action_page.php" class="form-container">
-                <h1 class="login-h1">Login</h1>
-                <label for="username"><b>Username</b></label>
-                <input  id="username"
-                        name="username" required
-                        type="text" placeholder="Enter Email">
-
-                <label for="password"><b>Password</b></label>
-                <input id="password"
-                       name="password" required
-                       type="password"
-                       placeholder="Enter Password">
-                <h7 class="sign-in-href">You don't have an account?<a class="sign-in" href="/register.html">Sign in</a>
-                </h7>
-                <button type="submit" class="btn wide-btn">Login</button>
-                <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-            </form>
-        </div>
         <div>
-            <button class="login-btn btn open-button" onclick="openForm()">Log in</button>
+            <button class="login-btn btn">Log in</button>
             <button class="logout-btn btn">Logout</button>
         </div>
     </nav>
 </header>
 <main>
-    <div class="bgr-wrapper">
-        <div class="searchbar-wrapper">
-            <h3 class="searchbar-headling"><span class="explore-span">Explore</span> your destinations</h3>
-            <div class="search-container">
-                <h5>Search destination</h5>
-                <input type="text" name="search" placeholder="Search location">Nesebar</input>
-            </div>
-            <div class="duration-container">
-                <div class="start-date-wrapper">
-                    <h5>Start</h5>
-                    <input class="calendar-input" type="date" placeholder="calendar">
-                </div>
-                <div class="end-date-wrapper">
-                    <h5>Finish</h5>
-                    <input class="calendar-input" type="date" placeholder="calendar">
-                </div>
-            </div>
-            <div class="type-container">
-                <h5 class="type-header">Choose type</h5>
-                <div class="type-cards-wrapper">
-                    <div class="card">
-                        <a><i class="fas fa-mountain"></i></a>
-                        <h3 class="type-h3">Mountain</h3>
-                    </div>
-                    <div class="card">
-                        <a><i class="fas fa-ship"></i></a>
-                        <h3 class="type-h3">Seaside</h3>
-                    </div>
-                    <div class="card">
-                        <a><i class="fas fa-city"></i></a>
-                        <h3 class="type-h3">City</h3>
-                    </div>
-                    <div class="card">
-                        <a><i class="fas fa-leaf"></i></a>
-                        <h3 class="type-h3">Eco-friendly</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="search-btn-wrapper">
-                <button class="wide-btn btn">Search</button>
-            </div>
+    <div class="form" id="myForm">
+        <div class="img-wrapper">
+            <img class="login-img" src="/images//login-img.jfif"></img>
         </div>
-        <div class="bg-container">
-            <div class="info-text-wrapper">
-                <h3 class="info-header"><span class="amazing-span">Amazing</span> destinations</h3>
-                <p class="info">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odit quo doloribus quidem.
-                    Aperiam, maiores ab repudiandae debitis aliquam voluptatum saepe consectetur iure. Assumenda,
-                    praesentium consectetur voluptate ex aperiam aliquam vero!</p>
-                <button class="wide-btn btn">Find trips</button>
-            </div>
-        </div>
+        <form action="/users/login" class="form-container">
+            <h1 class="login-h1">Login</h1>
+            <label for="username"><b>Username</b></label>
+            <input type="text" placeholder="Enter username" name="username" required>
+            <label for="password"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="password" required>
+            <h7 class="sign-in-href">You don't have an account?<a class="sign-in" href="/users/register">Sign in</a></h7>
+            <button type="submit" class="btn wide-btn">Login</button>
+        </form>
     </div>
-    <footer>
-        <p>Wish me luck</p>
-    </footer>
 </main>
-<script>
-    function openForm() {
-        document.getElementById("myModal").style.display = "block";
-        document.getElementById("myForm").style.display = "flex";
-    }
-
-    function closeForm() {
-        document.getElementById("myModal").style.display = "none";
-        document.getElementById("myForm").style.display = "none";
-    }
-</script>
+<footer>
+    <p>Wish me luck</p>
+</footer>
 </body>
 </html>
