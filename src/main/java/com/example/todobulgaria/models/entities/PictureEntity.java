@@ -27,11 +27,4 @@ public class PictureEntity extends BaseEntity {
         this.url = url;
     }
 
-    public TripEntity getTrip() {
-        return trip;
-    }
-
-    public void setTrip(TripEntity trip) {
-        this.trip = trip;
-    }
 }

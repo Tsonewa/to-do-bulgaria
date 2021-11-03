@@ -11,6 +11,10 @@ public class TripEntity extends BaseEntity {
 
     @Column(nullable = false)
     private Integer duration;
+    @Column
+    private Integer rating;
+    @OneToMany(mappedBy = "trip", targetEntity = ReviewEntity.class)
+    private List<ReviewEntity> reviews;
     @OneToOne
     private RegionEntity region;
     @OneToMany(mappedBy = "trip", targetEntity = PictureEntity.class)
@@ -25,6 +29,22 @@ public class TripEntity extends BaseEntity {
     private DetailsEntity details;
 
     public TripEntity() {
+    }
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
+    }
+
+    public List<ReviewEntity> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<ReviewEntity> reviews) {
+        this.reviews = reviews;
     }
 
     public RegionEntity getRegion() {
