@@ -75,12 +75,12 @@ nav {
     list-style: none;
 }
 
-a {
+.ul-nav a {
     text-decoration: none;
     color: white;
 }
 
-a:hover {
+.ul-nav a:hover {
     cursor: pointer;
     padding: 5px;
     border-style: dotted;
@@ -278,6 +278,11 @@ footer {
     background-color: black;
     height: 30px;
 }
+
+.log-out-div{
+    max-height: 36px;
+}
+
 
 
 

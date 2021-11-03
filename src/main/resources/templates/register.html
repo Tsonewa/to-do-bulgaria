@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css//login-style.css">
-    <link rel="stylesheet" href="/css//landing-page-style.css">
+    <link rel="stylesheet" href="/css/login-style.css">
+    <link rel="stylesheet" href="/css/landing-page-style.css">
     <title>Register Page</title>
 </head>
 <body>
@@ -35,9 +35,9 @@
 
     <div class="form" id="myForm">
         <div class="img-wrapper">
-            <img class="login-img" src="/images//register-pic.jpg"></img>
+            <img class="login-img" src="/images/register-pic.jpg">
         </div>
-        <form action="/users/register" class="form-container">
+        <form th:action="@{/users/register}" method="post" class="form-container">
             <h1 class="login-h1">Register</h1>
             <label for="username"><b>Username</b></label>
             <input id="username" type="text" placeholder="Enter username" name="username" required>
@@ -47,7 +47,7 @@
 
             <label for="confirmPassword"><b>Confirm password</b></label>
             <input id="confirmPassword" type="confirmPassword" placeholder="Enter confirm password" name="confirmPassword" required>
-
+            <h7 class="sign-in-href">Already have an account?<a class="sign-in" th:href="@{/users/login}">Login</a></h7>
             <button type="submit" class="btn wide-btn">Register</button>
         </form>
     </div>

@@ -78,3 +78,12 @@ main{
 .form-container .btn:hover, .open-button:hover {
     opacity: 1;
 }
+
+.error{
+    padding: 7px;
+    border-radius: 25px;
+    background-color: rgba(255, 25, 10, 0.8);
+    width: 254px;
+    text-align: center;
+    margin-bottom: 10px;
+}

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css//landing-page-style.css">
+    <link rel="stylesheet" href="/css/landing-page-style.css">
     <title>Landing Page</title>
 </head>
 <body>
@@ -15,7 +16,7 @@
     </div>
     <nav>
         <ul class="ul-nav">
-            <li>
+            <li sec:authorize="isAuthenticated()">
                 <a href="#">Home</a>
             </li>
             <li>
@@ -25,9 +26,13 @@
                 <a href="#">Popular trips</a>
             </li>
         </ul>
-        <div>
-            <button class="login-btn btn">Log in</button>
-            <button class="logout-btn btn">Logout</button>
+        <div sec:authorize="!isAuthenticated()">
+            <a th:href="@{/users/login}"><button class="login-btn btn">Log in</button></a>
+        </div>
+        <div class="log-out-div" sec:authorize="isAuthenticated()">
+            <form th:action="@{/users/logout}" th:method="post">
+                <button class="logout-btn btn">Logout</button>
+            </form>>
         </div>
     </nav>
 </header>

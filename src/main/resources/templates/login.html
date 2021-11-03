@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css//login-style.css">
-    <link rel="stylesheet" href="/css//landing-page-style.css">
+    <link rel="stylesheet" href="/css/login-style.css">
+    <link rel="stylesheet" href="/css/landing-page-style.css">
     <title>Login page</title>
 </head>
 <body>
@@ -34,15 +34,19 @@
 <main>
     <div class="form" id="myForm">
         <div class="img-wrapper">
-            <img class="login-img" src="/images//login-img.jfif"></img>
+            <img class="login-img" src="/images/register-pic.jpg">
         </div>
-        <form action="/users/login" class="form-container">
+        <form th:action="@{/users/login}" method="post" class="form-container">
             <h1 class="login-h1">Login</h1>
+            <p th:if="${bad_credentials}" class="error">
+                Invalid username or password.
+            </p>
             <label for="username"><b>Username</b></label>
-            <input type="text" placeholder="Enter username" name="username" required>
+            <input th:value="${username}" id="username" type="text" placeholder="Enter username" name="username" required>
             <label for="password"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="password" required>
-            <h7 class="sign-in-href">You don't have an account?<a class="sign-in" href="/users/register">Sign in</a></h7>
+            <input id="password" type="password" placeholder="Enter Password" name="password" required>
+            <h7 class="sign-in-href">You don't have an account?<a class="sign-in" th:href="@{/users/register}">Sign in</a></h7>
+
             <button type="submit" class="btn wide-btn">Login</button>
         </form>
     </div>

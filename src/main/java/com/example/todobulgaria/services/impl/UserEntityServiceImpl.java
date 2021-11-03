@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserEntityServiceImpl implements UserEntityService {
@@ -50,4 +51,10 @@ public class UserEntityServiceImpl implements UserEntityService {
         user.setRoles(List.of(userRole));
                 userRepository.save(user);
             }
+
+    @Override
+    public Optional<UserEntity> findUserByUsername(String username) {
+
+        return userRepository.findUserEntityByUsername(username);
     }
+}

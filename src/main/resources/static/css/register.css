@@ -1,9 +1,0 @@
-body {
-    font-family: 'Montserrat', sans-serif;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    background-image: url("/images/background-pic.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-}

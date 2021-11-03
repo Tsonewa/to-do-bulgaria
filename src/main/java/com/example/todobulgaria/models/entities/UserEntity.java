@@ -13,7 +13,7 @@ public class UserEntity extends BaseEntity {
     private String username;
     @Column(nullable = false)
     private String password;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<RoleEntity> roles;
     @Column
     private boolean status; //blocked or active
