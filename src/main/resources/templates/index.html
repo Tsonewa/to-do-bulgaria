@@ -25,27 +25,12 @@
             <li>
                 <a href="#">Popular trips</a>
             </li>
+            <li>
+                <button class="login-btn btn open-button" >Log in</button>
+                <button class="logout-btn btn">Logout</button>
+            </li>
         </ul>
-        <div class="form-popup" id="myForm">
-            <div class="img-wrapper">
-                <img class="login-img" src="/images//login-img.jfif"></img>
-            </div>
-            <form action="/action_page.php" class="form-container">
-                <h1 class="login-h1">Login</h1>
-                <label for="email"><b>Username</b></label>
-                <input type="text" placeholder="Enter Email" name="email" required>
-
-                <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
-                <h7 class="sign-in-href">You don't have an account?<a class="sign-in" href="/register.html">Sign in</a>
-                </h7>
-                <button type="submit" class="btn wide-btn">Login</button>
-                <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-            </form>
-        </div>
         <div>
-            <button class="login-btn btn" class="open-button" onclick="openForm()">Log in</button>
-            <button class="logout-btn btn">Logout</button>
         </div>
     </nav>
 </header>
@@ -55,17 +40,16 @@
             <h3 class="searchbar-headling"><span class="explore-span">Explore</span> your destinations</h3>
             <div class="search-container">
                 <h5>Search destination</h5>
-                <input type="text" name="search" placeholder="Search location">
-                </input>
+                <input type="text" name="search" placeholder="Search location">Nesebar</input>
             </div>
             <div class="duration-container">
                 <div class="start-date-wrapper">
                     <h5>Start</h5>
-                    <input class="calendar-input" type="date" placeholder="calendar"></input>
+                    <input class="calendar-input" type="date" placeholder="calendar">
                 </div>
                 <div class="end-date-wrapper">
                     <h5>Finish</h5>
-                    <input class="calendar-input" type="date" placeholder="calendar"></input>
+                    <input class="calendar-input" type="date" placeholder="calendar">
                 </div>
             </div>
             <div class="type-container">
@@ -106,18 +90,6 @@
     <footer>
         <p>Wish me luck</p>
     </footer>
-    </div>
 </main>
-<script>
-    function openForm() {
-        document.getElementById("myModal").style.display = "block";
-        document.getElementById("myForm").style.display = "flex";
-    }
-
-    function closeForm() {
-        document.getElementById("myModal").style.display = "none";
-        document.getElementById("myForm").style.display = "none";
-    }
-</script>
 </body>
 </html>
