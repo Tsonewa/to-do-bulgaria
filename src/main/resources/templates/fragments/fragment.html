@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<header th:fragment="navbar">
+    <div class="logo-wrapper">
+        <img class="logo-pic" src="/images/logo.jpg" alt="logo">
+    </div>
+    <nav>
+        <ul class="ul-nav">
+            <li>
+                <a th:href="@{'/'}">Home</a>
+            </li>
+            <li>
+                <a href="#">About us</a>
+            </li>
+            <li>
+                <a href="#">Popular trips</a>
+            </li>
+        </ul>
+        <div sec:authorize="!isAuthenticated()">
+            <a th:href="@{/users/login}"><button class="login-btn btn">Log in</button></a>
+        </div>
+        <div class="dropdown-wrapper">
+            <div sec:authorize="isAuthenticated()" class="dropdown">
+                <div class="dropdown-div">
+                    <a href="javascript:void(0)" class="fav-btn"><i class="far fa-heart"></i></a>
+                    <img class="profile-img" src="/images/flag-round-250.png">
+                </div>
+                <span th:value="name">Pesho</span>
+                <div class="dropdown-content">
+                    <p>
+                        <button class="btn create-btn">Add trip</button>
+                    </p>
+                    <hr>
+                    <a class="dropdown-a"><i class="fas fa-id-card"></i>Profile</a>
+                    <a class="dropdown-a"><i class="fab fa-font-awesome-flag"></i> My trips</a>
+                    <a class="dropdown-a"><i class="fas fa-cog"></i>Settings</a>
+                    <hr>
+                    <form class="log-out-div" th:action="@{/users/logout}" th:method="post">
+                    <button class="dropdown-a exit-btn"><i class="fas fa-sign-out-alt"></i>Exit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<footer th:fragment="footer">
+    <p>Wish me luck</p>
+</footer>
+</html>

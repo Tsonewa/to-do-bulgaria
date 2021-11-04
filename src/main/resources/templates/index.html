@@ -10,31 +10,7 @@
 </head>
 <body>
 
-<header>
-    <div class="logo-wrapper">
-        <img class="logo-pic" src="/images/logo.jpg" alt="logo">
-    </div>
-    <nav>
-        <ul class="ul-nav">
-            <li sec:authorize="isAuthenticated()">
-                <a href="#">Home</a>
-            </li>
-            <li>
-                <a href="#">About us</a>
-            </li>
-            <li>
-                <a href="#">Popular trips</a>
-            </li>
-        </ul>
-        <div sec:authorize="!isAuthenticated()">
-            <a th:href="@{/users/login}"><button class="login-btn btn">Log in</button></a>
-        </div>
-        <div class="log-out-div" sec:authorize="isAuthenticated()">
-            <form th:action="@{/users/logout}" th:method="post">
-                <button class="logout-btn btn">Logout</button>
-            </form>>
-        </div>
-    </nav>
+<header th:include="/fragments/fragment :: navbar" >
 </header>
 <main>
     <div class="bgr-wrapper">
@@ -43,16 +19,15 @@
             <div class="search-container">
                 <h5>Search destination</h5>
                 <input type="text" name="search" placeholder="Search location">
-                </input>
             </div>
             <div class="duration-container">
                 <div class="start-date-wrapper">
                     <h5>Start</h5>
-                    <input class="calendar-input" type="date" placeholder="calendar"></input>
+                    <input class="calendar-input" type="date" placeholder="calendar">
                 </div>
                 <div class="end-date-wrapper">
                     <h5>Finish</h5>
-                    <input class="calendar-input" type="date"placeholder="calendar"></input>
+                    <input class="calendar-input" type="date"placeholder="calendar">
                 </div>
             </div>
             <div class="type-container">
@@ -88,8 +63,7 @@
             </div>
         </div>
     </div>
-    <footer>
-        <p>Wish me luck</p>
+    <footer th:replace="/fragments/fragment :: footer">
     </footer>
 </main>
 </body>

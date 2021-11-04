@@ -44,7 +44,7 @@ http.
                         loginPage("/users/login").
                         usernameParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY).
                         passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY).
-                        defaultSuccessUrl("/").
+                        defaultSuccessUrl("/home").
                         failureForwardUrl("/users/login-error").
                 and().
                 logout().

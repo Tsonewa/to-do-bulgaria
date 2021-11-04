@@ -1,52 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css//details-style.css">
-    <link rel="stylesheet" href="/css//auth-home.css">
-    <link rel="stylesheet" href="/css//landing-page-style.css">
+    <link rel="stylesheet" href="/css/details-style.css">
+    <link rel="stylesheet" href="/css/landing-page-style.css">
     <title>Details page</title>
 </head>
 <body>
-<header id="full-nav">
-    <div class="logo-wrapper">
-        <img class="logo-pic" src="/images/logo.jpg" alt="logo">
-    </div>
-    <nav>
-        <ul class="ul-nav">
-            <li>
-                <a href="#">Home</a>
-            </li>
-            <li>
-                <a href="#">About us</a>
-            </li>
-            <li>
-                <a href="#">Popular trips</a>
-            </li>
-        </ul>
-        <div class="dropdown-wrapper">
-            <div class="dropdown">
-                <div class="dropdown-div">
-                    <a href="javascript:void(0)" class="fav-btn"><i class="far fa-heart"></i></a>
-                    <img class="profile-img" src="/images/flag-round-250.png"></img>
-                </div>
-                <span>Pesho</span>
-                <div class="dropdown-content">
-                    <p>
-                        <button class="btn create-btn">Add trip</button>
-                    </p>
-                    <hr>
-                    <a class="dropdown-a"><i class="fas fa-id-card"></i>Profile</a>
-                    <a class="dropdown-a"><i class="fab fa-font-awesome-flag"></i> My trips</a>
-                    <a class="dropdown-a"><i class="fas fa-cog"></i>Settings</a>
-                    <hr>
-                    <a class="dropdown-a"><i class="fas fa-sign-out-alt"></i>Exit</a>
-                </div>
-            </div>
-        </div>
-    </nav>
+<header id="full-nav" th:include="/fragments/fragment :: navbar">
 </header>
 <main>
     <div class="cover-wrapper">
@@ -333,8 +297,7 @@
     </div>
     </div>
 </main>
-<footer>
-    <p>Wish me luck</p>
+<footer th:replace="/fragments/fragment :: footer">
 </footer>
 </body>
 </html>

@@ -8,31 +8,10 @@
     <link rel="stylesheet" href="/css/landing-page-style.css">
     <title>Register Page</title>
 </head>
-<body>
-<header  id="full-size">
-    <div class="logo-wrapper">
-        <img class="logo-pic" src="/images/logo.jpg" alt="logo">
-    </div>
-    <nav>
-        <ul class="ul-nav">
-            <li>
-                <a href="#">Home</a>
-            </li>
-            <li>
-                <a href="#">About us</a>
-            </li>
-            <li>
-                <a href="#">Popular trips</a>
-            </li>
-        </ul>
-        <div>
-            <button class="login-btn btn">Log in</button>
-            <button class="logout-btn btn">Logout</button>
-        </div>
-    </nav>
+<body id="darker-bgr">
+<header  id="full-size" th:include="/fragments/fragment :: navbar">
 </header>
 <main>
-
     <div class="form" id="myForm">
         <div class="img-wrapper">
             <img class="login-img" src="/images/register-pic.jpg">
@@ -52,8 +31,7 @@
         </form>
     </div>
 </main>
-<footer>
-    <p>Wish me luck</p>
+<footer th:replace="/fragments/fragment :: footer">
 </footer>
 </body>
 </html>

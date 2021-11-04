@@ -2,9 +2,8 @@
 @import url("https://use.fontawesome.com/releases/v5.13.0/css/all.css");
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa&family=Montserrat:wght@500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa&family=Montserrat:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa&family=Euphoria+Script&family=Montserrat:wght@500&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Montserrat&display=swap');
 * {
     padding: 0px;
     margin: 0px;
@@ -280,8 +279,86 @@ footer {
 }
 
 .log-out-div{
-    max-height: 36px;
+    align-self: self-start;
 }
+
+.exit-btn{
+    background: transparent;
+    border: none;
+    font-size: 16px;
+}
+
+.dropdown {
+    display: flex;
+    flex-direction: row;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 48px;
+    right: 41px;
+    background-color: #f9f9f9;
+    border-radius: 15px;
+    min-width: 140px;
+    box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 20%);
+    padding: 23px 16px;
+    z-index: 1;
+    text-align: center;
+}
+
+.dropdown:hover .dropdown-content {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.profile-img {
+    width: 29px;
+    height: 29px;
+}
+
+.dropdown-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.dropdown-div {
+    display: flex;
+    flex-direction: row;
+    place-items: center;
+    margin-right: 10px;
+}
+
+.dropdown span {
+    align-self: center;
+    color: white;
+    margin-right: 50px;
+}
+
+.dropdown-a {
+    color: black;
+    text-align: left;
+}
+
+.fa-heart {
+    font-size: 20px;
+    margin-right: 5px;
+    background: gray;
+    border-radius: 25px;
+    padding: 7px;
+}
+
+.fa-id-card, .fa-font-awesome-flag, .fa-cog, .fa-sign-out-alt {
+    color: black;
+    margin-right: 6px;
+}
+
+hr {
+    margin: 10px 0px;
+    color: gainsboro;
+}
+
 
 
 
