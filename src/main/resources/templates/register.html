@@ -16,16 +16,32 @@
         <div class="img-wrapper">
             <img class="login-img" src="/images/register-pic.jpg">
         </div>
-        <form th:action="@{/users/register}" method="post" class="form-container">
+        <form th:action="@{/users/register}" th:method="post" th:object="${user}" class="form-container">
             <h1 class="login-h1">Register</h1>
             <label for="username"><b>Username</b></label>
-            <input id="username" type="text" placeholder="Enter username" name="username" required>
-
+            <input id="username" type="text" placeholder="Enter username" th:field="*{username}" required>
+            <p th:each="error: ${#fields.errors('username')}"
+               th:text="${error}">Validation error</p>
+            <label for="firstName"><b>FirstName</b></label>
+            <input id="firstName" type="text" placeholder="Enter first name" th:field="*{firstName}" required>
+            <p th:each="error: ${#fields.errors('firstName')}"
+               th:text="${error}">Validation error</p>
+            <label for="lastName"><b>LastName</b></label>
+            <input id="lastName" type="text" placeholder="Enter last name" th:field="*{lastName}" required>
+            <p th:each="error : ${#fields.errors('lastName')}"
+               th:text="${error}">Validation error</p>
+            <label for="email"><b>Email</b></label>
+            <input id="email" type="text" placeholder="Enter last name" th:field="*{email}" required>
+            <p th:each="error : ${#fields.errors('email')}"
+               th:text="${error}">Validation error</p>
             <label for="password"><b>Password</b></label>
-            <input id="password" type="password" placeholder="Enter Password" name="password" required>
-
+            <input id="password" type="password" placeholder="Enter Password" th:field="*{password}" required>
+            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error">
+            </p>
             <label for="confirmPassword"><b>Confirm password</b></label>
-            <input id="confirmPassword" type="confirmPassword" placeholder="Enter confirm password" name="confirmPassword" required>
+            <input id="confirmPassword" type="password" placeholder="Enter confirm password" th:field="*{confirmPassword}" required>
+            <p th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" class="error">
+            </p>
             <h7 class="sign-in-href">Already have an account?<a class="sign-in" th:href="@{/users/login}">Login</a></h7>
             <button type="submit" class="btn wide-btn">Register</button>
         </form>

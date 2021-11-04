@@ -7,7 +7,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,11 +16,9 @@ import java.util.stream.Collectors;
 public class UserDetailsImpl implements UserDetailsService {
 
     private final UserEntityService userEntityService;
-    private final PasswordEncoder passwordEncoder;
 
-    public UserDetailsImpl(UserEntityService userEntityService, PasswordEncoder passwordEncoder) {
+    public UserDetailsImpl(UserEntityService userEntityService) {
         this.userEntityService = userEntityService;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -46,4 +43,4 @@ public class UserDetailsImpl implements UserDetailsService {
                 collect
         );
     }
-    }
+}

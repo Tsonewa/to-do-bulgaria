@@ -6,6 +6,7 @@ import com.example.todobulgaria.repositories.RoleRepository;
 import com.example.todobulgaria.services.RoleEntityService;
 import org.springframework.stereotype.Service;
 
+import javax.management.relation.RoleNotFoundException;
 import java.util.Arrays;
 
 @Service
@@ -32,5 +33,12 @@ public class RoleEntityServiceImpl implements RoleEntityService {
 
                     roleRepository.save(roleEntity);
                 });
+    }
+
+    @Override
+    public RoleEntity findByName(RoleEnum role) throws RoleNotFoundException {
+
+        return roleRepository.findByRole(role)
+                .orElseThrow(() -> new RoleNotFoundException("Role " + role + " does not exist!"));
     }
 }
