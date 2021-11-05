@@ -8,6 +8,7 @@ import com.example.todobulgaria.services.UserEntityService;
 import com.example.todobulgaria.utils.EmailValidator;
 import com.example.todobulgaria.utils.PasswordMatchValidator;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.MessageSource;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
@@ -24,6 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.nio.file.attribute.UserPrincipalNotFoundException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/users")
@@ -58,26 +61,31 @@ public class UserController {
     }
 
     @GetMapping("/register")
-    public String showRegisterForm(WebRequest webRequest, Model model) {
-
-        UserRegistrationDto userRegistrationDto = new UserRegistrationDto();
-        model.addAttribute("user", userRegistrationDto);
+    public String showRegisterForm() {
         return "register";
+    }
+
+    @ModelAttribute("userRegistrationDto")
+    public UserRegistrationDto userRegistrationDto(){
+        return new UserRegistrationDto();
     }
 
 
     @PostMapping("/register")
-    public ModelAndView registerUser(
-            @ModelAttribute("user") @Valid UserRegistrationDto userRegistrationDto,
-            HttpServletRequest request,
-            Errors errors) {
+    public String registerUser(
+            @Valid UserRegistrationDto userRegistrationDto,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes) {
 
-        try {
-            UserEntity registered = userEntityService.registrateUser(userRegistrationDto);
-        } catch (UsernameNotFoundException uaeEx) {
-            return new ModelAndView().addObject("message", "An account for that username/email already exists.");
+        if(bindingResult.hasErrors()){
+            redirectAttributes.addFlashAttribute("userRegistrationDto", userRegistrationDto);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegistrationDto", bindingResult);
+
+            return "redirect:register";
         }
 
-        return new ModelAndView("/login", "user", userRegistrationDto);
+         userEntityService.registrateUser(userRegistrationDto);
+
+           return "redirect:/";
     }
 }
