@@ -15,9 +15,10 @@
 
 <main>
     <!-- multistep form -->
+    <div>
     <form id="msform">
       <fieldset id="input1-wrapper">
-          <h2 class="fs-title">Create your trip</h2>
+          <h2 class="fs-title">Create your daily trip</h2>
           <label>Region</label>
           <input type="text" name="region" placeholder="South Coast" />
           <label>Type</label>
@@ -27,15 +28,15 @@
               <option>City</option>
               <option>Eco-friendly</option>
           </select>
-          <label>Duration</label>
-          <input type="number" name="duration" id="duration" placeholder="100" />
           <label>Pictures</label>
           <input type="file">
           <button type="button" name="next" class="btn nextBtn" onclick="secondFieldset()" value="Next">Next</button>
         </fieldset>
+        <div id="day-wrapper">
             <fieldset id="input2-wrapper" hidden>
-          <h2 class="fs-title">Day 1</h2>
+          <h2 class="fs-title">Itinerary</h2>
           <label>Town</label>
+                <div id="input-div">
           <input type="text" name="townName" placeholder="Sofia" />
           <label>Breakfast</label>
          <input type="text" name="breakfastPlace" placeholder="Mekitsa&Coffee" />
@@ -47,47 +48,59 @@
           <input type="text" name="dinnerPlace" placeholder="Blue House" />
           <label>Attractions</label>
           <input type="text" name="attractions" placeholder="National Palace of Culture"/>
-       <!--TODO add interactive btn for jenerating more input field for additional attractions using js -->
-     <button type="button" name="previous" class="btn" value="Previous" onclick="home()">Previous</button>
-     <button type="button" name="previous" class="btn" value="Next" onclick="lastFildset()">Next</button>
-      </fieldset>
+                </div>
+                <button type="button" name="add-attraction" class="add-attraction-btn" value="Add attraction" onclick="addAttraction()">Add attraction</button>
+                <button type="button" name="previous" class="btn" value="Previous" onclick="home()">Previous</button>
+                <button type="button" name="previous" class="btn" value="Next" onclick="lastFildset()">Next</button>
+                <button type="button" name="add-day" class="add-attraction-btn" value="Add day" onclick="addDay()">Add day</button>
+            </fieldset>
+        </div>
         <fieldset id="input3-wrapper" hidden>
             <h2 class="fs-title">Details</h2>
             <label>Equipment</label>
-            <textarea type="text" name="equipment" placeholder="Equipment"></textarea>
-            <label>Must See Attractions</label>
-            <textarea type="text" name="mustSee" placeholder="MustSee"></textarea>
+            <textarea name="equipment" placeholder="Equipment"></textarea>
             <label>Festivals information</label>
-            <textarea type="text" name="festivals" placeholder="Rose Festival"></textarea>
+            <textarea  name="festivals" placeholder="Rose Festival"></textarea>
             <label>Foto tips</label>
-            <textarea type="text" name="equipment" placeholder="Fotographer tip"></textarea>
+            <textarea  name="equipment" placeholder="Fotographer tip"></textarea>
+
             <button type="button" name="previous" class="btn" value="Previous" onclick="secondFieldset()">Previous</button>
             <button type="button" name="previous" class="btn" value="Submit">Submit</button>
         </fieldset>
     </form>
     <script>
         function home(){
-            document.getElementById("input1-wrapper").style.display = "block";
+            document.getElementById("input1-wrapper").style.display = "flex";
             document.getElementById("input2-wrapper").style.display = "none";
             document.getElementById("input3-wrapper").style.display = "none";
         }
         home();
 
-        function secondFieldset(){
+        function secondFieldset() {
             document.getElementById("input1-wrapper").style.display = "none";
-            document.getElementById("input2-wrapper").style.display = "block";
+            document.getElementById("input2-wrapper").style.display = "flex";
             document.getElementById("input3-wrapper").style.display = "none";
         }
-
         function lastFildset(){
             document.getElementById("input1-wrapper").style.display = "none";
             document.getElementById("input2-wrapper").style.display = "none";
-            document.getElementById("input3-wrapper").style.display = "block";
+            document.getElementById("input3-wrapper").style.display = "flex";
         }
 
-   let duration = document.getElementById("duration").innerHTML;
+        function addAttraction(){
+            let input = document.createElement('input');
+            input.name = "attractions";
+            input.type = "text";
+            input.placeholder = "Historical Museum";
+
+            let fieldset = document.getElementById("input-div");
+
+            fieldset.appendChild(input);
+        }
+
 
     </script>
+    </div>
 </main>
 <footer th:replace="/fragments/fragment :: footer">
 </footer>
