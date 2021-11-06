@@ -37,7 +37,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
 http.
         authorizeRequests().
                         requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
-                        antMatchers("/", "/users/login", "/users/register").permitAll().
+                        antMatchers("/", "/users/login", "/users/register", "/about-us").permitAll().
                         antMatchers("/**").authenticated().
                 and().
                         formLogin().

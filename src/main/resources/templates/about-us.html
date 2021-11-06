@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/landing-page-style.css">
+    <link rel="stylesheet" href="/css/about-us-style.css">
+    <title>About us</title>
+</head>
+<body>
+<header th:include="/fragments/fragment :: navbar" id="full-size"></header>
+<main class="contacts-wrapper">
+    <div class="about-us-content-wrapper">
+    <h3 class="about-us-title">About us</h3>
+    <div class="articles-wrapper">
+        <div class="article">
+            <i class="fas fa-leaf"></i>
+            <h4 class="about-us-title">Mission</h4>
+            <p class="about-us-p">Christian Schmidt, warned earlier this week that the US-brokered peace agreement signed at the end of the war is at risk of collapsing unless action is taken to stop Serbian separatists from pushing towards secession.</p>
+        </div>
+        <div class="article">
+            <i class="far fa-star"></i>
+            <h4 class="about-us-title">Who are we?</h4>
+            <p class="about-us-p">The international community's High Representative in Bosnia, Christian Schmidt, warned earlier this week that the US-brokered peace agreement signed at the end of the war is at risk of collapsing unless action is .</p>
+        </div>
+        <div class="article">
+            <i class="fas fa-user-friends"></i>
+            <h4 class="about-us-title">Our team</h4>
+            <p class="about-us-p">The international community's High Representative in Bosnia, Christian Schmidt, warned earlier this week that the US-brokered peace agreement signed at the end of the war is at risk of collapsing unless action is taken to stop Serbian separatists.</p>
+        </div>
+    </div>
+    <h3 class="about-us-title">Contact us</h3>
+    <div class="contact-us-wrapper">
+        <div class="contacts-wrapper">
+            <div class="contact">
+                <i class="fas fa-tty"></i>
+                <h5>+359 885 59 59</h5>
+            </div>
+            <div class="contact">
+                <i class="fas fa-at"></i>
+                <h5>+to-do-bulgaria@gmail.com</h5>
+            </div>
+            <div class="contact">
+                <i class="fas fa-map-marked-alt"></i>
+                <h5>Sofia, 131th Str</h5>
+            </div>
+        </div>
+        <div class="location-pic-wrapper">
+            <img src="/images/gsmarena_004.jpg" alt="location-pic" />
+        </div>
+    </div>
+    </div>
+</main>
+<footer th:replace="/fragments/fragment :: footer"></footer>
+</body>
+</html>

@@ -16,4 +16,9 @@ public class HomeController {
         return "auth-home";
 }
 
+    @GetMapping("/about-us")
+    public String aboutUs(){
+        return "about-us";
+    }
+
 }
