@@ -14,9 +14,8 @@
 </header>
 
 <main>
-    <!-- multistep form -->
     <div>
-    <form id="msform">
+    <form th:action="@{/trips/add}" th:method="post" id="msform">
       <fieldset id="input1-wrapper">
           <h2 class="fs-title">Create your daily trip</h2>
           <label>Region</label>
@@ -32,7 +31,6 @@
           <input type="file">
           <button type="button" name="next" class="btn nextBtn" onclick="secondFieldset()" value="Next">Next</button>
         </fieldset>
-        <div id="day-wrapper">
             <fieldset id="input2-wrapper" hidden>
           <h2 class="fs-title">Itinerary</h2>
           <label>Town</label>
@@ -52,9 +50,8 @@
                 <button type="button" name="add-attraction" class="add-attraction-btn" value="Add attraction" onclick="addAttraction()">Add attraction</button>
                 <button type="button" name="previous" class="btn" value="Previous" onclick="home()">Previous</button>
                 <button type="button" name="previous" class="btn" value="Next" onclick="lastFildset()">Next</button>
-                <button type="button" name="add-day" class="add-attraction-btn" value="Add day" onclick="addDay()">Add day</button>
             </fieldset>
-        </div>
+
         <fieldset id="input3-wrapper" hidden>
             <h2 class="fs-title">Details</h2>
             <label>Equipment</label>
@@ -65,7 +62,7 @@
             <textarea  name="equipment" placeholder="Fotographer tip"></textarea>
 
             <button type="button" name="previous" class="btn" value="Previous" onclick="secondFieldset()">Previous</button>
-            <button type="button" name="previous" class="btn" value="Submit">Submit</button>
+            <button type="submit" name="previous" class="btn" value="Submit">Submit</button>
         </fieldset>
     </form>
     <script>
