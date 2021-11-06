@@ -2,10 +2,7 @@ package com.example.todobulgaria.models.entities;
 
 import com.example.todobulgaria.models.BaseEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "pictures")
@@ -13,8 +10,9 @@ public class PictureEntity extends BaseEntity {
 
     @Column
     private String url;
-    @ManyToOne
-    private TripEntity trip;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private ItineraryEntity itineraryEntity;
+
 
     public PictureEntity() {
     }
@@ -27,4 +25,11 @@ public class PictureEntity extends BaseEntity {
         this.url = url;
     }
 
+    public ItineraryEntity getItineraryEntity() {
+        return itineraryEntity;
+    }
+
+    public void setItineraryEntity(ItineraryEntity itineraryEntity) {
+        this.itineraryEntity = itineraryEntity;
+    }
 }

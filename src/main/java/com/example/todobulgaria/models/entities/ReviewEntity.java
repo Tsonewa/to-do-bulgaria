@@ -25,7 +25,7 @@ public class ReviewEntity extends BaseEntity {
     @Column(name = "parent_id")
     private Long parentId;
     @ManyToOne
-    private TripEntity trip;
+    private ItineraryEntity itinerary;
 
     public ReviewEntity() {
     }
@@ -62,11 +62,11 @@ public class ReviewEntity extends BaseEntity {
         this.parentId = parentId;
     }
 
-    public TripEntity getTrip() {
-        return trip;
+    public ItineraryEntity getItinerary() {
+        return itinerary;
     }
 
-    public void setTrip(TripEntity trip) {
-        this.trip = trip;
+    public void setItinerary(ItineraryEntity itinerary) {
+        this.itinerary = itinerary;
     }
 }

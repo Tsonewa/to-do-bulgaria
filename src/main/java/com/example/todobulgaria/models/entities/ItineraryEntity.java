@@ -8,16 +8,14 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "inineraries")
+@Table(name = "itineraries")
 public class ItineraryEntity extends BaseEntity {
 
-    @Column(nullable = false)
-    private Integer day;
+    @Column
+    private Integer rating;
     @Column(name = "created_on")
     @DateTimeFormat(pattern = "MM/dd/yyyy")
     private LocalDate createdOn;
-    @ManyToOne(targetEntity = TripEntity.class)
-    private TripEntity trip;
     @ManyToMany
     @JoinTable(
             name = "itineraries_attractions",
@@ -25,31 +23,33 @@ public class ItineraryEntity extends BaseEntity {
             inverseJoinColumns = { @JoinColumn(name = "attraction_id") }
     )
     private List<AttractionEntity> attractions;
-    @ManyToMany
-    @JoinTable(
-            name = "itineraries_towns",
-            joinColumns = { @JoinColumn(name = "itinerary_id") },
-            inverseJoinColumns = { @JoinColumn(name = "town_id") }
-    )
-    private List<TownEntity> towns;
     @ManyToOne
-    private BreakfastPlaceEntity breakfastPlace;
+    private TownEntity town;
+    @Column(name = "breakfast_place", nullable = false)
+    private String breakfastPlace;
+    @Column(name = "coffee_place", nullable = false)
+    private String coffeePlace;
+    @Column(name = "dinner_place", nullable = false)
+    private String dinnerPlace;
+    @Column
+    private String hotel;
+    @OneToMany(mappedBy = "itinerary", targetEntity = ReviewEntity.class)
+    private List<ReviewEntity> reviews;
+    @OneToMany(mappedBy = "itineraryEntity", targetEntity = PictureEntity.class)
+    private List<PictureEntity> pictures;
     @ManyToOne
-    private CoffeeShopEntity coffeePlace;
-    @ManyToOne
-    private RestaurantEntity dinnerPlace;
-    @ManyToOne
-    private HotelEntity hotel;
+    private UserEntity user;
+    @OneToOne
+    private CategoryEntity categoryEntity;
 
     public ItineraryEntity() {
     }
-
-    public Integer getDay() {
-        return day;
+    public Integer getRating() {
+        return rating;
     }
 
-    public void setDay(Integer day) {
-        this.day = day;
+    public void setRating(Integer rating) {
+        this.rating = rating;
     }
 
     public LocalDate getCreatedOn() {
@@ -60,14 +60,6 @@ public class ItineraryEntity extends BaseEntity {
         this.createdOn = createdOn;
     }
 
-    public TripEntity getTrip() {
-        return trip;
-    }
-
-    public void setTrip(TripEntity trip) {
-        this.trip = trip;
-    }
-
     public List<AttractionEntity> getAttractions() {
         return attractions;
     }
@@ -76,43 +68,83 @@ public class ItineraryEntity extends BaseEntity {
         this.attractions = attractions;
     }
 
-    public List<TownEntity> getTowns() {
-        return towns;
+    public List<ReviewEntity> getReviews() {
+        return reviews;
     }
 
-    public void setTowns(List<TownEntity> towns) {
-        this.towns = towns;
+    public void setReviews(List<ReviewEntity> reviews) {
+        this.reviews = reviews;
     }
 
-    public BreakfastPlaceEntity getBreakfastPlace() {
+    public CategoryEntity getCategoryEntity() {
+        return categoryEntity;
+    }
+
+    public void setCategoryEntity(CategoryEntity categoryEntity) {
+        this.categoryEntity = categoryEntity;
+    }
+
+    public List<PictureEntity> getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(List<PictureEntity> pictures) {
+        this.pictures = pictures;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
+
+    public CategoryEntity getCategory() {
+        return categoryEntity;
+    }
+
+    public void setCategory(CategoryEntity categoryEntity) {
+        this.categoryEntity = categoryEntity;
+    }
+
+    public String getBreakfastPlace() {
         return breakfastPlace;
     }
 
-    public void setBreakfastPlace(BreakfastPlaceEntity breakfastPlace) {
+    public void setBreakfastPlace(String breakfastPlace) {
         this.breakfastPlace = breakfastPlace;
     }
 
-    public CoffeeShopEntity getCoffeePlace() {
+    public String getCoffeePlace() {
         return coffeePlace;
     }
 
-    public void setCoffeePlace(CoffeeShopEntity coffeePlace) {
+    public void setCoffeePlace(String coffeePlace) {
         this.coffeePlace = coffeePlace;
     }
 
-    public RestaurantEntity getDinnerPlace() {
+    public String getDinnerPlace() {
         return dinnerPlace;
     }
 
-    public void setDinnerPlace(RestaurantEntity dinnerPlace) {
+    public void setDinnerPlace(String dinnerPlace) {
         this.dinnerPlace = dinnerPlace;
     }
 
-    public HotelEntity getHotel() {
+    public String getHotel() {
         return hotel;
     }
 
-    public void setHotel(HotelEntity hotel) {
+    public void setHotel(String hotel) {
         this.hotel = hotel;
+    }
+
+    public TownEntity getTown() {
+        return town;
+    }
+
+    public void setTown(TownEntity town) {
+        this.town = town;
     }
 }

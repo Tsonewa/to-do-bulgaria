@@ -13,8 +13,8 @@ public class TownEntity extends BaseEntity {
 
     @Column(nullable = false)
     private String name;
-    @ManyToOne
-    private RegionEntity region;
+    @Column
+    private String region;
 
     public TownEntity() {
     }
@@ -27,11 +27,11 @@ public class TownEntity extends BaseEntity {
         this.name = name;
     }
 
-    public RegionEntity getRegion() {
+    public String getRegion() {
         return region;
     }
 
-    public void setRegion(RegionEntity region) {
+    public void setRegion(String region) {
         this.region = region;
     }
 }

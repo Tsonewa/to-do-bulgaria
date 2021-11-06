@@ -27,10 +27,18 @@ public class UserEntity extends BaseEntity {
     private List<RoleEntity> roles;
     @Column
     private boolean status; //blocked or active
-    @OneToMany(mappedBy = "user", targetEntity = TripEntity.class)
-    private List<TripEntity> trips;
+    @OneToMany(mappedBy = "user", targetEntity = ItineraryEntity.class)
+    private List<ItineraryEntity> itineraries;
 
     public UserEntity() {
+    }
+
+    public List<ItineraryEntity> getItineraries() {
+        return itineraries;
+    }
+
+    public void setItineraries(List<ItineraryEntity> itineraries) {
+        this.itineraries = itineraries;
     }
 
     public String getFirstName() {
@@ -89,11 +97,5 @@ public class UserEntity extends BaseEntity {
         this.status = status;
     }
 
-    public List<TripEntity> getTrips() {
-        return trips;
-    }
 
-    public void setTrips(List<TripEntity> trips) {
-        this.trips = trips;
-    }
 }
