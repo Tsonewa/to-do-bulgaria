@@ -1,32 +1,16 @@
 package com.example.todobulgaria.web;
 
-import com.example.todobulgaria.annotations.PasswordMatches;
-import com.example.todobulgaria.annotations.ValidEmail;
 import com.example.todobulgaria.models.dto.UserRegistrationDto;
-import com.example.todobulgaria.models.entities.UserEntity;
 import com.example.todobulgaria.services.UserEntityService;
-import com.example.todobulgaria.utils.EmailValidator;
-import com.example.todobulgaria.utils.PasswordMatchValidator;
 import org.modelmapper.ModelMapper;
-import org.springframework.context.MessageSource;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
-import org.springframework.validation.ObjectError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.nio.file.attribute.UserPrincipalNotFoundException;
-import java.util.List;
 
 @Controller
 @RequestMapping("/users")
@@ -81,10 +65,11 @@ public class UserController {
             redirectAttributes.addFlashAttribute("userRegistrationDto", userRegistrationDto);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegistrationDto", bindingResult);
 
+            System.out.println(redirectAttributes);
             return "redirect:register";
         }
 
-         userEntityService.registrateUser(userRegistrationDto);
+         userEntityService.registrarUser(userRegistrationDto);
 
            return "redirect:/";
     }

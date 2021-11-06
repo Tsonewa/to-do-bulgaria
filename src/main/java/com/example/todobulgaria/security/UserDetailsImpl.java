@@ -1,7 +1,7 @@
 package com.example.todobulgaria.security;
 
 import com.example.todobulgaria.models.entities.UserEntity;
-import com.example.todobulgaria.services.UserEntityService;
+import com.example.todobulgaria.repositories.UserRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,16 +15,16 @@ import java.util.stream.Collectors;
 @Service
 public class UserDetailsImpl implements UserDetailsService {
 
-    private final UserEntityService userEntityService;
+    private final UserRepository userRepository;
 
-    public UserDetailsImpl(UserEntityService userEntityService) {
-        this.userEntityService = userEntityService;
+    public UserDetailsImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        UserEntity user = userEntityService.findUserByUsername(username)
+        UserEntity user = userRepository.findUserEntityByUsername(username)
                 .orElseThrow( () -> new UsernameNotFoundException("User with username" + username + " not found!"));
 
 

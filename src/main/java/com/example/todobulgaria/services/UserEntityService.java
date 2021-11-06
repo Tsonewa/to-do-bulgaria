@@ -9,9 +9,9 @@ public interface UserEntityService {
     void initUsers();
 
     Optional<UserEntity> findUserByUsername(String username);
-    UserEntity registrateUser(UserRegistrationDto registrationDto);
+    UserEntity registrarUser(UserRegistrationDto registrationDto);
     Optional<UserEntity> findUserByEmail(String email);
-    boolean emailExist(String email);
+    boolean existByUsername(String username);
 }
 
 
