@@ -1,9 +1,9 @@
 package com.example.todobulgaria.services.impl;
 
-import com.example.todobulgaria.models.dto.UserRegistrationDto;
 import com.example.todobulgaria.models.entities.RoleEntity;
 import com.example.todobulgaria.models.entities.UserEntity;
 import com.example.todobulgaria.models.enums.RoleEnum;
+import com.example.todobulgaria.models.service.UserRegisterServiceModel;
 import com.example.todobulgaria.repositories.RoleRepository;
 import com.example.todobulgaria.repositories.UserRepository;
 import com.example.todobulgaria.security.UserDetailsImpl;
@@ -73,17 +73,19 @@ public class UserEntityServiceImpl implements UserEntityService {
     }
 
     @Override
-    public UserEntity registrarUser(UserRegistrationDto registrationDto) {
+    public void registrarUser(UserRegisterServiceModel userRegisterServiceModel) {
 
-        if (existByUsername(registrationDto.getUsername())) {
+        if (existByUsername(userRegisterServiceModel.getUsername())) {
             throw new UsernameNotFoundException("There is an account with that email address: "
-                    + registrationDto.getUsername());
+                    + userRegisterServiceModel.getUsername());
         }
 
-        UserEntity user = modelMapper.map(registrationDto, UserEntity.class);
+        UserEntity user = modelMapper.map(userRegisterServiceModel, UserEntity.class);
         user.setStatus(true);
-        user.setPassword(passwordEncoder.encode(registrationDto.getPassword()));
+        user.setPassword(passwordEncoder.encode(userRegisterServiceModel.getPassword()));
         user.setRoles(List.of(roleRepository.findByRole(RoleEnum.USER).orElseThrow()));
+
+        userRepository.save(user);
 
         UserDetails principal = userDetailsImpl.loadUserByUsername(user.getUsername());
         Authentication authentication = new UsernamePasswordAuthenticationToken(
@@ -96,7 +98,6 @@ public class UserEntityServiceImpl implements UserEntityService {
                 getContext().
                 setAuthentication(authentication);
 
-        return userRepository.save(user);
     }
 
     @Override

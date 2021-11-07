@@ -16,6 +16,8 @@ public class ItineraryEntity extends BaseEntity {
     @Column(name = "created_on")
     @DateTimeFormat(pattern = "MM/dd/yyyy")
     private LocalDate createdOn;
+    @Column(columnDefinition = "TEXT")
+    private String description;
     @ManyToMany
     @JoinTable(
             name = "itineraries_attractions",
@@ -146,5 +148,13 @@ public class ItineraryEntity extends BaseEntity {
 
     public void setTown(TownEntity town) {
         this.town = town;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

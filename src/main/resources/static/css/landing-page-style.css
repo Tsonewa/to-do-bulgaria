@@ -361,6 +361,14 @@ hr {
 .about-us-title{
     margin: 20px 0px;
 }
+.fa-bell:after{
+    content: ".";
+    color: red;
+    font-size: 50px;
+    position: absolute;
+    top: -13px;
+    right: 186px;
+}
 
 
 

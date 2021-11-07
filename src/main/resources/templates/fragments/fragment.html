@@ -29,7 +29,8 @@
                     <a href="javascript:void(0)" class="fav-btn"><i class="far fa-heart"></i></a>
                     <img class="profile-img" src="/images/flag-round-250.png">
                 </div>
-                <span th:value="name">Pesho</span>
+                <span  sec:authorize="isAuthenticated()"
+                       sec:authentication="name">Pesho</span>
                 <div class="dropdown-content">
                     <p>
                         <a th:href="@{/trips/add}"> <button class="btn create-btn">Add trip</button></a>

@@ -1,4 +1,4 @@
-package com.example.todobulgaria.models.dto;
+package com.example.todobulgaria.models.bindings;
 
 import com.example.todobulgaria.annotations.PasswordMatches;
 import com.example.todobulgaria.annotations.ValidEmail;
@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @PasswordMatches
-public class UserRegistrationDto {
+public class UserRegisterBindingModel {
 
     @NotBlank
     @Size(min = 2, max = 20, message = "Username must be between 2 and 20 symbols")
@@ -25,7 +25,15 @@ public class UserRegistrationDto {
     @NotBlank
     private String confirmPassword;
 
-    public UserRegistrationDto() {
+    public UserRegisterBindingModel() {
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getFirstName() {
@@ -50,14 +58,6 @@ public class UserRegistrationDto {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {

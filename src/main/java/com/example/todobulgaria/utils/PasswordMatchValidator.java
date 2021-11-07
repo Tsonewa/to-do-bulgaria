@@ -1,8 +1,7 @@
 package com.example.todobulgaria.utils;
 
 import com.example.todobulgaria.annotations.PasswordMatches;
-import com.example.todobulgaria.models.dto.UserRegistrationDto;
-import org.springframework.stereotype.Component;
+import com.example.todobulgaria.models.bindings.UserRegisterBindingModel;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -16,7 +15,7 @@ public class PasswordMatchValidator  implements ConstraintValidator<PasswordMatc
 
     @Override
     public boolean isValid(Object obj, ConstraintValidatorContext context) {
-        UserRegistrationDto user = (UserRegistrationDto) obj;
+        UserRegisterBindingModel user = (UserRegisterBindingModel) obj;
         return user.getPassword().equals(user.getConfirmPassword());
 
     }

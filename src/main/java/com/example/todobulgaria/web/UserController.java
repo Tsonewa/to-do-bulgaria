@@ -1,6 +1,7 @@
 package com.example.todobulgaria.web;
 
-import com.example.todobulgaria.models.dto.UserRegistrationDto;
+import com.example.todobulgaria.models.bindings.UserRegisterBindingModel;
+import com.example.todobulgaria.models.service.UserRegisterServiceModel;
 import com.example.todobulgaria.services.UserEntityService;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -49,27 +50,28 @@ public class UserController {
         return "register";
     }
 
-    @ModelAttribute("userRegistrationDto")
-    public UserRegistrationDto userRegistrationDto(){
-        return new UserRegistrationDto();
+    @ModelAttribute("userRegisterBindingModel")
+    public UserRegisterBindingModel userRegisterBindingModel(){
+        return new UserRegisterBindingModel();
     }
 
 
     @PostMapping("/register")
     public String registerUser(
-            @Valid UserRegistrationDto userRegistrationDto,
+            @Valid UserRegisterBindingModel userRegisterBindingModel,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes) {
 
         if(bindingResult.hasErrors()){
-            redirectAttributes.addFlashAttribute("userRegistrationDto", userRegistrationDto);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegistrationDto", bindingResult);
+            redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel", bindingResult);
 
-            System.out.println(redirectAttributes);
+            System.out.println(bindingResult);
             return "redirect:register";
         }
+        UserRegisterServiceModel user = modelMapper.map(userRegisterBindingModel, UserRegisterServiceModel.class);
 
-         userEntityService.registrarUser(userRegistrationDto);
+        userEntityService.registrarUser(user);
 
            return "redirect:/";
     }

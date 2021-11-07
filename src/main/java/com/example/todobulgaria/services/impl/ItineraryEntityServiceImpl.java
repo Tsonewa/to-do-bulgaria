@@ -1,7 +1,7 @@
 package com.example.todobulgaria.services.impl;
 
-import com.example.todobulgaria.models.dto.AddItineraryDto;
 import com.example.todobulgaria.models.entities.ItineraryEntity;
+import com.example.todobulgaria.models.service.AddItineraryServiceModel;
 import com.example.todobulgaria.repositories.ItineraryRepository;
 import com.example.todobulgaria.services.CategoryEntityService;
 import com.example.todobulgaria.services.ItineraryEntityService;
@@ -24,12 +24,12 @@ public class ItineraryEntityServiceImpl implements ItineraryEntityService {
     }
 
     @Override
-    public void createItinerary(AddItineraryDto addItineraryDto) {
+    public void createItinerary(AddItineraryServiceModel addItineraryServiceModel) {
 
-        ItineraryEntity entity = modelMapper.map(addItineraryDto, ItineraryEntity.class);
+        ItineraryEntity entity = modelMapper.map(addItineraryServiceModel, ItineraryEntity.class);
 
-        entity.setCategoryEntity(categoryEntityService
-                .getCategoryByName(addItineraryDto.getCategory()));
+//        entity.setCategoryEntity(categoryEntityService
+//                .getCategoryByName(addItineraryServiceModel.getCategory()));
         
         entity.setCreatedOn(LocalDate.now());
         entity.setRating(0);

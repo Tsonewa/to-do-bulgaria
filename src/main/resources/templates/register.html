@@ -16,7 +16,7 @@
         <div class="img-wrapper">
             <img class="login-img" src="/images/register-pic.jpg">
         </div>
-        <form th:action="@{/users/register}" th:method="post" th:object="${userRegistrationDto}" class="form-container">
+        <form th:action="@{/users/register}" th:method="post" th:object="${userRegisterBindingModel}" class="form-container">
             <h1 class="login-h1">Register</h1>
             <label for="username"><b>Username</b></label>
             <input id="username" type="text" placeholder="Enter username" th:field="*{username}" required>

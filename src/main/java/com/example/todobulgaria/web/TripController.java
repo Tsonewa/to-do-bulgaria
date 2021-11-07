@@ -1,7 +1,9 @@
 package com.example.todobulgaria.web;
 
-import com.example.todobulgaria.models.dto.AddItineraryDto;
+import com.example.todobulgaria.models.bindings.AddItineraryBindingModel;
+import com.example.todobulgaria.models.service.AddItineraryServiceModel;
 import com.example.todobulgaria.services.ItineraryEntityService;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +18,11 @@ import javax.validation.Valid;
 public class TripController {
 
     private final ItineraryEntityService itineraryEntityService;
+    private final ModelMapper modelMapper;
 
-    public TripController(ItineraryEntityService itineraryEntityService) {
+    public TripController(ItineraryEntityService itineraryEntityService, ModelMapper modelMapper) {
         this.itineraryEntityService = itineraryEntityService;
+        this.modelMapper = modelMapper;
     }
 
 
@@ -28,18 +32,21 @@ public class TripController {
     }
 
     @PostMapping("/add")
-    public String addItinerary(@Valid AddItineraryDto addItineraryDto,
+    public String addItinerary(@Valid AddItineraryBindingModel addItineraryBindingModel,
                                BindingResult bindingResult,
                                RedirectAttributes redirectAttributes){
 
         if(bindingResult.hasErrors()){
-            redirectAttributes.addFlashAttribute("addItineraryDto", addItineraryDto);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addItineraryDto", bindingResult);
+            redirectAttributes.addFlashAttribute("addItineraryBindingModel", addItineraryBindingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addItineraryBindingModel", bindingResult);
 
             return "redirect:/add";
         }
 
-        itineraryEntityService.createItinerary(addItineraryDto);
+        itineraryEntityService
+                .createItinerary(modelMapper
+                        .map(addItineraryBindingModel,
+                                AddItineraryServiceModel.class));
 
         return "index";
     }

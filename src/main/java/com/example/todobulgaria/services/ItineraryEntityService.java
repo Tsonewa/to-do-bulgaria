@@ -1,8 +1,8 @@
 package com.example.todobulgaria.services;
 
-import com.example.todobulgaria.models.dto.AddItineraryDto;
+import com.example.todobulgaria.models.service.AddItineraryServiceModel;
 
 public interface ItineraryEntityService {
-    void createItinerary(AddItineraryDto addItineraryDto);
+    void createItinerary(AddItineraryServiceModel addItineraryServiceModel);
 }
 
