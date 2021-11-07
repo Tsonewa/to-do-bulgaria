@@ -29,7 +29,7 @@ fieldset {
     padding: 20px 30px;
     box-sizing: border-box;
     width: 28%;
-    margin: 0 10%;
+    margin: 1% 1%;
 
 }
 
@@ -58,4 +58,10 @@ fieldset {
     font-family: 'Montserrat';
     align-self: self-end;
     margin-bottom: 5px;
+}
+
+#itinerary-div{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
 }

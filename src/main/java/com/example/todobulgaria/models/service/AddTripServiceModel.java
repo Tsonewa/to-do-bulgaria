@@ -1,24 +1,26 @@
-package com.example.todobulgaria.models.bindings;
+package com.example.todobulgaria.models.service;
+
+import com.example.todobulgaria.models.enums.CategoryEnum;
 
 import java.util.List;
 
-public class AddItineraryBindingModel {
+public class AddTripServiceModel {
 
     private String region;
-    private String categoryName;
+    private CategoryEnum categoryName;
     private List<String> picturesUrls; //TODO fix pictures
-    private String townName;
-    private String breakfastPlace;
-    private String coffeePlace;
-    private String hotel;
-    private String dinnerPlace;
+    private List<String> townName;
+    private List<String> breakfastPlace;
+    private List<String> coffeePlace;
+    private List<String> hotel;
+    private List<String> dinnerPlace;
     private List<String> attractionsName;
     private String description;
     private String equipment;
     private String festivals;
     private String fotoTip;
 
-    public AddItineraryBindingModel() {
+    public AddTripServiceModel() {
     }
 
     public String getRegion() {
@@ -29,11 +31,11 @@ public class AddItineraryBindingModel {
         this.region = region;
     }
 
-    public String getCategoryName() {
+    public CategoryEnum getCategoryName() {
         return categoryName;
     }
 
-    public void setCategoryName(String categoryName) {
+    public void setCategoryName(CategoryEnum categoryName) {
         this.categoryName = categoryName;
     }
 
@@ -45,43 +47,43 @@ public class AddItineraryBindingModel {
         this.picturesUrls = picturesUrls;
     }
 
-    public String getTownName() {
+    public List<String> getTownName() {
         return townName;
     }
 
-    public void setTownName(String townName) {
+    public void setTownName(List<String> townName) {
         this.townName = townName;
     }
 
-    public String getBreakfastPlace() {
+    public List<String> getBreakfastPlace() {
         return breakfastPlace;
     }
 
-    public void setBreakfastPlace(String breakfastPlace) {
+    public void setBreakfastPlace(List<String> breakfastPlace) {
         this.breakfastPlace = breakfastPlace;
     }
 
-    public String getCoffeePlace() {
+    public List<String> getCoffeePlace() {
         return coffeePlace;
     }
 
-    public void setCoffeePlace(String coffeePlace) {
+    public void setCoffeePlace(List<String> coffeePlace) {
         this.coffeePlace = coffeePlace;
     }
 
-    public String getHotel() {
+    public List<String> getHotel() {
         return hotel;
     }
 
-    public void setHotel(String hotel) {
+    public void setHotel(List<String> hotel) {
         this.hotel = hotel;
     }
 
-    public String getDinnerPlace() {
+    public List<String> getDinnerPlace() {
         return dinnerPlace;
     }
 
-    public void setDinnerPlace(String dinnerPlace) {
+    public void setDinnerPlace(List<String> dinnerPlace) {
         this.dinnerPlace = dinnerPlace;
     }
 

@@ -1,26 +1,26 @@
-package com.example.todobulgaria.models.service;
+package com.example.todobulgaria.models.bindings;
 
 import com.example.todobulgaria.models.enums.CategoryEnum;
 
 import java.util.List;
 
-public class AddItineraryServiceModel {
+public class AddTripBindingModel {
 
     private String region;
-    private CategoryEnum category;
-    private String picturesUrl; //TODO fix pictures
-    private String townName;
-    private String breakfastPlace;
-    private String coffeePlace;
-    private String hotel;
-    private String dinnerPlace;
+    private String categoryName;
+    private List<String> picturesUrls; //TODO fix pictures
+    private List<String> townName;
+    private List<String> breakfastPlace;
+    private List<String> coffeePlace;
+    private List<String> hotel;
+    private List<String> dinnerPlace;
     private List<String> attractionsName;
     private String description;
     private String equipment;
     private String festivals;
     private String fotoTip;
 
-    public AddItineraryServiceModel() {
+    public AddTripBindingModel() {
     }
 
     public String getRegion() {
@@ -31,59 +31,59 @@ public class AddItineraryServiceModel {
         this.region = region;
     }
 
-    public CategoryEnum getCategory() {
-        return category;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setCategory(CategoryEnum category) {
-        this.category = category;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
-    public String getPicturesUrl() {
-        return picturesUrl;
+    public List<String> getPicturesUrls() {
+        return picturesUrls;
     }
 
-    public void setPicturesUrl(String picturesUrl) {
-        this.picturesUrl = picturesUrl;
+    public void setPicturesUrls(List<String> picturesUrls) {
+        this.picturesUrls = picturesUrls;
     }
 
-    public String getTownName() {
+    public List<String> getTownName() {
         return townName;
     }
 
-    public void setTownName(String townName) {
+    public void setTownName(List<String> townName) {
         this.townName = townName;
     }
 
-    public String getBreakfastPlace() {
+    public List<String> getBreakfastPlace() {
         return breakfastPlace;
     }
 
-    public void setBreakfastPlace(String breakfastPlace) {
+    public void setBreakfastPlace(List<String> breakfastPlace) {
         this.breakfastPlace = breakfastPlace;
     }
 
-    public String getCoffeePlace() {
+    public List<String> getCoffeePlace() {
         return coffeePlace;
     }
 
-    public void setCoffeePlace(String coffeePlace) {
+    public void setCoffeePlace(List<String> coffeePlace) {
         this.coffeePlace = coffeePlace;
     }
 
-    public String getHotel() {
+    public List<String> getHotel() {
         return hotel;
     }
 
-    public void setHotel(String hotel) {
+    public void setHotel(List<String> hotel) {
         this.hotel = hotel;
     }
 
-    public String getDinnerPlace() {
+    public List<String> getDinnerPlace() {
         return dinnerPlace;
     }
 
-    public void setDinnerPlace(String dinnerPlace) {
+    public void setDinnerPlace(List<String> dinnerPlace) {
         this.dinnerPlace = dinnerPlace;
     }
 
@@ -127,3 +127,5 @@ public class AddItineraryServiceModel {
         this.fotoTip = fotoTip;
     }
 }
+
+

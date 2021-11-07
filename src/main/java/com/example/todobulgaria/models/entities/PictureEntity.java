@@ -11,7 +11,7 @@ public class PictureEntity extends BaseEntity {
     @Column
     private String url;
     @ManyToOne(fetch = FetchType.EAGER)
-    private ItineraryEntity itineraryEntity;
+    private TripEntity trip;
 
 
     public PictureEntity() {
@@ -25,11 +25,11 @@ public class PictureEntity extends BaseEntity {
         this.url = url;
     }
 
-    public ItineraryEntity getItineraryEntity() {
-        return itineraryEntity;
+    public TripEntity getTrip() {
+        return trip;
     }
 
-    public void setItineraryEntity(ItineraryEntity itineraryEntity) {
-        this.itineraryEntity = itineraryEntity;
+    public void setTrip(TripEntity trip) {
+        this.trip = trip;
     }
 }
