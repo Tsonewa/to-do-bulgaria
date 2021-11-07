@@ -1,5 +1,6 @@
 package com.example.todobulgaria.config;
 
+import com.example.todobulgaria.security.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,4 +19,5 @@ public class ApplicationBeanConfiguration {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 }

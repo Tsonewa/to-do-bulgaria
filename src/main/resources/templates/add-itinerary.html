@@ -15,13 +15,13 @@
 
 <main>
     <div>
-    <form th:action="@{/trips/add}" th:method="post" id="msform">
+    <form th:action="@{/itineraries/add}" th:method="post" id="msform">
       <fieldset id="input1-wrapper">
           <h2 class="fs-title">Create your daily trip</h2>
           <label>Region</label>
           <input type="text" name="region" placeholder="South Coast" />
           <label>Type</label>
-          <select name="type" placeholder="Seaside" >
+          <select name="categoryName" placeholder="Seaside" >
               <option>Seaside</option>
               <option>Mountain</option>
               <option>City</option>
@@ -29,6 +29,8 @@
           </select>
           <label>Pictures</label>
           <input type="file">
+          <label>Description</label>
+          <textarea name="description" placeholder="Description"></textarea>
           <button type="button" name="next" class="btn nextBtn" onclick="secondFieldset()" value="Next">Next</button>
         </fieldset>
             <fieldset id="input2-wrapper" hidden>
@@ -45,13 +47,12 @@
           <label>Dinner</label>
           <input type="text" name="dinnerPlace" placeholder="Blue House" />
           <label>Attractions</label>
-          <input type="text" name="attractions" placeholder="National Palace of Culture"/>
+          <input type="text" name="attractionsName" placeholder="National Palace of Culture"/>
                 </div>
                 <button type="button" name="add-attraction" class="add-attraction-btn" value="Add attraction" onclick="addAttraction()">Add attraction</button>
                 <button type="button" name="previous" class="btn" value="Previous" onclick="home()">Previous</button>
                 <button type="button" name="previous" class="btn" value="Next" onclick="lastFildset()">Next</button>
             </fieldset>
-
         <fieldset id="input3-wrapper" hidden>
             <h2 class="fs-title">Details</h2>
             <label>Equipment</label>
@@ -59,7 +60,7 @@
             <label>Festivals information</label>
             <textarea  name="festivals" placeholder="Rose Festival"></textarea>
             <label>Foto tips</label>
-            <textarea  name="equipment" placeholder="Fotographer tip"></textarea>
+            <textarea  name="fotoTip" placeholder="Fotographer tip"></textarea>
 
             <button type="button" name="previous" class="btn" value="Previous" onclick="secondFieldset()">Previous</button>
             <button type="submit" name="previous" class="btn" value="Submit">Submit</button>
@@ -86,7 +87,7 @@
 
         function addAttraction(){
             let input = document.createElement('input');
-            input.name = "attractions";
+            input.name = "attractionsName";
             input.type = "text";
             input.placeholder = "Historical Museum";
 

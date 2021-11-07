@@ -1,6 +1,7 @@
 package com.example.todobulgaria.web;
 
 import com.example.todobulgaria.models.bindings.AddItineraryBindingModel;
+import com.example.todobulgaria.models.enums.CategoryEnum;
 import com.example.todobulgaria.models.service.AddItineraryServiceModel;
 import com.example.todobulgaria.services.ItineraryEntityService;
 import org.modelmapper.ModelMapper;
@@ -14,13 +15,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/trips")
-public class TripController {
+@RequestMapping("/itineraries")
+public class ItineraryController {
 
     private final ItineraryEntityService itineraryEntityService;
     private final ModelMapper modelMapper;
 
-    public TripController(ItineraryEntityService itineraryEntityService, ModelMapper modelMapper) {
+    public ItineraryController(ItineraryEntityService itineraryEntityService, ModelMapper modelMapper) {
         this.itineraryEntityService = itineraryEntityService;
         this.modelMapper = modelMapper;
     }
@@ -28,7 +29,7 @@ public class TripController {
 
     @GetMapping("/add")
     public String getAddTripForm(){
-        return "add-trip";
+        return "add-itinerary";
     }
 
     @PostMapping("/add")
@@ -40,13 +41,15 @@ public class TripController {
             redirectAttributes.addFlashAttribute("addItineraryBindingModel", addItineraryBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addItineraryBindingModel", bindingResult);
 
-            return "redirect:/add";
+            return "redirect:add";
         }
 
+        AddItineraryServiceModel itinerary = modelMapper.map(addItineraryBindingModel, AddItineraryServiceModel.class);
+
+        itinerary.setCategory(CategoryEnum.valueOf(addItineraryBindingModel.getCategoryName().toUpperCase()));
+
         itineraryEntityService
-                .createItinerary(modelMapper
-                        .map(addItineraryBindingModel,
-                                AddItineraryServiceModel.class));
+                .createItinerary(itinerary);
 
         return "index";
     }

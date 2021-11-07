@@ -2,13 +2,14 @@ package com.example.todobulgaria.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
 public class UserService extends User {
 
     public UserService(String username, String password,
-                        Collection<? extends GrantedAuthority> authorities) {
+                       Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
     }
 

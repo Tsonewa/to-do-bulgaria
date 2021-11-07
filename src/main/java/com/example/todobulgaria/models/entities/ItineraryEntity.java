@@ -43,6 +43,8 @@ public class ItineraryEntity extends BaseEntity {
     private UserEntity user;
     @OneToOne
     private CategoryEntity categoryEntity;
+    @OneToOne
+    private DetailsEntity details;
 
     public ItineraryEntity() {
     }
@@ -156,5 +158,13 @@ public class ItineraryEntity extends BaseEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public DetailsEntity getDetails() {
+        return details;
+    }
+
+    public void setDetails(DetailsEntity details) {
+        this.details = details;
     }
 }

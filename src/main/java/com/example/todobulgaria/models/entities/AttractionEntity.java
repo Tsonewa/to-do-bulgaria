@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Table(name = "attractions")
 public class AttractionEntity extends BaseEntity {
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
     @Column(columnDefinition = "LONGTEXT")
     private String location;
