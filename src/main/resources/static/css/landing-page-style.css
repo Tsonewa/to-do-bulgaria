@@ -341,7 +341,7 @@ footer {
     text-align: left;
 }
 
-.fa-heart {
+.fa-heart, .fa-bell {
     font-size: 20px;
     margin-right: 5px;
     background: gray;
