@@ -13,11 +13,11 @@ public class ItineraryEntity extends BaseEntity {
 
     @Column
     private Integer rating;
+    @Column
+    private Integer day;
     @Column(name = "created_on")
     @DateTimeFormat(pattern = "MM/dd/yyyy")
     private LocalDate createdOn;
-    @Column(columnDefinition = "TEXT")
-    private String description;
     @ManyToMany
     @JoinTable(
             name = "itineraries_attractions",
@@ -35,25 +35,24 @@ public class ItineraryEntity extends BaseEntity {
     private String dinnerPlace;
     @Column
     private String hotel;
-    @OneToMany(mappedBy = "itinerary", targetEntity = ReviewEntity.class)
-    private List<ReviewEntity> reviews;
-    @OneToMany(mappedBy = "itineraryEntity", targetEntity = PictureEntity.class)
-    private List<PictureEntity> pictures;
-    @ManyToOne
-    private UserEntity user;
-    @OneToOne
-    private CategoryEntity categoryEntity;
-    @OneToOne
-    private DetailsEntity details;
 
     public ItineraryEntity() {
     }
+
     public Integer getRating() {
         return rating;
     }
 
     public void setRating(Integer rating) {
         this.rating = rating;
+    }
+
+    public Integer getDay() {
+        return day;
+    }
+
+    public void setDay(Integer day) {
+        this.day = day;
     }
 
     public LocalDate getCreatedOn() {
@@ -72,44 +71,12 @@ public class ItineraryEntity extends BaseEntity {
         this.attractions = attractions;
     }
 
-    public List<ReviewEntity> getReviews() {
-        return reviews;
+    public TownEntity getTown() {
+        return town;
     }
 
-    public void setReviews(List<ReviewEntity> reviews) {
-        this.reviews = reviews;
-    }
-
-    public CategoryEntity getCategoryEntity() {
-        return categoryEntity;
-    }
-
-    public void setCategoryEntity(CategoryEntity categoryEntity) {
-        this.categoryEntity = categoryEntity;
-    }
-
-    public List<PictureEntity> getPictures() {
-        return pictures;
-    }
-
-    public void setPictures(List<PictureEntity> pictures) {
-        this.pictures = pictures;
-    }
-
-    public UserEntity getUser() {
-        return user;
-    }
-
-    public void setUser(UserEntity user) {
-        this.user = user;
-    }
-
-    public CategoryEntity getCategory() {
-        return categoryEntity;
-    }
-
-    public void setCategory(CategoryEntity categoryEntity) {
-        this.categoryEntity = categoryEntity;
+    public void setTown(TownEntity town) {
+        this.town = town;
     }
 
     public String getBreakfastPlace() {
@@ -142,29 +109,5 @@ public class ItineraryEntity extends BaseEntity {
 
     public void setHotel(String hotel) {
         this.hotel = hotel;
-    }
-
-    public TownEntity getTown() {
-        return town;
-    }
-
-    public void setTown(TownEntity town) {
-        this.town = town;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public DetailsEntity getDetails() {
-        return details;
-    }
-
-    public void setDetails(DetailsEntity details) {
-        this.details = details;
     }
 }

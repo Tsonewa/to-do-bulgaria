@@ -1,9 +1,9 @@
 package com.example.todobulgaria.web;
 
-import com.example.todobulgaria.models.bindings.AddItineraryBindingModel;
+import com.example.todobulgaria.models.bindings.AddTripBindingModel;
 import com.example.todobulgaria.models.enums.CategoryEnum;
-import com.example.todobulgaria.models.service.AddItineraryServiceModel;
-import com.example.todobulgaria.services.ItineraryEntityService;
+import com.example.todobulgaria.models.service.AddTripServiceModel;
+import com.example.todobulgaria.services.TripEntityService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -18,11 +18,11 @@ import javax.validation.Valid;
 @RequestMapping("/itineraries")
 public class ItineraryController {
 
-    private final ItineraryEntityService itineraryEntityService;
+    private final TripEntityService tripEntityService;
     private final ModelMapper modelMapper;
 
-    public ItineraryController(ItineraryEntityService itineraryEntityService, ModelMapper modelMapper) {
-        this.itineraryEntityService = itineraryEntityService;
+    public ItineraryController(TripEntityService tripEntityService, ModelMapper modelMapper) {
+        this.tripEntityService = tripEntityService;
         this.modelMapper = modelMapper;
     }
 
@@ -33,23 +33,25 @@ public class ItineraryController {
     }
 
     @PostMapping("/add")
-    public String addItinerary(@Valid AddItineraryBindingModel addItineraryBindingModel,
+    public String addItinerary(@Valid AddTripBindingModel addTripBindingModel,
                                BindingResult bindingResult,
                                RedirectAttributes redirectAttributes){
 
         if(bindingResult.hasErrors()){
-            redirectAttributes.addFlashAttribute("addItineraryBindingModel", addItineraryBindingModel);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addItineraryBindingModel", bindingResult);
+            redirectAttributes.addFlashAttribute("addTripBindingModel", addTripBindingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addTripBindingModel", bindingResult);
 
+            System.out.println(addTripBindingModel);
             return "redirect:add";
         }
 
-        AddItineraryServiceModel itinerary = modelMapper.map(addItineraryBindingModel, AddItineraryServiceModel.class);
+        AddTripServiceModel trip = modelMapper.map(addTripBindingModel, AddTripServiceModel.class);
 
-        itinerary.setCategory(CategoryEnum.valueOf(addItineraryBindingModel.getCategoryName().toUpperCase()));
+        trip.setCategoryName(CategoryEnum.valueOf(addTripBindingModel.getCategoryName().toUpperCase()));
+        System.out.println(trip);
+        tripEntityService
+                .createTrip(trip);
 
-        itineraryEntityService
-                .createItinerary(itinerary);
 
         return "index";
     }

@@ -33,10 +33,11 @@
           <textarea name="description" placeholder="Description"></textarea>
           <button type="button" name="next" class="btn nextBtn" onclick="secondFieldset()" value="Next">Next</button>
         </fieldset>
+        <div id="itinerary-div">
             <fieldset id="input2-wrapper" hidden>
-          <h2 class="fs-title">Itinerary</h2>
+          <h2 class="fs-title">Day 1</h2>
+           <div class="input-div">
           <label>Town</label>
-                <div id="input-div">
           <input type="text" name="townName" placeholder="Sofia" />
           <label>Breakfast</label>
          <input type="text" name="breakfastPlace" placeholder="Mekitsa&Coffee" />
@@ -48,11 +49,13 @@
           <input type="text" name="dinnerPlace" placeholder="Blue House" />
           <label>Attractions</label>
           <input type="text" name="attractionsName" placeholder="National Palace of Culture"/>
-                </div>
-                <button type="button" name="add-attraction" class="add-attraction-btn" value="Add attraction" onclick="addAttraction()">Add attraction</button>
+           </div>
+<!--                <button type="button" name="add-attraction" class="add-attraction-btn" value="Add attraction" onclick="addAttraction()">Add attraction</button>-->
+                <button type="button" name="add-day" class="btn" value="add-day" onclick="addDay()">Add day</button>
                 <button type="button" name="previous" class="btn" value="Previous" onclick="home()">Previous</button>
                 <button type="button" name="previous" class="btn" value="Next" onclick="lastFildset()">Next</button>
             </fieldset>
+        </div>
         <fieldset id="input3-wrapper" hidden>
             <h2 class="fs-title">Details</h2>
             <label>Equipment</label>
@@ -69,33 +72,109 @@
     <script>
         function home(){
             document.getElementById("input1-wrapper").style.display = "flex";
-            document.getElementById("input2-wrapper").style.display = "none";
+            document.getElementById("itinerary-div").style.display = "none";
             document.getElementById("input3-wrapper").style.display = "none";
         }
         home();
 
         function secondFieldset() {
             document.getElementById("input1-wrapper").style.display = "none";
-            document.getElementById("input2-wrapper").style.display = "flex";
+            document.getElementById("itinerary-div").style.display = "flex";
             document.getElementById("input3-wrapper").style.display = "none";
         }
         function lastFildset(){
             document.getElementById("input1-wrapper").style.display = "none";
-            document.getElementById("input2-wrapper").style.display = "none";
+            document.getElementById("itinerary-div").style.display = "none";
             document.getElementById("input3-wrapper").style.display = "flex";
         }
 
         function addAttraction(){
+            let parent = document.getElementById('itinerary-div');
+            let n = Number(parent.getElementsByTagName('fieldset').length) - 1;
+
             let input = document.createElement('input');
             input.name = "attractionsName";
             input.type = "text";
             input.placeholder = "Historical Museum";
 
-            let fieldset = document.getElementById("input-div");
+            let fieldset = document.getElementsByClassName("input-div")[n];
 
             fieldset.appendChild(input);
         }
 
+        function addDay(){
+            let parent = document.getElementById('itinerary-div');
+            let n = Number(parent.getElementsByTagName('fieldset').length) + 1;
+
+            let fieldset = document.createElement('fieldset')
+            let h2 = document.createElement('h2');
+            let div = document.createElement('div');
+            div.className = "input-div";
+
+            h2.textContent = 'Day ' + n;
+            h2.className= "fs-title";
+            let label = document.createElement('label');
+            label.textContent = "Town";
+            div.appendChild(h2);
+            div.appendChild(label);
+
+            let townInput = document.createElement('input');
+            townInput.type = "text";
+            townInput.name = "townName";
+            townInput.placeholder = "Sofia";
+            div.appendChild(townInput);
+            let labelBrekfast = document.createElement('label');
+            labelBrekfast.textContent = "Breakfast";
+
+            let breakfastInput = document.createElement('input');
+            breakfastInput.type = "text";
+            breakfastInput.name = "breakfastPlace";
+            breakfastInput.placeholder = "Mekitsa&Coffee";
+            div.appendChild(labelBrekfast).appendChild(breakfastInput);
+
+            let labelCoffee = document.createElement('label');
+            labelCoffee.textContent = "Coffee";
+            let coffeeInput = document.createElement('input');
+            coffeeInput.type = "text";
+            coffeeInput.name = "coffeePlace";
+            coffeeInput.placeholder = "CoffeeBar";
+            div.appendChild(labelCoffee).appendChild(coffeeInput);
+
+            let hotelCoffee = document.createElement('label');
+            hotelCoffee.textContent = "Hotel";
+            let hotelInput = document.createElement('input');
+            hotelInput.type = "text";
+            hotelInput.name = "hotel";
+            hotelInput.placeholder = "Grand Hotel Sofia";
+            div.appendChild(hotelCoffee).appendChild(hotelInput);
+
+            let dinnerLabel = document.createElement('label');
+            dinnerLabel.textContent = "Dinner";
+            let dinnerInput = document.createElement('input');
+            dinnerInput.type = "text";
+            dinnerInput.name = "dinnerPlace";
+            dinnerInput.placeholder = "Blue House";
+            div.appendChild(dinnerLabel).appendChild(dinnerInput);
+
+            let attractionsLabel = document.createElement('label');
+            attractionsLabel.textContent = "Attractions";
+            let attractionsInput = document.createElement('input');
+            attractionsInput.type = "text";
+            attractionsInput.name = "attractionsName";
+            attractionsInput.placeholder = "National Palace of Culture";
+            div.appendChild(attractionsLabel).appendChild(attractionsInput);
+
+            // let btn = document.createElement('button');
+            // btn.type = "button";
+            // btn.name = "add-attraction";
+            // btn.className="add-attraction-btn";
+            // btn.value="Add attraction"
+            // btn.textContent = "Add attraction";
+
+            fieldset.appendChild(div);
+            // fieldset.appendChild(btn);
+            parent.appendChild(fieldset);
+        }
 
     </script>
     </div>
