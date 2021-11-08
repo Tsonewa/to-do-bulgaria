@@ -2,6 +2,7 @@ package com.example.todobulgaria.services.impl;
 
 import com.example.todobulgaria.models.entities.*;
 import com.example.todobulgaria.models.service.AddTripServiceModel;
+import com.example.todobulgaria.models.views.BestTripsArticleViewModel;
 import com.example.todobulgaria.repositories.TripRepository;
 import com.example.todobulgaria.services.*;
 import org.modelmapper.ModelMapper;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TripEntityServiceImpl implements TripEntityService {
@@ -60,8 +62,7 @@ public class TripEntityServiceImpl implements TripEntityService {
                 townEntityService.saveTown(newTown);
                 itineraryEntity.setTown(newTown);
             }
-
-            itineraryEntity.setRating(0);
+            
             itineraryEntity.setCreatedOn(LocalDate.now());
             itineraryEntity.setBreakfastPlace(addTripServiceModel.getBreakfastPlace().get(i));
             itineraryEntity.setDinnerPlace(addTripServiceModel.getDinnerPlace().get(i));
@@ -95,14 +96,33 @@ public class TripEntityServiceImpl implements TripEntityService {
         detailsEntityService.saveDetailsEntity(details);
 
         entity.setDetails(details);
-
         UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         entity.setUser(userEntityService.findUserByUsername(principal.getUsername()).orElseThrow());
 
         //TODO implement adding pictures url using cloudinary -> use Pictures entity
-        System.out.println(entity);
+
         tripRepository.save(entity);
+    }
+
+    @Override
+    public  List<BestTripsArticleViewModel> findFirstEightBestTripsOrderByRating() {
+
+        List<TripEntity> bestEightTripsOrderByRating = tripRepository.findBestEightTripsOrderByRating();
+
+        List<BestTripsArticleViewModel> collect = bestEightTripsOrderByRating
+                .stream()
+                .map(b -> {
+                    BestTripsArticleViewModel map = modelMapper.map(b, BestTripsArticleViewModel.class);
+                    map.setUrl(b.getPicture().getUrl());
+
+                    System.out.println(map);
+                    return map;
+                }).collect(Collectors.toList());
+
+        System.out.println(collect);
+
+        return collect;
     }
 
     private DetailsEntity createDetailsEntity(String equipment, String festivals, String fotoTip) {

@@ -13,11 +13,11 @@ public class TripEntity extends BaseEntity {
     private String region;
     @Column
     private Integer duration;
-    @OneToMany(mappedBy = "trip", targetEntity = PictureEntity.class)
-    private List<PictureEntity> pictures;
+    @OneToOne(fetch = FetchType.EAGER)
+    private PictureEntity picture;
     @ManyToOne
     private UserEntity user;
-    @OneToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private CategoryEntity categoryEntity;
     @OneToMany(mappedBy = "trip", targetEntity = ItineraryEntity.class)
     private List<ItineraryEntity> itineraries;
@@ -27,8 +27,26 @@ public class TripEntity extends BaseEntity {
     private DetailsEntity details;
     @OneToMany(mappedBy = "trip", targetEntity = ReviewEntity.class)
     private List<ReviewEntity> reviews;
+    @Column
+    private Integer rating = 0;
 
     public TripEntity() {
+    }
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
+    }
+
+    public PictureEntity getPicture() {
+        return picture;
+    }
+
+    public void setPicture(PictureEntity picture) {
+        this.picture = picture;
     }
 
     public Integer getDuration() {
@@ -45,14 +63,6 @@ public class TripEntity extends BaseEntity {
 
     public void setRegion(String region) {
         this.region = region;
-    }
-
-    public List<PictureEntity> getPictures() {
-        return pictures;
-    }
-
-    public void setPictures(List<PictureEntity> pictures) {
-        this.pictures = pictures;
     }
 
     public UserEntity getUser() {

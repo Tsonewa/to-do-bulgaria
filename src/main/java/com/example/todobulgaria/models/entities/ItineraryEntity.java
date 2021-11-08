@@ -12,8 +12,6 @@ import java.util.List;
 public class ItineraryEntity extends BaseEntity {
 
     @Column(nullable = false)
-    private Integer rating;
-    @Column(nullable = false)
     private Integer day;
     @Column(name = "created_on", nullable = false)
     @DateTimeFormat(pattern = "MM/dd/yyyy")
@@ -47,14 +45,6 @@ public class ItineraryEntity extends BaseEntity {
 
     public void setTrip(TripEntity trip) {
         this.trip = trip;
-    }
-
-    public Integer getRating() {
-        return rating;
-    }
-
-    public void setRating(Integer rating) {
-        this.rating = rating;
     }
 
     public Integer getDay() {

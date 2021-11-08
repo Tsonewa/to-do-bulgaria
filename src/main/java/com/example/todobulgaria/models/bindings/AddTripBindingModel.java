@@ -1,10 +1,7 @@
 package com.example.todobulgaria.models.bindings;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.List;
 
 public class AddTripBindingModel {
@@ -17,18 +14,18 @@ public class AddTripBindingModel {
     private List<String> picturesUrls; //TODO fix pictures
     @NotEmpty
     @Valid
-    private List<@Size(min = 2, max = 15)@NotBlank String> townName;
+    private List<@Size(min = 2, max = 30)@NotBlank String> townName;
     @NotEmpty
-    private List<@Size(min = 2, max = 15)@NotBlank String> breakfastPlace;
+    private List<@Size(min = 2, max = 30)@NotBlank String> breakfastPlace;
     @NotEmpty
-    private List<@Size(min = 2, max = 15)@NotBlank String> coffeePlace;
+    private List<@Size(min = 2, max = 30)@NotBlank String> coffeePlace;
     @NotEmpty
-    private List<@Size(min = 2, max = 15)@NotBlank String> hotel;
+    private List<@Size(min = 2, max = 30)@NotBlank String> hotel;
     @NotEmpty
-    private List<@Size(min = 2, max = 15) @NotBlank String> dinnerPlace;
+    private List<@Size(min = 2, max = 30) @NotBlank String> dinnerPlace;
     @NotEmpty
     @Valid
-    private List<@Size(min = 2, max = 15) @NotBlank String> attractionsName;
+    private List<@Size(min = 2, max = 30) @NotBlank String> attractionsName;
     private String description;
     private String equipment;
     private String festivals;

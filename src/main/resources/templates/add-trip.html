@@ -15,7 +15,7 @@
 
 <main>
     <div>
-    <form th:action="@{/itineraries/add}" th:method="post" th:object="${addTripBindingModel}" id="msform">
+    <form th:action="@{/trips/add}" th:method="post" th:object="${addTripBindingModel}" id="msform">
       <fieldset id="input1-wrapper">
           <h2 class="fs-title">Create your daily trip</h2>
           <label>Region</label>
@@ -39,15 +39,15 @@
           <label>Town</label>
           <input th:field="*{townName}" type="text" name="townName" placeholder="Sofia" />
           <label>Breakfast</label>
-         <input type="text" name="breakfastPlace" placeholder="Mekitsa&Coffee" />
+         <input th:field="*{breakfastPlace}" type="text" name="breakfastPlace" placeholder="Mekitsa&Coffee" />
           <label>Coffee</label>
-          <input type="text" name="coffeePlace" placeholder="CoffeeBar" />
+          <input th:field="*{coffeePlace}" type="text" name="coffeePlace" placeholder="CoffeeBar" />
           <label>Hotel</label>
-          <input type="text" name="hotel" placeholder="Grand Hotel Sofia" />
+          <input th:field="*{hotel}" type="text" name="hotel" placeholder="Grand Hotel Sofia" />
           <label>Dinner</label>
-          <input type="text" name="dinnerPlace" placeholder="Blue House" />
+          <input th:field="*{dinnerPlace}" type="text" name="dinnerPlace" placeholder="Blue House" />
           <label>Attractions</label>
-          <input type="text" name="attractionsName" placeholder="National Palace of Culture"/>
+          <input th:field="*{attractionsName}" type="text" name="attractionsName" placeholder="National Palace of Culture"/>
            </div>
 <!--                <button type="button" name="add-attraction" class="add-attraction-btn" value="Add attraction" onclick="addAttraction()">Add attraction</button>-->
                 <button type="button" name="add-day" class="btn" value="add-day" onclick="addDay()">Add day</button>
@@ -60,9 +60,9 @@
             <label>Equipment</label>
             <textarea name="equipment" placeholder="Equipment"></textarea>
             <label>Festivals information</label>
-            <textarea  name="festivals" placeholder="Rose Festival"></textarea>
+            <textarea name="festivals" placeholder="Rose Festival"></textarea>
             <label>Foto tips</label>
-            <textarea  name="fotoTip" placeholder="Fotographer tip"></textarea>
+            <textarea name="fotoTip" placeholder="Fotographer tip"></textarea>
 
             <button type="button" name="previous" class="btn" value="Previous" onclick="secondFieldset()">Previous</button>
             <button type="submit" name="previous" class="btn" value="Submit">Submit</button>
