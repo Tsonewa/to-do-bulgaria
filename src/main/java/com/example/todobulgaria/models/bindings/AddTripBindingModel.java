@@ -38,7 +38,7 @@ public class AddTripBindingModel {
     }
 
     public String getRegion() {
-        return region.trim();
+        return region;
     }
 
     public void setRegion(String region) {
@@ -111,7 +111,7 @@ public class AddTripBindingModel {
     }
 
     public String getDescription() {
-        return description.trim();
+        return description;
     }
 
     public void setDescription(String description) {
@@ -119,7 +119,7 @@ public class AddTripBindingModel {
     }
 
     public String getEquipment() {
-        return equipment.trim();
+        return equipment;
     }
 
     public void setEquipment(String equipment) {
@@ -127,7 +127,7 @@ public class AddTripBindingModel {
     }
 
     public String getFestivals() {
-        return festivals.trim();
+        return festivals;
     }
 
     public void setFestivals(String festivals) {
@@ -135,7 +135,7 @@ public class AddTripBindingModel {
     }
 
     public String getFotoTip() {
-        return fotoTip.trim();
+        return fotoTip;
     }
 
     public void setFotoTip(String fotoTip) {

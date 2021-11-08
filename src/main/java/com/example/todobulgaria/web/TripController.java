@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -15,13 +16,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/itineraries")
-public class ItineraryController {
+@RequestMapping("/trips")
+public class TripController {
 
     private final TripEntityService tripEntityService;
     private final ModelMapper modelMapper;
 
-    public ItineraryController(TripEntityService tripEntityService, ModelMapper modelMapper) {
+    public TripController(TripEntityService tripEntityService, ModelMapper modelMapper) {
         this.tripEntityService = tripEntityService;
         this.modelMapper = modelMapper;
     }
@@ -29,7 +30,12 @@ public class ItineraryController {
 
     @GetMapping("/add")
     public String getAddTripForm(){
-        return "add-itinerary";
+        return "add-trip";
+    }
+
+    @ModelAttribute
+    public AddTripBindingModel addTripBindingModel(){
+        return new AddTripBindingModel();
     }
 
     @PostMapping("/add")
@@ -55,5 +61,11 @@ public class ItineraryController {
 
 
         return "index";
+    }
+
+    @GetMapping("/best")
+    public String getBestTrips(){
+
+        return "best-trips";
     }
 }

@@ -87,6 +87,7 @@ public class TripEntityServiceImpl implements TripEntityService {
         }
 
         entity.setItineraries(itineraries);
+        entity.setDuration(itineraries.size());
 
         DetailsEntity details =
                 createDetailsEntity(addTripServiceModel.getEquipment(), addTripServiceModel.getFestivals(), addTripServiceModel.getFotoTip());

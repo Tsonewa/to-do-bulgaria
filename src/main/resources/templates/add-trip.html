@@ -15,22 +15,21 @@
 
 <main>
     <div>
-    <form th:action="@{/itineraries/add}" th:method="post" id="msform">
+    <form th:action="@{/itineraries/add}" th:method="post" th:object="${addTripBindingModel}" id="msform">
       <fieldset id="input1-wrapper">
           <h2 class="fs-title">Create your daily trip</h2>
           <label>Region</label>
-          <input type="text" name="region" placeholder="South Coast" />
+          <input th:field="*{region}" type="text" name="region" placeholder="South Coast" />
           <label>Type</label>
-          <select name="categoryName" placeholder="Seaside" >
-              <option>Seaside</option>
-              <option>Mountain</option>
-              <option>City</option>
-              <option>Eco-friendly</option>
+          <select th:field="*{categoryName}" name="categoryName" placeholder="Seaside" >
+              <option value="">Select trip type</option>
+              <option th:each="t : ${T(com.example.todobulgaria.models.enums.CategoryEnum).values()}"
+                      th:text="${t}" th:value="${t}" th:selected="${t} == *{categoryName}">Mountain</option>
           </select>
           <label>Pictures</label>
           <input type="file">
           <label>Description</label>
-          <textarea name="description" placeholder="Description"></textarea>
+          <textarea th:field="*{description}" name="description" placeholder="Description"></textarea>
           <button type="button" name="next" class="btn nextBtn" onclick="secondFieldset()" value="Next">Next</button>
         </fieldset>
         <div id="itinerary-div">
@@ -38,7 +37,7 @@
           <h2 class="fs-title">Day 1</h2>
            <div class="input-div">
           <label>Town</label>
-          <input type="text" name="townName" placeholder="Sofia" />
+          <input th:field="*{townName}" type="text" name="townName" placeholder="Sofia" />
           <label>Breakfast</label>
          <input type="text" name="breakfastPlace" placeholder="Mekitsa&Coffee" />
           <label>Coffee</label>

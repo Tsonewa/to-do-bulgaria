@@ -11,6 +11,8 @@ public class TripEntity extends BaseEntity {
 
     @Column(nullable = false)
     private String region;
+    @Column
+    private Integer duration;
     @OneToMany(mappedBy = "trip", targetEntity = PictureEntity.class)
     private List<PictureEntity> pictures;
     @ManyToOne
@@ -27,6 +29,14 @@ public class TripEntity extends BaseEntity {
     private List<ReviewEntity> reviews;
 
     public TripEntity() {
+    }
+
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
     }
 
     public String getRegion() {

@@ -370,7 +370,12 @@ hr {
     right: 186px;
 }
 
-
+#full-size{
+    display: flex;
+    width: 100%;
+    align-self: self-end;
+    background: rgba(10, 10, 10, 0.2);
+}
 
 
 

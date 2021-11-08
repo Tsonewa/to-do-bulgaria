@@ -15,7 +15,7 @@
                 <a th:href="@{/about-us}">About us</a>
             </li>
             <li>
-                <a href="#">Popular trips</a>
+                <a th:href="@{/trips/best}">Popular trips</a>
             </li>
         </ul>
         <div sec:authorize="!isAuthenticated()">
@@ -33,7 +33,7 @@
                        sec:authentication="name">Pesho</span>
                 <div class="dropdown-content">
                     <p>
-                        <a th:href="@{/itineraries/add}"> <button class="btn create-btn">Add trip</button></a>
+                        <a th:href="@{/trips/add}"> <button class="btn create-btn">Add trip</button></a>
                     </p>
                     <hr>
                     <a class="dropdown-a"><i class="fas fa-id-card"></i>Profile</a>

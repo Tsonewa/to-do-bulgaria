@@ -13,12 +13,7 @@ main{
     background-size: cover;
 }
 
-#full-size{
-    display: flex;
-    width: 100%;
-    align-self: self-end;
-    background: rgba(10, 10, 10, 0.2);
-}
+
 .form {
     display: flex;
     flex-direction: row;
