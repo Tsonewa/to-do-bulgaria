@@ -9,15 +9,15 @@ import java.util.List;
 @Table(name="trips")
 public class TripEntity extends BaseEntity {
 
+    @Column(nullable = false)
     private String region;
-
     @OneToMany(mappedBy = "trip", targetEntity = PictureEntity.class)
     private List<PictureEntity> pictures;
     @ManyToOne
     private UserEntity user;
     @OneToOne
     private CategoryEntity categoryEntity;
-    @OneToMany
+    @OneToMany(mappedBy = "trip", targetEntity = ItineraryEntity.class)
     private List<ItineraryEntity> itineraries;
     @Column(columnDefinition = "TEXT")
     private String description;

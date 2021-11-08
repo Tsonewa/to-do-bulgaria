@@ -44,7 +44,7 @@ public class TripEntityServiceImpl implements TripEntityService {
         entity.setCategoryEntity(categoryEntityService
                 .getCategoryByName(addTripServiceModel.getCategoryName()));
 
-List<ItineraryEntity> itineraries = new ArrayList<>();
+        List<ItineraryEntity> itineraries = new ArrayList<>();
 
         for (int i = 0; i < addTripServiceModel.getTownName().size(); i++) {
 
@@ -67,7 +67,7 @@ List<ItineraryEntity> itineraries = new ArrayList<>();
             itineraryEntity.setDinnerPlace(addTripServiceModel.getDinnerPlace().get(i));
             itineraryEntity.setCoffeePlace(addTripServiceModel.getCoffeePlace().get(i));
             itineraryEntity.setHotel(addTripServiceModel.getHotel().get(i));
-
+            itineraryEntity.setTrip(entity);
 
             if (attractionEntityService.attractionExistByName(addTripServiceModel.getAttractionsName().get(i))) {
 
@@ -77,6 +77,7 @@ List<ItineraryEntity> itineraries = new ArrayList<>();
                 attraction.setName(addTripServiceModel.getAttractionsName().get(i));
 
                 attractionEntityService.saveAttraction(attraction);
+                itineraryEntity.setAttractions(List.of(attractionEntityService.findAttractionByName(attraction.getName())));
             }
 
             itineraryEntityService
@@ -99,9 +100,8 @@ List<ItineraryEntity> itineraries = new ArrayList<>();
         entity.setUser(userEntityService.findUserByUsername(principal.getUsername()).orElseThrow());
 
         //TODO implement adding pictures url using cloudinary -> use Pictures entity
-
+        System.out.println(entity);
         tripRepository.save(entity);
-
     }
 
     private DetailsEntity createDetailsEntity(String equipment, String festivals, String fotoTip) {

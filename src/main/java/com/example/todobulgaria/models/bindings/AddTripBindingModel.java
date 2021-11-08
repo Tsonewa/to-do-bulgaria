@@ -1,20 +1,34 @@
 package com.example.todobulgaria.models.bindings;
 
-import com.example.todobulgaria.models.enums.CategoryEnum;
-
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 public class AddTripBindingModel {
 
+    @Size(min = 2, max = 15)
+    @NotBlank
     private String region;
+    @NotNull
     private String categoryName;
     private List<String> picturesUrls; //TODO fix pictures
-    private List<String> townName;
-    private List<String> breakfastPlace;
-    private List<String> coffeePlace;
-    private List<String> hotel;
-    private List<String> dinnerPlace;
-    private List<String> attractionsName;
+    @NotEmpty
+    @Valid
+    private List<@Size(min = 2, max = 15)@NotBlank String> townName;
+    @NotEmpty
+    private List<@Size(min = 2, max = 15)@NotBlank String> breakfastPlace;
+    @NotEmpty
+    private List<@Size(min = 2, max = 15)@NotBlank String> coffeePlace;
+    @NotEmpty
+    private List<@Size(min = 2, max = 15)@NotBlank String> hotel;
+    @NotEmpty
+    private List<@Size(min = 2, max = 15) @NotBlank String> dinnerPlace;
+    @NotEmpty
+    @Valid
+    private List<@Size(min = 2, max = 15) @NotBlank String> attractionsName;
     private String description;
     private String equipment;
     private String festivals;
@@ -24,7 +38,7 @@ public class AddTripBindingModel {
     }
 
     public String getRegion() {
-        return region;
+        return region.trim();
     }
 
     public void setRegion(String region) {
@@ -54,6 +68,7 @@ public class AddTripBindingModel {
     public void setTownName(List<String> townName) {
         this.townName = townName;
     }
+
 
     public List<String> getBreakfastPlace() {
         return breakfastPlace;
@@ -96,7 +111,7 @@ public class AddTripBindingModel {
     }
 
     public String getDescription() {
-        return description;
+        return description.trim();
     }
 
     public void setDescription(String description) {
@@ -104,7 +119,7 @@ public class AddTripBindingModel {
     }
 
     public String getEquipment() {
-        return equipment;
+        return equipment.trim();
     }
 
     public void setEquipment(String equipment) {
@@ -112,7 +127,7 @@ public class AddTripBindingModel {
     }
 
     public String getFestivals() {
-        return festivals;
+        return festivals.trim();
     }
 
     public void setFestivals(String festivals) {
@@ -120,7 +135,7 @@ public class AddTripBindingModel {
     }
 
     public String getFotoTip() {
-        return fotoTip;
+        return fotoTip.trim();
     }
 
     public void setFotoTip(String fotoTip) {

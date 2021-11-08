@@ -11,11 +11,11 @@ import java.util.List;
 @Table(name = "itineraries")
 public class ItineraryEntity extends BaseEntity {
 
-    @Column
+    @Column(nullable = false)
     private Integer rating;
-    @Column
+    @Column(nullable = false)
     private Integer day;
-    @Column(name = "created_on")
+    @Column(name = "created_on", nullable = false)
     @DateTimeFormat(pattern = "MM/dd/yyyy")
     private LocalDate createdOn;
     @ManyToMany
@@ -33,10 +33,20 @@ public class ItineraryEntity extends BaseEntity {
     private String coffeePlace;
     @Column(name = "dinner_place", nullable = false)
     private String dinnerPlace;
-    @Column
+    @Column(nullable = false)
     private String hotel;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private TripEntity trip;
 
     public ItineraryEntity() {
+    }
+
+    public TripEntity getTrip() {
+        return trip;
+    }
+
+    public void setTrip(TripEntity trip) {
+        this.trip = trip;
     }
 
     public Integer getRating() {

@@ -49,6 +49,7 @@ public class ItineraryController {
 
         trip.setCategoryName(CategoryEnum.valueOf(addTripBindingModel.getCategoryName().toUpperCase()));
         System.out.println(trip);
+        System.out.println(addTripBindingModel);
         tripEntityService
                 .createTrip(trip);
 
