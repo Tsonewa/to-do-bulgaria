@@ -15,9 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.io.IOException;
+
 
 @Controller
 @RequestMapping("/trips")
@@ -45,12 +44,11 @@ public class TripController {
     @PostMapping("/add")
     public String addItinerary(@Valid AddTripBindingModel addTripBindingModel,
                                BindingResult bindingResult,
-                               RedirectAttributes redirectAttributes){
+                               RedirectAttributes redirectAttributes) throws IOException {
 
         if(bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("addTripBindingModel", addTripBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addTripBindingModel", bindingResult);
-
 
             return "redirect:add";
         }

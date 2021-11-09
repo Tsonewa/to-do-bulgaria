@@ -1,5 +1,7 @@
 package com.example.todobulgaria.models.bindings;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.List;
@@ -11,7 +13,7 @@ public class AddTripBindingModel {
     private String region;
     @NotNull
     private String categoryName;
-    private List<String> picturesUrls; //TODO fix pictures
+    private MultipartFile url;
     @NotEmpty
     @Valid
     private List<@Size(min = 2, max = 30)@NotBlank String> townName;
@@ -50,12 +52,12 @@ public class AddTripBindingModel {
         this.categoryName = categoryName;
     }
 
-    public List<String> getPicturesUrls() {
-        return picturesUrls;
+    public MultipartFile getUrl() {
+        return url;
     }
 
-    public void setPicturesUrls(List<String> picturesUrls) {
-        this.picturesUrls = picturesUrls;
+    public void setUrl(MultipartFile url) {
+        this.url = url;
     }
 
     public List<String> getTownName() {

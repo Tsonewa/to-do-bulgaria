@@ -14,7 +14,7 @@ public class ItineraryEntity extends BaseEntity {
     @Column(nullable = false)
     private Integer day;
     @Column(name = "created_on", nullable = false)
-    @DateTimeFormat(pattern = "MM/dd/yyyy")
+//    @DateTimeFormat(pattern = "MM/dd/yyyy")
     private LocalDate createdOn;
     @ManyToMany
     @JoinTable(

@@ -15,7 +15,7 @@
 
 <main>
     <div>
-    <form th:action="@{/trips/add}" th:method="post" th:object="${addTripBindingModel}" id="msform">
+    <form th:action="@{/trips/add}" th:method="post" enctype="multipart/form-data" th:object="${addTripBindingModel}" id="msform">
       <fieldset id="input1-wrapper">
           <h2 class="fs-title">Create your daily trip</h2>
           <label>Region</label>
@@ -27,7 +27,7 @@
                       th:text="${t}" th:value="${t}" th:selected="${t} == *{categoryName}">Mountain</option>
           </select>
           <label>Pictures</label>
-          <input type="file">
+          <input name="url" type="file">
           <label>Description</label>
           <textarea th:field="*{description}" name="description" placeholder="Description"></textarea>
           <button type="button" name="next" class="btn nextBtn" onclick="secondFieldset()" value="Next">Next</button>

@@ -3,13 +3,16 @@ package com.example.todobulgaria.services.impl;
 import com.example.todobulgaria.models.entities.*;
 import com.example.todobulgaria.models.service.AddTripServiceModel;
 import com.example.todobulgaria.models.views.BestTripsArticleViewModel;
+import com.example.todobulgaria.repositories.PictureRepository;
 import com.example.todobulgaria.repositories.TripRepository;
 import com.example.todobulgaria.services.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +29,10 @@ public class TripEntityServiceImpl implements TripEntityService {
     private final DetailsEntityService detailsEntityService;
     private final UserEntityService userEntityService;
     private final ItineraryEntityService itineraryEntityService;
+    private final CloudinaryService cloudinaryService;
+    private final PictureRepository pictureRepository;
 
-    public TripEntityServiceImpl(ModelMapper modelMapper, TripRepository tripRepository, CategoryEntityService categoryEntityService, TownEntityService townEntityService, AttractionEntityService attractionEntityService, DetailsEntityService detailsEntityService, UserEntityService userEntityService, ItineraryEntityService itineraryEntityService) {
+    public TripEntityServiceImpl(ModelMapper modelMapper, TripRepository tripRepository, CategoryEntityService categoryEntityService, TownEntityService townEntityService, AttractionEntityService attractionEntityService, DetailsEntityService detailsEntityService, UserEntityService userEntityService, ItineraryEntityService itineraryEntityService, CloudinaryService cloudinaryService, PictureRepository pictureRepository) {
         this.modelMapper = modelMapper;
         this.tripRepository = tripRepository;
         this.categoryEntityService = categoryEntityService;
@@ -36,10 +41,12 @@ public class TripEntityServiceImpl implements TripEntityService {
         this.detailsEntityService = detailsEntityService;
         this.userEntityService = userEntityService;
         this.itineraryEntityService = itineraryEntityService;
+        this.cloudinaryService = cloudinaryService;
+        this.pictureRepository = pictureRepository;
     }
 
     @Override
-    public void createTrip(AddTripServiceModel addTripServiceModel) {
+    public void createTrip(AddTripServiceModel addTripServiceModel) throws IOException {
 
         TripEntity entity = modelMapper.map(addTripServiceModel, TripEntity.class);
 
@@ -62,7 +69,7 @@ public class TripEntityServiceImpl implements TripEntityService {
                 townEntityService.saveTown(newTown);
                 itineraryEntity.setTown(newTown);
             }
-            
+
             itineraryEntity.setCreatedOn(LocalDate.now());
             itineraryEntity.setBreakfastPlace(addTripServiceModel.getBreakfastPlace().get(i));
             itineraryEntity.setDinnerPlace(addTripServiceModel.getDinnerPlace().get(i));
@@ -85,6 +92,7 @@ public class TripEntityServiceImpl implements TripEntityService {
                     .saveItinerary(itineraryEntity);
 
             itineraries.add(itineraryEntity);
+
         }
 
         entity.setItineraries(itineraries);
@@ -100,9 +108,26 @@ public class TripEntityServiceImpl implements TripEntityService {
 
         entity.setUser(userEntityService.findUserByUsername(principal.getUsername()).orElseThrow());
 
-        //TODO implement adding pictures url using cloudinary -> use Pictures entity
+        var picture = createPictureEntity(addTripServiceModel.getUrl());
+
+        pictureRepository.saveAndFlush(picture);
+
+        entity.setPicture(picture);
 
         tripRepository.save(entity);
+
+    }
+
+    private PictureEntity createPictureEntity(MultipartFile file) throws IOException {
+        final CloudinaryImage uploaded = this.cloudinaryService.upload(file);
+
+       PictureEntity picture = new PictureEntity();
+
+        picture.setPublicId(uploaded.getPublicId());
+        picture.setTitle(file.getName());
+        picture.setUrl(uploaded.getUrl());
+
+        return picture;
     }
 
     @Override

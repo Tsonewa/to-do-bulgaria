@@ -1,6 +1,7 @@
 package com.example.todobulgaria.models.service;
 
 import com.example.todobulgaria.models.enums.CategoryEnum;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -8,7 +9,7 @@ public class AddTripServiceModel {
 
     private String region;
     private CategoryEnum categoryName;
-    private List<String> picturesUrls; //TODO fix pictures
+    private MultipartFile url;
     private List<String> townName;
     private List<String> breakfastPlace;
     private List<String> coffeePlace;
@@ -39,12 +40,12 @@ public class AddTripServiceModel {
         this.categoryName = categoryName;
     }
 
-    public List<String> getPicturesUrls() {
-        return picturesUrls;
+    public MultipartFile getUrl() {
+        return url;
     }
 
-    public void setPicturesUrls(List<String> picturesUrls) {
-        this.picturesUrls = picturesUrls;
+    public void setUrl(MultipartFile url) {
+        this.url = url;
     }
 
     public List<String> getTownName() {

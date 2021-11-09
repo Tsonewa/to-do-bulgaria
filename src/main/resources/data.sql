@@ -29,14 +29,14 @@ values ('Парк Врана е създаден под влиянието на 
 
 
 INSERT INTO pictures (url)
-VALUES ('https://res.cloudinary.com/dabxnbbrp/image/upload/v1636450930/sample.jpg'),
+VALUES ('https://res.cloudinary.com/dabxnbbrp/image/upload/v1636468807/ivb5hjlpec3mwxp6u1m6.jpg'),
+       ('https://res.cloudinary.com/dabxnbbrp/image/upload/v1636469119/ymshr9ut5kjwmazt1ffl.webp'),
+       ('https://res.cloudinary.com/dabxnbbrp/image/upload/v1636450930/sample.jpg'),
+       ('https://res.cloudinary.com/dabxnbbrp/image/upload/v1636468807/ivb5hjlpec3mwxp6u1m6.jpg'),
+       ('https://res.cloudinary.com/dabxnbbrp/image/upload/v1636468320/pagmrk7kit5f4nmp1spm.jpg'),
        ('https://res.cloudinary.com/dabxnbbrp/image/upload/v1636450930/sample.jpg'),
        ('https://res.cloudinary.com/dabxnbbrp/image/upload/v1636450930/sample.jpg'),
-       ('https://res.cloudinary.com/dabxnbbrp/image/upload/v1636450930/sample.jpg'),
-       ('https://res.cloudinary.com/dabxnbbrp/image/upload/v1636450930/sample.jpg'),
-       ('https://res.cloudinary.com/dabxnbbrp/image/upload/v1636450930/sample.jpg'),
-       ('https://res.cloudinary.com/dabxnbbrp/image/upload/v1636450930/sample.jpg'),
-       ('https://res.cloudinary.com/dabxnbbrp/image/upload/v1636450930/sample.jpg'),
+       ('https://res.cloudinary.com/dabxnbbrp/image/upload/v1636468320/pagmrk7kit5f4nmp1spm.jpg'),
        ('https://res.cloudinary.com/dabxnbbrp/image/upload/v1636450930/sample.jpg');
 
 

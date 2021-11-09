@@ -9,10 +9,11 @@ import javax.persistence.*;
 public class PictureEntity extends BaseEntity {
 
     @Column
+    private String title;
+    @Column
     private String url;
-    @ManyToOne(fetch = FetchType.EAGER)
-    private TripEntity trip;
-
+    @Column
+    private String publicId;
 
     public PictureEntity() {
     }
@@ -25,11 +26,19 @@ public class PictureEntity extends BaseEntity {
         this.url = url;
     }
 
-    public TripEntity getTrip() {
-        return trip;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTrip(TripEntity trip) {
-        this.trip = trip;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getPublicId() {
+        return publicId;
+    }
+
+    public void setPublicId(String publicId) {
+        this.publicId = publicId;
     }
 }
