@@ -18,13 +18,13 @@
     <div  th:action="@{/trips/best}" th:method="get" th:object="${bestTrips}" class="best-articles-wrapper">
             <div th:each="t : ${bestTrips}" th:object="${t}" class="card-wrapper">
                 <div  class="img-card-wrapper">
-                    <img src="/images/register-pic.jpg">
+                    <img th:src="*{url}">
                     <a><i class="far fa-heart"></i></a>
                 </div>
                 <div class="text-card-wrapper">
-                    <h2><span th:text="${t.region}">Nesebar</span>, Bulgaria</h2>
+                    <h2><span th:text="*{region}">Nesebar</span>, Bulgaria</h2>
                     <div class="rate-card-wrapper">
-                        <h5> <span th:text="${t.duration}">3</span> days</h5>
+                        <h5> <span th:text="*{duration}">3</span> days</h5>
                         <h5><i class="fas fa-star"></i></h5>
                     </div>
                 </div>

@@ -14,7 +14,7 @@ public class AttractionEntity extends BaseEntity {
     private String name;
     @Column(columnDefinition = "LONGTEXT")
     private String location;
-    @Column
+    @Column(columnDefinition = "LONGTEXT")
     private String description;
 
     public AttractionEntity() {

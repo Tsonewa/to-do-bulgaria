@@ -110,7 +110,7 @@ public class TripEntityServiceImpl implements TripEntityService {
 
         List<TripEntity> bestEightTripsOrderByRating = tripRepository.findBestEightTripsOrderByRating();
 
-        List<BestTripsArticleViewModel> collect = bestEightTripsOrderByRating
+        return bestEightTripsOrderByRating
                 .stream()
                 .map(b -> {
                     BestTripsArticleViewModel map = modelMapper.map(b, BestTripsArticleViewModel.class);
@@ -119,11 +119,8 @@ public class TripEntityServiceImpl implements TripEntityService {
                     System.out.println(map);
                     return map;
                 }).collect(Collectors.toList());
-
-        System.out.println(collect);
-
-        return collect;
     }
+
 
     private DetailsEntity createDetailsEntity(String equipment, String festivals, String fotoTip) {
 

@@ -21,7 +21,7 @@ public class TripEntity extends BaseEntity {
     private CategoryEntity categoryEntity;
     @OneToMany(mappedBy = "trip", targetEntity = ItineraryEntity.class)
     private List<ItineraryEntity> itineraries;
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "LONGTEXT")
     private String description;
     @OneToOne
     private DetailsEntity details;
