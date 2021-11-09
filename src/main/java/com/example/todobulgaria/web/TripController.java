@@ -50,14 +50,16 @@ public class TripController {
             redirectAttributes.addFlashAttribute("addTripBindingModel", addTripBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addTripBindingModel", bindingResult);
 
+
             return "redirect:add";
         }
 
-        AddTripServiceModel trip = modelMapper.map(addTripBindingModel, AddTripServiceModel.class);
+        AddTripServiceModel trip =
+                modelMapper.map(addTripBindingModel, AddTripServiceModel.class);
 
-        trip.setCategoryName(CategoryEnum.valueOf(addTripBindingModel.getCategoryName().toUpperCase()));
-        System.out.println(trip);
-        System.out.println(addTripBindingModel);
+        CategoryEnum categoryEnum = CategoryEnum.valueOf(addTripBindingModel.getCategoryName());
+        trip.setCategoryName(CategoryEnum.valueOf(categoryEnum.toString()));
+
         tripEntityService
                 .createTrip(trip);
 

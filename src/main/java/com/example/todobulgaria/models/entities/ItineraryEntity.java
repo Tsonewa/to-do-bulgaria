@@ -20,7 +20,7 @@ public class ItineraryEntity extends BaseEntity {
     @JoinTable(
             name = "itineraries_attractions",
             joinColumns = { @JoinColumn(name = "itineraries_id") },
-            inverseJoinColumns = { @JoinColumn(name = "attraction_id") }
+            inverseJoinColumns = { @JoinColumn(name = "attraction_id")}
     )
     private List<AttractionEntity> attractions;
     @ManyToOne

@@ -55,7 +55,7 @@ public class TripEntityServiceImpl implements TripEntityService {
 
         List<ItineraryEntity> itineraries = new ArrayList<>();
 
-        for (int i = 0; i < addTripServiceModel.getTownName().size(); i++) {
+        for (int i = 0; i < addTripServiceModel.getDuration(); i++) {
 
             ItineraryEntity itineraryEntity = new ItineraryEntity();
             itineraryEntity.setDay(i + 1);
@@ -66,10 +66,12 @@ public class TripEntityServiceImpl implements TripEntityService {
                 TownEntity newTown = new TownEntity();
                 newTown.setName(addTripServiceModel.getTownName().get(i));
                 newTown.setRegion(addTripServiceModel.getRegion());
+
                 townEntityService.saveTown(newTown);
-                itineraryEntity.setTown(newTown);
+
             }
 
+            itineraryEntity.setTown(townEntityService.findTownByName(addTripServiceModel.getTownName().get(i)));
             itineraryEntity.setCreatedOn(LocalDate.now());
             itineraryEntity.setBreakfastPlace(addTripServiceModel.getBreakfastPlace().get(i));
             itineraryEntity.setDinnerPlace(addTripServiceModel.getDinnerPlace().get(i));
@@ -85,14 +87,11 @@ public class TripEntityServiceImpl implements TripEntityService {
                 attraction.setName(addTripServiceModel.getAttractionsName().get(i));
 
                 attractionEntityService.saveAttraction(attraction);
+
                 itineraryEntity.setAttractions(List.of(attractionEntityService.findAttractionByName(attraction.getName())));
             }
 
-            itineraryEntityService
-                    .saveItinerary(itineraryEntity);
-
             itineraries.add(itineraryEntity);
-
         }
 
         entity.setItineraries(itineraries);
@@ -115,6 +114,7 @@ public class TripEntityServiceImpl implements TripEntityService {
         entity.setPicture(picture);
 
         tripRepository.save(entity);
+
 
     }
 
@@ -141,7 +141,6 @@ public class TripEntityServiceImpl implements TripEntityService {
                     BestTripsArticleViewModel map = modelMapper.map(b, BestTripsArticleViewModel.class);
                     map.setUrl(b.getPicture().getUrl());
 
-                    System.out.println(map);
                     return map;
                 }).collect(Collectors.toList());
     }

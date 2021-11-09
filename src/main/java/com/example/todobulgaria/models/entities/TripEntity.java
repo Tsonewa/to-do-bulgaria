@@ -19,7 +19,7 @@ public class TripEntity extends BaseEntity {
     private UserEntity user;
     @ManyToOne(fetch = FetchType.EAGER)
     private CategoryEntity categoryEntity;
-    @OneToMany(mappedBy = "trip", targetEntity = ItineraryEntity.class)
+    @OneToMany(mappedBy = "trip", targetEntity = ItineraryEntity.class, cascade = CascadeType.ALL)
     private List<ItineraryEntity> itineraries;
     @Column(columnDefinition = "LONGTEXT")
     private String description;

@@ -17,6 +17,6 @@ public class ItineraryEntityServiceImpl implements ItineraryEntityService {
     @Override
     public void saveItinerary(ItineraryEntity itinerary) {
 
-        itineraryRepository.save(itinerary);
+        itineraryRepository.saveAndFlush(itinerary);
     }
 }

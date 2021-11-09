@@ -2,6 +2,7 @@ package com.example.todobulgaria.models.bindings;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.Column;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.List;
@@ -13,6 +14,9 @@ public class AddTripBindingModel {
     private String region;
     @NotNull
     private String categoryName;
+    @Column
+    @Positive
+    private Integer duration;
     private MultipartFile url;
     @NotEmpty
     @Valid
@@ -58,6 +62,14 @@ public class AddTripBindingModel {
 
     public void setUrl(MultipartFile url) {
         this.url = url;
+    }
+
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
     }
 
     public List<String> getTownName() {
