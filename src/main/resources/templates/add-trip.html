@@ -17,9 +17,10 @@
     <div>
     <form th:action="@{/trips/add}" th:method="post" enctype="multipart/form-data" th:object="${addTripBindingModel}" id="msform">
       <fieldset id="input1-wrapper">
-          <h2 class="fs-title">Create your daily trip</h2>
+          <h2 class="fs-title">Create your trip</h2>
           <label>Region</label>
           <input th:field="*{region}" type="text" name="region" placeholder="South Coast" />
+          <p th:if="${#fields.hasErrors('region')}" th:errors="*{region}" class="error"></p>
           <label>Type</label>
           <select th:field="*{categoryName}" name="categoryName" placeholder="Seaside" >
               <option value="">Select trip type</option>
@@ -28,6 +29,7 @@
           </select>
           <label>Pictures</label>
           <input name="url" type="file">
+          <p th:if="${#fields.hasErrors('url')}" th:errors="*{url}" class="error"></p>
           <label>Description</label>
           <textarea th:field="*{description}" name="description" placeholder="Description"></textarea>
           <button type="button" name="next" class="btn nextBtn" onclick="secondFieldset()" value="Next">Next</button>
@@ -38,16 +40,22 @@
            <div class="input-div">
           <label>Town</label>
           <input th:field="*{townName}" type="text" name="townName" placeholder="Sofia" />
-          <label>Breakfast</label>
+               <p th:if="${#fields.hasErrors('townName')}" th:errors="*{townName}" class="error"></p>
+               <label>Breakfast</label>
          <input th:field="*{breakfastPlace}" type="text" name="breakfastPlace" placeholder="Mekitsa&Coffee" />
-          <label>Coffee</label>
+               <p th:if="${#fields.hasErrors('breakfastPlace')}" th:errors="*{breakfastPlace}" class="error"></p>
+               <label>Coffee</label>
           <input th:field="*{coffeePlace}" type="text" name="coffeePlace" placeholder="CoffeeBar" />
-          <label>Hotel</label>
+               <p th:if="${#fields.hasErrors('coffeePlace')}" th:errors="*{breakfastPlace}" class="error"></p>
+               <label>Hotel</label>
           <input th:field="*{hotel}" type="text" name="hotel" placeholder="Grand Hotel Sofia" />
-          <label>Dinner</label>
+               <p th:if="${#fields.hasErrors('hotel')}" th:errors="*{hotel}" class="error"></p>
+               <label>Dinner</label>
           <input th:field="*{dinnerPlace}" type="text" name="dinnerPlace" placeholder="Blue House" />
-          <label>Attractions</label>
+               <p th:if="${#fields.hasErrors('dinnerPlace')}" th:errors="*{dinnerPlace}" class="error"></p>
+               <label>Attractions</label>
           <input th:field="*{attractionsName}" type="text" name="attractionsName" placeholder="National Palace of Culture"/>
+               <p th:if="${#fields.hasErrors('attractionsName')}" th:errors="*{attractionsName}" class="error"></p>
            </div>
 <!--                <button type="button" name="add-attraction" class="add-attraction-btn" value="Add attraction" onclick="addAttraction()">Add attraction</button>-->
                 <button type="button" name="add-day" class="btn" value="add-day" onclick="addDay()">Add day</button>
@@ -102,8 +110,8 @@
         }
 
         function addDay(){
-            let parent = document.getElementById('itinerary-div');
-            let n = Number(parent.getElementsByTagName('fieldset').length) + 1;
+             let parent = document.getElementById('itinerary-div');
+             let n = Number(parent.getElementsByTagName('fieldset').length) + 1;
 
             let fieldset = document.createElement('fieldset')
             let h2 = document.createElement('h2');
@@ -163,15 +171,15 @@
             attractionsInput.placeholder = "National Palace of Culture";
             div.appendChild(attractionsLabel).appendChild(attractionsInput);
 
-            // let btn = document.createElement('button');
-            // btn.type = "button";
-            // btn.name = "add-attraction";
-            // btn.className="add-attraction-btn";
-            // btn.value="Add attraction"
-            // btn.textContent = "Add attraction";
+            // // let btn = document.createElement('button');
+            // // btn.type = "button";
+            // // btn.name = "add-attraction";
+            // // btn.className="add-attraction-btn";
+            // // btn.value="Add attraction"
+            // // btn.textContent = "Add attraction";
 
             fieldset.appendChild(div);
-            // fieldset.appendChild(btn);
+            // // fieldset.appendChild(btn);
             parent.appendChild(fieldset);
         }
 

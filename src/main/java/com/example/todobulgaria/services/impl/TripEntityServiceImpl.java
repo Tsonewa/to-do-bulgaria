@@ -1,5 +1,6 @@
 package com.example.todobulgaria.services.impl;
 
+import com.example.todobulgaria.models.dto.TripsDto;
 import com.example.todobulgaria.models.entities.*;
 import com.example.todobulgaria.models.service.AddTripServiceModel;
 import com.example.todobulgaria.models.views.BestTripsArticleViewModel;
@@ -7,6 +8,10 @@ import com.example.todobulgaria.repositories.PictureRepository;
 import com.example.todobulgaria.repositories.TripRepository;
 import com.example.todobulgaria.services.*;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -152,5 +157,21 @@ public class TripEntityServiceImpl implements TripEntityService {
         detailsEntity.setFotoTips(fotoTip);
 
         return detailsEntity;
+    }
+
+    private TripsDto asTrip(TripEntity trip) {
+        TripsDto tripDto = modelMapper.map(trip, TripsDto.class);
+        tripDto.setUrl(trip.getPicture().getUrl());
+
+        return tripDto;
+    }
+
+    @Override
+    public Page<TripsDto> getTrips(int pageNo, int pageSize, String sortBy) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+
+        return tripRepository.
+                findAll(pageable).
+                map(this::asTrip);
     }
 }

@@ -9,27 +9,27 @@ import java.util.List;
 
 public class AddTripBindingModel {
 
-    @Size(min = 2, max = 15)
+    @Size(min = 2, max = 15, message = "Region length must be between 2 and 15 symbols.")
     @NotBlank
     private String region;
-    @NotNull
+    @NotNull(message = "Category can not be empty")
     private String categoryName;
-    @NotNull
+    @NotNull(message = "You should upload trip picture")
     private MultipartFile url;
     @NotEmpty
     @Valid
-    private List<@Size(min = 2, max = 30)@NotBlank String> townName;
+    private List<@Size(min = 2, max = 30, message = "Town name must be between 2 and 30 symbols")@NotBlank String> townName;
     @NotEmpty
-    private List<@Size(min = 2, max = 30)@NotBlank String> breakfastPlace;
+    private List<@Size(min = 2, max = 30, message = "Breakfast place name must be between 2 and 30 symbols")@NotBlank String> breakfastPlace;
     @NotEmpty
-    private List<@Size(min = 2, max = 30)@NotBlank String> coffeePlace;
+    private List<@Size(min = 2, max = 30,message = "Coffee place name must be between 2 and 30 symbols")@NotBlank String> coffeePlace;
     @NotEmpty
-    private List<@Size(min = 2, max = 30)@NotBlank String> hotel;
+    private List<@Size(min = 2, max = 30,message = "Hotel name must be between 2 and 30 symbols")@NotBlank String> hotel;
     @NotEmpty
-    private List<@Size(min = 2, max = 30) @NotBlank String> dinnerPlace;
+    private List<@Size(min = 2, max = 30, message = "Dinner place name must be between 2 and 30 symbols") @NotBlank String> dinnerPlace;
     @NotEmpty
     @Valid
-    private List<@Size(min = 2, max = 30) @NotBlank String> attractionsName;
+    private List<@Size(min = 2, max = 30, message = "Attraction name must be between 2 and 30 symbols") @NotBlank String> attractionsName;
     private String description;
     private String equipment;
     private String festivals;
