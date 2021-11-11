@@ -1,0 +1,147 @@
+.profile{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 650px;
+    background: #CCCCCC;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    position: relative;
+    top: -63px;
+    opacity: 0.8;
+    align-items: center;
+}
+
+#profile-main{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.profile-wrapper {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    margin-top: -3px;
+    align-self: center;
+    margin-bottom: 10px;
+    text-align-last: center;
+}
+
+.profile-pic-wrapper{
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    align-self: center;
+}
+
+.profile-pic-wrapper img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+table{
+    height: 300px;
+    overflow: scroll;
+}
+
+.user-nav-wrapper{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    align-items: center;
+    color: darkgray;
+    font-size: 15px;
+    margin-bottom: 100px;
+    margin-top: 80px;
+}
+
+.profile-a{
+    color: black;
+    opacity: 0.8;
+    margin: 10px;
+    font-size: 18px;
+    align-self: self-start;
+}
+
+.profile-a i{
+    opacity: 0.8;
+    margin-right: 14px;
+}
+
+.new-trips-btn{
+    background: transparent;
+    border-radius: 10px;
+    padding: 5px 30px;
+    border-width: thin;
+}
+
+.statistics-wrapper{
+    display: flex;
+    width: 80%;
+    justify-content: space-around;
+    align-self: center;
+}
+
+.users-statistic-wrapper, .trips-statistic-wrapper{
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    width: 250px;
+    height: 100px;
+}
+
+.statistic{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    margin-top: 10px;
+}
+
+
+
+.table-wrapper{
+    color: gray;
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin-top: 50px;
+    align-items: center;
+}
+
+.trips-table-wrapper{
+    background: white;
+    margin-top: 50px;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: justify;
+    max-height: 304px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+td{
+    color: black;
+    margin: 5px;
+    text-align: center;
+    padding-right: 10px;
+}
+
+th{
+    text-align: center;
+}
+
+td > i{
+    color: black;
+    margin-right: 5px;
+}
+
+table{
+    height: 300px;
+    overflow: scroll;
+}
+

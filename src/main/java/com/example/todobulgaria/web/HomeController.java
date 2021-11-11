@@ -21,4 +21,10 @@ public class HomeController {
         return "about-us";
     }
 
+
+    @GetMapping("/profile")
+    public String getAdminProfile(){
+        return "profile";
+    }
+
 }

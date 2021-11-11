@@ -377,6 +377,15 @@ hr {
     background: rgba(10, 10, 10, 0.2);
 }
 
-
+.error{
+    padding: 7px;
+    border-radius: 25px;
+    background-color: rgba(255, 25, 10, 0.8);
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 13px;
+    width: 90%;
+    margin-left: 10px;
+}
 
 

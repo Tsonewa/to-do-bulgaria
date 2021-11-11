@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/landing-page-style.css">
+    <link rel="stylesheet" href="/css/profile-style.css">
+    <title>Landing Page</title>
+</head>
+<body >
+<header th:include="/fragments/fragment :: navbar" >
+</header>
+<main id="profile-main">
+    <div class="profile-wrapper">
+        <div class="profile">
+
+       <div class="profile-wrapper">
+           <div class="profile-pic-wrapper">
+               <img class="profile-picture" src="/images/profile-2398782_1280.png" >
+           </div>
+
+       </div>
+            <h2>Pesho Petrov</h2>
+        <div class="user-nav-wrapper">
+            <button class="profile-a new-trips-btn"><i class="fas fa-sign-out-alt"></i>Нови маршрути</button>
+            <a class="profile-a"><i class="fas fa-id-card"></i>Профил</a>
+            <a class="profile-a"><i class="fab fa-font-awesome-flag"></i> Моите маршрути</a>
+            <a class="profile-a"><i class="fas fa-cog"></i>Настройки</a>
+            <form class="log-out-div" th:action="@{/users/logout}" th:method="post">
+                <button class="profile-a exit-btn"><i class="fas fa-sign-out-alt"></i>Exit</button>
+            </form>
+        </div>
+        </div>
+    </div>
+            <div class="table-wrapper">
+                <div class="statistics-wrapper">
+                    <div class="users-statistic-wrapper">
+                        <h4>Нови потребители</h4>
+                    <div class="statistic">
+                        <div class="stat-numbers">
+                            <h1>5</h1>
+                            <h6>Дневно</h6>
+                        </div>
+                        <div class="stat-numbers">
+                            <h1>15</h1>
+                            <h6>Седмично</h6>
+                        </div>
+                        <div class="stat-numbers">
+                            <h1>150</h1>
+                            <h6>Месечно</h6>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="trips-statistic-wrapper">
+
+                        <h4>Нови екскурзии</h4>
+                        <div class="statistic">
+                            <div class="stat-numbers">
+                                <h1>5</h1>
+                                <h6>Дневно</h6>
+                            </div>
+                            <div class="stat-numbers">
+                                <h1>15</h1>
+                                <h6>Седмично</h6>
+                            </div>
+                            <div class="stat-numbers">
+                                <h1>150</h1>
+                                <h6>Месечно</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<div class="trips-table-wrapper">
+    <table>
+        <tr>
+            <th>Екскурзия</th>
+            <th>Продължителност</th>
+            <th>Тип</th>
+            <th>Действие</th>
+        </tr>
+        <tr>
+            <td>Белоградчик, България</td>
+            <td><i class="far fa-clock"></i> 3 дни</td>
+            <td><i class="fas fa-map-signs"></i>Seaside</td>
+            <td> <button class="new-trips-btn">Изтрий</button> <button class="btn">Добави</button></td>
+        </tr>
+        <tr>
+            <td>Белоградчик, България</td>
+            <td><i class="far fa-clock"></i> 3 дни</td>
+            <td><i class="fas fa-map-signs"></i>Seaside</td>
+            <td> <button class="new-trips-btn">Изтрий</button> <button class="btn">Добави</button></td>
+        </tr>
+        <tr>
+            <td>Белоградчик, България</td>
+            <td><i class="far fa-clock"></i> 3 дни</td>
+            <td><i class="fas fa-map-signs"></i>Seaside</td>
+            <td> <button class="new-trips-btn">Изтрий</button> <button class="btn">Добави</button></td>
+        </tr>
+        <tr>
+            <td>Белоградчик, България</td>
+            <td><i class="far fa-clock"></i> 3 дни</td>
+            <td><i class="fas fa-map-signs"></i>Seaside</td>
+            <td> <button class="new-trips-btn">Изтрий</button> <button class="btn">Добави</button></td>
+        </tr>
+        <tr>
+            <td>Белоградчик, България</td>
+            <td><i class="far fa-clock"></i> 3 дни</td>
+            <td><i class="fas fa-map-signs"></i>Seaside</td>
+            <td> <button class="new-trips-btn">Изтрий</button> <button class="btn">Добави</button></td>
+        </tr>
+        <tr>
+            <td>Белоградчик, България</td>
+            <td><i class="far fa-clock"></i> 3 дни</td>
+            <td><i class="fas fa-map-signs"></i>Seaside</td>
+            <td> <button class="new-trips-btn">Изтрий</button> <button class="btn">Добави</button></td>
+        </tr>
+        <tr>
+            <td>Белоградчик, България</td>
+            <td><i class="far fa-clock"></i> 3 дни</td>
+            <td><i class="fas fa-map-signs"></i>Seaside</td>
+            <td> <button class="new-trips-btn">Изтрий</button> <button class="btn">Добави</button></td>
+        </tr>
+        <tr>
+            <td>Белоградчик, България</td>
+            <td><i class="far fa-clock"></i> 3 дни</td>
+            <td><i class="fas fa-map-signs"></i>Seaside</td>
+            <td> <button class="new-trips-btn">Изтрий</button> <button class="btn">Добави</button></td>
+        </tr>
+    </table>
+</div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer th:replace="/fragments/fragment :: footer">
+</footer>
+</body>
