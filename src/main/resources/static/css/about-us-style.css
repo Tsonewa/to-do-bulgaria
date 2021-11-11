@@ -35,10 +35,14 @@
     margin: 10px;
 }
 
+.article div{
+    text-align: center;
+}
+
 .articles-wrapper i{
     color: gray;
-    font-size: 120px;
-    margin-left: 40px;
+    font-size: 90px;
+    margin-left: 70px;
     opacity: 0.7;
 }
 
