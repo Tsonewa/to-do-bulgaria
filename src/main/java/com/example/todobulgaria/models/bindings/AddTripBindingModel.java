@@ -14,9 +14,7 @@ public class AddTripBindingModel {
     private String region;
     @NotNull
     private String categoryName;
-    @Column
-    @Positive
-    private Integer duration;
+    @NotNull
     private MultipartFile url;
     @NotEmpty
     @Valid
@@ -62,14 +60,6 @@ public class AddTripBindingModel {
 
     public void setUrl(MultipartFile url) {
         this.url = url;
-    }
-
-    public Integer getDuration() {
-        return duration;
-    }
-
-    public void setDuration(Integer duration) {
-        this.duration = duration;
     }
 
     public List<String> getTownName() {

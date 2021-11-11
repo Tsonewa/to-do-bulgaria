@@ -9,7 +9,6 @@ public class AddTripServiceModel {
 
     private String region;
     private CategoryEnum categoryName;
-    private Integer duration;
     private MultipartFile url;
     private List<String> townName;
     private List<String> breakfastPlace;
@@ -47,14 +46,6 @@ public class AddTripServiceModel {
 
     public void setUrl(MultipartFile url) {
         this.url = url;
-    }
-
-    public Integer getDuration() {
-        return duration;
-    }
-
-    public void setDuration(Integer duration) {
-        this.duration = duration;
     }
 
     public List<String> getTownName() {

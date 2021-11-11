@@ -28,11 +28,10 @@ public class TripEntityServiceImpl implements TripEntityService {
     private final AttractionEntityService attractionEntityService;
     private final DetailsEntityService detailsEntityService;
     private final UserEntityService userEntityService;
-    private final ItineraryEntityService itineraryEntityService;
     private final CloudinaryService cloudinaryService;
     private final PictureRepository pictureRepository;
 
-    public TripEntityServiceImpl(ModelMapper modelMapper, TripRepository tripRepository, CategoryEntityService categoryEntityService, TownEntityService townEntityService, AttractionEntityService attractionEntityService, DetailsEntityService detailsEntityService, UserEntityService userEntityService, ItineraryEntityService itineraryEntityService, CloudinaryService cloudinaryService, PictureRepository pictureRepository) {
+    public TripEntityServiceImpl(ModelMapper modelMapper, TripRepository tripRepository, CategoryEntityService categoryEntityService, TownEntityService townEntityService, AttractionEntityService attractionEntityService, DetailsEntityService detailsEntityService, UserEntityService userEntityService,  CloudinaryService cloudinaryService, PictureRepository pictureRepository) {
         this.modelMapper = modelMapper;
         this.tripRepository = tripRepository;
         this.categoryEntityService = categoryEntityService;
@@ -40,7 +39,6 @@ public class TripEntityServiceImpl implements TripEntityService {
         this.attractionEntityService = attractionEntityService;
         this.detailsEntityService = detailsEntityService;
         this.userEntityService = userEntityService;
-        this.itineraryEntityService = itineraryEntityService;
         this.cloudinaryService = cloudinaryService;
         this.pictureRepository = pictureRepository;
     }
@@ -55,7 +53,7 @@ public class TripEntityServiceImpl implements TripEntityService {
 
         List<ItineraryEntity> itineraries = new ArrayList<>();
 
-        for (int i = 0; i < addTripServiceModel.getDuration(); i++) {
+        for (int i = 0; i < addTripServiceModel.getTownName().size(); i++) {
 
             ItineraryEntity itineraryEntity = new ItineraryEntity();
             itineraryEntity.setDay(i + 1);
