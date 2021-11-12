@@ -19,6 +19,22 @@ body {
     background-size: cover;
 }
 
+a{
+    text-decoration-line: none;
+}
+
+.page-num{
+    background: gray;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 25px;
+}
+
+.prev, .next, .first{
+    color: white;
+    opacity: 0.8;
+    padding: 10px;
+}
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Montserrat', sans-serif;
@@ -388,4 +404,6 @@ hr {
     margin-left: 10px;
 }
 
-
+.unchecked{
+    color: black;
+}

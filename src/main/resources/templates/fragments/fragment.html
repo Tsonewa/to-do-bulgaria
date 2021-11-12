@@ -9,7 +9,8 @@
     <nav>
         <ul class="ul-nav">
             <li>
-                <a th:href="@{'/'}">Home</a>
+              <a sec:authorize="!isAuthenticated()" th:href="@{'/'}">Home</a>
+              <a sec:authorize="isAuthenticated()" th:href="@{'/home'}">Home</a>
             </li>
             <li>
                 <a th:href="@{/about-us}">About us</a>
