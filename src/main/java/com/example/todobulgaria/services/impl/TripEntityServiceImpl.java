@@ -2,8 +2,12 @@ package com.example.todobulgaria.services.impl;
 
 import com.example.todobulgaria.models.dto.TripsDto;
 import com.example.todobulgaria.models.entities.*;
+import com.example.todobulgaria.models.enums.CategoryEnum;
 import com.example.todobulgaria.models.service.AddTripServiceModel;
-import com.example.todobulgaria.models.views.BestTripsArticleViewModel;
+import com.example.todobulgaria.models.views.DetailsEntityViewModel;
+import com.example.todobulgaria.models.views.ItinariesDetailsViewModel;
+import com.example.todobulgaria.models.views.TripDetailsView;
+import com.example.todobulgaria.models.views.TripsArticleViewModel;
 import com.example.todobulgaria.repositories.PictureRepository;
 import com.example.todobulgaria.repositories.TripRepository;
 import com.example.todobulgaria.services.*;
@@ -21,6 +25,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -134,15 +139,16 @@ public class TripEntityServiceImpl implements TripEntityService {
     }
 
     @Override
-    public  List<BestTripsArticleViewModel> findFirstEightBestTripsOrderByRating() {
+    public  List<TripsArticleViewModel> findFirstEightBestTripsOrderByRating() {
 
         List<TripEntity> bestEightTripsOrderByRating = tripRepository.findBestEightTripsOrderByRating();
 
         return bestEightTripsOrderByRating
                 .stream()
                 .map(b -> {
-                    BestTripsArticleViewModel map = modelMapper.map(b, BestTripsArticleViewModel.class);
+                    TripsArticleViewModel map = modelMapper.map(b, TripsArticleViewModel.class);
                     map.setUrl(b.getPicture().getUrl());
+                    map.setTownName(b.getItineraries().get(0).getTown().getName());
 
                     return map;
                 }).collect(Collectors.toList());
@@ -162,6 +168,7 @@ public class TripEntityServiceImpl implements TripEntityService {
     private TripsDto asTrip(TripEntity trip) {
         TripsDto tripDto = modelMapper.map(trip, TripsDto.class);
         tripDto.setUrl(trip.getPicture().getUrl());
+        tripDto.setTownName(trip.getItineraries().get(0).getTown().getName());
 
         return tripDto;
     }
@@ -174,4 +181,31 @@ public class TripEntityServiceImpl implements TripEntityService {
                 findAll(pageable).
                 map(this::asTrip);
     }
+
+    @Override
+    public TripDetailsView findById(Long id) {
+
+           Optional<TripEntity> tripDetailsViewEntity =
+                   tripRepository.findById(id);
+
+        TripDetailsView map = modelMapper.map(tripDetailsViewEntity, TripDetailsView.class);
+
+        map.setItinaries(tripDetailsViewEntity.get()
+        .getItineraries().stream()
+        .map(i -> modelMapper.map(i, ItinariesDetailsViewModel.class)).collect(Collectors.toList()));
+        map.setTownName(tripDetailsViewEntity.get().getItineraries().get(0).getTown().getName());
+
+        DetailsEntityViewModel detailsMap = modelMapper.map(tripDetailsViewEntity.get().getDetails(), DetailsEntityViewModel.class);
+
+        map.setDetails(detailsMap);
+
+        map.setCategoryName(CategoryEnum.valueOf(tripDetailsViewEntity.get().getCategoryEntity().getName().name()).name());
+        map.setDuration(tripDetailsViewEntity.get().getItineraries().size());
+        map.setUrl(tripDetailsViewEntity.get().getPicture().getUrl());
+
+        return map;
+
+        }
+
+
 }

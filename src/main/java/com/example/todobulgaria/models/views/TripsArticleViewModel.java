@@ -1,14 +1,14 @@
 package com.example.todobulgaria.models.views;
 
-public class BestTripsArticleViewModel {
+public class TripsArticleViewModel {
 
     private Long id;
     private String url;
-    private String region;
+    private String townName;
     private Integer duration;
     private Integer rating;
 
-    public BestTripsArticleViewModel() {
+    public TripsArticleViewModel() {
     }
 
     public Integer getRating() {
@@ -27,12 +27,12 @@ public class BestTripsArticleViewModel {
         this.id = id;
     }
 
-    public String getRegion() {
-        return region;
+    public String getTownName() {
+        return townName;
     }
 
-    public void setRegion(String region) {
-        this.region = region;
+    public void setTownName(String townName) {
+        this.townName = townName;
     }
 
     public String getUrl() {
