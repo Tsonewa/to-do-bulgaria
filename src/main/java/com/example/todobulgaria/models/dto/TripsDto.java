@@ -4,7 +4,7 @@ public class TripsDto {
 
     private Long id;
     private String url;
-    private String region;
+    private String townName;
     private Integer duration;
     private Integer rating;
 
@@ -28,12 +28,12 @@ public class TripsDto {
         this.url = url;
     }
 
-    public String getRegion() {
-        return region;
+    public String getTownName() {
+        return townName;
     }
 
-    public void setRegion(String region) {
-        this.region = region;
+    public void setTownName(String townName) {
+        this.townName = townName;
     }
 
     public Integer getDuration() {

@@ -23,7 +23,7 @@ public class ItineraryEntity extends BaseEntity {
             inverseJoinColumns = { @JoinColumn(name = "attraction_id")}
     )
     private List<AttractionEntity> attractions;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private TownEntity town;
     @Column(name = "breakfast_place", nullable = false)
     private String breakfastPlace;
@@ -33,7 +33,7 @@ public class ItineraryEntity extends BaseEntity {
     private String dinnerPlace;
     @Column(nullable = false)
     private String hotel;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private TripEntity trip;
 
     public ItineraryEntity() {

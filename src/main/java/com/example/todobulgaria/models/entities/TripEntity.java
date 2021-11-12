@@ -1,6 +1,8 @@
 package com.example.todobulgaria.models.entities;
 
 import com.example.todobulgaria.models.BaseEntity;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
@@ -19,6 +21,7 @@ public class TripEntity extends BaseEntity {
     private UserEntity user;
     @ManyToOne(fetch = FetchType.EAGER)
     private CategoryEntity categoryEntity;
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "trip", targetEntity = ItineraryEntity.class, cascade = CascadeType.ALL)
     private List<ItineraryEntity> itineraries;
     @Column(columnDefinition = "LONGTEXT")
