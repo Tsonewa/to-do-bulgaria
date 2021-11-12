@@ -29,7 +29,7 @@ main {
 
 .text-card-wrapper h2{
     font-size: 16px;
-    margin: 8px 4px 0px 8px;
+    margin: 8px 4px 10px 8px;
 }
 
 .best-articles-wrapper {
@@ -85,5 +85,15 @@ main {
 
 .fa-star {
     color: coral;
+    letter-spacing: -15px;
+}
+
+.pagination-btn-wrapper{
+    width: 100%;
+    padding: 15px 0px;
+}
+
+.rating{
+   display: flex;
 }
 
