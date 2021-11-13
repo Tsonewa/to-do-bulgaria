@@ -3,6 +3,7 @@ package com.example.todobulgaria.services;
 import com.example.todobulgaria.models.dto.TripsDto;
 import com.example.todobulgaria.models.entities.TripEntity;
 import com.example.todobulgaria.models.service.AddTripServiceModel;
+import com.example.todobulgaria.models.views.TripCategoryTownDurationViewModel;
 import com.example.todobulgaria.models.views.TripDetailsView;
 import com.example.todobulgaria.models.views.TripsArticleViewModel;
 import org.springframework.data.domain.Page;
@@ -21,7 +22,10 @@ public interface TripEntityService {
             String sortBy);
 
     TripDetailsView findById(Long id);
+
+    List<TripCategoryTownDurationViewModel> findAllByUserId(Long id);
 }
+
 
 
 

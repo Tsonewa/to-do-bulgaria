@@ -4,10 +4,7 @@ import com.example.todobulgaria.models.dto.TripsDto;
 import com.example.todobulgaria.models.entities.*;
 import com.example.todobulgaria.models.enums.CategoryEnum;
 import com.example.todobulgaria.models.service.AddTripServiceModel;
-import com.example.todobulgaria.models.views.DetailsEntityViewModel;
-import com.example.todobulgaria.models.views.ItinariesDetailsViewModel;
-import com.example.todobulgaria.models.views.TripDetailsView;
-import com.example.todobulgaria.models.views.TripsArticleViewModel;
+import com.example.todobulgaria.models.views.*;
 import com.example.todobulgaria.repositories.PictureRepository;
 import com.example.todobulgaria.repositories.TripRepository;
 import com.example.todobulgaria.services.*;
@@ -262,6 +259,28 @@ public class TripEntityServiceImpl implements TripEntityService {
         return map;
 
         }
+
+    @Override
+    public List<TripCategoryTownDurationViewModel> findAllByUserId(Long id) {
+
+        List<TripEntity> tripEntities = tripRepository.findAllByUserId(id).orElse(null);
+        List<TripCategoryTownDurationViewModel> collect;
+
+        try{
+            collect = tripEntities.stream().map(e -> {
+
+                TripCategoryTownDurationViewModel map = modelMapper.map(e, TripCategoryTownDurationViewModel.class);
+                    map.setTownName(e.getItineraries().get(0).getTown().getName());
+
+                    return map;
+
+            }).collect(Collectors.toList());
+        } catch (NullPointerException ex){
+            throw new NullPointerException("Trip with this user id" + id + " does not exist!");
+        }
+
+        return collect;
+    }
 
 
 }

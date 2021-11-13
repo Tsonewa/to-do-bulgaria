@@ -14,11 +14,6 @@ import java.util.Optional;
 
 @Controller
 public class HomeController {
-    private final UserEntityService userEntityService;
-
-    public HomeController(UserEntityService userEntityService) {
-        this.userEntityService = userEntityService;
-    }
 
 
     @GetMapping("/")
@@ -34,25 +29,6 @@ public class HomeController {
     @GetMapping("/about-us")
     public String aboutUs(){
         return "about-us";
-    }
-
-
-
-    @GetMapping("/profile")
-    public String getAdminProfile(Model model){
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        Optional<UserEntity> userEntity = userEntityService.findUserByUsername(username);
-
-        UserProfileViewModel user = new UserProfileViewModel();
-        user.setFirstName(userEntity.get().getFirstName());
-        user.setLastName(userEntity.get().getLastName());
-
-        System.out.println(user);
-        model.addAttribute("user", user);
-
-        return "profile";
     }
 
 }

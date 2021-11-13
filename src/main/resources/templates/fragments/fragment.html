@@ -37,12 +37,12 @@
                         <a th:href="@{/trips/add}"> <button class="btn create-btn">Add trip</button></a>
                     </p>
                     <hr>
-                    <a class="dropdown-a" href="/profile"><i class="fas fa-id-card" ></i>Profile</a>
-                    <a class="dropdown-a"><i class="fab fa-font-awesome-flag"></i> My trips</a>
-                    <a class="dropdown-a"><i class="fas fa-cog"></i>Settings</a>
+                    <a class="dropdown-a" href="/profile"><i class="fas fa-id-card" ></i> Профил</a>
+                    <a class="dropdown-a" th:href="@{/profile/my-trips}"><i class="fab fa-font-awesome-flag"></i> Моите маршрути</a>
+                    <a class="dropdown-a"><i class="fas fa-cog"></i> Настройки</a>
                     <hr>
                     <form class="log-out-div" th:action="@{/users/logout}" th:method="post">
-                    <button class="dropdown-a exit-btn"><i class="fas fa-sign-out-alt"></i>Exit</button>
+                    <button class="dropdown-a exit-btn"><i class="fas fa-sign-out-alt"></i> Изход</button>
                     </form>
                 </div>
             </div>
