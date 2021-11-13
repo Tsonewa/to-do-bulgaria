@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/details-style.css">
     <link rel="stylesheet" href="/css/landing-page-style.css">
     <title>Details page</title>
+    <link rel="stylesheet" href="../static/css/details-style.css">
 </head>
 <body>
 <header id="full-nav" th:include="/fragments/fragment :: navbar">
@@ -64,6 +65,7 @@
         <h2>Plan</h2>
         <hr>
         <div class="map-wrapper">
+
             <div class="plan-wrapper">
                 <div class="weather-calendar">
                     <article class="box weather">
@@ -117,35 +119,37 @@
                         <span class="high-low">15&deg;/ 28&deg;</span>
                     </article>
                 </div>
-                <div class="day-plan-wrapper">
-                    <div class="plan-bullet">
+                <div  class="day-plan-wrapper">
+                    <div th:each="i : ${trip.itinaries}" th:object="${i}" class="plan-bullet">
+                       <h1>Day <span th:text="*{day}">1</span></h1>
+                        <h1><span th:text="*{townName}">TownName</span></h1>
                         <div class="bullet">
                             <img src="/images/grean-dot.png">
-                            <h5>Coffe Place</h5>
+                            <h5 th:text="*{coffeePlace}">Coffe Place</h5>
                             <h6>bul.fslfms.fksof</h6>
                             <h6>link to booking</h6>
                         </div>
                         <div class="bullet">
                             <img src="/images/grean-dot.png">
-                            <h5>Coffe Place</h5>
+                            <h5 th:text="*{breakfastPlace}">Coffe Place</h5>
+                            <a href="/"><h6>bul.fslfms.fksof</h6><a/>
+                            <h6>link to booking</h6>
+                        </div>
+                        <div class="bullet">
+                            <img src="/images/grean-dot.png">
+                            <h5 th:text="${i.dinnerPlace}">Coffe Place</h5>
                             <h6>bul.fslfms.fksof</h6>
                             <h6>link to booking</h6>
                         </div>
                         <div class="bullet">
                             <img src="/images/grean-dot.png">
-                            <h5>Coffe Place</h5>
+                            <h5 th:text="${i.hotel}">Coffe Place</h5>
                             <h6>bul.fslfms.fksof</h6>
                             <h6>link to booking</h6>
                         </div>
                         <div class="bullet">
                             <img src="/images/grean-dot.png">
-                            <h5>Coffe Place</h5>
-                            <h6>bul.fslfms.fksof</h6>
-                            <h6>link to booking</h6>
-                        </div>
-                        <div class="bullet">
-                            <img src="/images/grean-dot.png">
-                            <h5>Coffe Place</h5>
+                            <h5 th:text="${i.townName}">Coffe Place</h5>
                             <h6>bul.fslfms.fksof</h6>
                             <h6>link to booking</h6>
                         </div>

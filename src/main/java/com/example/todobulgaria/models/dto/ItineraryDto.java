@@ -1,7 +1,6 @@
-package com.example.todobulgaria.models.views;
+package com.example.todobulgaria.models.dto;
 
-
-public class ItinariesDetailsViewModel {
+public class ItineraryDto {
 
     private String breakfastPlace;
     private String coffeePlace;
@@ -10,7 +9,7 @@ public class ItinariesDetailsViewModel {
     private String townName;
     private String day;
 
-    public ItinariesDetailsViewModel() {
+    public ItineraryDto() {
     }
 
     public String getDay() {
