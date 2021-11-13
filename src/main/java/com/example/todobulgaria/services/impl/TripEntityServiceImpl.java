@@ -41,8 +41,11 @@ public class TripEntityServiceImpl implements TripEntityService {
     private final CloudinaryService cloudinaryService;
     private final PictureRepository pictureRepository;
     private final BreakfastPlaceEntityService breakfastPlaceEntityService;
+    private final CoffeePlaceEntityService coffeePlaceEntityService;
+    private final HotelEntityService hotelEntityService;
+    private final DinnerPlaceEntityService dinnerPlaceEntityService;
 
-    public TripEntityServiceImpl(ModelMapper modelMapper, TripRepository tripRepository, CategoryEntityService categoryEntityService, TownEntityService townEntityService, AttractionEntityService attractionEntityService, DetailsEntityService detailsEntityService, UserEntityService userEntityService, CloudinaryService cloudinaryService, PictureRepository pictureRepository, BreakfastPlaceEntityService breakfastPlaceEntityService) {
+    public TripEntityServiceImpl(ModelMapper modelMapper, TripRepository tripRepository, CategoryEntityService categoryEntityService, TownEntityService townEntityService, AttractionEntityService attractionEntityService, DetailsEntityService detailsEntityService, UserEntityService userEntityService, CloudinaryService cloudinaryService, PictureRepository pictureRepository, BreakfastPlaceEntityService breakfastPlaceEntityService, CoffeePlaceEntityService coffeePlaceEntityService, HotelEntityService hotelEntityService, DinnerPlaceEntityService dinnerPlaceEntityService) {
         this.modelMapper = modelMapper;
         this.tripRepository = tripRepository;
         this.categoryEntityService = categoryEntityService;
@@ -53,6 +56,9 @@ public class TripEntityServiceImpl implements TripEntityService {
         this.cloudinaryService = cloudinaryService;
         this.pictureRepository = pictureRepository;
         this.breakfastPlaceEntityService = breakfastPlaceEntityService;
+        this.coffeePlaceEntityService = coffeePlaceEntityService;
+        this.hotelEntityService = hotelEntityService;
+        this.dinnerPlaceEntityService = dinnerPlaceEntityService;
     }
 
     @Override
@@ -90,12 +96,40 @@ public class TripEntityServiceImpl implements TripEntityService {
 
             }
 
+            if (coffeePlaceEntityService.findCoffeePlaceEntityByName(addTripServiceModel.getCoffeePlace().get(i)) != null) {
+                itineraryEntity.setCoffeePlaceEntity(coffeePlaceEntityService.findCoffeePlaceEntityByName(addTripServiceModel.getCoffeePlace().get(i)));
+            } else {
+                CoffeePlaceEntity newCoffeePlace = new CoffeePlaceEntity();
+                newCoffeePlace.setName(addTripServiceModel.getCoffeePlace().get(i));
+
+                coffeePlaceEntityService.saveCoffeePlace(newCoffeePlace);
+            }
+
+            if (dinnerPlaceEntityService.findDinnerPlaceEntityByName(addTripServiceModel.getDinnerPlace().get(i)) != null) {
+                itineraryEntity.setDinnerPlaceEntity(dinnerPlaceEntityService.findDinnerPlaceEntityByName(addTripServiceModel.getDinnerPlace().get(i)));
+            } else {
+                DinnerPlaceEntity newDinnerPlace = new DinnerPlaceEntity();
+                newDinnerPlace.setName(addTripServiceModel.getDinnerPlace().get(i));
+
+                dinnerPlaceEntityService.saveDinnerPlace(newDinnerPlace);
+            }
+
+            if (hotelEntityService.findHotelEntityByName(addTripServiceModel.getHotel().get(i)) != null) {
+                itineraryEntity.setHotelEntity(hotelEntityService.findHotelEntityByName(addTripServiceModel.getHotel().get(i)));
+            } else {
+                HotelEntity newHotel = new HotelEntity();
+                newHotel.setName(addTripServiceModel.getHotel().get(i));
+
+                hotelEntityService.saveHotel(newHotel);
+            }
+
             itineraryEntity.setTown(townEntityService.findTownByName(addTripServiceModel.getTownName().get(i)));
             itineraryEntity.setBreakfastPlace(breakfastPlaceEntityService.findBrekfastPlaceEntityByName(addTripServiceModel.getBreakfastPlace().get(i)));
             itineraryEntity.setCreatedOn(LocalDate.now());
-            itineraryEntity.setDinnerPlace(addTripServiceModel.getDinnerPlace().get(i));
-            itineraryEntity.setCoffeePlace(addTripServiceModel.getCoffeePlace().get(i));
-            itineraryEntity.setHotel(addTripServiceModel.getHotel().get(i));
+            itineraryEntity.setDinnerPlaceEntity(dinnerPlaceEntityService.findDinnerPlaceEntityByName(addTripServiceModel.getDinnerPlace().get(i)));
+            itineraryEntity.setCoffeePlaceEntity(coffeePlaceEntityService.findCoffeePlaceEntityByName(addTripServiceModel.getCoffeePlace().get(i)));
+            itineraryEntity.setHotelEntity(hotelEntityService.findHotelEntityByName(addTripServiceModel.getHotel().get(i)));
+
             itineraryEntity.setTrip(entity);
 
             if (attractionEntityService.attractionExistByName(addTripServiceModel.getAttractionsName().get(i))) {
@@ -206,6 +240,10 @@ public class TripEntityServiceImpl implements TripEntityService {
         .map(i -> {
             ItinariesDetailsViewModel itinary = modelMapper.map(i, ItinariesDetailsViewModel.class);
             itinary.setBreakfastPlace(i.getBreakfastPlace().getName());
+            //TODO
+            itinary.setCoffeePlace(i.getCoffeePlaceEntity().getName());
+            itinary.setDinnerPlace(i.getDinnerPlaceEntity().getName());
+            itinary.setHotel(i.getHotelEntity().getName());
 
             return itinary;
 

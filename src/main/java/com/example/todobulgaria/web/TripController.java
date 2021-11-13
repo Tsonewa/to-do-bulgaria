@@ -1,11 +1,12 @@
 package com.example.todobulgaria.web;
 
 import com.example.todobulgaria.models.bindings.AddTripBindingModel;
+import com.example.todobulgaria.models.dto.ItineraryDto;
 import com.example.todobulgaria.models.dto.TripsDto;
-import com.example.todobulgaria.models.entities.Rating;
 import com.example.todobulgaria.models.enums.CategoryEnum;
 import com.example.todobulgaria.models.service.AddTripServiceModel;
 import com.example.todobulgaria.models.views.TripDetailsView;
+import com.example.todobulgaria.services.ItineraryEntityService;
 import com.example.todobulgaria.services.TripEntityService;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -26,10 +27,12 @@ public class TripController {
 
     private final TripEntityService tripEntityService;
     private final ModelMapper modelMapper;
+    private final ItineraryEntityService itineraryEntityService;
 
-    public TripController(TripEntityService tripEntityService, ModelMapper modelMapper) {
+    public TripController(TripEntityService tripEntityService, ModelMapper modelMapper, ItineraryEntityService itineraryEntityService) {
         this.tripEntityService = tripEntityService;
         this.modelMapper = modelMapper;
+        this.itineraryEntityService = itineraryEntityService;
     }
 
 
@@ -109,7 +112,6 @@ public class TripController {
             @PathVariable Long id, Model model) {
 
         TripDetailsView tripById = tripEntityService.findById(id);
-
         String townName = tripById.getItinaries().get(0).getTownName();
 
         model.addAttribute("trip", tripById);

@@ -1,7 +1,6 @@
 package com.example.todobulgaria.models.entities;
 
 import com.example.todobulgaria.models.BaseEntity;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -25,18 +24,58 @@ public class ItineraryEntity extends BaseEntity {
     private List<AttractionEntity> attractions;
     @ManyToOne(fetch = FetchType.EAGER)
     private TownEntity town;
-    @Column(name = "breakfast_place", nullable = false)
-    private String breakfastPlace;
-    @Column(name = "coffee_place", nullable = false)
-    private String coffeePlace;
-    @Column(name = "dinner_place", nullable = false)
-    private String dinnerPlace;
-    @Column(nullable = false)
-    private String hotel;
+//    @Column(name = "breakfast_place", nullable = false)
+//    private String breakfastPlace;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    private BreakfastPlaceEntity breakfastPlace;
+//    @Column(name = "coffee_place", nullable = false)
+//    private String coffeePlace;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    private CoffeePlaceEntity coffeePlaceEntity;
+//    @Column(name = "dinner_place", nullable = false)
+//    private String dinnerPlace;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    private DinnerPlaceEntity dinnerPlaceEntity;
+//    @Column(nullable = false)
+//    private String hotel;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    private HotelEntity hotelEntity;
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private TripEntity trip;
 
     public ItineraryEntity() {
+    }
+
+    public DinnerPlaceEntity getDinnerPlaceEntity() {
+        return dinnerPlaceEntity;
+    }
+
+    public void setDinnerPlaceEntity(DinnerPlaceEntity dinnerPlaceEntity) {
+        this.dinnerPlaceEntity = dinnerPlaceEntity;
+    }
+
+    public HotelEntity getHotelEntity() {
+        return hotelEntity;
+    }
+
+    public void setHotelEntity(HotelEntity hotelEntity) {
+        this.hotelEntity = hotelEntity;
+    }
+
+    public BreakfastPlaceEntity getBreakfastPlace() {
+        return breakfastPlace;
+    }
+
+    public CoffeePlaceEntity getCoffeePlaceEntity() {
+        return coffeePlaceEntity;
+    }
+
+    public void setCoffeePlaceEntity(CoffeePlaceEntity coffeePlaceEntity) {
+        this.coffeePlaceEntity = coffeePlaceEntity;
+    }
+
+    public void setBreakfastPlace(BreakfastPlaceEntity breakfastPlace) {
+        this.breakfastPlace = breakfastPlace;
     }
 
     public TripEntity getTrip() {
@@ -79,35 +118,35 @@ public class ItineraryEntity extends BaseEntity {
         this.town = town;
     }
 
-    public String getBreakfastPlace() {
-        return breakfastPlace;
-    }
+//    public String getBreakfastPlace() {
+//        return breakfastPlace;
+//    }
+//
+//    public void setBreakfastPlace(String breakfastPlace) {
+//        this.breakfastPlace = breakfastPlace;
+//    }
 
-    public void setBreakfastPlace(String breakfastPlace) {
-        this.breakfastPlace = breakfastPlace;
-    }
+//    public String getCoffeePlace() {
+//        return coffeePlace;
+//    }
+//
+//    public void setCoffeePlace(String coffeePlace) {
+//        this.coffeePlace = coffeePlace;
+//    }
 
-    public String getCoffeePlace() {
-        return coffeePlace;
-    }
+//    public String getDinnerPlace() {
+//        return dinnerPlace;
+//    }
+//
+//    public void setDinnerPlace(String dinnerPlace) {
+//        this.dinnerPlace = dinnerPlace;
+//    }
 
-    public void setCoffeePlace(String coffeePlace) {
-        this.coffeePlace = coffeePlace;
-    }
-
-    public String getDinnerPlace() {
-        return dinnerPlace;
-    }
-
-    public void setDinnerPlace(String dinnerPlace) {
-        this.dinnerPlace = dinnerPlace;
-    }
-
-    public String getHotel() {
-        return hotel;
-    }
-
-    public void setHotel(String hotel) {
-        this.hotel = hotel;
-    }
+//    public String getHotel() {
+//        return hotel;
+//    }
+//
+//    public void setHotel(String hotel) {
+//        this.hotel = hotel;
+//    }
 }
