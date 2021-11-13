@@ -40,8 +40,9 @@ public class TripEntityServiceImpl implements TripEntityService {
     private final UserEntityService userEntityService;
     private final CloudinaryService cloudinaryService;
     private final PictureRepository pictureRepository;
+    private final BreakfastPlaceEntityService breakfastPlaceEntityService;
 
-    public TripEntityServiceImpl(ModelMapper modelMapper, TripRepository tripRepository, CategoryEntityService categoryEntityService, TownEntityService townEntityService, AttractionEntityService attractionEntityService, DetailsEntityService detailsEntityService, UserEntityService userEntityService,  CloudinaryService cloudinaryService, PictureRepository pictureRepository) {
+    public TripEntityServiceImpl(ModelMapper modelMapper, TripRepository tripRepository, CategoryEntityService categoryEntityService, TownEntityService townEntityService, AttractionEntityService attractionEntityService, DetailsEntityService detailsEntityService, UserEntityService userEntityService, CloudinaryService cloudinaryService, PictureRepository pictureRepository, BreakfastPlaceEntityService breakfastPlaceEntityService) {
         this.modelMapper = modelMapper;
         this.tripRepository = tripRepository;
         this.categoryEntityService = categoryEntityService;
@@ -51,6 +52,7 @@ public class TripEntityServiceImpl implements TripEntityService {
         this.userEntityService = userEntityService;
         this.cloudinaryService = cloudinaryService;
         this.pictureRepository = pictureRepository;
+        this.breakfastPlaceEntityService = breakfastPlaceEntityService;
     }
 
     @Override
@@ -76,12 +78,21 @@ public class TripEntityServiceImpl implements TripEntityService {
                 newTown.setRegion(addTripServiceModel.getRegion());
 
                 townEntityService.saveTown(newTown);
+            }
+
+            if (breakfastPlaceEntityService.findBrekfastPlaceEntityByName(addTripServiceModel.getBreakfastPlace().get(i)) != null) {
+                itineraryEntity.setBreakfastPlace(breakfastPlaceEntityService.findBrekfastPlaceEntityByName(addTripServiceModel.getBreakfastPlace().get(i)));
+            } else {
+                BreakfastPlaceEntity newBreakfastPlace = new BreakfastPlaceEntity();
+                newBreakfastPlace.setName(addTripServiceModel.getBreakfastPlace().get(i));
+
+                breakfastPlaceEntityService.saveBreakfastPlace(newBreakfastPlace);
 
             }
 
             itineraryEntity.setTown(townEntityService.findTownByName(addTripServiceModel.getTownName().get(i)));
+            itineraryEntity.setBreakfastPlace(breakfastPlaceEntityService.findBrekfastPlaceEntityByName(addTripServiceModel.getBreakfastPlace().get(i)));
             itineraryEntity.setCreatedOn(LocalDate.now());
-            itineraryEntity.setBreakfastPlace(addTripServiceModel.getBreakfastPlace().get(i));
             itineraryEntity.setDinnerPlace(addTripServiceModel.getDinnerPlace().get(i));
             itineraryEntity.setCoffeePlace(addTripServiceModel.getCoffeePlace().get(i));
             itineraryEntity.setHotel(addTripServiceModel.getHotel().get(i));
@@ -192,7 +203,14 @@ public class TripEntityServiceImpl implements TripEntityService {
 
         map.setItinaries(tripDetailsViewEntity.get()
         .getItineraries().stream()
-        .map(i -> modelMapper.map(i, ItinariesDetailsViewModel.class)).collect(Collectors.toList()));
+        .map(i -> {
+            ItinariesDetailsViewModel itinary = modelMapper.map(i, ItinariesDetailsViewModel.class);
+            itinary.setBreakfastPlace(i.getBreakfastPlace().getName());
+
+            return itinary;
+
+        }).collect(Collectors.toList()));
+
         map.setTownName(tripDetailsViewEntity.get().getItineraries().get(0).getTown().getName());
 
         DetailsEntityViewModel detailsMap = modelMapper.map(tripDetailsViewEntity.get().getDetails(), DetailsEntityViewModel.class);
