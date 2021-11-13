@@ -9,6 +9,34 @@ values ('София', 'Област София'),
        ('Каварна', 'Област Варна'),
        ('Габрово', 'Област Плевен');
 
+INSERT INTO  breakfast_places (`name`)
+values ('Mekitsa&Coffee'),
+       ('PancakesPlace'),
+       ('Breakfast Paradise'),
+       ('Best Eggs in Town'),
+       ('Egg house'),
+       ('Donuts Heaven');
+
+INSERT INTO  coffee_places (`name`)
+values ('Coffee Place'),
+       ('Costa'),
+       ('Starbucks'),
+       ('Ric');
+
+INSERT INTO  dinner_places (`name`)
+values ('Millenium'),
+       ('Happy Bar&Grill'),
+       ('Stack House'),
+       ('Capitan Cook'),
+       ('Dominos Pizza');
+
+INSERT INTO hotels (`name`)
+values ('Grand Hotel Sofia'),
+       ('Grand Hotel Plovdiv'),
+       ('Ramada'),
+       ('Sheraton'),
+       ('Perla');
+
 INSERT INTO  details (equipment, festivals, foto_tips)
 values ('Екипировка за планина', 'Фестивал на розата', 'Парк-музей „Врана”'),
        ('Екипировка за море', 'Фестивал на водата', 'Морска градина'),
@@ -50,17 +78,17 @@ VALUES ('2004 UE е част от групата Aи толкова близо �
        ('столицатостта за спз периода 2020 – 2027', 2, 1, 'Централен Балкан', 3, 7, 7, 2),
         ('о финансиране за райони в преход при новата Политика на сближаване през периода 2020 – 2027', 2, 1, 'Централен Балкан', 3, 8, 8, 2);
 
-INSERT INTO  itineraries (breakfast_place, coffee_place, created_on, `day`, dinner_place, hotel, town_id, trip_id)
-values ('Mekitsa%Coffee', 'CoffeeShop', '2021-11-11', 1, 'Blue House', 'Grand Hotel Sofia', 1, 1),
-       ('Nedelq', 'Starbucks', '2021-11-13', 1, 'Happy Bar and Grill', 'Marinella', 2, 2),
-       ('Breakfast Paradise', 'Costa', '2021-11-13', 1, 'Hrima', 'Sheraton', 3, 3),
-       ('Eggs House', 'Coffee Place', '2021-11-14', 1, 'Milenium', 'Grand Hotel Plovdiv', 4, 4),
-       ('Eggs House', 'Coffee Place', '2021-11-14', 1, 'Milenium', 'Grand Hotel Plovdiv', 5, 5),
-       ('Eggs House', 'Coffee Place', '2021-11-14', 1, 'Milenium', 'Grand Hotel Plovdiv', 6, 6),
-       ('Eggs House', 'Coffee Place', '2021-11-14', 1, 'Milenium', 'Grand Hotel Plovdiv', 7, 7),
-       ('Eggs House', 'Coffee Place', '2021-11-14', 1, 'Milenium', 'Grand Hotel Plovdiv', 8, 8),
-       ('Pancakes House', 'Italian Taste', '2021-11-15', 1, 'McDonalds', 'Ramada Resort', 2, 8),
-        ('Pancakes House', 'Italian Taste', '2021-11-15', 1, 'McDonalds', 'Ramada Resort', 2,7);
+INSERT INTO  itineraries (created_on, `day`, dinner_place_entity_id, hotel_entity_id, town_id, trip_id, breakfast_place_id, coffee_place_entity_id)
+values ('2021-11-11', 1, 1,1,1, 1, 1,1),
+       ('2021-11-13', 1, 2,2, 2, 2, 2, 2),
+       ('2021-11-13', 1, 3,3, 3, 3, 3, 3),
+       ('2021-11-14', 1, 4,4, 4, 4, 4, 4),
+       ('2021-11-14', 1, 5,5, 5, 5, 2, 2),
+       ('2021-11-14', 1, 1,3, 6, 6,6, 1),
+       ('2021-11-14', 1,2,3, 7, 7,5, 2),
+       ('2021-11-14', 1, 4,5, 8, 8, 5, 3),
+       ('2021-11-15', 1, 5,5, 2, 8,3, 4),
+        ('2021-11-15', 1, 2,2, 2,7, 4, 1);
 
 INSERT INTO  itineraries_attractions (itineraries_id, attraction_id)
 VALUES (1, 2),
