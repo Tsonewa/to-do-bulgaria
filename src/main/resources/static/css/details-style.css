@@ -571,4 +571,9 @@ body {
     margin-right: 5px;
 }
 
-
+.uprate-a {
+    padding: 0px 5px;
+    font-size: 18px;
+    color: blue;
+    text-decoration: underline;
+}

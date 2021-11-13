@@ -240,7 +240,7 @@ public class TripEntityServiceImpl implements TripEntityService {
         .map(i -> {
             ItinariesDetailsViewModel itinary = modelMapper.map(i, ItinariesDetailsViewModel.class);
             itinary.setBreakfastPlace(i.getBreakfastPlace().getName());
-            //TODO
+            itinary.setAttractionName(i.getAttractions().get(0).getName());
             itinary.setCoffeePlace(i.getCoffeePlaceEntity().getName());
             itinary.setDinnerPlace(i.getDinnerPlaceEntity().getName());
             itinary.setHotel(i.getHotelEntity().getName());

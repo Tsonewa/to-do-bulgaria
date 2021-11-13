@@ -66,7 +66,6 @@ public class UserController {
             redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel", bindingResult);
 
-            System.out.println(bindingResult);
             return "redirect:register";
         }
         UserRegisterServiceModel user = modelMapper.map(userRegisterBindingModel, UserRegisterServiceModel.class);
@@ -75,4 +74,5 @@ public class UserController {
 
            return "redirect:/";
     }
+
 }

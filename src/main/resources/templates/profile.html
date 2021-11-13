@@ -14,20 +14,20 @@
 </header>
 <main id="profile-main">
     <div class="profile-wrapper">
-        <div class="profile">
+        <div th:action="@{/profile}" th:method="get" th:object="${user}" class="profile">
 
        <div class="profile-wrapper">
            <div class="profile-pic-wrapper">
                <img class="profile-picture" src="/images/profile-2398782_1280.png" >
            </div>
-
        </div>
-            <h2>Pesho Petrov</h2>
+            <h2><span th:text="*{firstName}">Pesho</span><span th:text="*{lastName}"></span></h2>
         <div class="user-nav-wrapper">
-            <button class="profile-a new-trips-btn"><i class="fas fa-sign-out-alt"></i>Нови маршрути</button>
-            <a class="profile-a"><i class="fas fa-id-card"></i>Профил</a>
-            <a class="profile-a"><i class="fab fa-font-awesome-flag"></i> Моите маршрути</a>
-            <a class="profile-a"><i class="fas fa-cog"></i>Настройки</a>
+            <button sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')" class="profile-a new-trips-btn"><i class="fas fa-sign-out-alt"></i>Нови маршрути</button>
+            <a sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')" class="profile-a"><i class="fas fa-id-card"></i>Профил</a>
+            <a sec:authorize="isAuthenticated()" class="profile-a"><i class="fab fa-font-awesome-flag"></i> Любими маршрути</a>
+            <a sec:authorize="isAuthenticated()" class="profile-a"><i class="fab fa-font-awesome-flag"></i> Моите маршрути</a>
+            <a sec:authorize="isAuthenticated()" class="profile-a"><i class="fas fa-cog"></i>Настройки</a>
             <form class="log-out-div" th:action="@{/users/logout}" th:method="post">
                 <button class="profile-a exit-btn"><i class="fas fa-sign-out-alt"></i>Exit</button>
             </form>
@@ -35,7 +35,7 @@
         </div>
     </div>
             <div class="table-wrapper">
-                <div class="statistics-wrapper">
+                <div sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')" class="statistics-wrapper">
                     <div class="users-statistic-wrapper">
                         <h4>Нови потребители</h4>
                     <div class="statistic">
@@ -53,8 +53,7 @@
                         </div>
                     </div>
                     </div>
-                    <div class="trips-statistic-wrapper">
-
+                    <div  class="trips-statistic-wrapper">
                         <h4>Нови екскурзии</h4>
                         <div class="statistic">
                             <div class="stat-numbers">
@@ -84,7 +83,7 @@
             <td>Белоградчик, България</td>
             <td><i class="far fa-clock"></i> 3 дни</td>
             <td><i class="fas fa-map-signs"></i>Seaside</td>
-            <td> <button class="new-trips-btn">Изтрий</button> <button class="btn">Добави</button></td>
+            <td> <button class="new-trips-btn">Изтрий</button> <button sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')" class="btn">Добави</button></td>
         </tr>
         <tr>
             <td>Белоградчик, България</td>

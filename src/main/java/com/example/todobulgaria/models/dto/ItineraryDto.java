@@ -8,8 +8,17 @@ public class ItineraryDto {
     private String hotel;
     private String townName;
     private String day;
+    private String attractionName;
 
     public ItineraryDto() {
+    }
+
+    public String getAttractionName() {
+        return attractionName;
+    }
+
+    public void setAttractionName(String attractionName) {
+        this.attractionName = attractionName;
     }
 
     public String getDay() {

@@ -21,7 +21,7 @@
         </div>
         <div class="cover-text-wrapper">
             <div class="rating-wrapper">
-                <h2><span th:text="*{townName}">Nesebar</span>, Bulgaria</h2>
+                <h2><span th:text="*{townName}">Nesebar</span>, България</h2>
                 <h5><i class="fas fa-star"></i></h5>
                 <h5><i class="fas fa-star"></i></h5>
                 <h5><i class="fas fa-star"></i></h5>
@@ -32,7 +32,7 @@
                     <h3 class="type-h3"><i class="fas fa-mountain"></i> <span th:text="*{categoryName}">Mountain</span></h3>
                 </div>
                 <div class="days">
-                    <h3 class="type-h3"><i class="fas fa-clock" ></i><span th:text="*{duration}">1</span> days</h3>
+                    <h3 class="type-h3"><i class="fas fa-clock"></i><span th:text="*{duration}">1</span> days</h3>
                 </div>
             </div>
         </div>
@@ -126,32 +126,32 @@
                         <div class="bullet">
                             <img src="/images/grean-dot.png">
                             <h5 th:text="*{coffeePlace}">Coffe Place</h5>
-                            <h6>bul.fslfms.fksof</h6>
-                            <h6>link to booking</h6>
+                            <a class="uprate-a" href="/"><h6>Add address</h6></a>
+                            <a class="uprate-a" href="/"><h6>Add booking</h6></a>
                         </div>
                         <div class="bullet">
                             <img src="/images/grean-dot.png">
                             <h5 th:text="*{breakfastPlace}">Coffe Place</h5>
-                            <a href="/"><h6>bul.fslfms.fksof</h6><a/>
-                            <h6>link to booking</h6>
+                            <a class="uprate-a" href="/"><h6>Add address</h6></a>
+                            <a class="uprate-a" href="/"><h6>Add booking</h6></a>
                         </div>
                         <div class="bullet">
                             <img src="/images/grean-dot.png">
-                            <h5 th:text="${i.dinnerPlace}">Coffe Place</h5>
-                            <h6>bul.fslfms.fksof</h6>
-                            <h6>link to booking</h6>
+                            <h5 th:text="*{dinnerPlace}">Coffe Place</h5>
+                            <a class="uprate-a" href="/"><h6>Add address</h6></a>
+                            <a class="uprate-a" href="/"><h6>Add booking</h6></a>
                         </div>
                         <div class="bullet">
                             <img src="/images/grean-dot.png">
-                            <h5 th:text="${i.hotel}">Coffe Place</h5>
-                            <h6>bul.fslfms.fksof</h6>
-                            <h6>link to booking</h6>
+                            <h5 th:text="*{hotel}">Coffe Place</h5>
+                            <a class="uprate-a" href="/"><h6>Add address</h6></a>
+                            <a class="uprate-a" href="/"><h6>Add booking</h6></a>
                         </div>
                         <div class="bullet">
                             <img src="/images/grean-dot.png">
-                            <h5 th:text="${i.townName}">Coffe Place</h5>
-                            <h6>bul.fslfms.fksof</h6>
-                            <h6>link to booking</h6>
+                            <h5 th:text="*{attractionName}">Coffe Place</h5>
+                            <a class="uprate-a" href="/"><h6>Add address</h6></a>
+                            <a class="uprate-a" href="/"><h6>Add booking</h6></a>
                         </div>
                     </div>
                 </div>

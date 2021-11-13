@@ -1,6 +1,8 @@
 package com.example.todobulgaria.models.entities;
 
 import com.example.todobulgaria.models.BaseEntity;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -21,6 +23,7 @@ public class ItineraryEntity extends BaseEntity {
             joinColumns = { @JoinColumn(name = "itineraries_id") },
             inverseJoinColumns = { @JoinColumn(name = "attraction_id")}
     )
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<AttractionEntity> attractions;
     @ManyToOne(fetch = FetchType.EAGER)
     private TownEntity town;
