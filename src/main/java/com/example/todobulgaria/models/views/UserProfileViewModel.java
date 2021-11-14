@@ -4,9 +4,18 @@ public class UserProfileViewModel {
 
     private String firstName;
     private String lastName;
+    private String profilePictureUrl;
 
 
     public UserProfileViewModel() {
+    }
+
+    public String getProfilePictureUrl() {
+        return profilePictureUrl;
+    }
+
+    public void setProfilePictureUrl(String profilePictureUrl) {
+        this.profilePictureUrl = profilePictureUrl;
     }
 
     public String getFirstName() {

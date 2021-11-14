@@ -1,12 +1,16 @@
 package com.example.todobulgaria.services.impl;
 
+import com.example.todobulgaria.models.entities.PictureEntity;
 import com.example.todobulgaria.models.entities.RoleEntity;
 import com.example.todobulgaria.models.entities.UserEntity;
 import com.example.todobulgaria.models.enums.RoleEnum;
 import com.example.todobulgaria.models.service.UserRegisterServiceModel;
+import com.example.todobulgaria.repositories.PictureRepository;
 import com.example.todobulgaria.repositories.RoleRepository;
 import com.example.todobulgaria.repositories.UserRepository;
 import com.example.todobulgaria.security.UserDetailsImpl;
+import com.example.todobulgaria.services.CloudinaryImage;
+import com.example.todobulgaria.services.CloudinaryService;
 import com.example.todobulgaria.services.UserEntityService;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,8 +20,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,13 +36,17 @@ public class UserEntityServiceImpl implements UserEntityService {
     private final RoleRepository roleRepository;
     private final ModelMapper modelMapper;
     private final UserDetailsImpl userDetailsImpl;
+    private final CloudinaryService cloudinaryService;
+    private final PictureRepository pictureRepository;
 
-    public UserEntityServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository, ModelMapper modelMapper,  UserDetailsImpl userDetailsImpl) {
+    public UserEntityServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository, ModelMapper modelMapper, UserDetailsImpl userDetailsImpl, CloudinaryService cloudinaryService, PictureRepository pictureRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.roleRepository = roleRepository;
         this.modelMapper = modelMapper;
         this.userDetailsImpl = userDetailsImpl;
+        this.cloudinaryService = cloudinaryService;
+        this.pictureRepository = pictureRepository;
     }
 
     @Override
@@ -73,7 +83,7 @@ public class UserEntityServiceImpl implements UserEntityService {
     }
 
     @Override
-    public void registrarUser(UserRegisterServiceModel userRegisterServiceModel) {
+    public void registrarUser(UserRegisterServiceModel userRegisterServiceModel) throws IOException {
 
         if (existByUsername(userRegisterServiceModel.getUsername())) {
             throw new UsernameNotFoundException("There is an account with that email address: "
@@ -84,6 +94,12 @@ public class UserEntityServiceImpl implements UserEntityService {
         user.setStatus(true);
         user.setPassword(passwordEncoder.encode(userRegisterServiceModel.getPassword()));
         user.setRoles(List.of(roleRepository.findByRole(RoleEnum.USER).orElseThrow()));
+
+        var picture = createPictureEntity(userRegisterServiceModel.getProfilePictureUrl());
+
+        pictureRepository.saveAndFlush(picture);
+
+        user.setProfilePictureUrl(picture);
 
         userRepository.save(user);
 
@@ -98,6 +114,18 @@ public class UserEntityServiceImpl implements UserEntityService {
                 getContext().
                 setAuthentication(authentication);
 
+    }
+
+    private PictureEntity createPictureEntity(MultipartFile file) throws IOException {
+        final CloudinaryImage uploaded = this.cloudinaryService.upload(file);
+
+        PictureEntity picture = new PictureEntity();
+
+        picture.setPublicId(uploaded.getPublicId());
+        picture.setTitle(file.getName());
+        picture.setUrl(uploaded.getUrl());
+
+        return picture;
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.example.todobulgaria.models.service;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class UserRegisterServiceModel {
 
     private String username;
@@ -8,8 +10,17 @@ public class UserRegisterServiceModel {
     private String email;
     private String password;
     private String confirmPassword;
+    private MultipartFile profilePictureUrl;
 
     public UserRegisterServiceModel() {
+    }
+
+    public MultipartFile getProfilePictureUrl() {
+        return profilePictureUrl;
+    }
+
+    public void setProfilePictureUrl(MultipartFile profilePictureUrl) {
+        this.profilePictureUrl = profilePictureUrl;
     }
 
     public String getUsername() {

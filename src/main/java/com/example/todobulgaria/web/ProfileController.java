@@ -28,13 +28,14 @@ public class ProfileController {
     }
 
     @GetMapping
-    public String getAdminProfile(Model model){
+    public String getUserProfile(Model model){
 
         Optional<UserEntity> userEntity = getCurrentUser();
 
         UserProfileViewModel user = new UserProfileViewModel();
         user.setFirstName(userEntity.get().getFirstName());
         user.setLastName(userEntity.get().getLastName());
+        user.setProfilePictureUrl(userEntity.get().getProfilePictureUrl().getUrl());
 
         model.addAttribute("user", user);
 
@@ -45,6 +46,7 @@ public class ProfileController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         Optional<UserEntity> userEntity = userEntityService.findUserByUsername(username);
+
         return userEntity;
     }
 
@@ -52,7 +54,7 @@ public class ProfileController {
     public String myTrips(Model model){
 
         Optional<UserEntity> userEntity = getCurrentUser();
-        getAdminProfile(model);
+        getUserProfile(model);
 
         List<TripCategoryTownDurationViewModel> userTrips = tripEntityService.findAllByUserId(userEntity.get().getId());
 

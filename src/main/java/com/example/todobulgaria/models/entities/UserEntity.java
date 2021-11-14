@@ -23,6 +23,8 @@ public class UserEntity extends BaseEntity {
     private String email;
     @Column(nullable = false)
     private String password;
+    @OneToOne
+    private PictureEntity profilePictureUrl;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<RoleEntity> roles;
     @Column
@@ -31,6 +33,14 @@ public class UserEntity extends BaseEntity {
     private List<TripEntity> trips;
 
     public UserEntity() {
+    }
+
+    public PictureEntity getProfilePictureUrl() {
+        return profilePictureUrl;
+    }
+
+    public void setProfilePictureUrl(PictureEntity profilePictureUrl) {
+        this.profilePictureUrl = profilePictureUrl;
     }
 
     public List<TripEntity> getTrips() {
