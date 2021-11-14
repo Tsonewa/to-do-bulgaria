@@ -28,7 +28,7 @@ public class UserEntity extends BaseEntity {
     @ManyToMany(fetch = FetchType.EAGER)
     private List<RoleEntity> roles;
     @Column
-    private boolean status; //blocked or active
+    private boolean status = false; //blocked or active
     @OneToMany(mappedBy = "user", targetEntity = TripEntity.class)
     private List<TripEntity> trips;
 
