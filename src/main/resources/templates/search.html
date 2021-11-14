@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/best-tripst-style.css">
+    <link rel="stylesheet" href="/css/landing-page-style.css">
+    <title>Search Trips</title>
+</head>
+<body>
+
+<header th:include="/fragments/fragment :: navbar" id="full-size">
+</header>
+<main>
+    <h1 class="best-trips-header">Nesebar</h1>
+<!--    <div th:action="@{/trips/search}" th:method="get" th:object="${trips}" class="best-articles-wrapper">-->
+<!--        <div th:each="t : ${trips}" th:object="${t}" class="card-wrapper">-->
+<!--            <div  class="img-card-wrapper">-->
+<!--                <img th:src="*{url}">-->
+<!--                &lt;!&ndash;button th:href="@{/}"><i class="far fa-heart"></i></button>&ndash;&gt;-->
+<!--            </div>-->
+<!--            <a th:href="@{/trips/{id}/details(id=*{id})}">-->
+<!--                <div class="text-card-wrapper">-->
+<!--                    <h2><span th:text="*{townName}">Nesebar</span>, Bulgaria</h2>-->
+<!--                    <div class="rate-card-wrapper">-->
+<!--                        <h5> <span th:text="*{duration}">3</span> days</h5>-->
+<!--                        <div class="rating">-->
+<!--                            <h5><i class="fas fa-star checked"></i></h5>-->
+<!--                            <h5><i class="fas fa-star checked"></i></h5>-->
+<!--                            <h5><i class="fas fa-star checked"></i></h5>-->
+<!--                            <h5><i class="fas fa-star checked"></i></h5>-->
+<!--                            <h5><i class="fas fa-star unchecked"></i></h5>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--        <div class="pagination-btn-wrapper">-->
+<!--            <a class="first" th:if="${currentPage > 1}" th:href="@{'/trips/all/1'}">First</a>-->
+<!--            <span class="first" th:unless="${currentPage > 1}">First</span>-->
+<!--            <a class="prev" th:if="${currentPage > 1}" th:href="@{'/trips/all/' + ${currentPage - 1}}">Previous</a>-->
+<!--            <span class="prev" th:unless="${currentPage > 1}">Previous</span>-->
+<!--            <span class="prev" th:each="i: ${#numbers.sequence(1, totalPages)}">-->
+<!--               <a class="page-num" th:if="${currentPage != i}" th:href="@{'/trips/all/' + ${i}}">[[${i}]]</a>-->
+<!--                    <span class="prev" th:unless="${currentPage != i}">[[${i}]]</span>-->
+<!--                </span>-->
+<!--        </div>-->
+<!--    </div>-->
+</main>
+<footer th:replace="/fragments/fragment :: footer">
+</footer>
+</body>
+</html>
