@@ -15,7 +15,6 @@
 <main id="profile-main">
     <div class="profile-wrapper">
         <div th:action="@{/profile}" th:method="get" th:object="${user}" class="profile">
-
        <div class="profile-wrapper">
            <div class="profile-pic-wrapper">
                <img class="profile-picture" th:src="*{profilePictureUrl}" >
@@ -23,10 +22,10 @@
        </div>
             <h2><span th:text="*{firstName}">Pesho</span><span th:text="*{lastName}"></span></h2>
         <div class="user-nav-wrapper">
-            <button sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')" class="profile-a new-trips-btn"><i class="fas fa-sign-out-alt" th:href="@{/profile/new}"></i>Нови маршрути</button>
+            <button sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')" class="profile-a new-trips-btn" th:href="@{/profile/new}">><i class="fas fa-sign-out-alt"></i>Нови маршрути</button>
             <a sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')" class="profile-a" th:href="@{/profile}"><i class="fas fa-id-card"></i>Профил</a>
-            <a sec:authorize="isAuthenticated()" class="profile-a"><i class="fab fa-font-awesome-flag"></i> Любими маршрути</a>
-            <a sec:authorize="isAuthenticated()" class="profile-a" th:href="@{/profile/my-trips}"><i class="fab fa-font-awesome-flag"></i> Моите маршрути</a>
+            <a sec:authorize="isAuthenticated()" class="profile-a"  th:href="@{/profile/favourite}" onclick="showFavouriteTrips()"><i class="fab fa-font-awesome-flag" ></i> Любими маршрути</a>
+            <a sec:authorize="isAuthenticated()" class="profile-a" th:href="@{/profile/my-trips}" onclick="hideFavouriteTrips()"><i class="fab fa-font-awesome-flag"></i> Моите маршрути</a>
             <a sec:authorize="isAuthenticated()" class="profile-a"><i class="fas fa-cog"></i>Настройки</a>
             <form class="log-out-div" th:action="@{/users/logout}" th:method="post">
                 <button class="profile-a exit-btn"><i class="fas fa-sign-out-alt"></i>Exit</button>
@@ -84,15 +83,39 @@
             <td><span th:text="*{townName}">Белоградчик</span>, България</td>
             <td><i class="far fa-clock"></i> <span th:text="*{duration}">3</span> дни</td>
             <td th:field="*{categoryName}"><i class="fas fa-map-signs"></i>Seaside</td>
-            <td sec:authorize="isAuthenticated()"> <button class="new-trips-btn">Изтрий</button> <button sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')" class="btn">Добави</button></td>
+            <td sec:authorize="isAuthenticated()"> <form th:action="@{/trips/{id}/delete(id=*{id})}" th:method="delete"><button class="new-trips-btn">Изтрий</button></form><a th:href="@{/trips/{id}/details(id=*{id})}"> <button class="btn" type="button">Детайли</button></a></td>
         </tr>
     </table>
+<!--    <table id="favourite-trips" th:action="@{/profile/favourite}" th:method="get" th:object="${userFavouriteTrips}">-->
+<!--        <tr>-->
+<!--            <th>Екскурзия</th>-->
+<!--            <th>Продължителност</th>-->
+<!--            <th>Тип</th>-->
+<!--            <th>Действие</th>-->
+<!--        </tr>-->
+<!--        <tr  th:each="t : ${userTrips}" th:object="${t}">-->
+<!--            <td><span th:text="*{townName}">Белоградчик</span>, България</td>-->
+<!--            <td><i class="far fa-clock"></i> <span th:text="*{duration}">3</span> дни</td>-->
+<!--            <td th:field="*{categoryName}"><i class="fas fa-map-signs"></i>Seaside</td>-->
+<!--            <td sec:authorize="isAuthenticated()"> <form th:action="@{/trips/{id}/delete(id=*{id})}" th:method="delete"><button class="new-trips-btn">Изтрий</button></form><a th:href="@{/trips/{id}/details(id=*{id})}"> <button class="btn" type="button">Детайли</button></a></td>-->
+<!--        </tr>-->
+<!--    </table>-->
 </div>
     </th:block>
             </div>
         </div>
     </div>
 </main>
+<script>
+
+    // function showFavouriteTrips(){
+    //     document.getElementById("favourite-trips").style.display = "flex";
+    // }
+    //
+    // function hideFavouriteTrips(){
+    //     document.getElementById("favourite-trips").style.display = "none";
+    // }
+</script>
 <footer th:replace="/fragments/fragment :: footer">
 </footer>
 </body>

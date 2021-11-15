@@ -3,6 +3,7 @@ package com.example.todobulgaria.services.impl;
 import com.example.todobulgaria.models.dto.TripsDto;
 import com.example.todobulgaria.models.entities.*;
 import com.example.todobulgaria.models.enums.CategoryEnum;
+import com.example.todobulgaria.models.enums.RoleEnum;
 import com.example.todobulgaria.models.service.AddTripServiceModel;
 import com.example.todobulgaria.models.views.*;
 import com.example.todobulgaria.repositories.PictureRepository;
@@ -23,6 +24,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -283,4 +285,44 @@ public class TripEntityServiceImpl implements TripEntityService {
     }
 
 
+
+    @Override
+    public void deleteTrip(Long id) {
+        tripRepository.deleteById(id);
+    }
+
+    @Override
+    public List<TripCategoryTownDurationViewModel> findAllTripsById(Set<Long> favouriteTripsSet) {
+
+        return tripRepository.findAllById(favouriteTripsSet)
+                .stream()
+                .map(m -> modelMapper.map
+                        (m, TripCategoryTownDurationViewModel.class))
+                .collect(Collectors.toList());
+
+    }
+
+    public boolean isOwner(String userName, Long id) {
+        Optional<TripEntity> trip = tripRepository.
+                findById(id);
+        Optional<UserEntity> caller = userEntityService.
+                findUserByUsername(userName);
+
+        if (trip.isEmpty() || caller.isEmpty()) {
+            return false;
+        } else {
+            TripEntity tripEntity = trip.get();
+
+            return isAdmin(caller.get()) ||
+                    tripEntity.getUser().getUsername().equals(userName);
+        }
+    }
+
+    private boolean isAdmin(UserEntity user) {
+        return user.
+                getRoles().
+                stream().
+                map(RoleEntity::getRole).
+                anyMatch(r -> r == RoleEnum.ADMIN);
+    }
 }

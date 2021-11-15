@@ -25,6 +25,7 @@ main {
 .card-wrapper {
     margin: 12px;
     width: 240px;
+    position: relative;
 }
 
 .text-card-wrapper h2{
@@ -96,4 +97,5 @@ main {
 .rating{
    display: flex;
 }
+
 

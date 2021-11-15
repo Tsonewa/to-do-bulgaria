@@ -23,11 +23,10 @@
             <a th:href="@{/users/login}"><button class="login-btn btn">Log in</button></a>
         </div>
         <div class="dropdown-wrapper">
-            <a sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')" href="javascript:void(0)" class="fav-btn"><i class="far fa-bell"></i></a>
             <div sec:authorize="isAuthenticated()" class="dropdown">
+                <a sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')" th:href="javascript:void(0)" class="fav-btn"><i class="far fa-bell"></i></a>
+                <a th:action="@{/profile/favourite}" class="fav-btn"><i class="far fa-heart"></i></a>
                 <div class="dropdown-div">
-
-                    <a href="javascript:void(0)" class="fav-btn"><i class="far fa-heart"></i></a>
                     <img class="profile-img" src="/images/flag-round-250.png">
                 </div>
                 <span  sec:authorize="isAuthenticated()"

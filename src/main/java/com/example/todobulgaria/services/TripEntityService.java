@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 public interface TripEntityService {
     void createTrip(AddTripServiceModel addTripServiceModel) throws IOException;
@@ -24,6 +25,12 @@ public interface TripEntityService {
     TripDetailsView findById(Long id);
 
     List<TripCategoryTownDurationViewModel> findAllByUserId(Long id);
+
+    boolean isOwner(String userName, Long id);
+
+    void deleteTrip(Long id);
+
+    List<TripCategoryTownDurationViewModel> findAllTripsById(Set<Long> favouriteTripsSet);
 }
 
 

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/profile")
@@ -59,6 +60,21 @@ public class ProfileController {
         List<TripCategoryTownDurationViewModel> userTrips = tripEntityService.findAllByUserId(userEntity.get().getId());
 
         model.addAttribute("userTrips", userTrips);
+
+        return "profile";
+    }
+
+    @GetMapping("/favourite")
+    public String favouriteTrips(Model model){
+
+        Optional<UserEntity> userEntity = getCurrentUser();
+        getUserProfile(model);
+
+        Set<Long> favouriteTripsSet = userEntity.get().getFavouriteTrips();
+
+        List<TripCategoryTownDurationViewModel> allTripsById = tripEntityService.findAllTripsById(favouriteTripsSet);
+
+        model.addAttribute("userFavouriteTrips", allTripsById);
 
         return "profile";
     }
