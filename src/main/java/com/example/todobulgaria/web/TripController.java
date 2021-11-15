@@ -10,6 +10,8 @@ import com.example.todobulgaria.models.views.TripDetailsView;
 import com.example.todobulgaria.services.ItineraryEntityService;
 import com.example.todobulgaria.services.TripEntityService;
 import com.example.todobulgaria.services.UserEntityService;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.modelmapper.ModelMapper;
@@ -27,16 +29,22 @@ import org.springframework.web.servlet.resource.HttpResource;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.security.Principal;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 
 @Controller
 @RequestMapping("/trips")
 public class TripController {
+
+    private static String API_KEY = "99e6406a5dbd944e77648f68cd84fb42";
+    private static String LOCATION = "Sofia";
+    private static String urlString = "https://api.openweathermap.org/data/2.5/forecast?q=" + LOCATION + ",BG&appid=" + API_KEY;
 
     private final TripEntityService tripEntityService;
     private final ModelMapper modelMapper;
@@ -128,9 +136,35 @@ public class TripController {
 
         TripDetailsView tripById = tripEntityService.findById(id);
         String townName = tripById.getItinaries().get(0).getTownName();
+        LOCATION = townName;
+
+        try{
+            StringBuilder result = new StringBuilder();
+            URL url = new URL(urlString);
+            URLConnection conn = url.openConnection();
+
+            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+            String line;
+
+            while ((line = rd.readLine()) != null) {
+                result.append(line);
+            }
+
+            rd.close();
+
+            Map<String, Object> rest = jsonToMap(result.toString());
+            System.out.println(rest);
+            //TODO find way to get the needed fields
+            System.out.println();
 
         model.addAttribute("trip", tripById);
         model.addAttribute("town", townName);
+
+        }catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+
 
         return "details";
     }
@@ -172,6 +206,16 @@ public class TripController {
         Optional<UserEntity> userEntity = userEntityService.findUserByUsername(username);
 
         return userEntity;
+    }
+
+    public Map<String, Object> jsonToMap(String str) {
+
+        Map<String, Object> map = new Gson().fromJson(str,
+                new TypeToken<HashMap<String, Object>>() {
+                }
+                        .getType());
+
+        return map;
     }
 
 }
