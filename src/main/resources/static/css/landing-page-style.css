@@ -407,3 +407,10 @@ hr {
 .unchecked{
     color: black;
 }
+
+#article-a{
+    position: absolute;
+    right: 5px;
+    top: 7px;
+}
+

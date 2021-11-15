@@ -13,6 +13,8 @@ public interface UserEntityService {
     void registrarUser(UserRegisterServiceModel userRegisterServiceModel) throws IOException;
     Optional<UserEntity> findUserByEmail(String email);
     boolean existByUsername(String username);
+
 }
+
 
 

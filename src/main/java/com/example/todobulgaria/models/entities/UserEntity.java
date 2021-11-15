@@ -6,7 +6,9 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -28,11 +30,23 @@ public class UserEntity extends BaseEntity {
     @ManyToMany(fetch = FetchType.EAGER)
     private List<RoleEntity> roles;
     @Column
-    private boolean status = false; //blocked or active
+    private boolean status; //blocked or active
     @OneToMany(mappedBy = "user", targetEntity = TripEntity.class)
     private List<TripEntity> trips;
+    @Transient
+    @Access(AccessType.PROPERTY)
+    private Set<Long> favouriteTrips;
 
     public UserEntity() {
+        this.favouriteTrips = new HashSet<>();
+    }
+
+    public Set<Long> getFavouriteTrips() {
+        return favouriteTrips;
+    }
+
+    public void setFavouriteTrips(Set<Long> favouriteTrips) {
+        this.favouriteTrips = favouriteTrips;
     }
 
     public PictureEntity getProfilePictureUrl() {

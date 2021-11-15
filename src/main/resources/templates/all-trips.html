@@ -17,6 +17,7 @@
     <h1 class="best-trips-header">Nesebar</h1>
     <div th:action="@{/trips/all}" th:method="get" th:object="${trips}" class="best-articles-wrapper">
         <div th:each="t : ${trips}" th:object="${t}" class="card-wrapper">
+            <a id="article-a" th:href="@{/trips/favourite/{id}(id = *{id})}" th:method="get" class="fav-btn "><i class="far fa-heart"></i></a>
             <div  class="img-card-wrapper">
                 <img th:src="*{url}">
                 <!--button th:href="@{/}"><i class="far fa-heart"></i></button>-->
