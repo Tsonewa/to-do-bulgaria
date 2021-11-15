@@ -36,18 +36,24 @@
     align-self: center;
 }
 
+.table-wrapper > span{
+    color: white;
+    align-self: flex-start;
+    margin: 20px 0px 9px 100px;
+}
+
+.sign-icon{
+    width: 25px;
+    height: 25px;
+    margin-right: 6px;
+}
+
 .profile-pic-wrapper img{
     object-fit: cover;
 }
 
-.table-h1{
-    font-size: 15px;
-    position: absolute;
-    top: 380px;
-}
-
 table{
-    height: 220px;
+    height: 290px;
     overflow: scroll;
     width: 105%;
 }
@@ -107,8 +113,6 @@ table{
     margin-top: 10px;
 }
 
-
-
 .table-wrapper{
     color: gray;
     display: flex;
@@ -119,7 +123,6 @@ table{
 
 .trips-table-wrapper{
     background: white;
-    margin-top: 30px;
     border-radius: 15px;
     padding: 20px;
     text-align: justify;
@@ -142,11 +145,6 @@ th{
 td > i{
     color: black;
     margin-right: 5px;
-}
-
-table{
-    height: 300px;
-    overflow: scroll;
 }
 
 h2 > span{

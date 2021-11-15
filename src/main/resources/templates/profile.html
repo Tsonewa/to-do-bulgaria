@@ -33,11 +33,12 @@
         </div>
         </div>
     </div>
-            <div class="table-wrapper">
-<th:block th:if="${userTrips != null}">
-    <h1 class="table-h1">Моите маршрути</h1>
-<div class="trips-table-wrapper">
 
+            <div class="table-wrapper">
+                <span>Моите маршрути</span>
+<th:block th:if="${userTrips != null}">
+
+<div class="trips-table-wrapper">
     <table th:action="@{/profile/my-trips}" th:method="get" th:object="${userTrips}">
         <tr>
             <th>Екскурзия</th>
@@ -48,13 +49,13 @@
         <tr th:each="t : ${userTrips}" th:object="${t}">
             <td><span th:text="*{townName}">Белоградчик</span>, България</td>
             <td><i class="far fa-clock"></i> <span th:text="*{duration}">3</span> дни</td>
-            <td  th:field="*{categoryName}"><img src="/images/Group%20560.png">Seaside</td>
+            <td><img class="sign-icon" src="/images/Group%20560.png"><span th:text="*{categoryName.toLowerCase()}">Seaside</span></td>
             <td class="btn-td" sec:authorize="isAuthenticated()"> <form th:action="@{/trips/{id}/delete(id=*{id})}" th:method="delete"><button class="new-trips-btn">Изтрий</button></form><a th:href="@{/trips/{id}/details(id=*{id})}"> <button class="btn" type="button">Детайли</button></a></td>
         </tr>
     </table>
 </div>
+    <span>Любими маршрути</span>
     <div class="trips-table-wrapper">
-        <h1 class="table-h1">Любими маршрути</h1>
     <table id="favourite-trips"  th:method="get" th:object="${userFavouriteTrips}">
         <tr>
             <th>Екскурзия</th>
@@ -65,7 +66,7 @@
         <tr  th:each="t : ${userTrips}" th:object="${t}">
             <td><span th:text="*{townName}">Белоградчик</span>, България</td>
             <td><i class="far fa-clock"></i> <span th:text="*{duration}">3</span> дни</td>
-            <td  th:field="*{categoryName}"><img src="/images/Group%20560.png"></i>Seaside</td>
+            <td><img class="sign-icon" src="/images/Group%20560.png"><span th:text="*{categoryName.toLowerCase()}">Seaside</span></td>
             <td  sec:authorize="isAuthenticated()"><a th:href="@{/trips/{id}/details(id=*{id})}"> <button class="wide-btn" type="button">Детайли</button></a></td>
         </tr>
     </table>
