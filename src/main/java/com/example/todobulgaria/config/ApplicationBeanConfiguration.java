@@ -1,5 +1,6 @@
 package com.example.todobulgaria.config;
 
+import com.example.interceptors.LastModelAndViewInterceptor;
 import org.modelmapper.ModelMapper;
 import com.cloudinary.Cloudinary;
 import org.springframework.context.annotation.Bean;
@@ -39,4 +40,8 @@ public class ApplicationBeanConfiguration {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
+    public LastModelAndViewInterceptor lastModelAndViewInterceptor(){
+        return new LastModelAndViewInterceptor();
+    }
 }
