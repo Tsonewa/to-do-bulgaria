@@ -2,12 +2,12 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    min-height: 650px;
+    min-height: 700px;
     background: #CCCCCC;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
     position: relative;
-    top: -63px;
+    top: -100px;
     opacity: 0.8;
     align-items: center;
 }
@@ -40,9 +40,16 @@
     object-fit: cover;
 }
 
+.table-h1{
+    font-size: 15px;
+    position: absolute;
+    top: 380px;
+}
+
 table{
-    height: 300px;
+    height: 220px;
     overflow: scroll;
+    width: 105%;
 }
 
 .user-nav-wrapper{
@@ -107,17 +114,16 @@ table{
     display: flex;
     flex-direction: column;
     width: 70%;
-    margin-top: 50px;
     align-items: center;
 }
 
 .trips-table-wrapper{
     background: white;
-    margin-top: 50px;
+    margin-top: 30px;
     border-radius: 15px;
     padding: 20px;
     text-align: justify;
-    max-height: 304px;
+    max-height: 200px;
     overflow: scroll;
     overflow-x: hidden;
 }
@@ -152,4 +158,9 @@ h2 > span{
     height: 100px;
     overflow: hidden;
     border-radius: 50%;
+}
+
+.btn-td{
+    display: flex;
+    align-items: baseline;
 }

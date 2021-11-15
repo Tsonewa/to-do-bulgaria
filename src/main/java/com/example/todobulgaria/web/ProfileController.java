@@ -61,23 +61,13 @@ public class ProfileController {
 
         model.addAttribute("userTrips", userTrips);
 
-        return "profile";
-    }
+//        Set<Long> favouriteTripsSet = userEntity.get().getFavouriteTrips();
 
-    @GetMapping("/favourite")
-    public String favouriteTrips(Model model){
-
-        Optional<UserEntity> userEntity = getCurrentUser();
-        getUserProfile(model);
-
-        Set<Long> favouriteTripsSet = userEntity.get().getFavouriteTrips();
-
-        List<TripCategoryTownDurationViewModel> allTripsById = tripEntityService.findAllTripsById(favouriteTripsSet);
+        List<TripCategoryTownDurationViewModel> allTripsById = tripEntityService.findAllTripsById(Set.of(1L,2L,4L));
 
         model.addAttribute("userFavouriteTrips", allTripsById);
 
         return "profile";
     }
-
 
 }

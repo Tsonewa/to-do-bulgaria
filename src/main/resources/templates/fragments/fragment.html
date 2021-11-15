@@ -24,8 +24,8 @@
         </div>
         <div class="dropdown-wrapper">
             <div sec:authorize="isAuthenticated()" class="dropdown">
-                <a sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')" th:href="javascript:void(0)" class="fav-btn"><i class="far fa-bell"></i></a>
-                <a th:action="@{/profile/favourite}" class="fav-btn"><i class="far fa-heart"></i></a>
+                <a sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')" href="javascript:void(0)" class="fav-btn"><i class="far fa-bell"></i></a>
+                <a th:action="@{/profile/my-trips}" class="fav-btn"><i class="far fa-heart"></i></a>
                 <div class="dropdown-div">
                     <img class="profile-img" src="/images/flag-round-250.png">
                 </div>
@@ -36,8 +36,7 @@
                         <a th:href="@{/trips/add}"> <button class="btn create-btn">Add trip</button></a>
                     </p>
                     <hr>
-                    <a class="dropdown-a" href="/profile"><i class="fas fa-id-card" ></i> Профил</a>
-                    <a class="dropdown-a" th:href="@{/profile/my-trips}"><i class="fab fa-font-awesome-flag"></i> Моите маршрути</a>
+                    <a class="dropdown-a" th:href="@{/profile/my-trips}"><i class="fas fa-id-card" ></i> Профил</a>
                     <a class="dropdown-a"><i class="fas fa-cog"></i> Настройки</a>
                     <hr>
                     <form class="log-out-div" th:action="@{/users/logout}" th:method="post">
