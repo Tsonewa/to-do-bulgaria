@@ -22,6 +22,11 @@ public class TownEntityServiceImpl implements TownEntityService {
     }
 
     @Override
+    public boolean existTownEntityByName(String name) {
+        return townRepository.existsByName(name);
+    }
+
+    @Override
     public void saveTown(TownEntity newTown) {
 
         townRepository.save(newTown);

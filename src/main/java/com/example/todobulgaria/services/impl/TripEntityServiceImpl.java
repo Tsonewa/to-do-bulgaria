@@ -75,7 +75,7 @@ public class TripEntityServiceImpl implements TripEntityService {
             ItineraryEntity itineraryEntity = new ItineraryEntity();
             itineraryEntity.setDay(i + 1);
 
-            if (townEntityService.findTownByName(addTripServiceModel.getTownName().get(i)) != null) {
+            if (townEntityService.existTownEntityByName(addTripServiceModel.getTownName().get(i))) {
                 itineraryEntity.setTown(townEntityService.findTownByName(addTripServiceModel.getTownName().get(i)));
             } else {
                 TownEntity newTown = new TownEntity();

@@ -7,6 +7,7 @@ import java.util.Optional;
 public interface TownEntityService {
     TownEntity findTownByName(String name);
 
+    boolean existTownEntityByName(String name);
     void saveTown(TownEntity newTown);
 }
 

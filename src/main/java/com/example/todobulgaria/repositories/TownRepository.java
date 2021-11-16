@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface TownRepository extends JpaRepository<TownEntity, Long> {
 
     Optional<TownEntity> getTownEntityByName(String name);
+
+    boolean existsByName(String name);
 }
