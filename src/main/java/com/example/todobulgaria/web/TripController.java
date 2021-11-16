@@ -2,6 +2,7 @@ package com.example.todobulgaria.web;
 
 import com.example.todobulgaria.models.bindings.AddTripBindingModel;
 import com.example.todobulgaria.models.dto.TripsDto;
+import com.example.todobulgaria.models.dto.WeatherDto;
 import com.example.todobulgaria.models.entities.TripEntity;
 import com.example.todobulgaria.models.entities.UserEntity;
 import com.example.todobulgaria.models.enums.CategoryEnum;
@@ -13,6 +14,7 @@ import com.example.todobulgaria.services.TripEntityService;
 import com.example.todobulgaria.services.UserEntityService;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -32,29 +34,33 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.security.Principal;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.TextStyle;
 import java.util.*;
-
 
 @Controller
 @RequestMapping("/trips")
 public class TripController {
 
     private static String API_KEY = "99e6406a5dbd944e77648f68cd84fb42";
-    private static String LOCATION = "Sofia";
-    private static String urlString = "https://api.openweathermap.org/data/2.5/forecast?q=" + LOCATION + ",BG&appid=" + API_KEY;
+    private static String OPEN_WEATHER_URL = "https://api.openweathermap.org/data/2.5/forecast?q=";
+
 
     private final TripEntityService tripEntityService;
     private final ModelMapper modelMapper;
     private final ItineraryEntityService itineraryEntityService;
     private final UserEntityService userEntityService;
     private final UserRepository userRepository;
+    private final Gson gson;
 
-    public TripController(TripEntityService tripEntityService, ModelMapper modelMapper, ItineraryEntityService itineraryEntityService, UserEntityService userEntityService, UserRepository userRepository) {
+    public TripController(TripEntityService tripEntityService, ModelMapper modelMapper, ItineraryEntityService itineraryEntityService, UserEntityService userEntityService, UserRepository userRepository, Gson gson) {
         this.tripEntityService = tripEntityService;
         this.modelMapper = modelMapper;
         this.itineraryEntityService = itineraryEntityService;
         this.userEntityService = userEntityService;
         this.userRepository = userRepository;
+        this.gson = gson;
     }
 
 
@@ -135,7 +141,7 @@ public class TripController {
 
         TripDetailsView tripById = tripEntityService.findById(id);
         String townName = tripById.getItinaries().get(0).getTownName();
-        LOCATION = townName;
+        String urlString = OPEN_WEATHER_URL + townName + ",BG&units=metric&appid=" + API_KEY;
 
         try{
             StringBuilder result = new StringBuilder();
@@ -152,21 +158,62 @@ public class TripController {
 
             rd.close();
 
-//            Map<String, Object> rest = jsonToMap(result.toString());
-//            System.out.println(rest);
-//            //TODO find way to get the needed fields
-//            System.out.println();
+            Map<String, Object> listApi = jsonToMap(result.toString());
+//            System.out.println(listApi);
+
+            List<Map<String, Object >> mapList = (List<Map<String, Object>>) (listApi.get("list"));
+//            System.out.println(mapList);
+
+            List<Map<String, Object >> mainList = new ArrayList<>();
+
+            for (int i = 0; i < mapList.size(); i++) {
+
+                Map<String, Object> stringObjectMap = mapList.get(i);
+                Map<String, Object> main = jsonToMap(stringObjectMap.get("main").toString());
+
+                mainList.add(i, main);
+            }
+
+//            System.out.println(mainList);
+
+            ArrayDeque<String> daysOfWeek = new ArrayDeque<>();
+
+            for (int i = 0; i < 5; i++) {
+                LocalDate today = LocalDate.now();
+                daysOfWeek.add(
+                        StringUtils.capitalize(getDayStringNew(today.plusDays(i),
+                                Locale.forLanguageTag("BG"))));
+            }
+
+            List<WeatherDto> weatherDtos = new ArrayList<>();
+            WeatherDto weatherWidget;
+
+            for (int i = 0; i < mapList.size() ; i+=8) {
+
+                weatherWidget = new WeatherDto();
+                weatherWidget.setTemperature(Double.parseDouble(mainList.get(i + 4).get("temp").toString()));
+                weatherWidget.setMaxTemperature(Double.parseDouble(mainList.get(i).get("temp_max").toString()));
+                weatherWidget.setMinTemperature(Double.parseDouble(mainList.get(i + 7).get("temp_min").toString()));
+                weatherWidget.setWeekDay(daysOfWeek.poll());
+
+                weatherDtos.add(weatherWidget);
+            }
+
+//            System.out.println(weatherDtos);
+
 
         model.addAttribute("trip", tripById);
         model.addAttribute("town", townName);
+        model.addAttribute("weather", weatherDtos);
 
         }catch(IOException e){
             System.out.println(e.getMessage());
         }
 
-
         return "details";
     }
+
+
 
     @PreAuthorize("isOwner(#id)")
     @DeleteMapping("/{id}/delete")
@@ -208,12 +255,17 @@ public class TripController {
 
     public Map<String, Object> jsonToMap(String str) {
 
-        Map<String, Object> map = new Gson().fromJson(str,
+        Map<String, Object> map = gson.fromJson(str,
                 new TypeToken<HashMap<String, Object>>() {
                 }
                         .getType());
 
         return map;
+    }
+
+    public static String getDayStringNew(LocalDate date, Locale locale) {
+        DayOfWeek day = date.getDayOfWeek();
+        return day.getDisplayName(TextStyle.FULL, locale);
     }
 
 }

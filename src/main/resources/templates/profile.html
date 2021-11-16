@@ -22,7 +22,7 @@
        </div>
             <h2><span th:text="*{firstName}">Pesho</span><span th:text="*{lastName}"></span></h2>
         <div class="user-nav-wrapper">
-            <button sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')" class="profile-a new-trips-btn" th:href="@{/profile/new}"><i class="far fa-address-card"></i>Моята профил</button>
+            <button sec:authorize="isAuthenticated()" class="profile-a new-trips-btn" th:href="@{/profile/new}"><i class="far fa-address-card"></i>Моята профил</button>
 <!--            <a sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')" class="profile-a" th:href="@{/profile}"><i class="fas fa-id-card"></i>Профил</a>-->
 <!--            <a sec:authorize="isAuthenticated()" class="profile-a"  th:href="@{/profile/favourite}" onclick="showFavouriteTrips()"><i class="fab fa-font-awesome-flag" ></i> Любими маршрути</a>-->
 <!--            <a sec:authorize="isAuthenticated()" class="profile-a" th:href="@{/profile/my-trips}" onclick="hideFavouriteTrips()"><i class="fab fa-font-awesome-flag"></i> Моите маршрути</a>-->
@@ -56,14 +56,14 @@
 </div>
     <span>Любими маршрути</span>
     <div class="trips-table-wrapper">
-    <table id="favourite-trips"  th:method="get" th:object="${userFavouriteTrips}">
+    <table id="favourite-trips"  th:object="${userFavouriteTrips}">
         <tr>
             <th>Екскурзия</th>
             <th>Продължителност</th>
             <th>Тип</th>
             <th>Действие</th>
         </tr>
-        <tr  th:each="t : ${userTrips}" th:object="${t}">
+        <tr  th:each="t : ${userFavouriteTrips}" th:object="${t}">
             <td><span th:text="*{townName}">Белоградчик</span>, България</td>
             <td><i class="far fa-clock"></i> <span th:text="*{duration}">3</span> дни</td>
             <td><img class="sign-icon" src="/images/Group%20560.png"><span th:text="*{categoryName.toLowerCase()}">Seaside</span></td>

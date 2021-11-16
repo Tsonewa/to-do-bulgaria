@@ -1,12 +1,11 @@
 package com.example.todobulgaria.web;
 
-import com.example.todobulgaria.models.entities.FavouriteTripEntity;
-import com.example.todobulgaria.models.entities.TripEntity;
 import com.example.todobulgaria.models.entities.UserEntity;
 import com.example.todobulgaria.models.views.TripCategoryTownDurationViewModel;
 import com.example.todobulgaria.models.views.UserProfileViewModel;
 import com.example.todobulgaria.services.TripEntityService;
 import com.example.todobulgaria.services.UserEntityService;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/profile")
@@ -24,10 +24,12 @@ public class ProfileController {
 
     private final UserEntityService userEntityService;
     private final TripEntityService tripEntityService;
+    private final ModelMapper modelMapper;
 
-    public ProfileController(UserEntityService userEntityService, TripEntityService tripEntityService) {
+    public ProfileController(UserEntityService userEntityService, TripEntityService tripEntityService, ModelMapper modelMapper) {
         this.userEntityService = userEntityService;
         this.tripEntityService = tripEntityService;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping
@@ -63,10 +65,16 @@ public class ProfileController {
 
         model.addAttribute("userTrips", userTrips);
 
-        Set<TripEntity> favouriteTrips = userEntity.get().getFavouriteTrips();
+       Set<TripCategoryTownDurationViewModel> favouriteTrips = userEntity.get().getFavouriteTrips()
+               .stream().map(t -> {
 
+                   TripCategoryTownDurationViewModel map = modelMapper.map(t, TripCategoryTownDurationViewModel.class);
+                map.setTownName(t.getItineraries().get(0).getTown().getName());
 
-//        List<TripCategoryTownDurationViewModel> allTripsById = tripEntityService.findAllTripsById(Set.of(1L,2L,4L));
+                return map;
+
+               })
+               .collect(Collectors.toSet());
 
         model.addAttribute("userFavouriteTrips", favouriteTrips);
 

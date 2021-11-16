@@ -1,6 +1,7 @@
 package com.example.todobulgaria.config;
 
 import com.example.interceptors.LastModelAndViewInterceptor;
+import com.google.gson.Gson;
 import org.modelmapper.ModelMapper;
 import com.cloudinary.Cloudinary;
 import org.springframework.context.annotation.Bean;
@@ -40,6 +41,10 @@ public class ApplicationBeanConfiguration {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
+    public Gson gson (){
+        return new Gson();
+    }
     @Bean
     public LastModelAndViewInterceptor lastModelAndViewInterceptor(){
         return new LastModelAndViewInterceptor();
