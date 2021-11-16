@@ -85,7 +85,7 @@ public class TripEntityServiceImpl implements TripEntityService {
                 townEntityService.saveTown(newTown);
             }
 
-            if (breakfastPlaceEntityService.findBrekfastPlaceEntityByName(addTripServiceModel.getBreakfastPlace().get(i)) != null) {
+            if (breakfastPlaceEntityService.existBreakfastPlaceByName(addTripServiceModel.getBreakfastPlace().get(i))) {
                 itineraryEntity.setBreakfastPlace(breakfastPlaceEntityService.findBrekfastPlaceEntityByName(addTripServiceModel.getBreakfastPlace().get(i)));
             } else {
                 BreakfastPlaceEntity newBreakfastPlace = new BreakfastPlaceEntity();

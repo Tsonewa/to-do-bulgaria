@@ -10,5 +10,7 @@ import java.util.Optional;
 public interface BreakfastPlaceRepository extends JpaRepository<BreakfastPlaceEntity, Long> {
 
     Optional<BreakfastPlaceEntity> findByName(String name);
+
+    boolean existsByName(String name);
 }
 

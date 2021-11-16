@@ -7,5 +7,7 @@ public interface BreakfastPlaceEntityService {
     BreakfastPlaceEntity findBrekfastPlaceEntityByName(String name);
 
     void saveBreakfastPlace(BreakfastPlaceEntity newBreakfastPlace);
+
+    boolean existBreakfastPlaceByName(String name);
 }
 

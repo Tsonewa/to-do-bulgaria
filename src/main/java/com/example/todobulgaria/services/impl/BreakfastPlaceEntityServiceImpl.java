@@ -26,4 +26,9 @@ public class BreakfastPlaceEntityServiceImpl implements BreakfastPlaceEntityServ
 
         breakfastPlaceRepository.save(newBreakfastPlace);
     }
+
+    @Override
+    public boolean existBreakfastPlaceByName(String name) {
+        return breakfastPlaceRepository.existsByName(name);
+    }
 }
