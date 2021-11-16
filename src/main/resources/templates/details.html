@@ -77,46 +77,6 @@
                         <span class="temp"><span> <span th:text="*{temperature.intValue()}">23</span></span>&deg;</span>
                         <span class="high-low" ><span th:text="*{maxTemperature.intValue()}">15</span>&deg;/ <span th:text="*{minTemperature.intValue()}">28</span>&deg;</span>
                     </article>
-<!--                    <article class="box weather">-->
-<!--                        <div class="icon bubble black">-->
-<!--                            <div class="spin">-->
-<!--                                <img src="/images/rainy.png">-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <h1>Tuesday</h1>-->
-<!--                        <span class="temp">27&deg;</span>-->
-<!--                        <span class="high-low">10&deg;/ 29&deg;</span>-->
-<!--                    </article>-->
-<!--                    <article class="box weather">-->
-<!--                        <div class="icon bubble black">-->
-<!--                            <div class="spin">-->
-<!--                                <img src="/images/Cloudy-icon.png">-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <h1>Wednesday</h1>-->
-<!--                        <span class="temp">23&deg;</span>-->
-<!--                        <span class="high-low">15&deg;/ 28&deg;</span>-->
-<!--                    </article>-->
-<!--                    <article class="box weather">-->
-<!--                        <div class="icon bubble black">-->
-<!--                            <div class="spin">-->
-<!--                                <img src="https://dl.dropbox.com/s/0qq5anxliaopt8d/sun.png">-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <h1>Monday</h1>-->
-<!--                        <span class="temp">23&deg;</span>-->
-<!--                        <span class="high-low">15&deg;/ 28&deg;</span>-->
-<!--                    </article>-->
-<!--                    <article class="box weather">-->
-<!--                        <div class="icon bubble black">-->
-<!--                            <div class="spin">-->
-<!--                                <img src="https://dl.dropbox.com/s/0qq5anxliaopt8d/sun.png">-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <h1>Monday</h1>-->
-<!--                        <span class="temp">23&deg;</span>-->
-<!--                        <span class="high-low">15&deg;/ 28&deg;</span>-->
-<!--                    </article>-->
                 </div>
                 <div  class="day-plan-wrapper">
                     <div th:each="i : ${trip.itinaries}" th:object="${i}" class="plan-bullet">

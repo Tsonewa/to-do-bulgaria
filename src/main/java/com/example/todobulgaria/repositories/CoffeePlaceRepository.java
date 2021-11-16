@@ -12,4 +12,6 @@ public interface CoffeePlaceRepository extends JpaRepository<CoffeePlaceEntity, 
 
     Optional<CoffeePlaceEntity> findByName(String name);
 
+    boolean existsByName(String name);
+
 }

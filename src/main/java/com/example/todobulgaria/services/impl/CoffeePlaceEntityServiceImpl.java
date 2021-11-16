@@ -24,6 +24,12 @@ public class CoffeePlaceEntityServiceImpl implements CoffeePlaceEntityService {
     }
 
     @Override
+    public boolean existCoffeePlaceByName(String name) {
+        return coffeePlaceRepository.existsByName(name);
+    }
+
+
+    @Override
     public void saveCoffeePlace(CoffeePlaceEntity newCoffeePlace) {
 
         coffeePlaceRepository.save(newCoffeePlace);

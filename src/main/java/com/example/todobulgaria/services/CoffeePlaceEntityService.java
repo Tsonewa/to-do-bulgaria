@@ -6,5 +6,7 @@ public interface CoffeePlaceEntityService {
 
     CoffeePlaceEntity findCoffeePlaceEntityByName(String name);
 
+    boolean existCoffeePlaceByName(String name);
+
     void saveCoffeePlace(CoffeePlaceEntity newCoffeePlace);
 }

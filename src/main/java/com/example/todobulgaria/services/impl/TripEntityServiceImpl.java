@@ -95,7 +95,7 @@ public class TripEntityServiceImpl implements TripEntityService {
 
             }
 
-            if (coffeePlaceEntityService.findCoffeePlaceEntityByName(addTripServiceModel.getCoffeePlace().get(i)) != null) {
+            if (coffeePlaceEntityService.existCoffeePlaceByName(addTripServiceModel.getCoffeePlace().get(i))) {
                 itineraryEntity.setCoffeePlaceEntity(coffeePlaceEntityService.findCoffeePlaceEntityByName(addTripServiceModel.getCoffeePlace().get(i)));
             } else {
                 CoffeePlaceEntity newCoffeePlace = new CoffeePlaceEntity();
@@ -304,7 +304,7 @@ public class TripEntityServiceImpl implements TripEntityService {
 
     @Override
     public TripEntity findEntityById(Long id) {
-        //TODO handle the exception
+        //TODO handle the exeption
         return tripRepository.findById(id).orElse(null);
 
     }
