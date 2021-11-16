@@ -31,7 +31,10 @@ public interface TripEntityService {
     void deleteTrip(Long id);
 
     List<TripCategoryTownDurationViewModel> findAllTripsById(Set<Long> favouriteTripsSet);
+
+    TripEntity findEntityById(Long id);
 }
+
 
 
 

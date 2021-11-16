@@ -135,6 +135,12 @@ public class UserEntityServiceImpl implements UserEntityService {
     }
 
     @Override
+    public void updateUser(UserEntity userByUsername) {
+
+        userRepository.save(userByUsername);
+    }
+
+    @Override
     public Optional<UserEntity> findUserByUsername(String username) {
 
         return userRepository.findUserEntityByUsername(username);

@@ -33,19 +33,22 @@ public class UserEntity extends BaseEntity {
     private boolean status; //blocked or active
     @OneToMany(mappedBy = "user", targetEntity = TripEntity.class)
     private List<TripEntity> trips;
-    @Transient
-    @Access(AccessType.PROPERTY)
-    private Set<Long> favouriteTrips;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @JoinTable(name="user_favourite",
+            joinColumns={@JoinColumn(name="userId")},
+            inverseJoinColumns={@JoinColumn(name="favouriteId")})
+    private Set<TripEntity> favouriteTrips = new HashSet<>();
 
     public UserEntity() {
-        this.favouriteTrips = new HashSet<>();
+
     }
 
-    public Set<Long> getFavouriteTrips() {
+    public Set<TripEntity> getFavouriteTrips() {
         return favouriteTrips;
     }
 
-    public void setFavouriteTrips(Set<Long> favouriteTrips) {
+    public void setFavouriteTrips(Set<TripEntity> favouriteTrips) {
         this.favouriteTrips = favouriteTrips;
     }
 

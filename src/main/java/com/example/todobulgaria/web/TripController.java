@@ -1,19 +1,18 @@
 package com.example.todobulgaria.web;
 
-import com.example.interceptors.LastModelAndViewInterceptor;
 import com.example.todobulgaria.models.bindings.AddTripBindingModel;
 import com.example.todobulgaria.models.dto.TripsDto;
+import com.example.todobulgaria.models.entities.TripEntity;
 import com.example.todobulgaria.models.entities.UserEntity;
 import com.example.todobulgaria.models.enums.CategoryEnum;
 import com.example.todobulgaria.models.service.AddTripServiceModel;
 import com.example.todobulgaria.models.views.TripDetailsView;
+import com.example.todobulgaria.repositories.UserRepository;
 import com.example.todobulgaria.services.ItineraryEntityService;
 import com.example.todobulgaria.services.TripEntityService;
 import com.example.todobulgaria.services.UserEntityService;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import org.apache.http.HttpRequest;
-import org.apache.http.HttpResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,9 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.resource.HttpResource;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -50,12 +47,14 @@ public class TripController {
     private final ModelMapper modelMapper;
     private final ItineraryEntityService itineraryEntityService;
     private final UserEntityService userEntityService;
+    private final UserRepository userRepository;
 
-    public TripController(TripEntityService tripEntityService, ModelMapper modelMapper, ItineraryEntityService itineraryEntityService, UserEntityService userEntityService) {
+    public TripController(TripEntityService tripEntityService, ModelMapper modelMapper, ItineraryEntityService itineraryEntityService, UserEntityService userEntityService, UserRepository userRepository) {
         this.tripEntityService = tripEntityService;
         this.modelMapper = modelMapper;
         this.itineraryEntityService = itineraryEntityService;
         this.userEntityService = userEntityService;
+        this.userRepository = userRepository;
     }
 
 
@@ -153,10 +152,10 @@ public class TripController {
 
             rd.close();
 
-            Map<String, Object> rest = jsonToMap(result.toString());
-            System.out.println(rest);
-            //TODO find way to get the needed fields
-            System.out.println();
+//            Map<String, Object> rest = jsonToMap(result.toString());
+//            System.out.println(rest);
+//            //TODO find way to get the needed fields
+//            System.out.println();
 
         model.addAttribute("trip", tripById);
         model.addAttribute("town", townName);
@@ -184,16 +183,15 @@ public class TripController {
 
         Optional<UserEntity> currentUser = getCurrentUser();
 
-        UserEntity userByUsername = userEntityService
-                .findUserByUsername(currentUser.get().getUsername()).orElse(null);
+        Optional<UserEntity> userByUsername = userEntityService.findUserByUsername(currentUser.get().getUsername());
 
-        Set<Long> favouriteTrips = userByUsername.getFavouriteTrips();
-        favouriteTrips.add(id);
+        Set<TripEntity> favouriteTrips = userByUsername.get().getFavouriteTrips();
+        favouriteTrips.add(tripEntityService.findEntityById(id));
 
-        userByUsername.setFavouriteTrips(favouriteTrips);
+        userEntityService.updateUser(userByUsername.orElse(null));
 
-        //ModelAndView mv = (ModelAndView)request.getSession().getAttribute(LastModelAndViewInterceptor.LAST_MODEL_VIEW_ATTRIBUTE);
-        //return mv;
+//        ModelAndView mv = (ModelAndView)request.getSession().getAttribute(LastModelAndViewInterceptor.LAST_MODEL_VIEW_ATTRIBUTE);
+//        return mv;
 
         String referer = request.getHeader("Referer");
 

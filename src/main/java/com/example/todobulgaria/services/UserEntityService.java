@@ -14,7 +14,9 @@ public interface UserEntityService {
     Optional<UserEntity> findUserByEmail(String email);
     boolean existByUsername(String username);
 
+    void updateUser(UserEntity userByUsername);
 }
+
 
 
 

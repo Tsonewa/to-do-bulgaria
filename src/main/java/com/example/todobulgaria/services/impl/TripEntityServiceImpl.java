@@ -302,6 +302,13 @@ public class TripEntityServiceImpl implements TripEntityService {
 
     }
 
+    @Override
+    public TripEntity findEntityById(Long id) {
+        //TODO handle the exception
+        return tripRepository.findById(id).orElse(null);
+
+    }
+
     public boolean isOwner(String userName, Long id) {
         Optional<TripEntity> trip = tripRepository.
                 findById(id);

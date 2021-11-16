@@ -1,5 +1,7 @@
 package com.example.todobulgaria.web;
 
+import com.example.todobulgaria.models.entities.FavouriteTripEntity;
+import com.example.todobulgaria.models.entities.TripEntity;
 import com.example.todobulgaria.models.entities.UserEntity;
 import com.example.todobulgaria.models.views.TripCategoryTownDurationViewModel;
 import com.example.todobulgaria.models.views.UserProfileViewModel;
@@ -61,11 +63,12 @@ public class ProfileController {
 
         model.addAttribute("userTrips", userTrips);
 
-//        Set<Long> favouriteTripsSet = userEntity.get().getFavouriteTrips();
+        Set<TripEntity> favouriteTrips = userEntity.get().getFavouriteTrips();
 
-        List<TripCategoryTownDurationViewModel> allTripsById = tripEntityService.findAllTripsById(Set.of(1L,2L,4L));
 
-        model.addAttribute("userFavouriteTrips", allTripsById);
+//        List<TripCategoryTownDurationViewModel> allTripsById = tripEntityService.findAllTripsById(Set.of(1L,2L,4L));
+
+        model.addAttribute("userFavouriteTrips", favouriteTrips);
 
         return "profile";
     }
