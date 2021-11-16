@@ -1,4 +1,4 @@
-package com.example.interceptors;
+package com.example.todobulgaria.interceptors;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;

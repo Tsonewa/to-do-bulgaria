@@ -12,4 +12,6 @@ public interface DinnerPlaceRepository extends JpaRepository<DinnerPlaceEntity, 
 
     Optional<DinnerPlaceEntity> findByName(String name);
 
+    boolean existsByName(String name);
+
 }

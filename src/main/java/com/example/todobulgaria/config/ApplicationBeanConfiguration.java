@@ -1,6 +1,6 @@
 package com.example.todobulgaria.config;
 
-import com.example.interceptors.LastModelAndViewInterceptor;
+import com.example.todobulgaria.interceptors.LastModelAndViewInterceptor;
 import com.google.gson.Gson;
 import org.modelmapper.ModelMapper;
 import com.cloudinary.Cloudinary;

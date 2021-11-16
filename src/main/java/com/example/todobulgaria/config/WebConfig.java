@@ -1,7 +1,6 @@
 package com.example.todobulgaria.config;
 
-import com.example.interceptors.LastModelAndViewInterceptor;
-import org.springframework.context.annotation.Bean;
+import com.example.todobulgaria.interceptors.LastModelAndViewInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;

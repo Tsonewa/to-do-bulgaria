@@ -25,4 +25,9 @@ public class DinnerPlaceEntityServiceImpl implements DinnerPlaceEntityService {
 
         dinnerPlaceRepository.save(newDinnerPlace);
     }
+
+    @Override
+    public boolean existDinnerPlaceByName(String name) {
+        return dinnerPlaceRepository.existsByName(name);
+    }
 }
