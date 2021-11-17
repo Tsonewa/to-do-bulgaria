@@ -1,7 +1,8 @@
-package com.example.todobulgaria.models.dto;
+package com.example.todobulgaria.models.service;
 
-public class UpdateItineraryDto {
+public class ItineryUpdateServiceModel {
 
+    private Long id;
     private String breakfastPlace;
     private String brekfastPlaceAddress;
     private String breakfastPlaceUrl;
@@ -17,7 +18,15 @@ public class UpdateItineraryDto {
     private String attractionName;
     private String attractionAddress;
 
-    public UpdateItineraryDto() {
+    public ItineryUpdateServiceModel() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getBreakfastPlace() {

@@ -4,6 +4,7 @@ import java.util.List;
 
 public class TripDetailsView {
 
+    private Long id;
     private String url;
     private String categoryName;
     private String townName;
@@ -13,6 +14,14 @@ public class TripDetailsView {
     private DetailsEntityViewModel details;
 
     public TripDetailsView() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public DetailsEntityViewModel getDetails() {

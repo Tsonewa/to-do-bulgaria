@@ -13,12 +13,12 @@
 <header class="full-nav" th:include="/fragments/fragment :: navbar">
 </header>
 <main>
-    <form th:object="${itineraryModel}" th:action="@{/itinerary/{id}(id = *{id})/update}" th:method="patch" >
+    <form  th:action="@{'/itinerary/' + *{id} + '/edit'}" th:method="patch" th:object="${itineraryModel}">
     <fieldset id="input2-wrapper">
         <div class="input-div">
             <label>Breakfast</label>
             <input th:field="*{breakfastPlace}" type="text" name="breakfastPlace" placeholder="Mekitsa&Coffee"/>
-            <input th:field="*{breakfastPlaceAddress}" type="text" name="breakfastPlaceAddress"/>
+            <input th:field="*{brekfastPlaceAddress}" type="text" name="breakfastPlaceAddress"/>
             <input th:field="*{breakfastPlaceUrl}" type="text" name="breakfastPlaceUrl"/>
             <p th:if="${#fields.hasErrors('breakfastPlace')}" th:errors="*{breakfastPlace}" class="error"></p>
             <label>Coffee</label>
@@ -37,11 +37,11 @@
             <input th:field="*{dinnerPlaceUrl}" type="text" name="dinnerPlaceUrl"/>
             <p th:if="${#fields.hasErrors('dinnerPlace')}" th:errors="*{dinnerPlace}" class="error"></p>
             <label>Attractions</label>
-            <input th:field="*{attractionsName}" type="text" name="attractionsName" placeholder="National Palace of Culture"/>
-            <input th:field="*{attractionsAddress}" type="text" name="attractionsAddress" />
-            <p th:if="${#fields.hasErrors('attractionsName')}" th:errors="*{attractionsName}" class="error"></p>
+            <input th:field="*{attractionName}" type="text" name="attractionName" placeholder="National Palace of Culture"/>
+            <input th:field="*{attractionAddress}" type="text" name="attractionAddress" />
+            <p th:if="${#fields.hasErrors('attractionName')}" th:errors="*{attractionName}" class="error"></p>
         </div>
-        <button type="submit" name="update-day" class="btn" value="update-day" >Update</button>
+        <button type="submit" name="update-day" class="btn" value="update-day">Update</button>
     </fieldset>
     </form>
 

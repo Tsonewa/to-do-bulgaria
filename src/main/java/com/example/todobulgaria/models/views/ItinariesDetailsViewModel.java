@@ -3,6 +3,7 @@ package com.example.todobulgaria.models.views;
 
 public class ItinariesDetailsViewModel {
 
+    private Long id;
     private String breakfastPlace;
     private String coffeePlace;
     private String dinnerPlace;
@@ -12,6 +13,14 @@ public class ItinariesDetailsViewModel {
     private String attractionName;
 
     public ItinariesDetailsViewModel() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getAttractionName() {
