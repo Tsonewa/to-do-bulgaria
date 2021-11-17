@@ -46,7 +46,7 @@
                <p th:if="${#fields.hasErrors('breakfastPlace')}" th:errors="*{breakfastPlace}" class="error"></p>
                <label>Coffee</label>
           <input th:field="*{coffeePlace}" type="text" name="coffeePlace" placeholder="CoffeeBar" />
-               <p th:if="${#fields.hasErrors('coffeePlace')}" th:errors="*{breakfastPlace}" class="error"></p>
+               <p th:if="${#fields.hasErrors('coffeePlace')}" th:errors="*{coffeePlace}" class="error"></p>
                <label>Hotel</label>
           <input th:field="*{hotel}" type="text" name="hotel" placeholder="Grand Hotel Sofia" />
                <p th:if="${#fields.hasErrors('hotel')}" th:errors="*{hotel}" class="error"></p>
