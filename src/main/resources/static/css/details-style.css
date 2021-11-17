@@ -572,8 +572,7 @@ body {
 }
 
 .uprate-a {
-    padding: 0px 5px;
-    font-size: 18px;
-    color: blue;
-    text-decoration: underline;
+    font-size: 14px;
+    color: white;
+    font-weight: 300;
 }

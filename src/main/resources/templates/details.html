@@ -84,9 +84,8 @@
                         <h1><span th:text="*{townName}">TownName</span></h1>
                         <div class="bullet">
                             <img src="/images/grean-dot.png">
-                            <h5 th:text="*{coffeePlace}">Coffe Place</h5>
-                            <a class="uprate-a" href="/"><h6>Add address</h6></a>
-                            <a class="uprate-a" href="/"><h6>Add booking</h6></a>
+                            <h5 th:text="*{coffeePlace}" >Coffe Place</h5>
+                            <a class="uprate-a" ><h6>Add booking</h6></a>
                         </div>
                         <div class="bullet">
                             <img src="/images/grean-dot.png">
@@ -112,6 +111,7 @@
                             <a class="uprate-a" href="/"><h6>Add address</h6></a>
                             <a class="uprate-a" href="/"><h6>Add booking</h6></a>
                         </div>
+                        <button class="btn" sec:authorize="isAuthenticated()"> <a class="uprate-a" th:href="@{'/itinerary/' + *{id} + '/edit'}" th:method="get">Add address/Add booking</a></button>
                     </div>
                 </div>
             </div>
