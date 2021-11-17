@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/add-trips.css">
+    <link rel="stylesheet" href="/css/landing-page-style.css">
+    <title>Update trip</title>
+</head>
+<body>
+<header class="full-nav" th:include="/fragments/fragment :: navbar">
+</header>
+<main>
+    <form th:object="${itineraryModel}" th:action="@{/itinerary/{id}(id = *{id})/update}" th:method="patch" >
+    <fieldset id="input2-wrapper">
+        <div class="input-div">
+            <label>Breakfast</label>
+            <input th:field="*{breakfastPlace}" type="text" name="breakfastPlace" placeholder="Mekitsa&Coffee"/>
+            <input th:field="*{breakfastPlaceAddress}" type="text" name="breakfastPlaceAddress"/>
+            <input th:field="*{breakfastPlaceUrl}" type="text" name="breakfastPlaceUrl"/>
+            <p th:if="${#fields.hasErrors('breakfastPlace')}" th:errors="*{breakfastPlace}" class="error"></p>
+            <label>Coffee</label>
+            <input th:field="*{coffeePlace}" type="text" name="coffeePlace" placeholder="CoffeeBar"/>
+            <input th:field="*{coffeePlaceAddress}" type="text" name="coffeePlaceAddress"/>
+            <input th:field="*{coffeePlaceUrl}" type="text" name="coffeePlaceUrl"/>
+            <p th:if="${#fields.hasErrors('coffeePlace')}" th:errors="*{coffeePlace}" class="error"></p>
+            <label>Hotel</label>
+            <input th:field="*{hotel}" type="text" name="hotel" placeholder="Grand Hotel Sofia"/>
+            <input th:field="*{hotelAddress}" type="text" name="hotelAddress"/>
+            <input th:field="*{hotelUrl}" type="text" name="hotelUrl"/>
+            <p th:if="${#fields.hasErrors('hotel')}" th:errors="*{hotel}" class="error"></p>
+            <label>Dinner</label>
+            <input th:field="*{dinnerPlace}" type="text" name="dinnerPlace" placeholder="Blue House" />
+            <input th:field="*{dinnerPlaceAddress}" type="text" name="dinnerPlaceAddress" />
+            <input th:field="*{dinnerPlaceUrl}" type="text" name="dinnerPlaceUrl"/>
+            <p th:if="${#fields.hasErrors('dinnerPlace')}" th:errors="*{dinnerPlace}" class="error"></p>
+            <label>Attractions</label>
+            <input th:field="*{attractionsName}" type="text" name="attractionsName" placeholder="National Palace of Culture"/>
+            <input th:field="*{attractionsAddress}" type="text" name="attractionsAddress" />
+            <p th:if="${#fields.hasErrors('attractionsName')}" th:errors="*{attractionsName}" class="error"></p>
+        </div>
+        <button type="submit" name="update-day" class="btn" value="update-day" >Update</button>
+    </fieldset>
+    </form>
+
+</main>
+
+<footer th:replace="/fragments/fragment :: footer">
+</footer>
+</body>
+</html>

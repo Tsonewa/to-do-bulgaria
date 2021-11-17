@@ -2,6 +2,7 @@ package com.example.todobulgaria.models.dto;
 
 public class ItineraryDto {
 
+    private long id;
     private String breakfastPlace;
     private String coffeePlace;
     private String dinnerPlace;
@@ -11,6 +12,14 @@ public class ItineraryDto {
     private String attractionName;
 
     public ItineraryDto() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getAttractionName() {
