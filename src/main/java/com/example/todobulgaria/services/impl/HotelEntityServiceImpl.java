@@ -20,6 +20,11 @@ public class HotelEntityServiceImpl implements HotelEntityService {
     }
 
     @Override
+    public boolean existHotelEntityByName(String name) {
+        return hotelRepository.existsByName(name);
+    }
+
+    @Override
     public void saveHotel(HotelEntity newHotel) {
 
         hotelRepository.save(newHotel);

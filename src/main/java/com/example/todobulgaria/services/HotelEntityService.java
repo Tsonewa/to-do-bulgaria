@@ -7,5 +7,6 @@ public interface HotelEntityService {
 
     HotelEntity findHotelEntityByName(String name);
 
+    boolean existHotelEntityByName(String name);
     void saveHotel(HotelEntity newHotel);
 }

@@ -113,7 +113,7 @@ public class TripEntityServiceImpl implements TripEntityService {
                 dinnerPlaceEntityService.saveDinnerPlace(newDinnerPlace);
             }
 
-            if (hotelEntityService.findHotelEntityByName(addTripServiceModel.getHotel().get(i)) != null) {
+            if (hotelEntityService.existHotelEntityByName(addTripServiceModel.getHotel().get(i))) {
                 itineraryEntity.setHotelEntity(hotelEntityService.findHotelEntityByName(addTripServiceModel.getHotel().get(i)));
             } else {
                 HotelEntity newHotel = new HotelEntity();
@@ -152,9 +152,11 @@ public class TripEntityServiceImpl implements TripEntityService {
         DetailsEntity details =
                 createDetailsEntity(addTripServiceModel.getEquipment(), addTripServiceModel.getFestivals(), addTripServiceModel.getFotoTip());
 
-        detailsEntityService.saveDetailsEntity(details);
+        if(details != null){
+            detailsEntityService.saveDetailsEntity(details);
+            entity.setDetails(details);
+        }
 
-        entity.setDetails(details);
         UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         entity.setUser(userEntityService.findUserByUsername(principal.getUsername()).orElseThrow());
@@ -201,6 +203,11 @@ public class TripEntityServiceImpl implements TripEntityService {
 
     private DetailsEntity createDetailsEntity(String equipment, String festivals, String fotoTip) {
 
+
+        if(equipment.trim().isEmpty() && festivals.trim().isEmpty() && fotoTip.trim().isEmpty()){
+            return null;
+        }
+
          DetailsEntity detailsEntity = new DetailsEntity();
          detailsEntity.setEquipment(equipment);
         detailsEntity.setFestivals(festivals);
@@ -238,6 +245,7 @@ public class TripEntityServiceImpl implements TripEntityService {
         .getItineraries().stream()
         .map(i -> {
             ItinariesDetailsViewModel itinary = modelMapper.map(i, ItinariesDetailsViewModel.class);
+
             itinary.setBreakfastPlace(i.getBreakfastPlace().getName());
             itinary.setAttractionName(i.getAttractions().get(0).getName());
             itinary.setCoffeePlace(i.getCoffeePlaceEntity().getName());

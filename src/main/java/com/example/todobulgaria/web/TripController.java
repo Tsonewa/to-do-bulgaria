@@ -24,6 +24,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -159,10 +160,8 @@ public class TripController {
             rd.close();
 
             Map<String, Object> listApi = jsonToMap(result.toString());
-//            System.out.println(listApi);
 
             List<Map<String, Object >> mapList = (List<Map<String, Object>>) (listApi.get("list"));
-//            System.out.println(mapList);
 
             List<Map<String, Object >> mainList = new ArrayList<>();
 
@@ -174,7 +173,6 @@ public class TripController {
                 mainList.add(i, main);
             }
 
-//            System.out.println(mainList);
 
             ArrayDeque<String> daysOfWeek = new ArrayDeque<>();
 
@@ -198,9 +196,6 @@ public class TripController {
 
                 weatherDtos.add(weatherWidget);
             }
-
-//            System.out.println(weatherDtos);
-
 
         model.addAttribute("trip", tripById);
         model.addAttribute("town", townName);

@@ -45,8 +45,5 @@ public class ApplicationBeanConfiguration {
     public Gson gson (){
         return new Gson();
     }
-    @Bean
-    public LastModelAndViewInterceptor lastModelAndViewInterceptor(){
-        return new LastModelAndViewInterceptor();
-    }
+
 }
