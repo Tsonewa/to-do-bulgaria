@@ -571,6 +571,11 @@ body {
     margin-right: 5px;
 }
 
+.update-span{
+    font-size: 13px;
+    padding: 0px 2px;
+}
+
 .uprate-a {
     font-size: 14px;
     color: white;

@@ -85,31 +85,30 @@
                         <div class="bullet">
                             <img src="/images/grean-dot.png">
                             <h5 th:text="*{coffeePlace}" >Coffe Place</h5>
-                            <span>Coffee place address</span>
+                            <span class="update-span" th:text="*{coffeePlaceAddress}">Add address</span>
+                            <a class="update-span" th:href="*{coffeePlaceBookingUrl}" >Book here</a>
                         </div>
                         <div class="bullet">
                             <img src="/images/grean-dot.png">
                             <h5 th:text="*{breakfastPlace}">Coffe Place</h5>
-                            <a class="uprate-a" href="/"><h6>Add address</h6></a>
-                            <a class="uprate-a" href="/"><h6>Add booking</h6></a>
+                            <span class="update-span" th:text="*{breakfastPlaceAddress}">Add address</span>
+                            <a class="update-span" th:href="*{breakfastPlaceBookingUrl}" >Book here</a>
                         </div>
                         <div class="bullet">
                             <img src="/images/grean-dot.png">
                             <h5 th:text="*{dinnerPlace}">Coffe Place</h5>
-                            <a class="uprate-a" href="/"><h6>Add address</h6></a>
-                            <a class="uprate-a" href="/"><h6>Add booking</h6></a>
+                            <span class="update-span" th:text="*{dinnerPlaceAddress}">Add address</span>
+                            <a class="update-span" th:href="*{dinnerPlaceBookingUrl}" >Book here</a>
                         </div>
                         <div class="bullet">
                             <img src="/images/grean-dot.png">
                             <h5 th:text="*{hotel}">Coffe Place</h5>
-                            <a class="uprate-a" href="/"><h6>Add address</h6></a>
-                            <a class="uprate-a" href="/"><h6>Add booking</h6></a>
+                            <span class="update-span" th:text="*{hotelAddress}">Add address</span>
+                            <a class="update-span" th:href="*{hotelBookingUrl}" >Book here</a>
                         </div>
                         <div class="bullet">
                             <img src="/images/grean-dot.png">
-                            <h5 th:text="*{attractionName}">Coffe Place</h5>
-                            <a class="uprate-a" href="/"><h6>Add address</h6></a>
-                            <a class="uprate-a" href="/"><h6>Add booking</h6></a>
+                            <h5 th:text="*{attractionName}">Coffee Place</h5>
                         </div>
                         <button class="btn" sec:authorize="isAuthenticated()"> <a class="uprate-a" th:href="@{'/itinerary/' + *{id} + '/edit'}" th:method="get">Add address/Add booking</a></button>
                     </div>
