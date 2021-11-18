@@ -317,6 +317,12 @@ public class TripEntityServiceImpl implements TripEntityService {
 
     }
 
+    @Override
+    public Integer tripsCount() {
+
+        return tripRepository.findAll().size();
+    }
+
     public boolean isOwner(String userName, Long id) {
         Optional<TripEntity> trip = tripRepository.
                 findById(id);

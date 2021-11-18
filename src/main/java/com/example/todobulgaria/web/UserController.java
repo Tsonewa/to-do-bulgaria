@@ -4,6 +4,7 @@ import com.example.todobulgaria.models.bindings.UserRegisterBindingModel;
 import com.example.todobulgaria.models.service.UserRegisterServiceModel;
 import com.example.todobulgaria.services.UserEntityService;
 import org.modelmapper.ModelMapper;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
@@ -75,5 +76,7 @@ public class UserController {
 
            return "redirect:/";
     }
+
+
 
 }

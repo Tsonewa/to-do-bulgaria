@@ -33,7 +33,10 @@ public interface TripEntityService {
     List<TripCategoryTownDurationViewModel> findAllTripsById(Set<Long> favouriteTripsSet);
 
     TripEntity findEntityById(Long id);
+
+    Integer tripsCount();
 }
+
 
 
 

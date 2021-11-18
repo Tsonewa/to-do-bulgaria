@@ -1,5 +1,6 @@
 package com.example.todobulgaria.web;
 
+import com.example.todobulgaria.config.ScheduleConfig;
 import com.example.todobulgaria.models.bindings.AddTripBindingModel;
 import com.example.todobulgaria.models.dto.TripsDto;
 import com.example.todobulgaria.models.dto.WeatherDto;
@@ -16,7 +17,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -45,7 +49,7 @@ public class TripController {
 
     private static String API_KEY = "99e6406a5dbd944e77648f68cd84fb42";
     private static String OPEN_WEATHER_URL = "https://api.openweathermap.org/data/2.5/forecast?q=";
-
+    Logger logger = LoggerFactory.getLogger(ScheduleConfig.class);
 
     private final TripEntityService tripEntityService;
     private final ModelMapper modelMapper;
@@ -262,4 +266,14 @@ public class TripController {
         return day.getDisplayName(TextStyle.FULL, locale);
     }
 
+
+
+    @Scheduled(cron = "0 0 20 * * *")
+    public void tripsCountSchedule(){
+
+        Integer tripsCount = tripEntityService.tripsCount();
+
+        logger.info("Current trips count is: {}" , tripsCount);
+
+    }
 }
