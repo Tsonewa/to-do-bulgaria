@@ -49,6 +49,7 @@ public class ItineraryController {
         return "update";
     }
 
+
     @PatchMapping("/itinerary/{id}/edit")
     public String updateItinerary(
             @PathVariable Long id,
