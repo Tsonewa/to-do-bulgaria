@@ -20,7 +20,7 @@ public class ScheduleConfig {
         this.tripEntityService = tripEntityService;
     }
 
-    @Scheduled(cron = "0 0 20 * *")
+    @Scheduled(cron = "0 0 20 * * *")
     public void tripsCountSchedule(){
 
         Integer tripsCount = tripEntityService.tripsCount();

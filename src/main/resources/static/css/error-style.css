@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&family=Montserrat:wght@500&display=swap');
+
+body{
+    font-family: 'Montserrat', sans-serif, 'Comfortaa', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+img{
+    width: 600px;
+}
+
+button{
+    background: forestgreen;
+    border-radius: 10px;
+    padding: 10px 50px;
+    margin: 10px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+a{
+    color: white;
+    text-decoration: none;
+}

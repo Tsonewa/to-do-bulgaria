@@ -1,6 +1,6 @@
 package com.example.todobulgaria.web;
 
-import com.example.todobulgaria.config.ScheduleConfig;
+import com.example.todobulgaria.exceptions.ObjectNotFoundException;
 import com.example.todobulgaria.models.bindings.AddTripBindingModel;
 import com.example.todobulgaria.models.dto.TripsDto;
 import com.example.todobulgaria.models.dto.WeatherDto;
@@ -17,10 +17,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.ModelMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
-import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -144,6 +143,10 @@ public class TripController {
             @PathVariable Long id, Model model) {
 
         TripDetailsView tripById = tripEntityService.findById(id);
+
+        if(tripById == null){
+            throw new ObjectNotFoundException(id);
+        }
         String townName = tripById.getItinaries().get(0).getTownName();
         String urlString = OPEN_WEATHER_URL + townName + ",BG&units=metric&appid=" + API_KEY;
 
@@ -228,6 +231,9 @@ public class TripController {
 
         Optional<UserEntity> currentUser = getCurrentUser();
 
+        if(!userEntityService.findUserByUsername(currentUser.get().getUsername()).isPresent()){
+             throw new ObjectNotFoundException(id);
+        }
         Optional<UserEntity> userByUsername = userEntityService.findUserByUsername(currentUser.get().getUsername());
 
         Set<TripEntity> favouriteTrips = userByUsername.get().getFavouriteTrips();
@@ -235,7 +241,7 @@ public class TripController {
 
         userEntityService.updateUser(userByUsername.orElse(null));
 
-//        ModelAndView mv = (ModelAndView)request.getSession().getAttribute(LastModelAndViewInterceptor.LAST_MODEL_VIEW_ATTRIBUTE);
+//        ModelAndView mv = (ModelAndView)request.getSession().getAttributuser_favouritee(LastModelAndViewInterceptor.LAST_MODEL_VIEW_ATTRIBUTE);
 //        return mv;
 
         String referer = request.getHeader("Referer");
