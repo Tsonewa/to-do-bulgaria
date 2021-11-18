@@ -5,14 +5,87 @@ public class ItinariesDetailsViewModel {
 
     private Long id;
     private String breakfastPlace;
+    private String breakfastPlaceAddress;
+    private String breakfastPlaceBookingUrl;
     private String coffeePlace;
+    private String coffeePlaceAddress;
+    private String coffeePlaceBookingUrl;
     private String dinnerPlace;
+    private String dinnerPlaceAddress;
+    private String dinnerPlaceBookingUrl;
     private String hotel;
+    private String hotelAddress;
+    private String hotelBookingUrl;
     private String townName;
     private String day;
     private String attractionName;
 
     public ItinariesDetailsViewModel() {
+    }
+
+
+    public String getDinnerPlaceAddress() {
+        return dinnerPlaceAddress;
+    }
+
+    public void setDinnerPlaceAddress(String dinnerPlaceAddress) {
+        this.dinnerPlaceAddress = dinnerPlaceAddress;
+    }
+
+    public String getDinnerPlaceBookingUrl() {
+        return dinnerPlaceBookingUrl;
+    }
+
+    public void setDinnerPlaceBookingUrl(String dinnerPlaceBookingUrl) {
+        this.dinnerPlaceBookingUrl = dinnerPlaceBookingUrl;
+    }
+
+    public String getHotelAddress() {
+        return hotelAddress;
+    }
+
+    public void setHotelAddress(String hotelAddress) {
+        this.hotelAddress = hotelAddress;
+    }
+
+    public String getHotelBookingUrl() {
+        return hotelBookingUrl;
+    }
+
+    public void setHotelBookingUrl(String hotelBookingUrl) {
+        this.hotelBookingUrl = hotelBookingUrl;
+    }
+
+    public String getBreakfastPlaceAddress() {
+        return breakfastPlaceAddress;
+    }
+
+    public void setBreakfastPlaceAddress(String breakfastPlaceAddress) {
+        this.breakfastPlaceAddress = breakfastPlaceAddress;
+    }
+
+    public String getBreakfastPlaceBookingUrl() {
+        return breakfastPlaceBookingUrl;
+    }
+
+    public void setBreakfastPlaceBookingUrl(String breakfastPlaceBookingUrl) {
+        this.breakfastPlaceBookingUrl = breakfastPlaceBookingUrl;
+    }
+
+    public String getCoffeePlaceAddress() {
+        return coffeePlaceAddress;
+    }
+
+    public void setCoffeePlaceAddress(String coffeePlaceAddress) {
+        this.coffeePlaceAddress = coffeePlaceAddress;
+    }
+
+    public String getCoffeePlaceBookingUrl() {
+        return coffeePlaceBookingUrl;
+    }
+
+    public void setCoffeePlaceBookingUrl(String coffeePlaceBookingUrl) {
+        this.coffeePlaceBookingUrl = coffeePlaceBookingUrl;
     }
 
     public Long getId() {

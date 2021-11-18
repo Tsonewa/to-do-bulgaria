@@ -80,15 +80,6 @@ map.setBreakfastPlace(itineraryEntity.getBreakfastPlace().getName());
 
         breakfastPlaceEntityService.saveBreakfastPlace(breakfastPlace);
 
-        AttractionEntity attractionEntity = byId.getAttractions().get(0);
-                attractionEntity.setLocation(itineraryUpdateServiceModel
-                .getAttractionAddress());
-
-        attractionEntity.setName(itineraryUpdateServiceModel
-                .getAttractionName());
-
-        attractionEntityService.saveAttraction(attractionEntity);
-
         CoffeePlaceEntity coffeePlaceEntity = byId.getCoffeePlaceEntity();
 
         coffeePlaceEntity.setAddress(itineraryUpdateServiceModel.

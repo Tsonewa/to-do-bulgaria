@@ -70,3 +70,8 @@ fieldset {
     display: flex;
     justify-content: center;
 }
+
+.update-span{
+    font-size: 13px;
+    padding: 0px 2px;
+}

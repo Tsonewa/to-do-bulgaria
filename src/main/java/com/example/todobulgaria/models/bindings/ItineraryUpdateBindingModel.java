@@ -18,8 +18,11 @@ public class ItineraryUpdateBindingModel {
     private String attractionName;
     private String attractionAddress;
 
+
     public ItineraryUpdateBindingModel() {
     }
+
+
 
     public Long getId() {
         return id;

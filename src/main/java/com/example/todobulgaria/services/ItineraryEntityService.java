@@ -20,7 +20,9 @@ public interface ItineraryEntityService {
     void updateItinerary(ItineryUpdateServiceModel itineraryUpdateServiceModel);
 
     ItinariesDetailsViewModel findByTripIdAndDay(Long id, Integer day);
+
 }
+
 
 
 

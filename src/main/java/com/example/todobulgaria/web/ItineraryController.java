@@ -70,6 +70,9 @@ public class ItineraryController {
 
         itineraryEntityService.updateItinerary(itineraryUpdateServiceModel);
 
+        //TODO fix: redirect to itinerary id instead of trip id
+        //TODO fix: #isOwner interseptor config -> denied access for random pages 403 = access forbidden
+
         return "redirect:/trips/" + id + "/details";
     }
 }

@@ -18,8 +18,10 @@ public class ItineryUpdateServiceModel {
     private String attractionName;
     private String attractionAddress;
 
+
     public ItineryUpdateServiceModel() {
     }
+
 
     public Long getId() {
         return id;

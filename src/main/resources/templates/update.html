@@ -45,11 +45,6 @@
             <label>Add Booking URL</label>
             <input th:field="*{dinnerPlaceUrl}" type="text" name="dinnerPlaceUrl" placeholder="https://www.booking.com"/>
             <p th:if="${#fields.hasErrors('dinnerPlace')}" th:errors="*{dinnerPlace}" class="error"></p>
-            <label>Attractions</label>
-            <input th:field="*{attractionName}" type="text" name="attractionName" placeholder="National Palace of Culture"/>
-            <label>Add address</label>
-            <input th:field="*{attractionAddress}" type="text" name="attractionAddress" placeholder="бул.Цариградско шосе, 15 1000,София" />
-            <p th:if="${#fields.hasErrors('attractionName')}" th:errors="*{attractionName}" class="error"></p>
         </div>
         <button type="submit" name="update-day" class="btn" value="update-day">Update</button>
     </fieldset>
