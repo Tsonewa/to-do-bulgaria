@@ -65,3 +65,8 @@ fieldset {
     flex-flow: row wrap;
     justify-content: center;
 }
+
+.update-form-div {
+    display: flex;
+    justify-content: center;
+}

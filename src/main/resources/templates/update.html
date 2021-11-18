@@ -14,39 +14,48 @@
 </header>
 <main>
     <form  th:action="@{'/itinerary/' + *{id} + '/edit'}" th:method="patch" th:object="${itineraryModel}">
-    <fieldset id="input2-wrapper">
+        <div id="msform">
+        <fieldset id="update-fieldset">
         <div class="input-div">
             <label>Breakfast</label>
             <input th:field="*{breakfastPlace}" type="text" name="breakfastPlace" placeholder="Mekitsa&Coffee"/>
-            <input th:field="*{brekfastPlaceAddress}" type="text" name="breakfastPlaceAddress"/>
-            <input th:field="*{breakfastPlaceUrl}" type="text" name="breakfastPlaceUrl"/>
+            <label>Add address</label>
+            <input th:field="*{brekfastPlaceAddress}" type="text" name="breakfastPlaceAddress" placeholder="бул.Цариградско шосе, 15 1000,София"/>
+            <label>Add Booking URL</label>
+            <input th:field="*{breakfastPlaceUrl}" type="text" name="breakfastPlaceUrl" placeholder="https://www.booking.com"/>
             <p th:if="${#fields.hasErrors('breakfastPlace')}" th:errors="*{breakfastPlace}" class="error"></p>
             <label>Coffee</label>
             <input th:field="*{coffeePlace}" type="text" name="coffeePlace" placeholder="CoffeeBar"/>
-            <input th:field="*{coffeePlaceAddress}" type="text" name="coffeePlaceAddress"/>
-            <input th:field="*{coffeePlaceUrl}" type="text" name="coffeePlaceUrl"/>
+            <label>Add address</label>
+            <input th:field="*{coffeePlaceAddress}" type="text" name="coffeePlaceAddress" placeholder="бул.Цариградско шосе, 15 1000,София"/>
+            <label>Add Booking URL</label>
+            <input th:field="*{coffeePlaceUrl}" type="text" name="coffeePlaceUrl" placeholder="https://www.booking.com"/>
             <p th:if="${#fields.hasErrors('coffeePlace')}" th:errors="*{coffeePlace}" class="error"></p>
             <label>Hotel</label>
             <input th:field="*{hotel}" type="text" name="hotel" placeholder="Grand Hotel Sofia"/>
-            <input th:field="*{hotelAddress}" type="text" name="hotelAddress"/>
-            <input th:field="*{hotelUrl}" type="text" name="hotelUrl"/>
+            <label>Add address</label>
+            <input th:field="*{hotelAddress}" type="text" name="hotelAddress" placeholder="бул.Цариградско шосе, 15 1000,София"/>
+            <label>Add Booking URL</label>
+            <input th:field="*{hotelUrl}" type="text" name="hotelUrl" placeholder="https://www.booking.com" />
             <p th:if="${#fields.hasErrors('hotel')}" th:errors="*{hotel}" class="error"></p>
             <label>Dinner</label>
             <input th:field="*{dinnerPlace}" type="text" name="dinnerPlace" placeholder="Blue House" />
-            <input th:field="*{dinnerPlaceAddress}" type="text" name="dinnerPlaceAddress" />
-            <input th:field="*{dinnerPlaceUrl}" type="text" name="dinnerPlaceUrl"/>
+            <label>Add address</label>
+            <input th:field="*{dinnerPlaceAddress}" type="text" name="dinnerPlaceAddress" placeholder="бул.Цариградско шосе, 15 1000,София"/>
+            <label>Add Booking URL</label>
+            <input th:field="*{dinnerPlaceUrl}" type="text" name="dinnerPlaceUrl" placeholder="https://www.booking.com"/>
             <p th:if="${#fields.hasErrors('dinnerPlace')}" th:errors="*{dinnerPlace}" class="error"></p>
             <label>Attractions</label>
             <input th:field="*{attractionName}" type="text" name="attractionName" placeholder="National Palace of Culture"/>
-            <input th:field="*{attractionAddress}" type="text" name="attractionAddress" />
+            <label>Add address</label>
+            <input th:field="*{attractionAddress}" type="text" name="attractionAddress" placeholder="бул.Цариградско шосе, 15 1000,София" />
             <p th:if="${#fields.hasErrors('attractionName')}" th:errors="*{attractionName}" class="error"></p>
         </div>
         <button type="submit" name="update-day" class="btn" value="update-day">Update</button>
     </fieldset>
+        </div>
     </form>
-
 </main>
-
 <footer th:replace="/fragments/fragment :: footer">
 </footer>
 </body>
