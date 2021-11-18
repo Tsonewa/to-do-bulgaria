@@ -49,7 +49,7 @@ public class TripController {
 
     private static String API_KEY = "99e6406a5dbd944e77648f68cd84fb42";
     private static String OPEN_WEATHER_URL = "https://api.openweathermap.org/data/2.5/forecast?q=";
-    Logger logger = LoggerFactory.getLogger(ScheduleConfig.class);
+
 
     private final TripEntityService tripEntityService;
     private final ModelMapper modelMapper;
@@ -268,12 +268,4 @@ public class TripController {
 
 
 
-    @Scheduled(cron = "0 0 20 * * *")
-    public void tripsCountSchedule(){
-
-        Integer tripsCount = tripEntityService.tripsCount();
-
-        logger.info("Current trips count is: {}" , tripsCount);
-
-    }
 }
