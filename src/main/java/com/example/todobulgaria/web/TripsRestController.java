@@ -1,25 +1,31 @@
 package com.example.todobulgaria.web;
 
+import com.example.todobulgaria.exceptions.ObjectNotFoundException;
 import com.example.todobulgaria.models.dto.ItineraryDto;
 import com.example.todobulgaria.models.dto.TripsDto;
+import com.example.todobulgaria.models.entities.TripEntity;
+import com.example.todobulgaria.models.entities.UserEntity;
+import com.example.todobulgaria.models.views.TripsArticleViewModel;
 import com.example.todobulgaria.services.ItineraryEntityService;
 import com.example.todobulgaria.services.TripEntityService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/trips")
-public class TripsSearchRestController {
+public class TripsRestController {
 
 
     private final TripEntityService tripEntityService;
     private final ItineraryEntityService itineraryEntityService;
 
-    public TripsSearchRestController(TripEntityService tripEntityService, ItineraryEntityService itineraryEntityService) {
+    public TripsRestController(TripEntityService tripEntityService, ItineraryEntityService itineraryEntityService) {
         this.tripEntityService = tripEntityService;
         this.itineraryEntityService = itineraryEntityService;
     }
@@ -33,4 +39,11 @@ public class TripsSearchRestController {
         return ResponseEntity.ok(
                 tripEntityService.getTrips(pageNo, pageSize, sortBy));
     }
+//
+//        @GetMapping("/best")
+//        public ResponseEntity<List<TripsArticleViewModel>> showBestTrips(){
+//        List<TripsArticleViewModel> bestTrips = tripEntityService.findFirstEightBestTripsOrderByRating();
+//
+//        return ResponseEntity.ok(bestTrips);
+//    }
 }

@@ -27,6 +27,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -102,6 +103,12 @@ public class TripController {
 
         return "auth-home";
     }
+
+//    @GetMapping("/best")
+//    private ModelAndView bestTrips(){
+//
+//        return new ModelAndView("best-trips");
+//    }
 
     @GetMapping("/best")
     public String showBestTrips(Model model){
