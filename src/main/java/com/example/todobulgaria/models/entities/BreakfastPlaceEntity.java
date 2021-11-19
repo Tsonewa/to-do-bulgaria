@@ -6,10 +6,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "breakfast_places")
-public class BreakfastPlaceEntity extends BaseEntity {
+public class BreakfastPlaceEntity extends BaseEntity implements Serializable {
 
     @Column(nullable = false)
     private String name;

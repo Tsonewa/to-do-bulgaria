@@ -5,12 +5,13 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
 @Table(name = "itineraries")
-public class ItineraryEntity extends BaseEntity {
+public class ItineraryEntity extends BaseEntity implements Serializable {
 
     @Column(nullable = false)
     private Integer day;

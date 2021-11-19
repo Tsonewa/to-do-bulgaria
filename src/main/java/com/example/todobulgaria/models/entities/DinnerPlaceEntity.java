@@ -5,10 +5,11 @@ import com.example.todobulgaria.models.BaseEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "dinner_places")
-public class DinnerPlaceEntity extends BaseEntity {
+public class DinnerPlaceEntity extends BaseEntity implements Serializable {
 
     @Column(nullable = false)
     private String name;

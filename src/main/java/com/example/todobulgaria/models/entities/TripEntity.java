@@ -5,11 +5,12 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name="trips")
-public class TripEntity extends BaseEntity {
+public class TripEntity extends BaseEntity implements Serializable {
 
     @Column(nullable = false)
     private String region;

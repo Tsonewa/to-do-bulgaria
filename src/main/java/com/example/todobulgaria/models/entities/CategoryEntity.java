@@ -7,10 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "categories")
-public class CategoryEntity extends BaseEntity {
+public class CategoryEntity extends BaseEntity implements Serializable {
 
     @Enumerated(value = EnumType.STRING)
     private CategoryEnum name;
