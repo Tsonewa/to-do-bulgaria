@@ -60,5 +60,3 @@ fetch(`http://localhost:8080/api/${tripId}/reviews`)
         }
         displayReviews(reviewsArray);
     });
-
-
