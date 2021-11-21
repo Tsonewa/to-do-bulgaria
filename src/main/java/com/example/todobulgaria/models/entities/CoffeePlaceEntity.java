@@ -1,47 +1,14 @@
 package com.example.todobulgaria.models.entities;
 
-import com.example.todobulgaria.models.BaseEntity;
+import com.example.todobulgaria.models.BasePlaceEntity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "coffee_places")
-public class CoffeePlaceEntity extends BaseEntity implements Serializable {
+public class CoffeePlaceEntity extends BasePlaceEntity implements Serializable {
 
-    @Column(nullable = false)
-    private String name;
-    @Column
-    private String address;
-    @Column(name = "booking_url")
-    private String bookingUrl;
 
-    public CoffeePlaceEntity() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getBookingUrl() {
-        return bookingUrl;
-    }
-
-    public void setBookingUrl(String bookingUrl) {
-        this.bookingUrl = bookingUrl;
-    }
 }
