@@ -1,8 +1,8 @@
 package com.example.todobulgaria.models.entities;
 
 import com.example.todobulgaria.models.BaseEntity;
-import org.apache.catalina.User;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.userdetails.User;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,14 +20,22 @@ public class ReviewEntity extends BaseEntity {
     @Column(name = "created_on", nullable = false)
     @DateTimeFormat(pattern = "MM/dd/yyyy")
     private LocalDate createdOn;
-    @Column(name = "user_id" ,nullable = false)
-    private Long userId;
-    @Column(name = "parent_id")
-    private Long parentId;
+    @ManyToOne
+    private UserEntity user;
     @ManyToOne
     private TripEntity trip;
+    @Column
+    private boolean approved;
 
     public ReviewEntity() {
+    }
+
+    public boolean isApproved() {
+        return approved;
+    }
+
+    public void setApproved(boolean approved) {
+        this.approved = approved;
     }
 
     public String getComment() {
@@ -46,20 +54,12 @@ public class ReviewEntity extends BaseEntity {
         this.createdOn = createdOn;
     }
 
-    public Long getUserId() {
-        return userId;
+    public UserEntity getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Long getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 
     public TripEntity getTrip() {
