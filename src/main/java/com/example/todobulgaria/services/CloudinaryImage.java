@@ -1,6 +1,7 @@
 package com.example.todobulgaria.services;
 
 public class CloudinaryImage {
+
     private String url;
     private String publicId;
 

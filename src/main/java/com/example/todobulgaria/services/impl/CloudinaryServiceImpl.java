@@ -35,7 +35,7 @@ public class CloudinaryServiceImpl implements CloudinaryService {
                     upload(tempFile, Map.of());
 
             String url = uploadResult.getOrDefault(URL,
-                    "https://res.cloudinary.com/dabxnbbrp/image/upload/v1636638898/pmo0xge6in18dxwmupoq.png");
+                    "https://res.cloudinary.com/dabxnbbrp/image/upload/v1637528308/sodjh4ukaucugkzdbho3.png");
             String publicId = uploadResult.getOrDefault(PUBLIC_ID, "");
 
             return new CloudinaryImage().
