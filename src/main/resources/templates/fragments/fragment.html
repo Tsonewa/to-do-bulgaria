@@ -51,4 +51,59 @@
 <footer th:fragment="footer">
     <p>Wish me luck</p>
 </footer>
+
+<div class="comments-container" th:fragment="commnets-container">
+    <h2>Comments</h2>
+    <hr>
+    <ul id="comments-list" class="comments-list">
+        <li>
+            <div class="comment-main-level">
+                <!-- Avatar -->
+                <div class="comment-avatar"><img
+                        src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div>
+                <!-- Main comment -->
+                <div class="comment-box">
+                    <div class="comment-head">
+                        <h6 class="comment-name by-author"><a href="http://creaticode.com/blog">Gosho Georgiev</a>
+                        </h6>
+                        <span>19 Dec, 2021</span>
+                    </div>
+                    <div class="comment-content">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure
+                        laudantium vitae, praesentium optio, sapiente distinctio illo?
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li>
+            <!-- Avatar -->
+            <div class="comment-avatar"><img
+                    src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt="">
+            </div>
+            <!-- Main comment -->
+            <div class="comment-box">
+                <div class="comment-head">
+                    <h6 class="comment-name by-author"><a href="http://creaticode.com/blog">Gosho
+                        Georgiev</a></h6>
+                    <span>19 Dec, 2021</span>
+                </div>
+                <div class="comment-content">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure
+                    laudantium vitae, praesentium optio, sapiente distinctio illo?
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div class="comment-form" th:fragment="comment-form">
+    <div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg"
+                                     alt=""></div>
+    <form class="comment-box">
+        <input type="text" placeholder="Write your comment here...">
+        <button class="btn">Send</button>
+    </form>
+</div>
+
 </html>
