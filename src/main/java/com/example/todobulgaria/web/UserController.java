@@ -23,10 +23,10 @@ public class UserController {
     private final PasswordEncoder passwordEncoder;
     private final UserEntityService userEntityService;
 
-    public UserController(ModelMapper modelMapper, PasswordEncoder passwordEncoder,  UserEntityService userEntityService, UserEntityService userEntityService1) {
+    public UserController(ModelMapper modelMapper, PasswordEncoder passwordEncoder,  UserEntityService userEntityService) {
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
-        this.userEntityService = userEntityService1;
+        this.userEntityService = userEntityService;
     }
 
     @GetMapping("/login")
@@ -64,6 +64,7 @@ public class UserController {
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes) throws IOException {
 
+        System.out.println(bindingResult);
         if(bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel", bindingResult);

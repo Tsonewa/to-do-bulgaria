@@ -11,7 +11,7 @@ public interface UserEntityService {
 
     Optional<UserEntity> findUserByUsername(String username);
     void registrarUser(UserRegisterServiceModel userRegisterServiceModel) throws IOException;
-    Optional<UserEntity> findUserByEmail(String email);
+
     boolean existByUsername(String username);
 
     void updateUser(UserEntity userByUsername);

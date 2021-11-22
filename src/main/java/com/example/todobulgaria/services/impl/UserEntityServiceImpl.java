@@ -131,12 +131,10 @@ public class UserEntityServiceImpl implements UserEntityService {
     @Override
     public boolean existByUsername(String username) {
         return userRepository.existsByUsername(username);
-
     }
 
     @Override
     public void updateUser(UserEntity userByUsername) {
-
         userRepository.save(userByUsername);
     }
 
@@ -144,11 +142,5 @@ public class UserEntityServiceImpl implements UserEntityService {
     public Optional<UserEntity> findUserByUsername(String username) {
 
         return userRepository.findUserEntityByUsername(username);
-    }
-
-    @Override
-    public Optional<UserEntity> findUserByEmail(String email) {
-
-        return userRepository.findUserEntityByEmail(email);
     }
 }
