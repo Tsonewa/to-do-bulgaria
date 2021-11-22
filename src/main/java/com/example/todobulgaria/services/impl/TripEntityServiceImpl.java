@@ -1,5 +1,6 @@
 package com.example.todobulgaria.services.impl;
 
+import com.example.todobulgaria.exceptions.ObjectNotFoundException;
 import com.example.todobulgaria.models.dto.TripsDto;
 import com.example.todobulgaria.models.entities.*;
 import com.example.todobulgaria.models.enums.CategoryEnum;
@@ -149,10 +150,8 @@ public class TripEntityServiceImpl implements TripEntityService {
         entity.setItineraries(itineraries);
         entity.setDuration(itineraries.size());
 
-        DetailsEntity details =
-                createDetailsEntity(addTripServiceModel.getEquipment(), addTripServiceModel.getFestivals(), addTripServiceModel.getFotoTip());
-
-        if(details != null){
+        if(addTripServiceModel.getEquipment() != null || addTripServiceModel.getFestivals() != null || addTripServiceModel.getFotoTip() != null){
+            DetailsEntity details = createDetailsEntity(addTripServiceModel.getEquipment(), addTripServiceModel.getFestivals(), addTripServiceModel.getFotoTip());
             detailsEntityService.saveDetailsEntity(details);
             entity.setDetails(details);
         }
@@ -203,15 +202,10 @@ public class TripEntityServiceImpl implements TripEntityService {
 
     private DetailsEntity createDetailsEntity(String equipment, String festivals, String fotoTip) {
 
-
-        if(equipment.trim().isEmpty() && festivals.trim().isEmpty() && fotoTip.trim().isEmpty()){
-            return null;
-        }
-
-         DetailsEntity detailsEntity = new DetailsEntity();
-         detailsEntity.setEquipment(equipment);
-        detailsEntity.setFestivals(festivals);
-        detailsEntity.setFotoTips(fotoTip);
+            DetailsEntity detailsEntity = new DetailsEntity();
+            detailsEntity.setEquipment(equipment);
+            detailsEntity.setFestivals(festivals);
+            detailsEntity.setFotoTips(fotoTip);
 
         return detailsEntity;
     }
@@ -236,12 +230,33 @@ public class TripEntityServiceImpl implements TripEntityService {
     @Override
     public TripDetailsView findById(Long id) {
 
-           Optional<TripEntity> tripDetailsViewEntity =
-                   tripRepository.findById(id);
+           TripEntity tripEntity =
+                   tripRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException(id));
 
-        TripDetailsView map = modelMapper.map(tripDetailsViewEntity, TripDetailsView.class);
+        TripDetailsView map = new TripDetailsView();
 
-        map.setItinaries(tripDetailsViewEntity.get()
+       map.setItinaries(matToItineraryDetailsView
+               (tripEntity));
+
+        map.setTownName(tripEntity.getItineraries().get(0).getTown().getName());
+
+        if(tripEntity.getDetails() != null) {
+            map.setDetails(modelMapper
+                    .map(tripEntity.getDetails(), DetailsEntityViewModel.class));
+        }
+
+        map.setCategoryName(CategoryEnum.valueOf(tripEntity.getCategoryEntity().getName().name()).name());
+        map.setDuration(tripEntity.getItineraries().size());
+        map.setUrl(tripEntity.getPicture().getUrl());
+        map.setId(tripEntity.getId());
+
+        return map;
+
+        }
+
+    private List<ItinariesDetailsViewModel> matToItineraryDetailsView(TripEntity tripEntity) {
+
+      return tripEntity
         .getItineraries().stream()
         .map(i -> {
             ItinariesDetailsViewModel itinary = modelMapper.map(i, ItinariesDetailsViewModel.class);
@@ -254,21 +269,8 @@ public class TripEntityServiceImpl implements TripEntityService {
 
             return itinary;
 
-        }).collect(Collectors.toList()));
-
-        map.setTownName(tripDetailsViewEntity.get().getItineraries().get(0).getTown().getName());
-
-        DetailsEntityViewModel detailsMap = modelMapper.map(tripDetailsViewEntity.get().getDetails(), DetailsEntityViewModel.class);
-
-        map.setDetails(detailsMap);
-
-        map.setCategoryName(CategoryEnum.valueOf(tripDetailsViewEntity.get().getCategoryEntity().getName().name()).name());
-        map.setDuration(tripDetailsViewEntity.get().getItineraries().size());
-        map.setUrl(tripDetailsViewEntity.get().getPicture().getUrl());
-
-        return map;
-
-        }
+        }).collect(Collectors.toList());
+    }
 
     @Override
     public List<TripCategoryTownDurationViewModel> findAllByUserId(Long id) {

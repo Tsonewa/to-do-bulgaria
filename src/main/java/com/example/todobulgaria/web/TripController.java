@@ -149,6 +149,7 @@ public class TripController {
     public String showTrip(
             @PathVariable Long id, Model model) {
 
+
         TripDetailsView tripById = tripEntityService.findById(id);
 
         if(tripById == null){

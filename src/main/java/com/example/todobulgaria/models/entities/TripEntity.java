@@ -29,6 +29,7 @@ public class TripEntity extends BaseEntity implements Serializable {
     private String description;
     @OneToOne
     private DetailsEntity details;
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "trip", targetEntity = ReviewEntity.class)
     private List<ReviewEntity> reviews;
     @Column
