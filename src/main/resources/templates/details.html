@@ -45,17 +45,17 @@
             <div class="big-image">
                 <img th:src="*{url}">
             </div>
-            <div class="small-images-wrapper">
-                <div class="small-image">
-                    <img src="/images/733-8752.jpg">
-                </div>
-                <div class="small-image">
-                    <img src="/images/733-8752.jpg">
-                </div>
-                <div class="small-image">
-                    <img src="/images/733-8752.jpg">
-                </div>
-            </div>
+<!--            <div class="small-images-wrapper">-->
+<!--                <div class="small-image">-->
+<!--                    <img src="/images/733-8752.jpg">-->
+<!--                </div>-->
+<!--                <div class="small-image">-->
+<!--                    <img src="/images/733-8752.jpg">-->
+<!--                </div>-->
+<!--                <div class="small-image">-->
+<!--                    <img src="/images/733-8752.jpg">-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
         <div class="info-text-wrapper-p">
             <p th:value="*{description}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam reprehenderit quo illum, repudiandae
@@ -130,18 +130,18 @@
                 <div  class="details bullet">
                     <img src="/images/grean-dot.png">
                     <h5>Equipment</h5>
-                    <h6 th:text="*{details.equipment}">bul.fslfms.fksof</h6>
+                    <h6 th:if="*{details != null}" th:text="*{details.equipment}">bul.fslfms.fksof</h6>
                 </div>
                 <div  class="details bullet">
                     <img src="/images/grean-dot.png">
                     <h5>Foto tips</h5>
-                    <h6 th:text="*{details.fotoTips}">The equipment you need Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio,
+                    <h6 th:if="*{details != null}" th:text="*{details.fotoTips}">The equipment you need Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio,
                         maxime.</h6>
                 </div>
                 <div class="details bullet">
                     <img src="/images/download.png">
                     <h5>Festivals</h5>
-                    <h6 th:text="*{details.festivals}">bul.fslfms.fksof</h6>
+                    <h6 th:if="*{details != null}" th:text="*{details.festivals}">bul.fslfms.fksof</h6>
                 </div>
             </div>
         </div>
@@ -172,13 +172,15 @@
             </ul>
         </div>
 
-        <div class="comment-form" th:fragment="comment-form">
-            <div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg"
+        <div class="comment-form">
+            <div class="comment-avatar"><img src="/images/profile-2398782_1280.png"
                                              alt=""></div>
-            <form class="comment-box" >
+            <form id="commentForm" th:method="POST"
+                     th:action="@{'/api/' + *{id} + '/reviews'}" class="comment-box" >
                 <input type="text" placeholder="Write your comment here...">
-                <button class="btn">Send</button>
+                <button type="submit" class="btn">Send</button>
             </form>
+
         </div>
     </div>
     <script th:src="@{/js/reviews.js}"></script>

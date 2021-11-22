@@ -1,20 +1,20 @@
 package com.example.todobulgaria.models.bindings;
 
+import com.example.todobulgaria.annotations.ValidUrl;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.Column;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.List;
 
 public class AddTripBindingModel {
 
-    @Size(min = 2, max = 15, message = "Region length must be between 2 and 15 symbols.")
+    @Size(min = 2, max = 25, message = "Region length must be between 2 and 25 symbols.")
     @NotBlank
     private String region;
     @NotNull(message = "Category can not be empty")
     private String categoryName;
-    @NotNull(message = "You should upload trip picture")
+    @ValidUrl
     private MultipartFile url;
     @NotEmpty
     @Valid
