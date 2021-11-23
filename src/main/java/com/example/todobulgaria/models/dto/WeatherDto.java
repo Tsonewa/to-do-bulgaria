@@ -10,11 +10,13 @@ public class WeatherDto {
     public WeatherDto() {
     }
 
-    public WeatherDto(Double temperature, Double minTemperature, Double maxTemperature) {
+    public WeatherDto(Double temperature, Double minTemperature, Double maxTemperature, String weekDay) {
         this.temperature = temperature;
         this.minTemperature = minTemperature;
         this.maxTemperature = maxTemperature;
+        this.weekDay = weekDay;
     }
+
 
     public String getWeekDay() {
         return weekDay;

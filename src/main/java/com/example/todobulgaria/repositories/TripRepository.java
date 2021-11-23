@@ -16,4 +16,5 @@ public interface TripRepository extends JpaRepository<TripEntity, Long> {
      List<TripEntity> findBestEightTripsOrderByRating();
 
     Optional<List<TripEntity>> findAllByUserId(Long id);
+
 }

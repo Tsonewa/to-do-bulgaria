@@ -1,6 +1,5 @@
 package com.example.todobulgaria.services;
 
-import com.example.todobulgaria.models.dto.TripsDto;
 import com.example.todobulgaria.models.entities.TripEntity;
 import com.example.todobulgaria.models.service.AddTripServiceModel;
 import com.example.todobulgaria.models.views.TripCategoryTownDurationViewModel;
@@ -17,7 +16,7 @@ public interface TripEntityService {
 
     List<TripsArticleViewModel> findFirstEightBestTripsOrderByRating();
 
-    Page<TripsDto> getTrips(
+    Page<TripsArticleViewModel> getTrips(
             int pageNo,
             int pageSize,
             String sortBy);
@@ -35,7 +34,9 @@ public interface TripEntityService {
     TripEntity findEntityById(Long id);
 
     Integer tripsCount();
+
 }
+
 
 
 

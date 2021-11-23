@@ -9,7 +9,7 @@ public class TripDetailsView {
     private String categoryName;
     private String townName;
     private Integer duration;
-    private List<ItinariesDetailsViewModel> itinaries;
+    private List<ItinerariesDetailsViewModel> itinaries;
     private String description;
     private DetailsEntityViewModel details;
 
@@ -74,11 +74,11 @@ public class TripDetailsView {
         this.duration = duration;
     }
 
-    public List<ItinariesDetailsViewModel> getItinaries() {
+    public List<ItinerariesDetailsViewModel> getItinaries() {
         return itinaries;
     }
 
-    public void setItinaries(List<ItinariesDetailsViewModel> itinaries) {
+    public void setItinaries(List<ItinerariesDetailsViewModel> itinaries) {
         this.itinaries = itinaries;
     }
 }

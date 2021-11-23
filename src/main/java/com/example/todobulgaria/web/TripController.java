@@ -2,13 +2,14 @@ package com.example.todobulgaria.web;
 
 import com.example.todobulgaria.exceptions.ObjectNotFoundException;
 import com.example.todobulgaria.models.bindings.AddTripBindingModel;
-import com.example.todobulgaria.models.dto.TripsDto;
 import com.example.todobulgaria.models.dto.WeatherDto;
 import com.example.todobulgaria.models.entities.TripEntity;
 import com.example.todobulgaria.models.entities.UserEntity;
 import com.example.todobulgaria.models.enums.CategoryEnum;
+import com.example.todobulgaria.models.enums.UnexcitingTownsWeatherAPIEnum;
 import com.example.todobulgaria.models.service.AddTripServiceModel;
 import com.example.todobulgaria.models.views.TripDetailsView;
+import com.example.todobulgaria.models.views.TripsArticleViewModel;
 import com.example.todobulgaria.repositories.UserRepository;
 import com.example.todobulgaria.services.ItineraryEntityService;
 import com.example.todobulgaria.services.TripEntityService;
@@ -18,8 +19,6 @@ import com.google.gson.reflect.TypeToken;
 import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,7 +26,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -49,7 +47,6 @@ public class TripController {
 
     private static String API_KEY = "99e6406a5dbd944e77648f68cd84fb42";
     private static String OPEN_WEATHER_URL = "https://api.openweathermap.org/data/2.5/forecast?q=";
-
 
     private final TripEntityService tripEntityService;
     private final ModelMapper modelMapper;
@@ -104,12 +101,6 @@ public class TripController {
         return "auth-home";
     }
 
-//    @GetMapping("/best")
-//    private ModelAndView bestTrips(){
-//
-//        return new ModelAndView("best-trips");
-//    }
-
     @GetMapping("/best")
     public String showBestTrips(Model model){
 
@@ -127,10 +118,10 @@ public class TripController {
     @GetMapping("/all/{pageNum}")
     public String showAlTrips( @PathVariable(name = "pageNum") int pageNum, Model model){
 
-        Page<TripsDto> allTrips = tripEntityService.getTrips(pageNum - 1, 8, "id");
+        Page<TripsArticleViewModel> allTrips = tripEntityService.getTrips(pageNum - 1, 8, "id");
         long totalItems = allTrips.getTotalElements();
         int totalPages = allTrips.getTotalPages();
-        List<TripsDto> listTrips = allTrips.getContent();
+        List<TripsArticleViewModel> listTrips = allTrips.getContent();
 
         model.addAttribute("trips", listTrips);
         model.addAttribute("currentPage", pageNum);
@@ -155,7 +146,12 @@ public class TripController {
         if(tripById == null){
             throw new ObjectNotFoundException(id);
         }
+
         String townName = tripById.getItinaries().get(0).getTownName();
+
+        townName = checkIfTownExistInWeatherApi
+                (townName);
+
         String urlString = OPEN_WEATHER_URL + townName + ",BG&units=metric&appid=" + API_KEY;
 
         try{
@@ -222,6 +218,19 @@ public class TripController {
         return "details";
     }
 
+    private String checkIfTownExistInWeatherApi(String townNameWithoutWhitespaces) {
+
+        String town = townNameWithoutWhitespaces;
+
+        String townToLowerCase = town.toLowerCase();
+
+        if(townToLowerCase.equals(UnexcitingTownsWeatherAPIEnum.ELENITE.name().toLowerCase())
+        || townToLowerCase.equals(UnexcitingTownsWeatherAPIEnum.ЕЛЕНИТЕ.name().toLowerCase())){
+            town = "Бургас";
+        }
+
+        return town;
+    }
 
 
     @PreAuthorize("isOwner(#id)")
@@ -274,6 +283,7 @@ public class TripController {
 
         return map;
     }
+
 
     public static String getDayStringNew(LocalDate date, Locale locale) {
         DayOfWeek day = date.getDayOfWeek();

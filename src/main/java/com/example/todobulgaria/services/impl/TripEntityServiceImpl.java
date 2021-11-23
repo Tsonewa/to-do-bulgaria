@@ -1,7 +1,6 @@
 package com.example.todobulgaria.services.impl;
 
 import com.example.todobulgaria.exceptions.ObjectNotFoundException;
-import com.example.todobulgaria.models.dto.TripsDto;
 import com.example.todobulgaria.models.entities.*;
 import com.example.todobulgaria.models.enums.CategoryEnum;
 import com.example.todobulgaria.models.enums.RoleEnum;
@@ -191,11 +190,8 @@ public class TripEntityServiceImpl implements TripEntityService {
         return bestEightTripsOrderByRating
                 .stream()
                 .map(b -> {
-                    TripsArticleViewModel map = modelMapper.map(b, TripsArticleViewModel.class);
-                    map.setUrl(b.getPicture().getUrl());
-                    map.setTownName(b.getItineraries().get(0).getTown().getName());
-
-                    return map;
+                    TripsArticleViewModel tripsArticleViewModel = asArticleTrip(b);
+                    return tripsArticleViewModel;
                 }).collect(Collectors.toList());
     }
 
@@ -210,21 +206,21 @@ public class TripEntityServiceImpl implements TripEntityService {
         return detailsEntity;
     }
 
-    private TripsDto asTrip(TripEntity trip) {
-        TripsDto tripDto = modelMapper.map(trip, TripsDto.class);
-        tripDto.setUrl(trip.getPicture().getUrl());
-        tripDto.setTownName(trip.getItineraries().get(0).getTown().getName());
+    private TripsArticleViewModel asArticleTrip(TripEntity trip) {
+        TripsArticleViewModel tripsArticleViewModel = modelMapper.map(trip, TripsArticleViewModel.class);
+        tripsArticleViewModel.setUrl(trip.getPicture().getUrl());
+        tripsArticleViewModel.setTownName(trip.getItineraries().get(0).getTown().getName());
 
-        return tripDto;
+        return tripsArticleViewModel;
     }
 
     @Override
-    public Page<TripsDto> getTrips(int pageNo, int pageSize, String sortBy) {
+    public Page<TripsArticleViewModel> getTrips(int pageNo, int pageSize, String sortBy) {
         Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
 
         return tripRepository.
                 findAll(pageable).
-                map(this::asTrip);
+                map(this::asArticleTrip);
     }
 
     @Override
@@ -238,7 +234,7 @@ public class TripEntityServiceImpl implements TripEntityService {
        map.setItinaries(matToItineraryDetailsView
                (tripEntity));
 
-        map.setTownName(tripEntity.getItineraries().get(0).getTown().getName());
+        map.setTownName(map.getItinaries().get(0).getTownName());
 
         if(tripEntity.getDetails() != null) {
             map.setDetails(modelMapper
@@ -254,12 +250,13 @@ public class TripEntityServiceImpl implements TripEntityService {
 
         }
 
-    private List<ItinariesDetailsViewModel> matToItineraryDetailsView(TripEntity tripEntity) {
+    private List<ItinerariesDetailsViewModel> matToItineraryDetailsView(TripEntity tripEntity) {
 
       return tripEntity
         .getItineraries().stream()
         .map(i -> {
-            ItinariesDetailsViewModel itinary = modelMapper.map(i, ItinariesDetailsViewModel.class);
+            ItinerariesDetailsViewModel itinary = modelMapper
+                    .map(i, ItinerariesDetailsViewModel.class);
 
             itinary.setBreakfastPlace(i.getBreakfastPlace().getName());
             itinary.setAttractionName(i.getAttractions().get(0).getName());
@@ -293,8 +290,6 @@ public class TripEntityServiceImpl implements TripEntityService {
 
         return collect;
     }
-
-
 
     @Override
     public void deleteTrip(Long id) {
