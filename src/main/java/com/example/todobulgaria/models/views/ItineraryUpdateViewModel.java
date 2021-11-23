@@ -1,27 +1,32 @@
-package com.example.todobulgaria.models.service;
+package com.example.todobulgaria.models.views;
 
-public class ItineryUpdateServiceModel {
+public class ItineraryUpdateViewModel {
 
     private Long id;
     private String breakfastPlace;
-    private String brekfastPlaceAddress;
-    private String breakfastPlaceUrl;
+    private String breakfastPlaceAddress;
+    private String breakfastPlaceBookingUrl;
     private String coffeePlace;
     private String coffeePlaceAddress;
-    private String coffeePlaceUrl;
+    private String coffeePlaceBookingUrl;
     private String dinnerPlace;
     private String dinnerPlaceAddress;
-    private String dinnerPlaceUrl;
+    private String dinnerPlaceBookingUrl;
     private String hotel;
     private String hotelAddress;
-    private String hotelUrl;
-    private String attractionName;
-    private String attractionAddress;
+    private String hotelBookingUrl;
+    private Long tripId;
 
-
-    public ItineryUpdateServiceModel() {
+    public ItineraryUpdateViewModel() {
     }
 
+    public Long getTripId() {
+        return tripId;
+    }
+
+    public void setTripId(Long tripId) {
+        this.tripId = tripId;
+    }
 
     public Long getId() {
         return id;
@@ -39,20 +44,20 @@ public class ItineryUpdateServiceModel {
         this.breakfastPlace = breakfastPlace;
     }
 
-    public String getBrekfastPlaceAddress() {
-        return brekfastPlaceAddress;
+    public String getBreakfastPlaceAddress() {
+        return breakfastPlaceAddress;
     }
 
-    public void setBrekfastPlaceAddress(String brekfastPlaceAddress) {
-        this.brekfastPlaceAddress = brekfastPlaceAddress;
+    public void setBreakfastPlaceAddress(String breakfastPlaceAddress) {
+        this.breakfastPlaceAddress = breakfastPlaceAddress;
     }
 
-    public String getBreakfastPlaceUrl() {
-        return breakfastPlaceUrl;
+    public String getBreakfastPlaceBookingUrl() {
+        return breakfastPlaceBookingUrl;
     }
 
-    public void setBreakfastPlaceUrl(String breakfastPlaceUrl) {
-        this.breakfastPlaceUrl = breakfastPlaceUrl;
+    public void setBreakfastPlaceBookingUrl(String breakfastPlaceBookingUrl) {
+        this.breakfastPlaceBookingUrl = breakfastPlaceBookingUrl;
     }
 
     public String getCoffeePlace() {
@@ -71,12 +76,12 @@ public class ItineryUpdateServiceModel {
         this.coffeePlaceAddress = coffeePlaceAddress;
     }
 
-    public String getCoffeePlaceUrl() {
-        return coffeePlaceUrl;
+    public String getCoffeePlaceBookingUrl() {
+        return coffeePlaceBookingUrl;
     }
 
-    public void setCoffeePlaceUrl(String coffeePlaceUrl) {
-        this.coffeePlaceUrl = coffeePlaceUrl;
+    public void setCoffeePlaceBookingUrl(String coffeePlaceBookingUrl) {
+        this.coffeePlaceBookingUrl = coffeePlaceBookingUrl;
     }
 
     public String getDinnerPlace() {
@@ -95,12 +100,12 @@ public class ItineryUpdateServiceModel {
         this.dinnerPlaceAddress = dinnerPlaceAddress;
     }
 
-    public String getDinnerPlaceUrl() {
-        return dinnerPlaceUrl;
+    public String getDinnerPlaceBookingUrl() {
+        return dinnerPlaceBookingUrl;
     }
 
-    public void setDinnerPlaceUrl(String dinnerPlaceUrl) {
-        this.dinnerPlaceUrl = dinnerPlaceUrl;
+    public void setDinnerPlaceBookingUrl(String dinnerPlaceBookingUrl) {
+        this.dinnerPlaceBookingUrl = dinnerPlaceBookingUrl;
     }
 
     public String getHotel() {
@@ -119,27 +124,12 @@ public class ItineryUpdateServiceModel {
         this.hotelAddress = hotelAddress;
     }
 
-    public String getHotelUrl() {
-        return hotelUrl;
+    public String getHotelBookingUrl() {
+        return hotelBookingUrl;
     }
 
-    public void setHotelUrl(String hotelUrl) {
-        this.hotelUrl = hotelUrl;
+    public void setHotelBookingUrl(String hotelBookingUrl) {
+        this.hotelBookingUrl = hotelBookingUrl;
     }
 
-    public String getAttractionName() {
-        return attractionName;
-    }
-
-    public void setAttractionName(String attractionName) {
-        this.attractionName = attractionName;
-    }
-
-    public String getAttractionAddress() {
-        return attractionAddress;
-    }
-
-    public void setAttractionAddress(String attractionAddress) {
-        this.attractionAddress = attractionAddress;
-    }
 }

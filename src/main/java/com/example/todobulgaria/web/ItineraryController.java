@@ -1,14 +1,13 @@
 package com.example.todobulgaria.web;
 
 import com.example.todobulgaria.models.bindings.ItineraryUpdateBindingModel;
-import com.example.todobulgaria.models.service.ItineryUpdateServiceModel;
-import com.example.todobulgaria.models.views.ItinariesDetailsViewModel;
-import com.example.todobulgaria.security.UserService;
+import com.example.todobulgaria.models.service.ItineraryUpdateServiceModel;
+import com.example.todobulgaria.models.views.ItinerariesDetailsViewModel;
+import com.example.todobulgaria.models.views.ItineraryUpdateViewModel;
 import com.example.todobulgaria.services.ItineraryEntityService;
 import com.example.todobulgaria.services.TripEntityService;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,23 +31,23 @@ public class ItineraryController {
         this.modelMapper = modelMapper;
     }
 
-    @PreAuthorize("isOwner(#id)")
-    @GetMapping("/itinerary/{id}/edit")
-    public String getEditItinerary(@PathVariable Long id, Model model) {
+//    @PreAuthorize("isOwner(#id)")
+    @GetMapping("/itinerary/{id}/edit/{tripId}")
+    public String getEditItinerary(@PathVariable Long id,
+                                   @PathVariable Long tripId,
+                                   Model model) {
 
+        ItineraryUpdateServiceModel itineraryModel =
+                itineraryEntityService.findById(id);
 
-        ItinariesDetailsViewModel itinariesDetailsViewModel = itineraryEntityService.findById(id);
+        ItineraryUpdateViewModel itineraryUpdateViewModel =
+                modelMapper.map(itineraryModel, ItineraryUpdateViewModel.class);
+        itineraryUpdateViewModel.setTripId(tripId);
 
-         ItineraryUpdateBindingModel itineraryModel = modelMapper.map(
-                itinariesDetailsViewModel,
-                ItineraryUpdateBindingModel.class
-        );
-
-        model.addAttribute("itineraryModel", itineraryModel);
+        model.addAttribute("itineraryModel", itineraryUpdateViewModel);
 
         return "update";
     }
-
 
     @PatchMapping("/itinerary/{id}/edit")
     public String updateItinerary(
@@ -56,7 +55,6 @@ public class ItineraryController {
             @Valid ItineraryUpdateBindingModel itineraryUpdateBindingModel,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes) {
-
 
         if (bindingResult.hasErrors()) {
 
@@ -66,14 +64,17 @@ public class ItineraryController {
             return "redirect:/itinerary/" + id + "/edit";
         }
 
-        ItineryUpdateServiceModel itineraryUpdateServiceModel = modelMapper.map(itineraryUpdateBindingModel,
-                ItineryUpdateServiceModel.class);
+        ItineraryUpdateServiceModel itineraryUpdateServiceModel = modelMapper.map
+                (itineraryUpdateBindingModel,
+                ItineraryUpdateServiceModel.class);
+
+        itineraryUpdateServiceModel.setTripId
+                (itineraryUpdateBindingModel.getTripId());
 
         itineraryEntityService.updateItinerary(itineraryUpdateServiceModel);
 
-        //TODO fix: redirect to itinerary id instead of trip id
         //TODO fix: #isOwner interseptor config -> denied access for random pages 403 = access forbidden
 
-        return "redirect:/trips/" + id + "/details";
+        return "redirect:/trips/" + itineraryUpdateBindingModel.getTripId() + "/details";
     }
 }

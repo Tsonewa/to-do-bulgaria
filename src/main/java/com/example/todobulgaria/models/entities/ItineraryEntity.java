@@ -28,20 +28,12 @@ public class ItineraryEntity extends BaseEntity implements Serializable {
     private List<AttractionEntity> attractions;
     @ManyToOne(fetch = FetchType.EAGER)
     private TownEntity town;
-//    @Column(name = "breakfast_place", nullable = false)
-//    private String breakfastPlace;
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private BreakfastPlaceEntity breakfastPlace;
-//    @Column(name = "coffee_place", nullable = false)
-//    private String coffeePlace;
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private CoffeePlaceEntity coffeePlaceEntity;
-//    @Column(name = "dinner_place", nullable = false)
-//    private String dinnerPlace;
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private DinnerPlaceEntity dinnerPlaceEntity;
-//    @Column(nullable = false)
-//    private String hotel;
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private HotelEntity hotelEntity;
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -122,35 +114,4 @@ public class ItineraryEntity extends BaseEntity implements Serializable {
         this.town = town;
     }
 
-//    public String getBreakfastPlace() {
-//        return breakfastPlace;
-//    }
-//
-//    public void setBreakfastPlace(String breakfastPlace) {
-//        this.breakfastPlace = breakfastPlace;
-//    }
-
-//    public String getCoffeePlace() {
-//        return coffeePlace;
-//    }
-//
-//    public void setCoffeePlace(String coffeePlace) {
-//        this.coffeePlace = coffeePlace;
-//    }
-
-//    public String getDinnerPlace() {
-//        return dinnerPlace;
-//    }
-//
-//    public void setDinnerPlace(String dinnerPlace) {
-//        this.dinnerPlace = dinnerPlace;
-//    }
-
-//    public String getHotel() {
-//        return hotel;
-//    }
-//
-//    public void setHotel(String hotel) {
-//        this.hotel = hotel;
-//    }
 }

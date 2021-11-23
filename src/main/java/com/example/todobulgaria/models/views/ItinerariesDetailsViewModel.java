@@ -1,6 +1,7 @@
-package com.example.todobulgaria.models.bindings;
+package com.example.todobulgaria.models.views;
 
-public class ItineraryUpdateBindingModel {
+
+public class ItinerariesDetailsViewModel {
 
     private Long id;
     private String breakfastPlace;
@@ -15,18 +16,11 @@ public class ItineraryUpdateBindingModel {
     private String hotel;
     private String hotelAddress;
     private String hotelBookingUrl;
-    private Long tripId;
+    private String townName;
+    private String day;
+    private String attractionName;
 
-
-    public ItineraryUpdateBindingModel() {
-    }
-
-    public Long getTripId() {
-        return tripId;
-    }
-
-    public void setTripId(Long tripId) {
-        this.tripId = tripId;
+    public ItinerariesDetailsViewModel() {
     }
 
     public Long getId() {
@@ -131,5 +125,29 @@ public class ItineraryUpdateBindingModel {
 
     public void setHotelBookingUrl(String hotelBookingUrl) {
         this.hotelBookingUrl = hotelBookingUrl;
+    }
+
+    public String getTownName() {
+        return townName;
+    }
+
+    public void setTownName(String townName) {
+        this.townName = townName;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public String getAttractionName() {
+        return attractionName;
+    }
+
+    public void setAttractionName(String attractionName) {
+        this.attractionName = attractionName;
     }
 }

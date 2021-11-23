@@ -1,6 +1,6 @@
-package com.example.todobulgaria.models.bindings;
+package com.example.todobulgaria.models.service;
 
-public class ItineraryUpdateBindingModel {
+public class ItineraryUpdateServiceModel {
 
     private Long id;
     private String breakfastPlace;
@@ -17,8 +17,7 @@ public class ItineraryUpdateBindingModel {
     private String hotelBookingUrl;
     private Long tripId;
 
-
-    public ItineraryUpdateBindingModel() {
+    public ItineraryUpdateServiceModel() {
     }
 
     public Long getTripId() {
@@ -45,6 +44,31 @@ public class ItineraryUpdateBindingModel {
         this.breakfastPlace = breakfastPlace;
     }
 
+    public String getCoffeePlace() {
+        return coffeePlace;
+    }
+
+    public void setCoffeePlace(String coffeePlace) {
+        this.coffeePlace = coffeePlace;
+    }
+
+
+    public String getDinnerPlace() {
+        return dinnerPlace;
+    }
+
+    public void setDinnerPlace(String dinnerPlace) {
+        this.dinnerPlace = dinnerPlace;
+    }
+
+    public String getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(String hotel) {
+        this.hotel = hotel;
+    }
+
     public String getBreakfastPlaceAddress() {
         return breakfastPlaceAddress;
     }
@@ -59,14 +83,6 @@ public class ItineraryUpdateBindingModel {
 
     public void setBreakfastPlaceBookingUrl(String breakfastPlaceBookingUrl) {
         this.breakfastPlaceBookingUrl = breakfastPlaceBookingUrl;
-    }
-
-    public String getCoffeePlace() {
-        return coffeePlace;
-    }
-
-    public void setCoffeePlace(String coffeePlace) {
-        this.coffeePlace = coffeePlace;
     }
 
     public String getCoffeePlaceAddress() {
@@ -85,14 +101,6 @@ public class ItineraryUpdateBindingModel {
         this.coffeePlaceBookingUrl = coffeePlaceBookingUrl;
     }
 
-    public String getDinnerPlace() {
-        return dinnerPlace;
-    }
-
-    public void setDinnerPlace(String dinnerPlace) {
-        this.dinnerPlace = dinnerPlace;
-    }
-
     public String getDinnerPlaceAddress() {
         return dinnerPlaceAddress;
     }
@@ -107,14 +115,6 @@ public class ItineraryUpdateBindingModel {
 
     public void setDinnerPlaceBookingUrl(String dinnerPlaceBookingUrl) {
         this.dinnerPlaceBookingUrl = dinnerPlaceBookingUrl;
-    }
-
-    public String getHotel() {
-        return hotel;
-    }
-
-    public void setHotel(String hotel) {
-        this.hotel = hotel;
     }
 
     public String getHotelAddress() {

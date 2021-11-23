@@ -1,9 +1,10 @@
 package com.example.todobulgaria.services.impl;
 
+import com.example.todobulgaria.exceptions.ObjectNotFoundException;
 import com.example.todobulgaria.models.dto.ItineraryDto;
 import com.example.todobulgaria.models.entities.*;
-import com.example.todobulgaria.models.service.ItineryUpdateServiceModel;
-import com.example.todobulgaria.models.views.ItinariesDetailsViewModel;
+import com.example.todobulgaria.models.service.ItineraryUpdateServiceModel;
+import com.example.todobulgaria.models.views.ItinerariesDetailsViewModel;
 import com.example.todobulgaria.repositories.ItineraryRepository;
 import com.example.todobulgaria.services.*;
 import org.modelmapper.ModelMapper;
@@ -40,42 +41,48 @@ public class ItineraryEntityServiceImpl implements ItineraryEntityService {
     }
 
     @Override
-    public List<ItineraryDto> getAllItinerariesByTripId(Long trip_id) {
+    public ItineraryUpdateServiceModel findById(Long id) {
 
-        List<ItineraryEntity> allByTripId = itineraryRepository.findAllByTripId(trip_id);
+        ItineraryEntity itineraryEntity = itineraryRepository
+                .findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException(id));
 
-        return allByTripId.stream().map(i -> modelMapper.map(i, ItineraryDto.class)).collect(Collectors.toList());
+        ItinerariesDetailsViewModel itinerariesDetailsViewModel =
+                asItineraryDetailView(itineraryEntity);
+
+        return modelMapper.map(itinerariesDetailsViewModel
+                , ItineraryUpdateServiceModel.class);
     }
 
-    @Override
-    public ItinariesDetailsViewModel findById(Long id) {
+    private ItinerariesDetailsViewModel asItineraryDetailView(ItineraryEntity itineraryEntity) {
 
-        ItineraryEntity itineraryEntity = itineraryRepository.findById(id).orElse(null);
+        ItinerariesDetailsViewModel map = modelMapper
+                .map(itineraryEntity, ItinerariesDetailsViewModel.class);
 
-        ItinariesDetailsViewModel map = modelMapper.map(itineraryEntity, ItinariesDetailsViewModel.class);
-map.setAttractionName(itineraryEntity.getAttractions().get(0).getName());
-map.setHotel(itineraryEntity.getHotelEntity().getName());
-map.setDinnerPlace(itineraryEntity.getDinnerPlaceEntity().getName());
-map.setCoffeePlace(itineraryEntity.getCoffeePlaceEntity().getName());
-map.setBreakfastPlace(itineraryEntity.getBreakfastPlace().getName());
+        map.setAttractionName(itineraryEntity.getAttractions().get(0).getName());
+        map.setHotel(itineraryEntity.getHotelEntity().getName());
+        map.setDinnerPlace(itineraryEntity.getDinnerPlaceEntity().getName());
+        map.setCoffeePlace(itineraryEntity.getCoffeePlaceEntity().getName());
+        map.setBreakfastPlace(itineraryEntity.getBreakfastPlace().getName());
 
         return map;
     }
 
     @Override
-    public void updateItinerary(ItineryUpdateServiceModel itineraryUpdateServiceModel) {
+    public void updateItinerary(ItineraryUpdateServiceModel itineraryUpdateServiceModel) {
 
-        ItineraryEntity byId = itineraryRepository.findById(itineraryUpdateServiceModel.getId()).orElseThrow();
+        ItineraryEntity byId = itineraryRepository.findById
+                (itineraryUpdateServiceModel.getId()).orElseThrow();
 
         BreakfastPlaceEntity breakfastPlace = byId.getBreakfastPlace();
-                breakfastPlace.setAddress(itineraryUpdateServiceModel
-                        .getBrekfastPlaceAddress());
+        breakfastPlace.setAddress(itineraryUpdateServiceModel
+                .getBreakfastPlaceAddress());
 
         breakfastPlace.setBookingUrl(itineraryUpdateServiceModel
-                        .getBreakfastPlaceUrl());
+                .getBreakfastPlaceBookingUrl());
 
         breakfastPlace
-               .setName(itineraryUpdateServiceModel
+                .setName(itineraryUpdateServiceModel
                         .getBreakfastPlace());
 
         breakfastPlaceEntityService.saveBreakfastPlace(breakfastPlace);
@@ -83,56 +90,42 @@ map.setBreakfastPlace(itineraryEntity.getBreakfastPlace().getName());
         CoffeePlaceEntity coffeePlaceEntity = byId.getCoffeePlaceEntity();
 
         coffeePlaceEntity.setAddress(itineraryUpdateServiceModel.
-                getAttractionAddress());
+                getDinnerPlaceAddress());
 
         coffeePlaceEntity.setBookingUrl(itineraryUpdateServiceModel
-                        .getCoffeePlaceUrl());
+                .getCoffeePlaceBookingUrl());
 
         coffeePlaceEntity.setName(itineraryUpdateServiceModel
-                        .getCoffeePlace());
+                .getCoffeePlace());
 
         coffeePlaceEntityService.saveCoffeePlace(coffeePlaceEntity);
 
         DinnerPlaceEntity dinnerPlaceEntity = byId.getDinnerPlaceEntity();
 
         dinnerPlaceEntity.setAddress(itineraryUpdateServiceModel
-                        .getDinnerPlaceAddress());
+                .getDinnerPlaceAddress());
 
         dinnerPlaceEntity.setBookingUrl(itineraryUpdateServiceModel
-                        .getDinnerPlaceUrl());
+                .getDinnerPlaceBookingUrl());
 
         dinnerPlaceEntity.setName(itineraryUpdateServiceModel
-                        .getDinnerPlace());
+                .getDinnerPlace());
 
         dinnerPlaceEntityService.saveDinnerPlace(dinnerPlaceEntity);
 
         HotelEntity hotelEntity = byId.getHotelEntity();
 
         hotelEntity.setAddress(itineraryUpdateServiceModel
-                        .getHotelAddress());
+                .getHotelAddress());
 
-             hotelEntity.setBookingUrl(itineraryUpdateServiceModel
-                        .getHotelUrl());
+        hotelEntity.setBookingUrl(itineraryUpdateServiceModel
+                .getHotelBookingUrl());
 
-             hotelEntity.setName(itineraryUpdateServiceModel
-                        .getHotel());
+        hotelEntity.setName(itineraryUpdateServiceModel
+                .getHotel());
 
-             hotelEntityService.saveHotel(hotelEntity);
+        hotelEntityService.saveHotel(hotelEntity);
 
         itineraryRepository.save(byId);
-    }
-
-    @Override
-    public ItinariesDetailsViewModel findByTripIdAndDay(Long id, Integer day) {
-        ItineraryEntity byTripIdAndDay = itineraryRepository.findByTripIdAndDay(id, day);
-
-        ItinariesDetailsViewModel map = modelMapper.map(byTripIdAndDay, ItinariesDetailsViewModel.class);
-
-        map.setAttractionName(byTripIdAndDay.getAttractions().get(0).getName());
-        map.setHotel(byTripIdAndDay.getHotelEntity().getName());
-        map.setDinnerPlace(byTripIdAndDay.getDinnerPlaceEntity().getName());
-        map.setCoffeePlace(byTripIdAndDay.getCoffeePlaceEntity().getName());
-        map.setBreakfastPlace(byTripIdAndDay.getBreakfastPlace().getName());
-        return map;
     }
 }
