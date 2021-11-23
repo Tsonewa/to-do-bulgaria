@@ -81,25 +81,25 @@
                             <a class="update-span" th:href="*{coffeePlaceBookingUrl}" >Book here</a>
                         </div>
                         <div class="bullet">
-                            <img src="/images/grean-dot.png">
+                            <img src="/images/collor-dots/green.png">
                             <h5 th:text="*{breakfastPlace}">Coffe Place</h5>
                             <span class="update-span" th:text="*{breakfastPlaceAddress}">Add address</span>
                             <a class="update-span" th:href="*{breakfastPlaceBookingUrl}" >Book here</a>
                         </div>
                         <div class="bullet">
-                            <img src="/images/grean-dot.png">
+                            <img src="/images/collor-dots/orange.png">
                             <h5 th:text="*{dinnerPlace}">Coffe Place</h5>
                             <span class="update-span" th:text="*{dinnerPlaceAddress}">Add address</span>
                             <a class="update-span" th:href="*{dinnerPlaceBookingUrl}" >Book here</a>
                         </div>
                         <div class="bullet">
-                            <img src="/images/grean-dot.png">
+                            <img src="/images/collor-dots/purple.png">
                             <h5 th:text="*{hotel}">Coffe Place</h5>
                             <span class="update-span" th:text="*{hotelAddress}">Add address</span>
                             <a class="update-span" th:href="*{hotelBookingUrl}" >Book here</a>
                         </div>
                         <div class="bullet">
-                            <img src="/images/grean-dot.png">
+                            <img src="/images/collor-dots/blue.png">
                             <h5 th:text="*{attractionName}">Coffee Place</h5>
                         </div>
                         <button class="btn" sec:authorize="isAuthenticated()"> <a class="uprate-a" th:href="@{'/itinerary/' + *{id} + '/edit/' + ${trip.id}}" th:method="GET">Add address/Add booking</a></button>
