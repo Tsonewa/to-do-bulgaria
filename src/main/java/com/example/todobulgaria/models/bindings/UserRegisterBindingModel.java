@@ -2,10 +2,15 @@ package com.example.todobulgaria.models.bindings;
 
 import com.example.todobulgaria.annotations.PasswordMatches;
 import com.example.todobulgaria.annotations.ValidEmail;
+import com.example.todobulgaria.annotations.ValidUrl;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.File;
+import java.net.URI;
 
 @PasswordMatches
 public class UserRegisterBindingModel {
@@ -25,6 +30,7 @@ public class UserRegisterBindingModel {
     private String password;
     @NotBlank
     private String confirmPassword;
+    @ValidUrl
     private MultipartFile profilePictureUrl;
 
     public UserRegisterBindingModel() {

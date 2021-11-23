@@ -35,10 +35,10 @@
     </div>
 
             <div class="table-wrapper">
+<th:block th:if="${userTrips.size() > 0}">
                 <span>Моите маршрути</span>
-<th:block th:if="${userTrips != null}">
-
 <div class="trips-table-wrapper">
+
     <table th:action="@{/profile/my-trips}" th:method="get" th:object="${userTrips}">
         <tr>
             <th>Екскурзия</th>
@@ -54,7 +54,10 @@
         </tr>
     </table>
 </div>
+</th:block>
+    <th:block th:if="${userFavouriteTrips.size() > 0}">
     <span>Любими маршрути</span>
+
     <div class="trips-table-wrapper">
     <table id="favourite-trips"  th:object="${userFavouriteTrips}">
         <tr>
@@ -70,8 +73,8 @@
             <td  sec:authorize="isAuthenticated()"><a th:href="@{/trips/{id}/details(id=*{id})}"> <button class="wide-btn" type="button">Детайли</button></a></td>
         </tr>
     </table>
+        </th:block>
     </div>
-</th:block>
 </div>
             </div>
         </div>

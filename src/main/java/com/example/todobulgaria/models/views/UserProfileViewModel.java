@@ -6,7 +6,6 @@ public class UserProfileViewModel {
     private String lastName;
     private String profilePictureUrl;
 
-
     public UserProfileViewModel() {
     }
 

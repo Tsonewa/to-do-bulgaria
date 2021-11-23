@@ -39,7 +39,7 @@
 .table-wrapper > span{
     color: white;
     align-self: flex-start;
-    margin: 20px 0px 9px 100px;
+    margin: 20px 0px 9px 30px;
 }
 
 .sign-icon{
@@ -53,7 +53,6 @@
 }
 
 table{
-    height: 290px;
     overflow: scroll;
     width: 105%;
 }
@@ -117,8 +116,9 @@ table{
     color: gray;
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 69%;
     align-items: center;
+    padding: 20px;
 }
 
 .trips-table-wrapper{
@@ -127,6 +127,8 @@ table{
     padding: 20px;
     text-align: justify;
     max-height: 200px;
+    min-height: 200px;
+    min-width: 95%;
     overflow: scroll;
     overflow-x: hidden;
 }
