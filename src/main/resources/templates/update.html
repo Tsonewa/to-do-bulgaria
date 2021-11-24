@@ -34,11 +34,15 @@
             <p th:if="${#fields.hasErrors('coffeePlace')}" th:errors="*{coffeePlace}" class="error"></p>
             <label>Hotel</label>
             <input th:field="*{hotel}" type="text" name="hotel" placeholder="Grand Hotel Sofia"/>
+            <p th:if="${#fields.hasErrors('hotel')}" th:errors="*{coffeePlace}" class="error"></p>
             <label>Add address</label>
             <input th:field="*{hotelAddress}" type="text" name="hotelAddress" placeholder="бул.Цариградско шосе, 15 1000,София"/>
+            <p th:if="${#fields.hasErrors('hotelAddress')}" th:errors="*{hotelAddress}" class="error"></p>
             <label>Add Booking URL</label>
-            <input th:field="*{hotelBookingUrl}" type="text" name="hotelUrl" placeholder="https://www.booking.com" />
-            <p th:if="${#fields.hasErrors('hotel')}" th:errors="*{hotel}" class="error"></p>
+            <input id="hotelBookingUrl" th:field="*{hotelBookingUrl}" th:errorclass="is-invalid" type="text" name="hotelBookingUrl" placeholder="https://www.booking.com" />
+            <p class="invalid-feedback error errors alert alert-danger">
+                Address must be with length min 10 symbols.
+            </p>
             <label>Dinner</label>
             <input th:field="*{dinnerPlace}" type="text" name="dinnerPlace" placeholder="Blue House" />
             <label>Add address</label>

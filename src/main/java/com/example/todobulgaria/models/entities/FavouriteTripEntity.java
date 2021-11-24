@@ -2,6 +2,7 @@ package com.example.todobulgaria.models.entities;
 
 import com.example.todobulgaria.models.BaseEntity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -13,7 +14,7 @@ import java.util.Set;
 @Table(name = "favourites")
 public class FavouriteTripEntity extends BaseEntity {
 
-    @ManyToMany(mappedBy = "favouriteTrips")
+    @ManyToMany
     private Set<UserEntity> userFavourites = new HashSet<>();
 
     public FavouriteTripEntity() {

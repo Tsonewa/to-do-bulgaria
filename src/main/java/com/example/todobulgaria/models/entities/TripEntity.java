@@ -20,7 +20,7 @@ public class TripEntity extends BaseEntity implements Serializable {
     private PictureEntity picture;
     @ManyToOne
     private UserEntity user;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private CategoryEntity categoryEntity;
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "trip", targetEntity = ItineraryEntity.class, cascade = CascadeType.ALL)
