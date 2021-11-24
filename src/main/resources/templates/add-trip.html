@@ -17,63 +17,63 @@
     <div>
     <form th:action="@{/trips/add}" th:method="post" enctype="multipart/form-data" th:object="${addTripBindingModel}" id="msform">
       <fieldset id="input1-wrapper">
-          <h2 class="fs-title">Create your trip</h2>
-          <label>Region</label>
+          <h2 class="fs-title">Създай маршрут</h2>
+          <label>Област</label>
           <input th:field="*{region}" type="text" name="region" placeholder="South Coast" />
           <p th:if="${#fields.hasErrors('region')}" th:errors="*{region}" class="error"></p>
-          <label>Type</label>
+          <label>Тип</label>
           <select th:field="*{categoryName}" name="categoryName" placeholder="Seaside" >
               <option value="">Select trip type</option>
               <option th:each="t : ${T(com.example.todobulgaria.models.enums.CategoryEnum).values()}"
                       th:text="${t}" th:value="${t}" th:selected="${t} == *{categoryName}">Mountain</option>
           </select>
-          <label>Pictures</label>
+          <label>Снимка</label>
           <input name="url" type="file">
           <p th:if="${#fields.hasErrors('url')}" th:errors="*{url}" class="error"></p>
-          <label>Description</label>
+          <label>Описание</label>
           <textarea th:field="*{description}" name="description" placeholder="Description"></textarea>
-          <button type="button" name="next" class="btn nextBtn" onclick="secondFieldset()" value="Next">Next</button>
+          <button type="button" name="next" class="btn nextBtn" onclick="secondFieldset()" value="Next">Напред</button>
         </fieldset>
         <div id="itinerary-div">
             <fieldset id="input2-wrapper" hidden>
-          <h2 class="fs-title">Day 1</h2>
+          <h2 class="fs-title">Ден 1</h2>
            <div class="input-div">
-          <label>Town</label>
+          <label>Град</label>
           <input th:field="*{townName}" type="text" name="townName" placeholder="Sofia" />
                <p th:if="${#fields.hasErrors('townName')}" th:errors="*{townName}" class="error"></p>
                <label>Breakfast</label>
          <input th:field="*{breakfastPlace}" type="text" name="breakfastPlace" placeholder="Mekitsa&Coffee" />
                <p th:if="${#fields.hasErrors('breakfastPlace')}" th:errors="*{breakfastPlace}" class="error"></p>
-               <label>Coffee</label>
+               <label>Кафе</label>
           <input th:field="*{coffeePlace}" type="text" name="coffeePlace" placeholder="CoffeeBar" />
                <p th:if="${#fields.hasErrors('coffeePlace')}" th:errors="*{coffeePlace}" class="error"></p>
-               <label>Hotel</label>
+               <label>Хотел</label>
           <input th:field="*{hotel}" type="text" name="hotel" placeholder="Grand Hotel Sofia" />
                <p th:if="${#fields.hasErrors('hotel')}" th:errors="*{hotel}" class="error"></p>
-               <label>Dinner</label>
+               <label>Вечеря</label>
           <input th:field="*{dinnerPlace}" type="text" name="dinnerPlace" placeholder="Blue House" />
                <p th:if="${#fields.hasErrors('dinnerPlace')}" th:errors="*{dinnerPlace}" class="error"></p>
-               <label>Attractions</label>
+               <label>Атракция</label>
           <input th:field="*{attractionsName}" type="text" name="attractionsName" placeholder="National Palace of Culture"/>
                <p th:if="${#fields.hasErrors('attractionsName')}" th:errors="*{attractionsName}" class="error"></p>
            </div>
 <!--                <button type="button" name="add-attraction" class="add-attraction-btn" value="Add attraction" onclick="addAttraction()">Add attraction</button>-->
-                <button type="button" name="add-day" class="btn" value="add-day" onclick="addDay()">Add day</button>
-                <button type="button" name="previous" class="btn" value="Previous" onclick="home()">Previous</button>
-                <button type="button" name="previous" class="btn" value="Next" onclick="lastFildset()">Next</button>
+                <button type="button" name="add-day" class="btn" value="add-day" onclick="addDay()">Добави ден</button>
+                <button type="button" name="previous" class="btn" value="Previous" onclick="home()">Назад</button>
+                <button type="button" name="previous" class="btn" value="Next" onclick="lastFildset()">Напред</button>
             </fieldset>
         </div>
         <fieldset id="input3-wrapper" hidden>
-            <h2 class="fs-title">Details</h2>
-            <label>Equipment</label>
+            <h2 class="fs-title">Детайли</h2>
+            <label>Екипировка</label>
             <textarea name="equipment" placeholder="Equipment"></textarea>
-            <label>Festivals information</label>
+            <label>Местни културни мероприятия</label>
             <textarea name="festivals" placeholder="Rose Festival"></textarea>
-            <label>Foto tips</label>
+            <label>Фото спирки</label>
             <textarea name="fotoTip" placeholder="Fotographer tip"></textarea>
 
-            <button type="button" name="previous" class="btn" value="Previous" onclick="secondFieldset()">Previous</button>
-            <button type="submit" name="previous" class="btn" value="Submit">Submit</button>
+            <button type="button" name="previous" class="btn" value="Previous" onclick="secondFieldset()">Назад</button>
+            <button type="submit" name="previous" class="btn" value="Submit">Създай маршрут</button>
         </fieldset>
     </form>
     <script th:src="@{/js/multistep-form.js}"></script>
