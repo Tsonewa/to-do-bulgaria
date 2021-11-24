@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional
 public class UserEntityServiceImpl implements UserEntityService {
 
     private final UserRepository userRepository;

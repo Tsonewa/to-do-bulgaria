@@ -28,14 +28,14 @@ public class UserEntity extends BaseEntity implements Serializable {
     private String password;
     @OneToOne
     private PictureEntity profilePictureUrl;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private List<RoleEntity> roles;
     @Column
     private boolean status; //blocked or active
     @OneToMany(mappedBy = "user", targetEntity = TripEntity.class)
     private List<TripEntity> trips;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.PERSIST})
     @JoinTable(name="user_favourite",
             joinColumns={@JoinColumn(name="userId")},
             inverseJoinColumns={@JoinColumn(name="favouriteId")})

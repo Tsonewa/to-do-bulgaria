@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -55,13 +56,16 @@ public class ProfileController {
         return userEntity;
     }
 
+    @Transactional
     @GetMapping("/my-trips")
     public String myTrips(Model model){
 
         Optional<UserEntity> userEntity = getCurrentUser();
         getUserProfile(model);
 
-        List<TripCategoryTownDurationViewModel> userTrips = tripEntityService.findAllByUserId(userEntity.get().getId());
+        List<TripCategoryTownDurationViewModel> userTrips =
+                tripEntityService.findAllByUserId(userEntity.get()
+                        .getId());
 
         model.addAttribute("userTrips", userTrips);
 

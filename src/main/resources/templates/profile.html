@@ -50,7 +50,7 @@
             <td><span th:text="*{townName}">Белоградчик</span>, България</td>
             <td><i class="far fa-clock"></i> <span th:text="*{duration}">3</span> дни</td>
             <td><img class="sign-icon" src="/images/Group%20560.png"><span th:text="*{categoryName.toLowerCase()}">Seaside</span></td>
-            <td class="btn-td" sec:authorize="isAuthenticated()"> <form th:action="@{/trips/{id}/delete(id=*{id})}" th:method="delete"><button class="new-trips-btn">Изтрий</button></form><a th:href="@{/trips/{id}/details(id=*{id})}"> <button class="btn" type="button">Детайли</button></a></td>
+            <td class="btn-td" sec:authorize="isAuthenticated()"> <form th:action="@{'/trips/' + *{id} + '/delete'}" th:method="delete"><button class="new-trips-btn">Изтрий</button></form><a th:href="@{/trips/{id}/details(id=*{id})}"> <button class="btn" type="button">Детайли</button></a></td>
         </tr>
     </table>
 </div>
@@ -73,8 +73,9 @@
             <td  sec:authorize="isAuthenticated()"><a th:href="@{/trips/{id}/details(id=*{id})}"> <button class="wide-btn" type="button">Детайли</button></a></td>
         </tr>
     </table>
+</div>
         </th:block>
-    </div>
+    </div>>
 </div>
             </div>
         </div>
