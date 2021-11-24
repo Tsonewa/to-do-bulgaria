@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -131,6 +132,7 @@ public class TripController {
         return "all-trips";
     }
 
+    @Transactional
     @RequestMapping("/trips/all")
     public String pagableBestTripsPage(Model model) {
         return showAlTrips(1, model);
@@ -235,8 +237,7 @@ public class TripController {
 
     @PreAuthorize("isOwner(#id)")
     @DeleteMapping("/{id}/delete")
-    public String deleteTrip(@PathVariable Long id,
-                              Principal principal) {
+    public String deleteTrip(@PathVariable Long id) {
 
         tripEntityService.deleteTrip(id);
 

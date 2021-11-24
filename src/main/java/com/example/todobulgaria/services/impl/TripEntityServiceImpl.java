@@ -14,12 +14,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -291,8 +293,10 @@ public class TripEntityServiceImpl implements TripEntityService {
         return collect;
     }
 
+    @PreAuthorize("isOwner(#id)")
     @Override
     public void deleteTrip(Long id) {
+
         tripRepository.deleteById(id);
     }
 
@@ -309,8 +313,9 @@ public class TripEntityServiceImpl implements TripEntityService {
 
     @Override
     public TripEntity findEntityById(Long id) {
-        //TODO handle the exeption
-        return tripRepository.findById(id).orElse(null);
+
+        return tripRepository.findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException(id));
 
     }
 
