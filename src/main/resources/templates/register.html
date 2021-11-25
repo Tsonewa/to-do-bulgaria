@@ -17,35 +17,35 @@
             <img class="login-img" src="/images/register-pic.jpg">
         </div>
         <form th:action="@{/users/register}" th:method="post" th:object="${userRegisterBindingModel}" class="form-container" enctype="multipart/form-data">
-            <h1 class="login-h1">Register</h1>
-            <label for="username"><b>Username</b></label>
+            <h1 class="login-h1" th:text="#{signIn}">Register</h1>
+            <label for="username" ><b th:text="#{username}">Username</b></label>
             <input id="username" type="text" placeholder="Enter username" th:field="*{username}" required>
             <p th:each="error: ${#fields.errors('username')}"
                th:text="${error}" th:class="error">Validation error</p>
-            <label for="firstName"><b>First name</b></label>
+            <label for="firstName" ><b th:text="#{firstName}">First name</b></label>
             <input id="firstName" type="text" placeholder="Enter first name" th:field="*{firstName}" required>
             <p th:each="error: ${#fields.errors('firstName')}"
                th:text="${error}" th:class="error">Validation error</p>
-            <label for="lastName"><b>Last name</b></label>
+            <label for="lastName" ><b th:text="#{lastName}">Last name</b></label>
             <input  id="lastName" type="text" placeholder="Enter last name" th:field="*{lastName}" required>
             <p th:each="error : ${#fields.errors('lastName')}"
                th:text="${error}" th:class="error">Validation error</p>
-            <label for="email"><b>Email</b></label>
+            <label for="email" ><b th:text="#{email}">Email</b></label>
             <input  id="email" type="text" placeholder="Enter last name" th:field="*{email}" required>
             <p th:each="error : ${#fields.errors('email')}"
                th:text="${error}" th:class="error">Validation error</p>
-            <label><b>Profile picture</b></label>
+            <label ><b th:text="#{profilePicture}">Profile picture</b></label>
             <input id="profilePictureUrl" name="profilePictureUrl" type="file" th:field="*{profilePictureUrl}">
             <p th:each="error: ${#fields.errors('profilePictureUrl')}"
                th:text="${error}" th:class="error">Validation error</p>
-            <label  for="password"><b>Password</b></label>
+            <label for="password" ><b th:text="#{password}">Password</b></label>
             <input id="password" type="password" placeholder="Enter Password" th:field="*{password}" required>
             <p th:each="error : ${#fields.errors('password')}"
                th:text="${error}" th:class="error">Validation error</p>
-            <label for="confirmPassword"><b>Confirm password</b></label>
+            <label for="confirmPassword" ><b th:text="#{confirmPassword}">Confirm password</b></label>
             <input class="register-icon" id="confirmPassword" type="password" placeholder="Enter confirm password" th:field="*{confirmPassword}" required>
             <h7 class="sign-in-href">Already have an account?<a class="sign-in" th:href="@{/users/login}">Login</a></h7>
-            <button type="submit" class="btn wide-btn">Register</button>
+            <button type="submit" class="btn wide-btn" th:text="#{signIn}">Register</button>
         </form>
     </div>
 </main>

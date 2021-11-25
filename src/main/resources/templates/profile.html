@@ -22,11 +22,11 @@
        </div>
             <h2><span th:text="*{firstName}">Pesho</span><span th:text="*{lastName}"></span></h2>
         <div class="user-nav-wrapper">
-            <button sec:authorize="isAuthenticated()" class="profile-a new-trips-btn" th:href="@{/profile/new}"><i class="far fa-address-card"></i>Моята профил</button>
-            <a sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')" class="profile-a" th:href="@{/admin}"><i class="fas fa-id-card"></i>Статистика</a>
-            <a sec:authorize="isAuthenticated()" class="profile-a"><i class="fas fa-cog"></i>Настройки</a>
+            <button sec:authorize="isAuthenticated()" class="profile-a new-trips-btn" th:href="@{/profile/new}"><i class="far fa-address-card" th:text="#{profile}"></i>Моята профил</button>
+            <a sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')" class="profile-a" th:href="@{/admin}"><i class="fas fa-id-card" th:text="#{stats}"></i>Статистика</a>
+            <a sec:authorize="isAuthenticated()" class="profile-a"><i class="fas fa-cog" th:text="#{settings}"></i>Настройки</a>
             <form class="log-out-div" th:action="@{/users/logout}" th:method="post">
-                <button class="profile-a exit-btn"><i class="fas fa-sign-out-alt"></i>Exit</button>
+                <button class="profile-a exit-btn"><i class="fas fa-sign-out-alt" th:text="#{logout}"></i>Exit</button>
             </form>
         </div>
         </div>
