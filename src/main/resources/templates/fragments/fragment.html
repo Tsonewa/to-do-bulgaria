@@ -9,22 +9,21 @@
     <nav>
         <ul class="ul-nav">
             <li>
-              <a sec:authorize="!isAuthenticated()" th:href="@{'/'}">Home</a>
-              <a sec:authorize="isAuthenticated()" th:href="@{'/home'}">Home</a>
+              <a sec:authorize="!isAuthenticated()" th:href="@{'/'}"  th:text="#{home}">Home</a>
+              <a sec:authorize="isAuthenticated()" th:href="@{'/home'}"  th:text="#{home}">Home</a>
             </li>
             <li>
-                <a th:href="@{/about-us}">About us</a>
+                <a th:href="@{/about-us}"  th:text="#{aboutUs}">About us</a>
             </li>
             <li>
-                <a th:href="@{/trips/best}">Popular trips</a>
+                <a th:href="@{/trips/best}"  th:text="#{bestTrips}">Popular trips</a>
             </li>
         </ul>
         <div sec:authorize="!isAuthenticated()">
-            <a th:href="@{/users/login}"><button class="login-btn btn">Log in</button></a>
+            <a th:href="@{/users/login}"><button class="login-btn btn" th:text="#{login}">Log in</button></a>
         </div>
         <div class="dropdown-wrapper">
             <div sec:authorize="isAuthenticated()" class="dropdown">
-                <a sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')" href="javascript:void(0)" class="fav-btn"><i class="far fa-bell"></i></a>
                 <a th:action="@{/profile/my-trips}" class="fav-btn"><i class="far fa-heart"></i></a>
                 <div class="dropdown-div">
                     <img class="profile-img" src="/images/flag-round-250.png">
@@ -33,15 +32,15 @@
                        sec:authentication="name">Pesho</span>
                 <div class="dropdown-content">
                     <p>
-                        <a th:href="@{/trips/add}"> <button class="btn create-btn">Add trip</button></a>
+                        <a th:href="@{/trips/add}"> <button class="btn create-btn"  th:text="#{add}">Add trip</button></a>
                     </p>
                     <hr>
-                    <a class="dropdown-a" th:href="@{/profile/my-trips}"><i class="fas fa-id-card" ></i> Профил</a>
-                    <a sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')" class="dropdown-a" th:href="@{/admin}"><i class="fas fa-chart-line"></i></i>  Статистика</a>
-                    <a class="dropdown-a"><i class="fas fa-cog"></i> Настройки</a>
+                    <a class="dropdown-a" th:href="@{/profile/my-trips}"><i class="fas fa-id-card"  th:text="#{profile}"></i> Профил</a>
+                    <a sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')" class="dropdown-a" th:href="@{/admin}"  th:text="#{stats}"><i class="fas fa-chart-line"></i></i>  Статистика</a>
+                    <a class="dropdown-a"><i class="fas fa-cog"  th:text="#{settings}"></i> Настройки</a>
                     <hr>
                     <form class="log-out-div" th:action="@{/users/logout}" th:method="post">
-                    <button class="dropdown-a exit-btn"><i class="fas fa-sign-out-alt"></i> Изход</button>
+                    <button class="dropdown-a exit-btn"><i class="fas fa-sign-out-alt"  th:text="#{logout}"></i> Изход</button>
                     </form>
                 </div>
             </div>
@@ -51,8 +50,8 @@
 
 <footer th:fragment="footer">
    <ul class="footer-ul">
-       <li>&COPY; -All rights reserved <a th:href="@{'/'}">To-Do-Bulgaria &reg;</a></li>
-       <li>FAQ</li>
+       <li  th:text="#{copyRights}">&COPY; -All rights reserved <a th:href="@{'/'}">To-Do-Bulgaria &reg;</a></li>
+       <li th:text="#{faq}">FAQ</li>
        <li th:text="#{contact}">Contact us</li>
        <li>
            <form th:method="get">
@@ -68,6 +67,4 @@
        </li>
    </ul>
 </footer>
-
-
 </html>

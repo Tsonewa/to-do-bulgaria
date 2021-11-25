@@ -419,6 +419,7 @@ hr {
     flex-direction: row;
     color: gray;
     place-content: center;
+    padding-top: 20px;
 }
 
 .footer-ul > li{
