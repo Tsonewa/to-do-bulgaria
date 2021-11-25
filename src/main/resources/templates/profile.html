@@ -23,7 +23,7 @@
             <h2><span th:text="*{firstName}">Pesho</span><span th:text="*{lastName}"></span></h2>
         <div class="user-nav-wrapper">
             <button sec:authorize="isAuthenticated()" class="profile-a new-trips-btn" th:href="@{/profile/new}"><i class="far fa-address-card"></i>Моята профил</button>
-<!--            <a sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')" class="profile-a" th:href="@{/profile}"><i class="fas fa-id-card"></i>Профил</a>-->
+            <a sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')" class="profile-a" th:href="@{/admin}"><i class="fas fa-id-card"></i>Статистика</a>
 <!--            <a sec:authorize="isAuthenticated()" class="profile-a"  th:href="@{/profile/favourite}" onclick="showFavouriteTrips()"><i class="fab fa-font-awesome-flag" ></i> Любими маршрути</a>-->
 <!--            <a sec:authorize="isAuthenticated()" class="profile-a" th:href="@{/profile/my-trips}" onclick="hideFavouriteTrips()"><i class="fab fa-font-awesome-flag"></i> Моите маршрути</a>-->
             <a sec:authorize="isAuthenticated()" class="profile-a"><i class="fas fa-cog"></i>Настройки</a>

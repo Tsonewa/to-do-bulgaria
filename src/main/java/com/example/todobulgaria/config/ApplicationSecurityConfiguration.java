@@ -1,5 +1,6 @@
 package com.example.todobulgaria.config;
 
+import com.example.todobulgaria.models.enums.RoleEnum;
 import com.example.todobulgaria.security.UserDetailsImpl;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -41,7 +42,8 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
 http.
         authorizeRequests().
                         requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
-                        antMatchers("/", "/users/login", "/users/register", "/about-us", "/trips/best", "/actuator/**", "/admin").permitAll().
+                        antMatchers("/", "/users/login", "/users/register", "/about-us", "/trips/best").permitAll().
+                        antMatchers("/admin", "/actuator/**").hasRole(RoleEnum.ADMIN.name()).
                         antMatchers("/**").authenticated().
                 and().
                         formLogin().
