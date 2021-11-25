@@ -20,7 +20,7 @@
     <div class="container" id="container-cards">
         </div>
 
-    <h1>HTTP Traces</h1>
+    <h1 class="title-table">HTTP Traces</h1>
     <div class="container-table">
                 <table class="table">
                     <thead>
@@ -30,18 +30,9 @@
                         <th>Time Taken(ms)</th>
                         <th>Status</th>
                         <th>URL</th>
-                        <th>View</th>
                     </tr>
                     </thead>
-                    <tbody id="myTable">
-                    <tr>
-                        <td>{{trace?.timestamp}</td>
-                        <td>{{trace?.request.method}}</td>
-                        <td>{{trace?.timeTaken}}</td>
-                        <td >{{trace?.response.status}}</td>
-                        <td>{{trace?.request.uri}}</td>
-                        <td><button class="btn btn-link"><i class="far fa-eye"></i></button></td>
-                    </tr>
+                    <tbody id="traces-table">
                     </tbody>
                 </table>
             </div>

@@ -154,6 +154,7 @@ fetch("http://localhost:8080/actuator/metrics/system.cpu.count")
 
 
 const containerCards = document.getElementById('container-cards');
+const containerTableRows = document.getElementById('traces-table');
 
 let httpTracesStatus200 = [];
 let httpTracesStatus400 = [];
@@ -168,12 +169,35 @@ fetch("http://localhost:8080/actuator/httptrace")
         let arrayTraces = data[traceKey];
         for (const trace of arrayTraces) {
             processTraces(trace);
+            visualizeTraceRow(trace);
         }
         displayTraces200(httpTracesStatus200);
         displayTraces400(httpTracesStatus400);
         displayTraces404(httpTracesStatus404);
         displayTraces500(httpTracesStatus500);
     });
+
+function visualizeTraceRow(trace){
+
+    let tr = document.createElement('tr');
+    let tdTimestamp = document.createElement('td');
+    tdTimestamp.textContent = `${trace.timestamp}`;
+    tr.appendChild(tdTimestamp);
+    let tdMethod = document.createElement('td');
+    tdMethod.textContent = `${trace.request.method}`;
+    tr.appendChild(tdMethod);
+    let tdTimetaken = document.createElement('td');
+    tdTimetaken.textContent = `${trace.timeTaken}`;
+    tr.appendChild(tdTimetaken);
+    let tdResponseStat = document.createElement('td');
+    tdResponseStat.textContent = `${trace.response.status}`;
+    tr.appendChild(tdResponseStat);
+    let tdResponseUrl = document.createElement('td');
+    tdResponseUrl.textContent = `${trace.request.uri}`;
+    tr.appendChild(tdResponseUrl);
+
+    containerTableRows.appendChild(tr);
+}
 
 function displayTraces200(traceArray){
     let divRow = document.createElement('div');
