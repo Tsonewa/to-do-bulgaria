@@ -37,7 +37,7 @@
                     </p>
                     <hr>
                     <a class="dropdown-a" th:href="@{/profile/my-trips}"><i class="fas fa-id-card" ></i> Профил</a>
-                    <a sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')" class="profile-a" th:href="@{/admin}"><i class="fas fa-id-card"></i>Статистика</a>
+                    <a sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')" class="dropdown-a" th:href="@{/admin}"><i class="fas fa-chart-line"></i></i>  Статистика</a>
                     <a class="dropdown-a"><i class="fas fa-cog"></i> Настройки</a>
                     <hr>
                     <form class="log-out-div" th:action="@{/users/logout}" th:method="post">
