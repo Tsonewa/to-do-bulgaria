@@ -1,22 +1,22 @@
 package com.example.todobulgaria.config;
 
-import com.example.todobulgaria.interceptors.LastModelAndViewInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    private final LastModelAndViewInterceptor lastModelAndViewInterceptor;
+    private final LocaleChangeInterceptor changeInterceptor;
 
 
-    public WebConfig(LastModelAndViewInterceptor lastModelAndViewInterceptor1) {
-        this.lastModelAndViewInterceptor = lastModelAndViewInterceptor1;
+    public WebConfig(LocaleChangeInterceptor changeInterceptor) {
+        this.changeInterceptor = changeInterceptor;
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(lastModelAndViewInterceptor);
+        registry.addInterceptor(changeInterceptor);
     }
 }
