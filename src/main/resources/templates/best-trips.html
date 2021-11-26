@@ -14,7 +14,7 @@
 <header th:include="/fragments/fragment :: navbar" id="full-size">
 </header>
 <main >
-    <h1 class="best-trips-header">Nesebar</h1>
+    <h1 class="best-trips-header" th:text="#{bestTrips}">Топ маршрути</h1>
     <div th:action="@{/trips/best}" th:method="get" th:object="${bestTrips}" class="best-articles-wrapper">
         <div th:each="t : ${bestTrips}" th:object="${t}" class="card-wrapper">
             <a id="article-a" th:href="@{/trips/favourite/{id}(id = *{id})}" th:method="get" class="fav-btn "><i class="far fa-heart"></i></a>
@@ -23,9 +23,9 @@
                 </div>
                 <a th:href="@{/trips/{id}/details(id=*{id})}">
                 <div class="text-card-wrapper">
-                    <h2><span th:text="*{townName}">Nesebar</span>, Bulgaria</h2>
+                    <h2 ><span th:text="*{townName}">Несебър</span>, България</h2>
                     <div class="rate-card-wrapper">
-                        <h5> <span th:text="*{duration}">3</span> days</h5>
+                        <h5> <span th:text="*{duration}">3</span> дни</h5>
                         <div class="rating">
                             <h5><i class="fas fa-star"></i></h5>
                         <h5><i class="fas fa-star"></i></h5>
@@ -39,11 +39,6 @@
             </div>
         </div>
 </main>
-<!--<script>-->
-<!--    fetch('http://localhost:8080/trips/best')-->
-<!--        .then(response => response.json())-->
-<!--        .then(data => console.log(data));-->
-<!--</script>-->
 <footer th:replace="/fragments/fragment :: footer">
 </footer>
 </body>

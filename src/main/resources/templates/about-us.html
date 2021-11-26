@@ -13,31 +13,31 @@
 <header th:include="/fragments/fragment :: navbar" id="full-size"></header>
 <main class="contacts-wrapper">
     <div class="about-us-content-wrapper">
-    <h3 class="about-us-title">About us</h3>
+    <h3 class="about-us-title" th:text="#{aboutUs}">About us</h3>
     <div class="articles-wrapper">
         <div class="article">
             <div>
                 <i class="fas fa-leaf"></i>
             </div>
-            <h4 class="about-us-title">Mission</h4>
-            <p class="about-us-p">Christian Schmidt, warned earlier this week that the US-brokered peace agreement signed at the end of the war is at risk of collapsing unless action is taken to stop Serbian separatists from pushing towards secession.</p>
+            <h4 class="about-us-title" th:text="#{mission}">Mission</h4>
+            <p class="about-us-p" th:text="#{aboutUsText}"></p>
         </div>
         <div class="article">
             <div>
             <i class="far fa-star"></i>
             </div>
-            <h4 class="about-us-title">Who are we?</h4>
-            <p class="about-us-p">The international community's High Representative in Bosnia, Christian Schmidt, warned earlier this week that the US-brokered peace agreement signed at the end of the war is at risk of collapsing unless action is .</p>
+            <h4 class="about-us-title" th:text="#{whoAreWe}">Who are we?</h4>
+            <p class="about-us-p" th:text="#{whoAreWeText}"></p>
         </div>
         <div class="article">
             <div>
             <i class="fas fa-user-friends"></i>
             </div>
-        <h4 class="about-us-title">Our team</h4>
-            <p class="about-us-p">The international community's High Representative in Bosnia, Christian Schmidt, warned earlier this week that the US-brokered peace agreement signed at the end of the war is at risk of collapsing unless action is taken to stop Serbian separatists.</p>
+        <h4 class="about-us-title" th:text="#{ourTeam}">Our team</h4>
+            <p class="about-us-p" th:text="#{ourTeamText}">The international community's High Representative in Bosnia, Christian Schmidt, warned earlier this week that the US-brokered peace agreement signed at the end of the war is at risk of collapsing unless action is taken to stop Serbian separatists.</p>
         </div>
     </div>
-    <h3 class="about-us-title">Contact us</h3>
+    <h3 class="about-us-title" th:text="#{contact}">Contact us</h3>
     <div class="contact-us-wrapper">
         <div class="contacts-wrapper">
             <div class="contact">

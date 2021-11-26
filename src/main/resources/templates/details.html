@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="/css/details-style.css">
     <link rel="stylesheet" href="/css/landing-page-style.css">
     <title>Details page</title>
-    <link rel="stylesheet" href="../static/css/details-style.css">
 </head>
 <body>
 <header id="full-nav" th:include="/fragments/fragment :: navbar">
@@ -166,8 +165,11 @@
                                              alt=""></div>
             <form id="commentForm" th:method="POST"
                      th:action="@{'/api/' + *{id} + '/reviews'}" class="comment-box" >
-                <input type="text" placeholder="Write your comment here...">
-                <button type="submit" class="btn">Send</button>
+                <textarea placeholder="Write your comment here..." id="message" name="message" ></textarea>
+                <input type="submit"
+                       class="btn"
+                       id="postComment"
+                       value="Изпрати"/>
             </form>
 
         </div>
