@@ -52,15 +52,6 @@ main{
     padding: 16px;
 }
 
-.input-icons > #username, .input-icons > #password{
-    padding: 16px 16px 16px 30px;
-    width: 87%;
-    margin: 5px 0 22px 0;
-    border: none;
-    background: #f1f1f1;
-}
-
-
     /* When the inputs get focus, do something */
 .form-container input[type=text]:focus, .form-container input[type=password]:focus, .form-container input[type=confirmPassword]:focus, .form-container input[type=file]:focus {
     background-color: #ddd;
@@ -90,20 +81,6 @@ main{
 /* Add some hover effects to buttons */
 .form-container .btn:hover, .open-button:hover {
     opacity: 1;
-}
-
-#icon-password, #icon-username{
-    position: relative;
-    left: -76px;
-    top: 40px;
-    color: #313E48;
-    font-size: 14px;
-
-}
-
-.input-icons {
-    width: 100%;
-    margin-bottom: 10px;
 }
 
 

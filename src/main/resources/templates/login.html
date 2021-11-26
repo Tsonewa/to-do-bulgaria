@@ -21,15 +21,11 @@
             <p th:if="${bad_credentials}" class="error" th:text="#{invalidLogin}">
                 Invalid username or password.
             </p>
-            <div class="input-icons">
                 <label for="username" th:text="#{username}"><b>Username</b></label>
-                <i id="icon-username" class="far fa-user icon"></i>
             <input th:value="${username}" id="username" type="text" placeholder="Enter username" name="username" required>
                 <label for="password" th:text="#{password}"><b>Password</b></label>
-                <i id="icon-password" class="fas fa-lock icon"></i>
             <input  id="password" type="password" placeholder="Enter Password" name="password" required>
             <h7 class="sign-in-href">You don't have an account?<a class="sign-in" th:href="@{/users/register}">Sign in</a></h7>
-            </div>
             <button type="submit" class="btn wide-btn" th:text="#{login}">Login</button>
         </form>
     </div>
