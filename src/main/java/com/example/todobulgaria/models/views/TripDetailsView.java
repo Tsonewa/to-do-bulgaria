@@ -7,7 +7,7 @@ public class TripDetailsView {
     private Long id;
     private String url;
     private String categoryName;
-    private String townName;
+    private String startPoint;
     private Integer duration;
     private List<ItinerariesDetailsViewModel> itinaries;
     private String description;
@@ -40,14 +40,12 @@ public class TripDetailsView {
         this.description = description;
     }
 
-    public String getTownName() {
-        return townName;
+    public String getStartPoint() {
+        return startPoint;
     }
 
-
-
-    public void setTownName(String townName) {
-        this.townName = townName;
+    public void setStartPoint(String startPoint) {
+        this.startPoint = startPoint;
     }
 
     public String getUrl() {

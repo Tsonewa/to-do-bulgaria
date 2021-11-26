@@ -18,9 +18,9 @@
     <form th:action="@{/trips/add}" th:method="post" enctype="multipart/form-data" th:object="${addTripBindingModel}" id="msform">
       <fieldset id="input1-wrapper">
           <h2 class="fs-title">Създай маршрут</h2>
-          <label>Област</label>
-          <input th:field="*{region}" type="text" name="region" placeholder="South Coast" />
-          <p th:if="${#fields.hasErrors('region')}" th:errors="*{region}" class="error"></p>
+          <label>Начална точка</label>
+          <input th:field="*{startPoint}" type="text" name="region" placeholder="South Coast" />
+          <p th:if="${#fields.hasErrors('startPoint')}" th:errors="*{startPoint}" class="error"></p>
           <label>Тип</label>
           <select th:field="*{categoryName}" name="categoryName" placeholder="Seaside" >
               <option value="">Select trip type</option>

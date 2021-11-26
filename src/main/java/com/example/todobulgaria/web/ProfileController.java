@@ -73,7 +73,7 @@ public class ProfileController {
                .stream().map(t -> {
 
                    TripCategoryTownDurationViewModel map = modelMapper.map(t, TripCategoryTownDurationViewModel.class);
-                map.setTownName(t.getItineraries().get(0).getTown().getName());
+                map.setStartPoint(t.getStartPoint());
 
                 return map;
 

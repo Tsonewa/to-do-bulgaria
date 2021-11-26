@@ -20,6 +20,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDate;
@@ -82,7 +83,7 @@ public class TripEntityServiceImpl implements TripEntityService {
             } else {
                 TownEntity newTown = new TownEntity();
                 newTown.setName(addTripServiceModel.getTownName().get(i));
-                newTown.setRegion(addTripServiceModel.getRegion());
+                newTown.setRegion(addTripServiceModel.getStartPoint());
 
                 townEntityService.saveTown(newTown);
             }
@@ -211,7 +212,7 @@ public class TripEntityServiceImpl implements TripEntityService {
     private TripsArticleViewModel asArticleTrip(TripEntity trip) {
         TripsArticleViewModel tripsArticleViewModel = modelMapper.map(trip, TripsArticleViewModel.class);
         tripsArticleViewModel.setUrl(trip.getPicture().getUrl());
-        tripsArticleViewModel.setTownName(trip.getItineraries().get(0).getTown().getName());
+        tripsArticleViewModel.setStartPoint(trip.getStartPoint());
 
         return tripsArticleViewModel;
     }
@@ -236,7 +237,7 @@ public class TripEntityServiceImpl implements TripEntityService {
        map.setItinaries(matToItineraryDetailsView
                (tripEntity));
 
-        map.setTownName(map.getItinaries().get(0).getTownName());
+        map.setStartPoint(map.getStartPoint());
 
         if(tripEntity.getDetails() != null) {
             map.setDetails(modelMapper
@@ -274,14 +275,14 @@ public class TripEntityServiceImpl implements TripEntityService {
     @Override
     public List<TripCategoryTownDurationViewModel> findAllByUserId(Long id) {
 
-        List<TripEntity> tripEntities = tripRepository.findAllByUserId(id).orElse(null);
+        List<TripEntity> tripEntities = tripRepository.findAllByUserId(id);
         List<TripCategoryTownDurationViewModel> collect;
 
         try{
             collect = tripEntities.stream().map(e -> {
 
                 TripCategoryTownDurationViewModel map = modelMapper.map(e, TripCategoryTownDurationViewModel.class);
-                    map.setTownName(e.getItineraries().get(0).getTown().getName());
+                    map.setStartPoint(e.getStartPoint());
 
                     return map;
 
@@ -347,5 +348,10 @@ public class TripEntityServiceImpl implements TripEntityService {
                 stream().
                 map(RoleEntity::getRole).
                 anyMatch(r -> r == RoleEnum.ADMIN);
+    }
+
+    @Override
+    public List<TripEntity> getByKeyword(String keyword){
+        return tripRepository.findByKeyword(keyword);
     }
 }

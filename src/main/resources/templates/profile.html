@@ -45,7 +45,7 @@
             <th>Действие</th>
         </tr>
         <tr th:each="t : ${userTrips}" th:object="${t}">
-            <td><span th:text="*{townName}">Белоградчик</span>, България</td>
+            <td><span th:text="*{startPoint}">Белоградчик</span>, България</td>
             <td><i class="far fa-clock"></i> <span th:text="*{duration}">3</span> дни</td>
             <td><img class="sign-icon" src="/images/Group%20560.png"><span th:text="*{categoryName.toLowerCase()}">Seaside</span></td>
             <td class="btn-td" sec:authorize="isAuthenticated()"> <form th:action="@{'/trips/' + *{id} + '/delete'}" th:method="delete"><button class="new-trips-btn">Изтрий</button></form><a th:href="@{/trips/{id}/details(id=*{id})}"> <button class="btn" type="button">Детайли</button></a></td>
@@ -65,7 +65,7 @@
             <th>Действие</th>
         </tr>
         <tr  th:each="t : ${userFavouriteTrips}" th:object="${t}">
-            <td><span th:text="*{townName}">Белоградчик</span>, България</td>
+            <td><span th:text="*{startPoint}">Белоградчик</span>, България</td>
             <td><i class="far fa-clock"></i> <span th:text="*{duration}">3</span> дни</td>
             <td><img class="sign-icon" src="/images/Group%20560.png"><span th:text="*{categoryName.toLowerCase()}">Seaside</span></td>
             <td  sec:authorize="isAuthenticated()"><a th:href="@{/trips/{id}/details(id=*{id})}"> <button class="wide-btn" type="button">Детайли</button></a></td>

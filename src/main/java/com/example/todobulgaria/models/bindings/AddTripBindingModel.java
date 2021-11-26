@@ -9,9 +9,9 @@ import java.util.List;
 
 public class AddTripBindingModel {
 
-    @Size(min = 2, max = 25, message = "Region length must be between 2 and 25 symbols.")
+    @Size(min = 2, max = 25, message = "Town length must be between 2 and 25 symbols.")
     @NotBlank
-    private String region;
+    private String startPoint;
     @NotNull(message = "Category can not be empty")
     private String categoryName;
     @ValidUrl
@@ -38,12 +38,12 @@ public class AddTripBindingModel {
     public AddTripBindingModel() {
     }
 
-    public String getRegion() {
-        return region;
+    public String getStartPoint() {
+        return startPoint;
     }
 
-    public void setRegion(String region) {
-        this.region = region;
+    public void setStartPoint(String startPoint) {
+        this.startPoint = startPoint;
     }
 
     public String getCategoryName() {

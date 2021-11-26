@@ -7,7 +7,7 @@ import java.util.List;
 
 public class AddTripServiceModel {
 
-    private String region;
+    private String startPoint;
     private CategoryEnum categoryName;
     private MultipartFile url;
     private List<String> townName;
@@ -24,12 +24,12 @@ public class AddTripServiceModel {
     public AddTripServiceModel() {
     }
 
-    public String getRegion() {
-        return region;
+    public String getStartPoint() {
+        return startPoint;
     }
 
-    public void setRegion(String region) {
-        this.region = region;
+    public void setStartPoint(String startPoint) {
+        this.startPoint = startPoint;
     }
 
     public CategoryEnum getCategoryName() {

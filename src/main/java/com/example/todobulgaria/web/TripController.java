@@ -36,7 +36,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.security.Principal;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
@@ -65,7 +64,6 @@ public class TripController {
         this.gson = gson;
     }
 
-
     @GetMapping("/add")
     public String getAddTripForm(){
         return "add-trip";
@@ -92,8 +90,10 @@ public class TripController {
         AddTripServiceModel trip =
                 modelMapper.map(addTripBindingModel, AddTripServiceModel.class);
 
-        CategoryEnum categoryEnum = CategoryEnum.valueOf(addTripBindingModel.getCategoryName());
-        trip.setCategoryName(CategoryEnum.valueOf(categoryEnum.toString()));
+        CategoryEnum categoryEnum = CategoryEnum.valueOf(addTripBindingModel
+                .getCategoryName().replace("-", "_"));
+
+        trip.setCategoryName(CategoryEnum.valueOf(categoryEnum.name()));
 
         tripEntityService
                 .createTrip(trip);
@@ -102,6 +102,7 @@ public class TripController {
         return "auth-home";
     }
 
+    @Transactional
     @GetMapping("/best")
     public String showBestTrips(Model model){
 
@@ -110,12 +111,7 @@ public class TripController {
         return "best-trips";
     }
 
-//    @PostMapping("/best")
-//    public String saveRating(Rating rating, Model model) {
-//        model.addAttribute("rating", rating);
-//        return "redirect:best";
-//    }
-
+    @Transactional
     @GetMapping("/all/{pageNum}")
     public String showAlTrips( @PathVariable(name = "pageNum") int pageNum, Model model){
 
@@ -138,10 +134,10 @@ public class TripController {
         return showAlTrips(1, model);
     }
 
+    @Transactional
     @GetMapping("/{id}/details")
     public String showTrip(
             @PathVariable Long id, Model model) {
-
 
         TripDetailsView tripById = tripEntityService.findById(id);
 
@@ -244,6 +240,7 @@ public class TripController {
         return "redirect:/profile/my-trips";
     }
 
+    @Transactional
     @GetMapping("/favourite/{id}")
     public String addFavouriteTrip(@PathVariable Long id, HttpServletRequest request){
 
@@ -291,6 +288,18 @@ public class TripController {
         return day.getDisplayName(TextStyle.FULL, locale);
     }
 
+    @GetMapping("/search")
+    public String home(Model model, String keyword) {
+        if(keyword!=null) {
+            List<TripEntity> list = tripEntityService.getByKeyword(keyword);
+            model.addAttribute("list", list);
+        }else {
+            Page<TripsArticleViewModel> list =
+                    tripEntityService.getTrips(1, 8, "id");
 
+            model.addAttribute("list", list);}
+
+        return "index";
+    }
 
 }

@@ -4,7 +4,7 @@ public class TripsArticleViewModel {
 
     private Long id;
     private String url;
-    private String townName;
+    private String startPoint;
     private Integer duration;
     private Integer rating;
 
@@ -27,12 +27,12 @@ public class TripsArticleViewModel {
         this.id = id;
     }
 
-    public String getTownName() {
-        return townName;
+    public String getStartPoint() {
+        return startPoint;
     }
 
-    public void setTownName(String townName) {
-        this.townName = townName;
+    public void setStartPoint(String startPoint) {
+        this.startPoint = startPoint;
     }
 
     public String getUrl() {

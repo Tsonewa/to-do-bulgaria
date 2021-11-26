@@ -4,7 +4,7 @@ public class TripCategoryTownDurationViewModel {
 
     private Long id;
     private String categoryName;
-    private String townName;
+    private String startPoint;
     private Integer duration;
 
     public TripCategoryTownDurationViewModel() {
@@ -26,12 +26,12 @@ public class TripCategoryTownDurationViewModel {
         this.categoryName = categoryName;
     }
 
-    public String getTownName() {
-        return townName;
+    public String getStartPoint() {
+        return startPoint;
     }
 
-    public void setTownName(String townName) {
-        this.townName = townName;
+    public void setStartPoint(String startPoint) {
+        this.startPoint = startPoint;
     }
 
     public Integer getDuration() {

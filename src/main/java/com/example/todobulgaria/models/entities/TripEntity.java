@@ -13,7 +13,7 @@ import java.util.List;
 public class TripEntity extends BaseEntity implements Serializable {
 
     @Column(nullable = false)
-    private String region;
+    private String startPoint;
     @Column
     private Integer duration;
     @OneToOne(fetch = FetchType.EAGER)
@@ -22,7 +22,6 @@ public class TripEntity extends BaseEntity implements Serializable {
     private UserEntity user;
     @ManyToOne
     private CategoryEntity categoryEntity;
-    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "trip", targetEntity = ItineraryEntity.class, cascade = CascadeType.ALL)
     private List<ItineraryEntity> itineraries;
     @Column(columnDefinition = "LONGTEXT")
@@ -62,12 +61,12 @@ public class TripEntity extends BaseEntity implements Serializable {
         this.duration = duration;
     }
 
-    public String getRegion() {
-        return region;
+    public String getStartPoint() {
+        return startPoint;
     }
 
-    public void setRegion(String region) {
-        this.region = region;
+    public void setStartPoint(String region) {
+        this.startPoint = region;
     }
 
     public UserEntity getUser() {
