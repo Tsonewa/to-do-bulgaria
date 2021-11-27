@@ -74,11 +74,15 @@ table{
     margin: 10px;
     font-size: 18px;
     align-self: self-start;
+    letter-spacing: 1px;
+    font-style: oblique;
 }
 
 .profile-a i{
     opacity: 0.8;
     margin-right: 14px;
+    letter-spacing: 1px;
+    font-style: oblique;
 }
 
 .new-trips-btn{

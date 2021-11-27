@@ -35,12 +35,12 @@
                         <a th:href="@{/trips/add}"> <button class="btn create-btn"  th:text="#{add}">Add trip</button></a>
                     </p>
                     <hr>
-                    <a class="dropdown-a" th:href="@{/profile/my-trips}"  th:text="#{profile}"><i class="fas fa-id-card" ></i> Профил</a>
-                    <a sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')" class="dropdown-a" th:href="@{/admin}"  th:text="#{stats}"><i class="fas fa-chart-line"></i></i>  Статистика</a>
-                    <a class="dropdown-a"  th:text="#{settings}"><i class="fas fa-cog" ></i> Настройки</a>
+                    <a class="dropdown-a" th:href="@{/profile/my-trips}"  ><i class="fas fa-id-card"  th:text="#{profile}"></i></a>
+                    <a sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')" class="dropdown-a" th:href="@{/admin}"  th:text="#{stats}"><i class="fas fa-chart-line"></i></a>
+                    <a class="dropdown-a" ><i class="fas fa-cog" th:text="#{settings}" ></i></a>
                     <hr>
                     <form class="log-out-div" th:action="@{/users/logout}" th:method="post">
-                    <button class="dropdown-a exit-btn" th:text="#{logout}"><i class="fas fa-sign-out-alt" ></i> Изход</button>
+                    <button class="dropdown-a exit-btn" ><i class="fas fa-sign-out-alt" th:text="#{logout}"></i></button>
                     </form>
                 </div>
             </div>

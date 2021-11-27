@@ -366,8 +366,11 @@ footer {
 }
 
 .fa-id-card, .fa-font-awesome-flag, .fa-cog, .fa-sign-out-alt {
-    color: black;
+    color: darkolivegreen;
     margin-right: 6px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    font-style: oblique;
 }
 
 hr {
