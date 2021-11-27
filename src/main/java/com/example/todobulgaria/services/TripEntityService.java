@@ -27,7 +27,7 @@ public interface TripEntityService {
 
     boolean isOwner(String userName, Long id);
 
-    void deleteTrip(Long id);
+    void deleteTrip(Long id, String username);
 
     List<TripCategoryTownDurationViewModel> findAllTripsById(Set<Long> favouriteTripsSet);
 

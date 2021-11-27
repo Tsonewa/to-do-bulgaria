@@ -36,6 +36,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.security.Principal;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
@@ -102,7 +103,6 @@ public class TripController {
         return "auth-home";
     }
 
-    @Transactional
     @GetMapping("/best")
     public String showBestTrips(Model model){
 
@@ -111,7 +111,6 @@ public class TripController {
         return "best-trips";
     }
 
-    @Transactional
     @GetMapping("/all/{pageNum}")
     public String showAlTrips( @PathVariable(name = "pageNum") int pageNum, Model model){
 
@@ -128,7 +127,6 @@ public class TripController {
         return "all-trips";
     }
 
-    @Transactional
     @RequestMapping("/trips/all")
     public String pagableBestTripsPage(Model model) {
         return showAlTrips(1, model);
@@ -233,9 +231,10 @@ public class TripController {
 
     @PreAuthorize("isOwner(#id)")
     @DeleteMapping("/{id}/delete")
-    public String deleteTrip(@PathVariable Long id) {
+    @Transactional
+    public String deleteTrip(@PathVariable Long id, Principal principal) {
 
-        tripEntityService.deleteTrip(id);
+        tripEntityService.deleteTrip(id, principal.getName());
 
         return "redirect:/profile/my-trips";
     }

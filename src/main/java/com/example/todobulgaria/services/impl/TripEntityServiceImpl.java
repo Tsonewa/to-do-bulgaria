@@ -17,6 +17,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -281,14 +282,11 @@ public class TripEntityServiceImpl implements TripEntityService {
         try{
             collect = tripEntities.stream().map(e -> {
 
-                TripCategoryTownDurationViewModel map = modelMapper.map(e, TripCategoryTownDurationViewModel.class);
-                    map.setStartPoint(e.getStartPoint());
-
-                    return map;
+                return modelMapper.map(e, TripCategoryTownDurationViewModel.class);
 
             }).collect(Collectors.toList());
-        } catch (NullPointerException ex){
-            throw new NullPointerException("Trip with this user id" + id + " does not exist!");
+        } catch (RuntimeException ex){
+            throw new ObjectNotFoundException(id);
         }
 
         return collect;
@@ -296,7 +294,23 @@ public class TripEntityServiceImpl implements TripEntityService {
 
     @PreAuthorize("isOwner(#id)")
     @Override
-    public void deleteTrip(Long id) {
+    public void deleteTrip(Long id, String username) {
+
+        UserEntity currentUser = userEntityService
+                .findUserByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException
+                        ("User with username " + username + " not found!"));
+
+        Set<TripEntity> filteredTrips =  currentUser
+                .getFavouriteTrips()
+                .stream()
+                .filter(t -> !t.getId().equals(id))
+                .collect(Collectors.toSet());
+
+        currentUser.setFavouriteTrips(filteredTrips);
+
+        userEntityService.
+                updateUser(currentUser);
 
         tripRepository.deleteById(id);
     }
