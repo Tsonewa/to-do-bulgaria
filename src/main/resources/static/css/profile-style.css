@@ -179,7 +179,6 @@ h2 > span{
 }
 
 .trips-table-wrapper::-webkit-scrollbar-thumb {
-    background-color: gray;
-    outline: 1px solid slategrey;
+    background-color: darkgrey;
     border-radius: 15px;
 }
