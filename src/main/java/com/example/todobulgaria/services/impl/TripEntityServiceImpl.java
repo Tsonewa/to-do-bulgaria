@@ -23,15 +23,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
-import java.security.Principal;
+import java.util.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import static org.modelmapper.Converters.Collection.map;
 
 @Service
 public class TripEntityServiceImpl implements TripEntityService {
@@ -367,9 +365,24 @@ public class TripEntityServiceImpl implements TripEntityService {
     }
 
     @Override
+    public List<TripsArticleViewModel> getByKeywordAndDuration(String keyword, int duration){
+
+        return tripRepository.findByKeywordAndDuration(keyword.trim(), duration)
+                .stream()
+                .map(t -> {
+
+                    TripsArticleViewModel map = modelMapper.map(t, TripsArticleViewModel.class);
+                    map.setUrl(t.getPicture().getUrl());
+
+                    return map;
+                })
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<TripsArticleViewModel> getByKeyword(String keyword){
 
-        return tripRepository.findByKeyword(keyword)
+        return tripRepository.findByKeyword(keyword.trim())
                 .stream()
                 .map(t -> {
 

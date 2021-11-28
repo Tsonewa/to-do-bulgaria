@@ -41,8 +41,12 @@ import java.net.URLConnection;
 import java.security.Principal;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.*;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 @Controller
 @RequestMapping("/trips")
@@ -287,24 +291,31 @@ public class TripController {
     }
 
     @GetMapping("/search")
-    public String search(@Valid SearchBindingModel searchBindingModel,
-                       BindingResult bindingResult,
-                       RedirectAttributes redirectAttributes, Model model) {
+    public String search(SearchBindingModel searchBindingModel,
+                       Model model) {
 
-        if(bindingResult.hasErrors()){
-            redirectAttributes.addFlashAttribute("searchBindingModel", searchBindingModel);
-            redirectAttributes.addFlashAttribute("org.springframework.BindingResult.validation.searchBindingModel", bindingResult);
+        List<TripsArticleViewModel> list;
 
-            return "redirect:trips/search";
+        if(!searchBindingModel.getStartDate().trim().isEmpty()
+                && !searchBindingModel.getEndDate().trim().isEmpty()) {
+            LocalDate localDateStart = LocalDate.parse(searchBindingModel.getStartDate(), DateTimeFormatter.ISO_LOCAL_DATE);
+            LocalDate localDateEnd = LocalDate.parse(searchBindingModel.getEndDate(), DateTimeFormatter.ISO_LOCAL_DATE);
+
+            int duration = (int) DAYS.between(localDateStart, localDateEnd);
+
+            list = tripEntityService
+                    .getByKeywordAndDuration(searchBindingModel.getStartPoint(), duration);
+        }else {
+
+            list = tripEntityService
+                    .getByKeyword(searchBindingModel.getStartPoint());
         }
 
-            List<TripsArticleViewModel> list = tripEntityService
-                    .getByKeyword(searchBindingModel.getStartPoint());
-
-            model.addAttribute("list", list);
-            model.addAttribute("searchedTown", searchBindingModel.getStartPoint());
+        model.addAttribute("list", list);
+        model.addAttribute("searchedTown", searchBindingModel.getStartPoint());
 
         return "search";
     }
+
 
 }

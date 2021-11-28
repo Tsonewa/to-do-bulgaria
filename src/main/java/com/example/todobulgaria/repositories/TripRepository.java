@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface TripRepository extends JpaRepository<TripEntity, Long> {
@@ -17,7 +17,9 @@ public interface TripRepository extends JpaRepository<TripEntity, Long> {
 
     List<TripEntity> findAllByUserId(@Param("id") Long id);
 
+    @Query(value = "select * from trips t where t.start_point like %:keyword% and t.duration = :duration", nativeQuery = true)
+    List<TripEntity> findByKeywordAndDuration(@Param("keyword") String keyword, @Param("duration") int duration);
+
     @Query(value = "select * from trips t where t.start_point like %:keyword%", nativeQuery = true)
     List<TripEntity> findByKeyword(@Param("keyword") String keyword);
-
 }
