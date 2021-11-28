@@ -48,6 +48,62 @@
     </nav>
 </header>
 
+<main th:fragment="search">
+    <div class="bgr-wrapper">
+        <div class="searchbar-wrapper">
+            <h3 class="searchbar-headling" ><span class="explore-span" >Explore</span> your destinations</h3>
+            <form id="searchForm" th:action="@{/trips/search}" th:method="GET">
+                <div class="search-container">
+                    <h5 th:text="#{searchDestination}">Search destination</h5>
+                    <input type="text" name="startPoint" id="startPoint" placeholder="Search location">
+                </div>
+                <div class="duration-container">
+                    <div class="start-date-wrapper">
+                        <h5 th:text="#{start}">Start</h5>
+                        <input class="calendar-input" type="date" name="startDate" id="startDate" placeholder="calendar">
+                    </div>
+                    <div class="end-date-wrapper">
+                        <h5 th:text="#{finish}">Finish</h5>
+                        <input class="calendar-input" type="date"placeholder="calendar">
+                    </div>
+                </div>
+                <div class="type-container">
+                    <h5 class="type-header" th:text="#{type}">Choose type</h5>
+                    <div class="type-cards-wrapper">
+                        <div class="card">
+                            <a><i class="fas fa-mountain"></i></a>
+                            <h3 class="type-h3" th:text="#{mountain}">Mountain</h3>
+                        </div>
+                        <div class="card">
+                            <a><i class="fas fa-ship"></i></a>
+                            <h3 class="type-h3" th:text="#{seaside}">Seaside</h3>
+                        </div>
+                        <div class="card">
+                            <a><i class="fas fa-city"></i></a>
+                            <h3 class="type-h3" th:text="#{city}">City</h3>
+                        </div>
+                        <div class="card">
+                            <a><i class="fas fa-leaf"></i></a>
+                            <h3 class="type-h3" th:text="#{eco}">Eco-friendly</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="search-btn-wrapper">
+                    <button type="submit" class="wide-btn btn" th:text="#{searchBtn}">Search</button>
+                </div>
+            </form>
+        </div>
+        <div class="bg-container">
+            <div class="info-text-wrapper">
+                <h3 class="info-header" ><span class="amazing-span" >Amazing</span> destinations</h3>
+                <p class="info" th:text="#{mission}"> There's a travel planning for every kind of traveler, whether you need to build an itinerary, plan a road trip, or coordinate your next vacation. Get your fully customized day by day itinerary for free!</p>
+                <a th:href="@{/trips/all/1}"><button class="wide-btn btn"  th:text="#{allTrips}">All trips</button></a>
+            </div>
+        </div>
+    </div>
+</main>
+
+
 <footer th:fragment="footer">
    <ul class="footer-ul">
        <li  th:text="#{copyRights}">&COPY; -All rights reserved <a th:href="@{'/'}">To-Do-Bulgaria &reg;</a></li>
