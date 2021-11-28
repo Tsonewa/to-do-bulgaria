@@ -19,6 +19,10 @@ body {
     background-size: cover;
 }
 
+main{
+    min-height: 540px;
+}
+
 a{
     text-decoration-line: none;
 }
@@ -446,4 +450,16 @@ hr {
 .footer-ul > li > a{
     color: inherit;
     padding: 20px;
+}
+
+.no-match-p{
+    font-size: 35px;
+    margin: 50px;
+    color: white;
+}
+
+.no-match-p > i{
+    color: white;
+    font-size: 30px;
+    margin-right: 15px;
 }

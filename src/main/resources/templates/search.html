@@ -16,6 +16,7 @@
 <main>
     <h1 class="best-trips-header" th:text="${searchedTown}">Nesebar</h1>
     <div th:action="@{/trips/search}" th:method="GET" th:object="${list}" class="best-articles-wrapper">
+       <th:block th:if="${list.size() > 0}">
         <div th:each="t : ${list}" th:object="${t}" class="card-wrapper">
             <a id="article-a" th:href="@{/trips/favourite/{id}(id = *{id})}" th:method="get" class="fav-btn "><i class="far fa-heart"></i></a>
             <div  class="img-card-wrapper">
@@ -37,6 +38,9 @@
                 </div>
             </a>
         </div>
+       </th:block>
+
+        <p class="no-match-p" th:unless="${list.size() > 0}"><i class="far fa-frown-open"></i>No matches found.</p>
     </div>
 </main>
 <footer th:replace="/fragments/fragment :: footer">
