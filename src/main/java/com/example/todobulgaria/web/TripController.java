@@ -2,12 +2,14 @@ package com.example.todobulgaria.web;
 
 import com.example.todobulgaria.exceptions.ObjectNotFoundException;
 import com.example.todobulgaria.models.bindings.AddTripBindingModel;
+import com.example.todobulgaria.models.bindings.SearchBindingModel;
 import com.example.todobulgaria.models.dto.WeatherDto;
 import com.example.todobulgaria.models.entities.TripEntity;
 import com.example.todobulgaria.models.entities.UserEntity;
 import com.example.todobulgaria.models.enums.CategoryEnum;
 import com.example.todobulgaria.models.enums.UnexcitingTownsWeatherAPIEnum;
 import com.example.todobulgaria.models.service.AddTripServiceModel;
+import com.example.todobulgaria.models.views.TripCategoryTownDurationViewModel;
 import com.example.todobulgaria.models.views.TripDetailsView;
 import com.example.todobulgaria.models.views.TripsArticleViewModel;
 import com.example.todobulgaria.repositories.UserRepository;
@@ -143,7 +145,7 @@ public class TripController {
             throw new ObjectNotFoundException(id);
         }
 
-        String townName = tripById.getItinaries().get(0).getTownName();
+        String townName = tripById.getStartPoint();
 
         townName = checkIfTownExistInWeatherApi
                 (townName);
@@ -255,9 +257,6 @@ public class TripController {
 
         userEntityService.updateUser(userByUsername.orElse(null));
 
-//        ModelAndView mv = (ModelAndView)request.getSession().getAttributuser_favouritee(LastModelAndViewInterceptor.LAST_MODEL_VIEW_ATTRIBUTE);
-//        return mv;
-
         String referer = request.getHeader("Referer");
 
         return "redirect:" + referer;
@@ -288,17 +287,24 @@ public class TripController {
     }
 
     @GetMapping("/search")
-    public String home(Model model, String keyword) {
-        if(keyword!=null) {
-            List<TripEntity> list = tripEntityService.getByKeyword(keyword);
+    public String search(@Valid SearchBindingModel searchBindingModel,
+                       BindingResult bindingResult,
+                       RedirectAttributes redirectAttributes, Model model) {
+
+        if(bindingResult.hasErrors()){
+            redirectAttributes.addFlashAttribute("searchBindingModel", searchBindingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.BindingResult.validation.searchBindingModel", bindingResult);
+
+            return "redirect:trips/search";
+        }
+
+            List<TripsArticleViewModel> list = tripEntityService
+                    .getByKeyword(searchBindingModel.getStartPoint());
+
             model.addAttribute("list", list);
-        }else {
-            Page<TripsArticleViewModel> list =
-                    tripEntityService.getTrips(1, 8, "id");
+            model.addAttribute("searchedTown", searchBindingModel.getStartPoint());
 
-            model.addAttribute("list", list);}
-
-        return "index";
+        return "search";
     }
 
 }

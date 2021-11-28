@@ -149,8 +149,6 @@ nav {
     width: 39%;
     height: 110%;
     background: #CCCCCC;
-    justify-items: center;
-    text-align: start;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
     flex-wrap: nowrap;
@@ -158,6 +156,12 @@ nav {
     position: relative;
     top: -63px;
     opacity: 0.8;
+    text-align: center;
+}
+
+#searchForm{
+    display: flex;
+    flex-direction: column;
 }
 
 .info-text-wrapper {
@@ -214,9 +218,7 @@ nav {
 }
 
 .type-container {
-    justify-content: center;
-    justify-items: center;
-    text-align: -webkit-center;
+    align-self: center;
     width: 80%;
 }
 
@@ -246,7 +248,8 @@ nav {
 
 .duration-container {
     display: flex;
-    flex-direction: row;
+   margin: 18px 0px;
+    align-self: center;
 }
 
 input {

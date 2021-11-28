@@ -35,7 +35,7 @@ public interface TripEntityService {
 
     Integer tripsCount();
 
-    List<TripEntity> getByKeyword(String keyword);
+    List<TripsArticleViewModel> getByKeyword(String keyword);
 }
 
 

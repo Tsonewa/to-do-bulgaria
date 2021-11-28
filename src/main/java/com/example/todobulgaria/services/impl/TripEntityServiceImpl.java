@@ -31,6 +31,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static org.modelmapper.Converters.Collection.map;
+
 @Service
 public class TripEntityServiceImpl implements TripEntityService {
 
@@ -238,7 +240,7 @@ public class TripEntityServiceImpl implements TripEntityService {
        map.setItinaries(matToItineraryDetailsView
                (tripEntity));
 
-        map.setStartPoint(map.getStartPoint());
+        map.setStartPoint(tripEntity.getStartPoint());
 
         if(tripEntity.getDetails() != null) {
             map.setDetails(modelMapper
@@ -365,7 +367,17 @@ public class TripEntityServiceImpl implements TripEntityService {
     }
 
     @Override
-    public List<TripEntity> getByKeyword(String keyword){
-        return tripRepository.findByKeyword(keyword);
+    public List<TripsArticleViewModel> getByKeyword(String keyword){
+
+        return tripRepository.findByKeyword(keyword)
+                .stream()
+                .map(t -> {
+
+                    TripsArticleViewModel map = modelMapper.map(t, TripsArticleViewModel.class);
+                    map.setUrl(t.getPicture().getUrl());
+
+                    return map;
+                })
+                .collect(Collectors.toList());
     }
 }

@@ -18,7 +18,7 @@ public class TripsRestController {
     }
 
     @GetMapping("/pageable")
-    public ResponseEntity<Page<TripsArticleViewModel>> getBooks(
+    public ResponseEntity<Page<TripsArticleViewModel>> getTrips(
             @RequestParam(name = "pageNo", defaultValue = "0") Integer pageNo,
             @RequestParam(name = "pageSize", defaultValue = "8") Integer pageSize,
             @RequestParam(name = "sortBy", defaultValue = "id") String sortBy){

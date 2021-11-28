@@ -26,17 +26,17 @@ public class ItineraryEntity extends BaseEntity implements Serializable {
     )
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<AttractionEntity> attractions;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private TownEntity town;
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(optional = false)
     private BreakfastPlaceEntity breakfastPlace;
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(optional = false)
     private CoffeePlaceEntity coffeePlaceEntity;
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(optional = false)
     private DinnerPlaceEntity dinnerPlaceEntity;
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(optional = false)
     private HotelEntity hotelEntity;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL)
     private TripEntity trip;
 
     public ItineraryEntity() {

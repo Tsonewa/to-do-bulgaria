@@ -6,7 +6,7 @@ logging:
 spring:
     datasource:
         driverClassName: com.mysql.cj.jdbc.Driver
-        password:
+        password: Jeh96dits94$
         url: jdbc:mysql://localhost:3306/to-do-bulgaria?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
         username: root
     jpa:
@@ -26,15 +26,29 @@ spring:
             max-file-size: 10MB
             max-request-size: 10MB
 
-#Init data
+    #Init data
 #    sql:
 #        init:
 #            mode: always
+
+#Manager endpoints
+management:
+    endpoints:
+        web:
+#            base-path: "/admin"
+            exposure:
+                include: "*"
+
+    endpoint:
+        health:
+          show-details: always
 
 #Cloudinary Properties
 cloudinary:
     api-key: '584545974723152'
     api-secret: f6oKiS1Wx6zAGb21iLSwt8Q1z4c
     cloud-Name: dabxnbbrp
+
+
 
 

@@ -17,7 +17,7 @@ public interface TripRepository extends JpaRepository<TripEntity, Long> {
 
     List<TripEntity> findAllByUserId(@Param("id") Long id);
 
-    @Query(value = "select * from trips t where t.region like %:keyword%", nativeQuery = true)
+    @Query(value = "select * from trips t where t.start_point like %:keyword%", nativeQuery = true)
     List<TripEntity> findByKeyword(@Param("keyword") String keyword);
 
 }

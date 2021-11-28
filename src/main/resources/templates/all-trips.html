@@ -20,7 +20,6 @@
             <a id="article-a" th:href="@{/trips/favourite/{id}(id = *{id})}" th:method="get" class="fav-btn "><i class="far fa-heart"></i></a>
             <div  class="img-card-wrapper">
                 <img th:src="*{url}">
-                <!--button th:href="@{/}"><i class="far fa-heart"></i></button>-->
             </div>
             <a th:href="@{/trips/{id}/details(id=*{id})}">
             <div class="text-card-wrapper">
