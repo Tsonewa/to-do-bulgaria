@@ -211,19 +211,25 @@ nav {
 
 
 .type-cards-wrapper {
-    width: 100%;
+    width: 80%;
     height: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    text-align: center;
     justify-content: center;
-    align-content: center;
+    align-self: center;
 }
 
 .type-container {
     align-self: center;
     width: 80%;
+}
+
+.type-container > select{
+    border: 1px solid grey;
+    padding: 7px;
+    border-radius: 8px;
+    margin-bottom: 11px;
 }
 
 .searchbar-headling {
@@ -283,7 +289,7 @@ input {
 }
 
 .search-btn-wrapper {
-    margin-top: 85px;
+    margin-top: 45px;
 }
 
 .searchbar-headling {

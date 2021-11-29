@@ -37,7 +37,7 @@
                     <hr>
                     <a class="dropdown-a" th:href="@{/profile/my-trips}"  ><i class="fas fa-id-card"  th:text="#{profile}"></i></a>
                     <a sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')" class="dropdown-a" th:href="@{/admin}"  th:text="#{stats}"><i class="fas fa-chart-line"></i></a>
-                    <a class="dropdown-a" ><i class="fas fa-cog" th:text="#{settings}" ></i></a>
+                    <a class="dropdown-a" th:text="#{settings}"><i class="fas fa-cog"  ></i></a>
                     <hr>
                     <form class="log-out-div" th:action="@{/users/logout}" th:method="post">
                     <button class="dropdown-a exit-btn" ><i class="fas fa-sign-out-alt" th:text="#{logout}"></i></button>
@@ -68,7 +68,14 @@
                     </div>
                 </div>
                 <div class="type-container">
-                    <h5 class="type-header" th:text="#{type}">Choose type</h5>
+                    <label th:for="categoryName">Choose type</label>
+                    <select name="categoryName" id="categoryName">
+                        <option th:value="MOUNTAIN">Mountain</option>
+                        <option th:value="SEASIDE">Seaside</option>
+                        <option th:value="CITY">City</option>
+                        <option th:value="ECO_FRIENDLY">Eco-friendly</option>
+                    </select>
+                </div>
                     <div class="type-cards-wrapper">
                         <div class="card">
                             <a><i class="fas fa-mountain"></i></a>
@@ -87,7 +94,6 @@
                             <h3 class="type-h3" th:text="#{eco}">Eco-friendly</h3>
                         </div>
                     </div>
-                </div>
                 <div class="search-btn-wrapper">
                     <button type="submit" class="wide-btn btn" th:text="#{searchBtn}">Search</button>
                 </div>
