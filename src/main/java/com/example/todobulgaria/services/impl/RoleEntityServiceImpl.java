@@ -19,23 +19,6 @@ public class RoleEntityServiceImpl implements RoleEntityService {
     }
 
     @Override
-    public void initRoles() {
-
-        if(roleRepository.count() > 0){
-            return;
-        }
-
-        Arrays.stream(RoleEnum.values())
-                .forEach(r -> {
-
-                    RoleEntity roleEntity = new RoleEntity();
-                    roleEntity.setRole(r);
-
-                    roleRepository.save(roleEntity);
-                });
-    }
-
-    @Override
     public RoleEntity findByName(RoleEnum role) throws RoleNotFoundException {
 
         return roleRepository.findByRole(role)

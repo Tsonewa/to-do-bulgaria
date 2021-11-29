@@ -1,14 +1,21 @@
 package com.example.todobulgaria.models.bindings;
 
-import java.sql.Date;
-
 public class SearchBindingModel {
 
     private String startPoint;
     private String startDate;
     private String endDate;
+    private String categoryName;
 
     public SearchBindingModel() {
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public String getStartDate() {

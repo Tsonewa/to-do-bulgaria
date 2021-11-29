@@ -35,7 +35,7 @@ public class UserEntity extends BaseEntity implements Serializable {
     @OneToMany(mappedBy = "user", targetEntity = TripEntity.class)
     private List<TripEntity> trips;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST})
+    @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name="user_favourite",
             joinColumns={@JoinColumn(name="userId")},
             inverseJoinColumns={@JoinColumn(name="favouriteId")})

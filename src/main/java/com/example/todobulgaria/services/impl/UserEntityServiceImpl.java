@@ -49,39 +49,6 @@ public class UserEntityServiceImpl implements UserEntityService {
     }
 
     @Override
-    public void initUsers() {
-
-        if (userRepository.count() > 0) {
-            return;
-        }
-
-        RoleEntity adminRole = roleRepository.findByRole(RoleEnum.ADMIN).orElse(null);
-        RoleEntity userRole = roleRepository.findByRole(RoleEnum.USER).orElse(null);
-
-        UserEntity admin = new UserEntity();
-        admin.setUsername("admin");
-        admin.setFirstName("Admin");
-        admin.setLastName("Adminov");
-        admin.setEmail("admin@abv.bg");
-        admin.setPassword(passwordEncoder.encode("admin"));
-        admin.setStatus(true);
-
-        admin.setRoles(List.of(adminRole, userRole));
-        userRepository.save(admin);
-
-        UserEntity user = new UserEntity();
-        user.setUsername("pesho");
-        user.setFirstName("Petyr");
-        user.setLastName("Petrov");
-        user.setEmail("peshko@mail.bg");
-        user.setPassword(passwordEncoder.encode("12345"));
-        user.setStatus(true);
-
-        user.setRoles(List.of(userRole));
-        userRepository.save(user);
-    }
-
-    @Override
     public void registrarUser(UserRegisterServiceModel userRegisterServiceModel) throws IOException {
 
         if (existByUsername(userRegisterServiceModel.getUsername())) {

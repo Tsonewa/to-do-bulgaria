@@ -1,3 +1,35 @@
+INSERT INTO  categories (`name`)
+values ('MOUNTAIN'),
+       ('CITY'),
+       ('SEASIDE'),
+       ('ECO_FRIENDLY');
+
+INSERT INTO  roles (`role`)
+values ('USER'),
+       ('ADMIN');
+
+INSERT INTO pictures (url)
+VALUES ('https://res.cloudinary.com/dabxnbbrp/image/upload/v1637148377/1_sw7qex.jpg'),
+       ('https://res.cloudinary.com/dabxnbbrp/image/upload/v1637148360/2_cy8g2h.jpg'),
+       ('https://res.cloudinary.com/dabxnbbrp/image/upload/v1637148359/3_uwvoom.jpg'),
+       ('https://res.cloudinary.com/dabxnbbrp/image/upload/v1637148380/4_wlvzrb.jpg'),
+       ('https://res.cloudinary.com/dabxnbbrp/image/upload/v1637528308/sodjh4ukaucugkzdbho3.png'),
+        ('https://res.cloudinary.com/dabxnbbrp/image/upload/v1636468807/ivb5hjlpec3mwxp6u1m6.jpg'),
+       ('https://res.cloudinary.com/dabxnbbrp/image/upload/v1636469119/ymshr9ut5kjwmazt1ffl.webp'),
+       ('https://res.cloudinary.com/dabxnbbrp/image/upload/v1637077858/dpwdevalzbvqrtnxnnjk.jpg'),
+       ('https://res.cloudinary.com/dabxnbbrp/image/upload/v1637093619/nqnxpyq2lasrpus8mm6q.jpg'),
+       ('https://res.cloudinary.com/dabxnbbrp/image/upload/v1637570488/xbjheh5siz24z1voswxw.jpg'),
+
+
+INSERT INTO  users (email, first_name, last_name, password, status, username, profile_picture_url_id)
+values ('admin@gmail.com', 'Admin', 'Adminov', 'a20913c3bd79c3f36f828e2533058a4bd5c2229f5cfe51183e82606ab461cedf13e7c7e7ca51caab', true, 'admin', 5),
+       ('pesho@gmail.com', 'Petyr', 'Petrov', 'f5d3ef035ee251222e29d25a2019128ccdb3bec7f71a4b6e1236311cdc321e19c73294436e0464c2', true, 'pesho', 5);
+
+INSERT INTO  user_roles (user_entity_id, role_id)
+values (1, 1),
+       (1, 2),
+       (2, 1);
+
 INSERT INTO  towns (`name`, region)
 values ('Своге', 'Западна България'),
        ('Зверино','Западна България'),
@@ -74,11 +106,7 @@ values ('Искрецки манастир „Успение Богородич�
        ('Музей на авиацията');
 
 
-INSERT INTO pictures (url)
-VALUES ('https://res.cloudinary.com/dabxnbbrp/image/upload/v1637148377/1_sw7qex.jpg'),
-       ('https://res.cloudinary.com/dabxnbbrp/image/upload/v1637148360/2_cy8g2h.jpg'),
-       ('https://res.cloudinary.com/dabxnbbrp/image/upload/v1637148359/3_uwvoom.jpg'),
-       ('https://res.cloudinary.com/dabxnbbrp/image/upload/v1637148380/4_wlvzrb.jpg');
+
 
 
 INSERT INTO trips (description, duration, rating, start_point, category_entity_id, details_id, picture_id, user_id)
