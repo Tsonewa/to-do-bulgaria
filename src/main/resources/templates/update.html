@@ -18,44 +18,44 @@
         <fieldset id="update-fieldset">
         <div class="input-div">
             <input type="hidden" th:field="*{tripId}" th:name="tripid">
-            <label>Закуска</label>
+            <label th:text="#{breakfastPlace}">Закуска</label>
             <input th:field="*{breakfastPlace}" type="text" name="breakfastPlace" placeholder="Mekitsa&Coffee"/>
             <p th:if="${#fields.hasErrors('breakfastPlace')}" th:errors="*{breakfastPlace}" class="error"></p>
-            <label>Добави адрес</label>
+            <label th:text="#{addAddress}">Добави адрес</label>
             <input th:field="*{breakfastPlaceAddress}" type="text" name="breakfastPlaceAddress" placeholder="бул.Цариградско шосе, 15 1000,София"/>
             <p th:if="${#fields.hasErrors('breakfastPlaceAddress')}" th:errors="*{breakfastPlaceAddress}" class="error"></p>
-            <label>Добави връзка за резервация</label>
+            <label th:text="#{addUri}">Добави връзка за резервация</label>
             <input th:field="*{breakfastPlaceBookingUrl}" type="text" name="breakfastPlaceUrl" placeholder="https://www.booking.com"/>
             <p th:if="${#fields.hasErrors('breakfastPlaceBookingUrl')}" th:errors="*{breakfastPlaceBookingUrl}" class="error"></p>
-            <label>Кафе</label>
+            <label th:text="#{coffeePlace}">Кафе</label>
             <input th:field="*{coffeePlace}" type="text" name="coffeePlace" placeholder="CoffeeBar"/>
             <p th:if="${#fields.hasErrors('coffeePlace')}" th:errors="*{coffeePlace}" class="error"></p>
-            <label>Добави адрес</label>
+            <label th:text="#{addAddress}">Добави адрес</label>
             <input th:field="*{coffeePlaceAddress}" type="text" name="coffeePlaceAddress" placeholder="бул.Цариградско шосе, 15 1000,София"/>
             <p th:if="${#fields.hasErrors('coffeePlaceAddress')}" th:errors="*{coffeePlaceAddress}" class="error"></p>
-            <label>Добави връзка за резервация</label>
+            <label th:text="#{addUri}">Добави връзка за резервация</label>
             <input th:field="*{coffeePlaceBookingUrl}" type="text" name="coffeePlaceBookingUrl" placeholder="https://www.booking.com"/>
             <p th:if="${#fields.hasErrors('coffeePlaceBookingUrl')}" th:errors="*{coffeePlaceBookingUrl}" class="error"></p>
-            <label>Хотел</label>
+            <label th:text="#{hotel}">Хотел</label>
             <input th:field="*{hotel}" type="text" name="hotel" placeholder="Grand Hotel Sofia"/>
             <p th:if="${#fields.hasErrors('hotel')}" th:errors="*{hotel}" class="error"></p>
-            <label>Добави адрес</label>
+            <label th:text="#{addAddress}">Добави адрес</label>
             <input th:field="*{hotelAddress}" type="text" name="hotelAddress" placeholder="бул.Цариградско шосе, 15 1000,София"/>
             <p th:if="${#fields.hasErrors('hotelAddress')}" th:errors="*{hotelAddress}" class="error"></p>
-            <label>Добави връзка за резервация</label>
+            <label th:text="#{addUri}">Добави връзка за резервация</label>
             <input id="hotelBookingUrl" th:field="*{hotelBookingUrl}" th:errors="*{hotelBookingUrl}" type="text" name="hotelBookingUrl" placeholder="https://www.booking.com" />
             <p th:if="${#fields.hasErrors('hotelBookingUrl')}" th:errors="*{hotelBookingUrl}" class="error"></p>
-            <label>Вечеря</label>
+            <label th:text="#{dinnerPlace}">Вечеря</label>
             <input th:field="*{dinnerPlace}" type="text" name="dinnerPlace" placeholder="Blue House" />
             <p th:if="${#fields.hasErrors('dinnerPlace')}" th:errors="*{dinnerPlace}" class="error"></p>
-            <label>Добави адрес</label>
+            <label th:text="#{addAddress}">Добави адрес</label>
             <input th:field="*{dinnerPlaceAddress}" type="text" name="dinnerPlaceAddress" placeholder="бул.Цариградско шосе, 15 1000,София"/>
             <p th:if="${#fields.hasErrors('dinnerPlaceAddress')}" th:errors="*{dinnerPlaceAddress}" class="error"></p>
-            <label>Добави връзка за резервация</label>
+            <label th:text="#{addUri}">Добави връзка за резервация</label>
             <input th:field="*{dinnerPlaceBookingUrl}" type="text" name="dinnerPlaceBookingUrl" placeholder="https://www.booking.com"/>
             <p th:if="${#fields.hasErrors('dinnerPlaceBookingUrl')}" th:errors="*{dinnerPlaceBookingUrl}" class="error"></p>
         </div>
-        <button type="submit" name="update-day" class="btn" value="update-day">Update</button>
+        <button type="submit" name="update-day" class="btn" value="update-day" th:text="#{update}">Update</button>
     </fieldset>
         </div>
     </form>
