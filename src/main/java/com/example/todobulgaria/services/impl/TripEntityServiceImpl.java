@@ -84,7 +84,6 @@ public class TripEntityServiceImpl implements TripEntityService {
             } else {
                 TownEntity newTown = new TownEntity();
                 newTown.setName(addTripServiceModel.getTownName().get(i));
-                newTown.setRegion(addTripServiceModel.getStartPoint());
 
                 townEntityService.saveTown(newTown);
             }
@@ -238,6 +237,7 @@ public class TripEntityServiceImpl implements TripEntityService {
        map.setItinaries(matToItineraryDetailsView
                (tripEntity));
 
+       map.setDescription(tripEntity.getDescription());
         map.setStartPoint(tripEntity.getStartPoint());
 
         if(tripEntity.getDetails() != null) {
