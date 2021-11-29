@@ -14,7 +14,7 @@
 <header th:include="/fragments/fragment :: navbar" id="full-size">
 </header>
 <main>
-    <h1 class="best-trips-header">Nesebar</h1>
+    <h1 class="best-trips-header" th:text="#{allTrips}">Всички маршрути</h1>
     <div th:action="@{/trips/all}" th:method="get" th:object="${trips}" class="best-articles-wrapper">
         <div th:each="t : ${trips}" th:object="${t}" class="card-wrapper">
             <a id="article-a" th:href="@{/trips/favourite/{id}(id = *{id})}" th:method="get" class="fav-btn "><i class="far fa-heart"></i></a>
@@ -23,9 +23,9 @@
             </div>
             <a th:href="@{/trips/{id}/details(id=*{id})}">
             <div class="text-card-wrapper">
-                <h2><span th:text="*{startPoint}">Nesebar</span>, Bulgaria</h2>
+                <h2><span th:text="*{startPoint}">Nesebar</span>, България</h2>
                 <div class="rate-card-wrapper">
-                    <h5> <span th:text="*{duration}">3</span> days</h5>
+                    <h5> <span th:text="*{duration}">3</span> дни</h5>
                     <div class="rating">
                         <h5><i class="fas fa-star checked"></i></h5>
                         <h5><i class="fas fa-star checked"></i></h5>
@@ -38,10 +38,10 @@
             </a>
         </div>
         <div class="pagination-btn-wrapper">
-        <a class="first" th:if="${currentPage > 1}" th:href="@{'/trips/all/1'}">First</a>
-        <span class="first" th:unless="${currentPage > 1}">First</span>
-        <a class="prev" th:if="${currentPage > 1}" th:href="@{'/trips/all/' + ${currentPage - 1}}">Previous</a>
-        <span class="prev" th:unless="${currentPage > 1}">Previous</span>
+        <a class="first" th:if="${currentPage > 1}" th:href="@{'/trips/all/1'}" th:text="#{first}">First</a>
+        <span class="first" th:unless="${currentPage > 1}" th:text="#{first}">First</span>
+        <a class="prev" th:if="${currentPage > 1}" th:href="@{'/trips/all/' + ${currentPage - 1}}" th:text="#{previous}">Previous</a>
+        <span class="prev" th:unless="${currentPage > 1}" th:text="#{previous}">Previous</span>
         <span class="prev" th:each="i: ${#numbers.sequence(1, totalPages)}">
                <a class="page-num" th:if="${currentPage != i}" th:href="@{'/trips/all/' + ${i}}">[[${i}]]</a>
                     <span class="prev" th:unless="${currentPage != i}">[[${i}]]</span>

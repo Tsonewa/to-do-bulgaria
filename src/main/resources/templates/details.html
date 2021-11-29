@@ -46,14 +46,14 @@
             </div>
         </div>
         <div class="info-text-wrapper-p">
-            <p th:value="*{description}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam reprehenderit quo illum, repudiandae
+            <p th:text="*{description}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam reprehenderit quo illum, repudiandae
                 quos perferendis necessitatibus pariatur ratione sint odit temporibus molestias! Amet illum voluptatem
                 ad maxime rem laborum delectus eos nisi at magnam velit, quisquam inventore quae, est explicabo
                 accusantium doloremque tenetur corporis architecto saepe libero! Et, suscipit dolore!</p>
         </div>
     </div>
     <div class="plan-wrapper">
-        <h2>Plan</h2>
+        <h2 th:text="#{plan}">Plan</h2>
         <hr>
         <div class="map-wrapper">
             <div class="plan-wrapper">
@@ -111,24 +111,24 @@
         </div>
     </div>
     <div class="details-wrapper">
-        <h2>Details</h2>
+        <h2 th:text="#{details}">Details</h2>
         <hr>
         <div class="details-wrapper">
             <div class="details-bullet">
                 <div  class="details bullet">
                     <img src="/images/collor-dots/green.png">
-                    <h5>Equipment</h5>
+                    <h5 th:text="#{equipment}">Equipment</h5>
                     <h6 th:if="*{details != null}" th:text="*{details.equipment}">bul.fslfms.fksof</h6>
                 </div>
                 <div  class="details bullet">
                     <img src="/images/collor-dots/purple.png">
-                    <h5>Foto tips</h5>
+                    <h5 th:text="#{foto}">Foto tips</h5>
                     <h6 th:if="*{details != null}" th:text="*{details.fotoTips}">The equipment you need Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio,
                         maxime.</h6>
                 </div>
                 <div class="details bullet">
                     <img src="/images/collor-dots/blue.png">
-                    <h5>Festivals</h5>
+                    <h5 th:text="#{festivals}">Festivals</h5>
                     <h6 th:if="*{details != null}" th:text="*{details.festivals}">bul.fslfms.fksof</h6>
                 </div>
             </div>
@@ -136,7 +136,7 @@
     </div>
 
         <div class="comments-container">
-            <h2>Comments</h2>
+            <h2 th:text="#{comments}">Comments</h2>
             <hr>
             <ul id="comments-list" class="comments-list">
                 <li>
