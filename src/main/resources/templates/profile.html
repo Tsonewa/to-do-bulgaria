@@ -34,15 +34,15 @@
 
             <div class="table-wrapper">
 <th:block th:if="${userTrips.size() > 0}">
-                <span>Моите маршрути</span>
+                <span th:text="#{myTrips}">Моите маршрути</span>
 <div class="trips-table-wrapper">
 
     <table th:action="@{/profile/my-trips}" th:method="get" th:object="${userTrips}">
         <tr>
-            <th>Екскурзия</th>
-            <th>Продължителност</th>
-            <th>Тип</th>
-            <th>Действие</th>
+            <th th:text="#{trip}">Екскурзия</th>
+            <th th:text="#{duration}">Продължителност</th>
+            <th th:text="#{types}">Тип</th>
+            <th th:text="#{action}">Действие</th>
         </tr>
         <tr th:each="t : ${userTrips}" th:object="${t}">
             <td><span th:text="*{startPoint}">Белоградчик</span>, България</td>
@@ -54,15 +54,15 @@
 </div>
 </th:block>
     <th:block th:if="${userFavouriteTrips.size() > 0}">
-    <span>Любими маршрути</span>
+    <span th:text="#{favouriteTrips}">Любими маршрути</span>
 
     <div class="trips-table-wrapper">
     <table id="favourite-trips"  th:object="${userFavouriteTrips}">
         <tr>
-            <th>Екскурзия</th>
-            <th>Продължителност</th>
-            <th>Тип</th>
-            <th>Действие</th>
+            <th th:text="#{trip}">Екскурзия</th>
+            <th th:text="#{duration}">Продължителност</th>
+            <th th:text="#{types}">Тип</th>
+            <th th:text="#{action}">Действие</th>
         </tr>
         <tr  th:each="t : ${userFavouriteTrips}" th:object="${t}">
             <td><span th:text="*{startPoint}">Белоградчик</span>, България</td>
