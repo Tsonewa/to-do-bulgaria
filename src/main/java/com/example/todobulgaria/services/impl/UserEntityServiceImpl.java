@@ -1,7 +1,6 @@
 package com.example.todobulgaria.services.impl;
 
 import com.example.todobulgaria.models.entities.PictureEntity;
-import com.example.todobulgaria.models.entities.RoleEntity;
 import com.example.todobulgaria.models.entities.UserEntity;
 import com.example.todobulgaria.models.enums.RoleEnum;
 import com.example.todobulgaria.models.service.UserRegisterServiceModel;
@@ -22,7 +21,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
