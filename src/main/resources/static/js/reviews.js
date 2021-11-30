@@ -5,6 +5,55 @@ const reviewsContainer =
 
 const reviewsArray = [];
 
+const csrfHeaderName = document.head.querySelector('[name="_csrf_header"]').content;
+const csrfHeaderValue = document.head.querySelector('[name="_csrf"]').content;
+
+const commentForm = document.getElementById('commentForm')
+commentForm.addEventListener("submit", handleReviewSubmit)
+
+async function handleReviewSubmit(event) {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const url = form.action;
+    const formData = new FormData(form);
+
+    try {
+        const responseData = await postFormDataAsJson({url, formData});
+
+        reviewsContainer.insertAdjacentHTML("afterbegin", asReview(responseData));
+
+        form.reset();
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+async function postFormDataAsJson({url, formData}) {
+
+    const plainFormData = Object.fromEntries(formData.entries());
+    const formDataAsJSONString = JSON.stringify(plainFormData);
+
+    const fetchOptions = {
+        method: "POST",
+        headers: {
+            [csrfHeaderName] : csrfHeaderValue,
+            "Content-Type" : "application/json",
+            "Accept" :"application/json"
+        },
+        body: formDataAsJSONString
+    }
+
+    const response = await fetch(url, fetchOptions);
+
+    if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(errorMessage);
+    }
+
+    return response.json();
+}
+
     const displayReviews = (reviews) => {
     reviewsContainer.innerHTML = reviews.map((r) => {
         return asReview(r)
@@ -51,6 +100,8 @@ const reviewsArray = [];
 
         return li.innerHTML;
 }
+
+
 
 fetch(`http://localhost:8080/api/${tripId}/reviews`)
     .then(response => response.json())
