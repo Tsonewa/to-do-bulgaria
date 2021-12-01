@@ -393,4 +393,19 @@ public class TripEntityServiceImpl implements TripEntityService {
                 })
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<TripsArticleViewModel> getByKeywordDurationAndCategory(String startPoint, int duration, int categoryName) {
+
+        return tripRepository.findByKeywordDurationAndCategory(startPoint.trim(), duration, categoryName)
+                .stream()
+                .map(t -> {
+
+                    TripsArticleViewModel map = modelMapper.map(t, TripsArticleViewModel.class);
+                    map.setUrl(t.getPicture().getUrl());
+
+                    return map;
+                })
+                .collect(Collectors.toList());
+    }
 }

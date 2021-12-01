@@ -8,7 +8,6 @@ import com.example.todobulgaria.models.views.TripsArticleViewModel;
 import org.springframework.data.domain.Page;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -38,9 +37,9 @@ public interface TripEntityService {
 
     List<TripsArticleViewModel> getByKeywordAndDuration(String keyword, int duration);
     List<TripsArticleViewModel> getByKeyword(String keyword);
-
-
+    List<TripsArticleViewModel> getByKeywordDurationAndCategory(String startPoint, int duration, int categoryName);
 }
+
 
 
 

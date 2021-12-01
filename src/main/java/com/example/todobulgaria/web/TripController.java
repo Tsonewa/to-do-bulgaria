@@ -9,7 +9,6 @@ import com.example.todobulgaria.models.entities.UserEntity;
 import com.example.todobulgaria.models.enums.CategoryEnum;
 import com.example.todobulgaria.models.enums.UnexcitingTownsWeatherAPIEnum;
 import com.example.todobulgaria.models.service.AddTripServiceModel;
-import com.example.todobulgaria.models.views.TripCategoryTownDurationViewModel;
 import com.example.todobulgaria.models.views.TripDetailsView;
 import com.example.todobulgaria.models.views.TripsArticleViewModel;
 import com.example.todobulgaria.repositories.UserRepository;
@@ -41,7 +40,6 @@ import java.net.URLConnection;
 import java.security.Principal;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.*;
@@ -303,9 +301,17 @@ public class TripController {
 
             int duration = (int) DAYS.between(localDateStart, localDateEnd);
 
-            list = tripEntityService
-                    .getByKeywordAndDuration(searchBindingModel.getStartPoint(), duration);
-        }else {
+            if(searchBindingModel.getCategoryName() != null){
+
+                list = tripEntityService
+                        .getByKeywordDurationAndCategory(searchBindingModel.getStartPoint(),
+                                duration, CategoryEnum.valueOf(searchBindingModel.getCategoryName()).ordinal());
+            }else {
+
+                list = tripEntityService
+                        .getByKeywordAndDuration(searchBindingModel.getStartPoint(), duration);
+            }
+            }else {
 
             list = tripEntityService
                     .getByKeyword(searchBindingModel.getStartPoint());
