@@ -518,6 +518,18 @@ h1 {
     margin: 40px 0px;
 }
 
+#commentForm > textarea{
+    min-height: 60px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#commentForm > input {
+    max-height: 34px;
+    max-width: 105px;
+    align-self: flex-end;
+}
+
 .comment-box input {
     height: 55px;
     width: 600px;
