@@ -8,6 +8,6 @@ public interface TownEntityService {
     TownEntity findTownByName(String name);
 
     boolean existTownEntityByName(String name);
-    void saveTown(TownEntity newTown);
+    TownEntity saveTown(TownEntity newTown);
 }
 

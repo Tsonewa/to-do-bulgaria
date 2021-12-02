@@ -1,5 +1,6 @@
 package com.example.todobulgaria.services.impl;
 
+import com.example.todobulgaria.exceptions.ObjectNotFoundException;
 import com.example.todobulgaria.models.entities.TownEntity;
 import com.example.todobulgaria.repositories.TownRepository;
 import com.example.todobulgaria.services.TownEntityService;
@@ -27,8 +28,9 @@ public class TownEntityServiceImpl implements TownEntityService {
     }
 
     @Override
-    public void saveTown(TownEntity newTown) {
+    public TownEntity saveTown(TownEntity newTown) {
 
-        townRepository.save(newTown);
+       return townRepository.save(newTown);
     }
+
 }
