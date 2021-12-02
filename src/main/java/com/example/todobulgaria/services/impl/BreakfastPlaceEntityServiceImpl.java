@@ -16,15 +16,15 @@ public class BreakfastPlaceEntityServiceImpl implements BreakfastPlaceEntityServ
 
 
     @Override
-    public BreakfastPlaceEntity findBrekfastPlaceEntityByName(String name) {
+    public BreakfastPlaceEntity findBreakfastPlaceEntityByName(String name) {
 
         return breakfastPlaceRepository.findByName(name).orElse(null);
     }
 
     @Override
-    public void saveBreakfastPlace(BreakfastPlaceEntity newBreakfastPlace) {
+    public BreakfastPlaceEntity saveBreakfastPlace(BreakfastPlaceEntity newBreakfastPlace) {
 
-        breakfastPlaceRepository.save(newBreakfastPlace);
+        return breakfastPlaceRepository.save(newBreakfastPlace);
     }
 
     @Override

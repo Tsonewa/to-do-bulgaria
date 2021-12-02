@@ -4,9 +4,9 @@ import com.example.todobulgaria.models.entities.BreakfastPlaceEntity;
 
 public interface BreakfastPlaceEntityService {
 
-    BreakfastPlaceEntity findBrekfastPlaceEntityByName(String name);
+    BreakfastPlaceEntity findBreakfastPlaceEntityByName(String name);
 
-    void saveBreakfastPlace(BreakfastPlaceEntity newBreakfastPlace);
+    BreakfastPlaceEntity saveBreakfastPlace(BreakfastPlaceEntity newBreakfastPlace);
 
     boolean existBreakfastPlaceByName(String name);
 }
