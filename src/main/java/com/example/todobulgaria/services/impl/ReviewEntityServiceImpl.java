@@ -26,14 +26,12 @@ public class ReviewEntityServiceImpl implements ReviewEntityService {
 
     private final ReviewRepository reviewRepository;
     private final TripRepository tripRepository;
-    private final ModelMapper modelMapper;
     private final UserEntityService userEntityService;
     private final TripEntityService tripEntityService;
 
-    public ReviewEntityServiceImpl(ReviewRepository reviewRepository, TripRepository tripRepository, ModelMapper modelMapper, UserEntityService userEntityService, TripEntityService tripEntityService) {
+    public ReviewEntityServiceImpl(ReviewRepository reviewRepository, TripRepository tripRepository, UserEntityService userEntityService, TripEntityService tripEntityService) {
         this.reviewRepository = reviewRepository;
         this.tripRepository = tripRepository;
-        this.modelMapper = modelMapper;
         this.userEntityService = userEntityService;
         this.tripEntityService = tripEntityService;
     }
@@ -42,8 +40,8 @@ public class ReviewEntityServiceImpl implements ReviewEntityService {
     @Override
     public List<ReviewEntityViewModel> getAllReviewsByTripId(Long tripId) {
 
-        TripEntity tripEntity = tripRepository.findById(tripId).orElseThrow(() -> new ObjectNotFoundException(tripId));
-
+        TripEntity tripEntity = tripRepository.findById(tripId).orElseThrow(()
+                -> new ObjectNotFoundException(tripId));
 
         return tripEntity.getReviews()
                 .stream()
@@ -53,7 +51,6 @@ public class ReviewEntityServiceImpl implements ReviewEntityService {
 
     @Override
     public ReviewEntityViewModel createComment(CreateReviewServiceModel serviceModel) {
-
 
         Optional<UserEntity> userByUsername = userEntityService.findUserByUsername(serviceModel.getUser());
 
@@ -80,7 +77,7 @@ public class ReviewEntityServiceImpl implements ReviewEntityService {
 
     }
 
-    private ReviewEntityViewModel  mapReview(ReviewEntity reviewEntity) {
+    private ReviewEntityViewModel mapReview(ReviewEntity reviewEntity) {
 
         ReviewEntityViewModel reviewModel = new ReviewEntityViewModel();
         reviewModel.setApprove(true);

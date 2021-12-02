@@ -21,9 +21,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.transaction.Transactional;
 import java.io.IOException;
-import java.util.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -89,7 +87,7 @@ public class TripEntityServiceImpl implements TripEntityService {
             }
 
             if (breakfastPlaceEntityService.existBreakfastPlaceByName(addTripServiceModel.getBreakfastPlace().get(i))) {
-                itineraryEntity.setBreakfastPlace(breakfastPlaceEntityService.findBrekfastPlaceEntityByName(addTripServiceModel.getBreakfastPlace().get(i)));
+                itineraryEntity.setBreakfastPlace(breakfastPlaceEntityService.findBreakfastPlaceEntityByName(addTripServiceModel.getBreakfastPlace().get(i)));
             } else {
                 BreakfastPlaceEntity newBreakfastPlace = new BreakfastPlaceEntity();
                 newBreakfastPlace.setName(addTripServiceModel.getBreakfastPlace().get(i));
@@ -126,7 +124,7 @@ public class TripEntityServiceImpl implements TripEntityService {
             }
 
             itineraryEntity.setTown(townEntityService.findTownByName(addTripServiceModel.getTownName().get(i)));
-            itineraryEntity.setBreakfastPlace(breakfastPlaceEntityService.findBrekfastPlaceEntityByName(addTripServiceModel.getBreakfastPlace().get(i)));
+            itineraryEntity.setBreakfastPlace(breakfastPlaceEntityService.findBreakfastPlaceEntityByName(addTripServiceModel.getBreakfastPlace().get(i)));
             itineraryEntity.setCreatedOn(LocalDate.now());
             itineraryEntity.setDinnerPlaceEntity(dinnerPlaceEntityService.findDinnerPlaceEntityByName(addTripServiceModel.getDinnerPlace().get(i)));
             itineraryEntity.setCoffeePlaceEntity(coffeePlaceEntityService.findCoffeePlaceEntityByName(addTripServiceModel.getCoffeePlace().get(i)));
