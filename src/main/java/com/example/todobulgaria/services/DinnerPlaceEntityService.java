@@ -6,7 +6,7 @@ public interface DinnerPlaceEntityService {
 
     DinnerPlaceEntity findDinnerPlaceEntityByName(String name);
 
-    void saveDinnerPlace(DinnerPlaceEntity newDinnerPlace);
+    DinnerPlaceEntity saveDinnerPlace(DinnerPlaceEntity newDinnerPlace);
 
     boolean existDinnerPlaceByName(String name);
 }

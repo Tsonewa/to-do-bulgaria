@@ -21,9 +21,9 @@ public class DinnerPlaceEntityServiceImpl implements DinnerPlaceEntityService {
     }
 
     @Override
-    public void saveDinnerPlace(DinnerPlaceEntity newDinnerPlace) {
+    public DinnerPlaceEntity saveDinnerPlace(DinnerPlaceEntity newDinnerPlace) {
 
-        dinnerPlaceRepository.save(newDinnerPlace);
+        return dinnerPlaceRepository.save(newDinnerPlace);
     }
 
     @Override
