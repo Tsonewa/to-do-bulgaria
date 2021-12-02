@@ -25,7 +25,7 @@ public class AttractionEntityServiceImpl implements AttractionEntityService {
     }
 
     @Override
-    public void saveAttraction(AttractionEntity attraction) {
-        attractionsRepository.save(attraction);
+    public AttractionEntity saveAttraction(AttractionEntity attraction) {
+        return attractionsRepository.save(attraction);
     }
 }

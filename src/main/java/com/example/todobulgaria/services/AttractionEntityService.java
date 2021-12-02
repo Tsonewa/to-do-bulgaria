@@ -8,7 +8,7 @@ public interface AttractionEntityService {
 
     boolean attractionExistByName(String name);
 
-    void saveAttraction(AttractionEntity attraction);
+    AttractionEntity saveAttraction(AttractionEntity attraction);
 }
 
 
