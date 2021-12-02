@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface UserEntityService {
 
     Optional<UserEntity> findUserByUsername(String username);
-    void registrarUser(UserRegisterServiceModel userRegisterServiceModel) throws IOException;
+    UserEntity registrarUser(UserRegisterServiceModel userRegisterServiceModel) throws IOException;
 
     boolean existByUsername(String username);
 

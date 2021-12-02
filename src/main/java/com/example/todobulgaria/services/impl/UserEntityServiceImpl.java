@@ -1,5 +1,6 @@
 package com.example.todobulgaria.services.impl;
 
+import com.example.todobulgaria.exceptions.UserDuplicationException;
 import com.example.todobulgaria.models.entities.PictureEntity;
 import com.example.todobulgaria.models.entities.UserEntity;
 import com.example.todobulgaria.models.enums.RoleEnum;
@@ -16,7 +17,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -47,11 +47,10 @@ public class UserEntityServiceImpl implements UserEntityService {
     }
 
     @Override
-    public void registrarUser(UserRegisterServiceModel userRegisterServiceModel) throws IOException {
+    public UserEntity registrarUser(UserRegisterServiceModel userRegisterServiceModel) throws IOException {
 
         if (existByUsername(userRegisterServiceModel.getUsername())) {
-            throw new UsernameNotFoundException("There is an account with that email address: "
-                    + userRegisterServiceModel.getUsername());
+            throw new UserDuplicationException(userRegisterServiceModel.getUsername());
         }
 
         UserEntity user = modelMapper.map(userRegisterServiceModel, UserEntity.class);
@@ -78,6 +77,7 @@ public class UserEntityServiceImpl implements UserEntityService {
                 getContext().
                 setAuthentication(authentication);
 
+        return user;
     }
 
     private PictureEntity createPictureEntity(MultipartFile file) throws IOException {

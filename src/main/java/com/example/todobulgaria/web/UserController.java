@@ -1,6 +1,7 @@
 package com.example.todobulgaria.web;
 
 import com.example.todobulgaria.models.bindings.UserRegisterBindingModel;
+import com.example.todobulgaria.models.entities.UserEntity;
 import com.example.todobulgaria.models.service.UserRegisterServiceModel;
 import com.example.todobulgaria.services.UserEntityService;
 import org.modelmapper.ModelMapper;
@@ -75,7 +76,7 @@ public class UserController {
 
         userEntityService.registrarUser(user);
 
-           return "redirect:/";
+        return "redirect:/";
     }
 
 
