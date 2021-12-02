@@ -16,8 +16,8 @@ public class DetailsEntityServiceImpl implements DetailsEntityService {
 
 
     @Override
-    public void saveDetailsEntity(DetailsEntity detailsEntity) {
+    public DetailsEntity saveDetailsEntity(DetailsEntity detailsEntity) {
 
-        detailsEntityRepository.saveAndFlush(detailsEntity);
+        return detailsEntityRepository.saveAndFlush(detailsEntity);
     }
 }

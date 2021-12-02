@@ -4,5 +4,5 @@ import com.example.todobulgaria.models.entities.DetailsEntity;
 
 public interface DetailsEntityService {
 
-    void saveDetailsEntity(DetailsEntity detailsEntity);
+    DetailsEntity saveDetailsEntity(DetailsEntity detailsEntity);
 }
