@@ -8,5 +8,5 @@ public interface CoffeePlaceEntityService {
 
     boolean existCoffeePlaceByName(String name);
 
-    void saveCoffeePlace(CoffeePlaceEntity newCoffeePlace);
+    CoffeePlaceEntity saveCoffeePlace(CoffeePlaceEntity newCoffeePlace);
 }

@@ -10,11 +10,9 @@ import org.springframework.stereotype.Service;
 public class CoffeePlaceEntityServiceImpl implements CoffeePlaceEntityService {
 
     private final CoffeePlaceRepository coffeePlaceRepository;
-    private final ModelMapper modelMapper;
 
-    public CoffeePlaceEntityServiceImpl(CoffeePlaceRepository coffeePlaceRepository, ModelMapper modelMapper) {
+    public CoffeePlaceEntityServiceImpl(CoffeePlaceRepository coffeePlaceRepository) {
         this.coffeePlaceRepository = coffeePlaceRepository;
-        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -30,8 +28,8 @@ public class CoffeePlaceEntityServiceImpl implements CoffeePlaceEntityService {
 
 
     @Override
-    public void saveCoffeePlace(CoffeePlaceEntity newCoffeePlace) {
+    public CoffeePlaceEntity saveCoffeePlace(CoffeePlaceEntity newCoffeePlace) {
 
-        coffeePlaceRepository.save(newCoffeePlace);
+    return coffeePlaceRepository.save(newCoffeePlace);
     }
 }
