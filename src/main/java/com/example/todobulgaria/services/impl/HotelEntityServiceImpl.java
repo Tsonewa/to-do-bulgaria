@@ -25,8 +25,8 @@ public class HotelEntityServiceImpl implements HotelEntityService {
     }
 
     @Override
-    public void saveHotel(HotelEntity newHotel) {
+    public HotelEntity saveHotel(HotelEntity newHotel) {
 
-        hotelRepository.save(newHotel);
+        return hotelRepository.save(newHotel);
     }
 }
