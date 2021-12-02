@@ -1,5 +1,6 @@
 package com.example.todobulgaria.services.impl;
 
+import com.example.todobulgaria.exceptions.CategoryNotFoundException;
 import com.example.todobulgaria.models.entities.CategoryEntity;
 import com.example.todobulgaria.models.enums.CategoryEnum;
 import com.example.todobulgaria.repositories.CategoryRepository;
@@ -12,8 +13,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import javax.management.relation.RoleNotFoundException;
 import java.util.Optional;
 
+import static com.example.todobulgaria.models.enums.RoleEnum.USER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.InstanceOfAssertFactories.OPTIONAL;
 import static org.junit.jupiter.api.Assertions.*;
@@ -46,12 +49,22 @@ class CategoryEntityServiceImplTest {
     @Test
     void getCategoryByName() {
 
-        when(categoryRepositoryMock.getCategoryEntityByName(any(CategoryEnum.class))).thenReturn(categoryEntityTest);
+        when(categoryRepositoryMock.getCategoryEntityByName(any(CategoryEnum.class))).thenReturn(Optional.of(categoryEntityTest));
 
         CategoryEntity categoryByName = serviceToTest.getCategoryByName(categoryEntityTest.getName());
 
         verify(categoryRepositoryMock).getCategoryEntityByName(categoryEntityTest.getName());
 
         assertThat(categoryByName).isNotNull();
+    }
+
+    @DisplayName("Unexciting category by name - throw exception")
+    @Test
+    void getCategoryByNameDoesntExist() {
+
+        when(categoryRepositoryMock.getCategoryEntityByName(CategoryEnum.CITY)).thenReturn(Optional.empty());
+
+        assertThrows(CategoryNotFoundException.class, ()
+                -> serviceToTest.getCategoryByName(CategoryEnum.CITY));
     }
 }
