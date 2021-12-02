@@ -1,7 +1,6 @@
 package com.example.todobulgaria.services.impl;
 
 import com.example.todobulgaria.exceptions.ObjectNotFoundException;
-import com.example.todobulgaria.models.dto.ItineraryDto;
 import com.example.todobulgaria.models.entities.*;
 import com.example.todobulgaria.models.service.ItineraryUpdateServiceModel;
 import com.example.todobulgaria.models.views.ItinerariesDetailsViewModel;
@@ -9,9 +8,6 @@ import com.example.todobulgaria.repositories.ItineraryRepository;
 import com.example.todobulgaria.services.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ItineraryEntityServiceImpl implements ItineraryEntityService {
@@ -22,22 +18,20 @@ public class ItineraryEntityServiceImpl implements ItineraryEntityService {
     private final DinnerPlaceEntityService dinnerPlaceEntityService;
     private final HotelEntityService hotelEntityService;
     private final CoffeePlaceEntityService coffeePlaceEntityService;
-    private final AttractionEntityService attractionEntityService;
 
-    public ItineraryEntityServiceImpl(ItineraryRepository itineraryRepository, ModelMapper modelMapper, BreakfastPlaceEntityService breakfastPlaceEntityService, DinnerPlaceEntityService dinnerPlaceEntityService, HotelEntityService hotelEntityService, CoffeePlaceEntityService coffeePlaceEntityService, AttractionEntityService attractionEntityService) {
+    public ItineraryEntityServiceImpl(ItineraryRepository itineraryRepository, ModelMapper modelMapper, BreakfastPlaceEntityService breakfastPlaceEntityService, DinnerPlaceEntityService dinnerPlaceEntityService, HotelEntityService hotelEntityService, CoffeePlaceEntityService coffeePlaceEntityService) {
         this.itineraryRepository = itineraryRepository;
         this.modelMapper = modelMapper;
         this.breakfastPlaceEntityService = breakfastPlaceEntityService;
         this.dinnerPlaceEntityService = dinnerPlaceEntityService;
         this.hotelEntityService = hotelEntityService;
         this.coffeePlaceEntityService = coffeePlaceEntityService;
-        this.attractionEntityService = attractionEntityService;
     }
 
     @Override
-    public void saveItinerary(ItineraryEntity itinerary) {
+    public ItineraryEntity saveItinerary(ItineraryEntity itinerary) {
 
-        itineraryRepository.saveAndFlush(itinerary);
+        return itineraryRepository.saveAndFlush(itinerary);
     }
 
     @Override
@@ -69,10 +63,11 @@ public class ItineraryEntityServiceImpl implements ItineraryEntityService {
     }
 
     @Override
-    public void updateItinerary(ItineraryUpdateServiceModel itineraryUpdateServiceModel) {
+    public ItineraryEntity updateItinerary(ItineraryUpdateServiceModel itineraryUpdateServiceModel) {
 
         ItineraryEntity byId = itineraryRepository.findById
-                (itineraryUpdateServiceModel.getId()).orElseThrow();
+                (itineraryUpdateServiceModel.getId())
+                .orElseThrow(() -> new ObjectNotFoundException(itineraryUpdateServiceModel.getId()));
 
         BreakfastPlaceEntity breakfastPlace = byId.getBreakfastPlace();
         breakfastPlace.setAddress(itineraryUpdateServiceModel
@@ -126,6 +121,6 @@ public class ItineraryEntityServiceImpl implements ItineraryEntityService {
 
         hotelEntityService.saveHotel(hotelEntity);
 
-        itineraryRepository.save(byId);
+      return itineraryRepository.save(byId);
     }
 }

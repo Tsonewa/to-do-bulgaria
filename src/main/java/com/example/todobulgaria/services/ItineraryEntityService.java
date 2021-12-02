@@ -5,11 +5,11 @@ import com.example.todobulgaria.models.service.ItineraryUpdateServiceModel;
 
 public interface ItineraryEntityService {
 
-    void saveItinerary(ItineraryEntity itinerary);
+    ItineraryEntity saveItinerary(ItineraryEntity itinerary);
 
     ItineraryUpdateServiceModel findById(Long id);
 
-    void updateItinerary(ItineraryUpdateServiceModel itineraryUpdateServiceModel);
+    ItineraryEntity updateItinerary(ItineraryUpdateServiceModel itineraryUpdateServiceModel);
 
 }
 
