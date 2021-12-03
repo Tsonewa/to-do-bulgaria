@@ -9,6 +9,7 @@ import com.example.todobulgaria.repositories.PictureRepository;
 import com.example.todobulgaria.repositories.RoleRepository;
 import com.example.todobulgaria.repositories.UserRepository;
 import com.example.todobulgaria.security.UserDetailsImpl;
+import com.example.todobulgaria.services.CloudinaryImage;
 import com.example.todobulgaria.services.CloudinaryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -16,27 +17,25 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
+import org.springframework.security.test.context.support.WithUserDetails;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.from;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.web.servlet.function.ServerResponse.status;
 
 @ExtendWith(MockitoExtension.class)
+@ContextConfiguration
 class UserEntityServiceImplTest {
 
     @Mock
@@ -60,6 +59,9 @@ class UserEntityServiceImplTest {
     @Mock
     PictureRepository pictureRepositoryMock;
 
+    @Mock
+    private UserRepository userRepositoryTest;
+
     @InjectMocks
     private UserEntityServiceImpl serviceToTest;
 
@@ -67,9 +69,14 @@ class UserEntityServiceImplTest {
     private PictureEntity testPicture;
     private RoleEntity testAdminRole, testUserRole;
     private UserRegisterServiceModel testUserRegisterServiceModel;
+    private MultipartFile multipartFile;
+    private CloudinaryImage cloudinaryImageTest;
+    private FileInputStream fileInputStreamTest;
 
     @BeforeEach
-    void setUp(){
+    void setUp() throws IOException {
+
+        userDetailsMock = new UserDetailsImpl(userRepositoryMock);
 
         serviceToTest = new UserEntityServiceImpl(userRepositoryMock,
                 passwordEncoderMock, roleRepositoryMock, modelMapperMock,
@@ -81,21 +88,29 @@ class UserEntityServiceImplTest {
         testAdminRole.setRole(RoleEnum.ADMIN);
         testUserRole.setRole(RoleEnum.USER);
 
+        fileInputStreamTest = new FileInputStream("src/main/resources/static/images/flag-round-250.png");
+        multipartFile = new MockMultipartFile("file", "NameOfTheFile", "multipart/form-data", fileInputStreamTest);
+        cloudinaryImageTest = new CloudinaryImage();
+        cloudinaryImageTest.setPublicId("public_id");
+        cloudinaryImageTest.setUrl("url");
+
         testPicture = new PictureEntity();
-        testPicture.setTitle("Picture");
-        testPicture.setUrl("url.png");
+
+        testPicture.setTitle(multipartFile.getOriginalFilename());
+        testPicture.setUrl(cloudinaryImageTest.getUrl());
         testPicture.setId(1L);
-        testPicture.setPublicId("public_id");
+        testPicture.setPublicId(cloudinaryImageTest.getPublicId());
 
         pictureRepositoryMock.save(testPicture);
 
         testUser = new UserEntity();
 
+        testUser.setId(1L);
         testUser.setUsername("pesho");
         testUser.setLastName("Petrov");
         testUser.setFirstName("Pesho");
         testUser.setEmail("petyr@gmail.com");
-        testUser.setPassword(passwordEncoderMock.encode("12345"));
+        testUser.setPassword("12345");
         testUser.setStatus(true);
         testUser.setRoles(List.of(testAdminRole, testUserRole));
         testUser.setProfilePictureUrl(pictureRepositoryMock.getById(1L));
@@ -106,42 +121,34 @@ class UserEntityServiceImplTest {
 
         testUserRegisterServiceModel.setUsername("pesho");
         testUserRegisterServiceModel.setEmail("gosho@gmail.com");
-        testUserRegisterServiceModel.setPassword("12345");
         testUserRegisterServiceModel.setFirstName("Georgi");
         testUserRegisterServiceModel.setLastName("Georgiev");
+        testUserRegisterServiceModel.setPassword("12345");
         testUserRegisterServiceModel.setConfirmPassword("12345");
+        testUserRegisterServiceModel.setProfilePictureUrl(multipartFile);
 
     }
 
     @DisplayName("Successful user registration")
     @Test
+    @WithUserDetails
     void registrarUserSuccess() throws IOException {
 
-//        UserEntity newUserTest = new UserEntity();
-//
-//        newUserTest.setUsername("pesho");
-//        newUserTest.setLastName("Georgiev");
-//        newUserTest.setFirstName("Gosho");
-//        newUserTest.setEmail("gosho@gmail.com");
-//        newUserTest.setPassword(passwordEncoderMock.encode("12345"));
-//        newUserTest.setStatus(true);
-//        newUserTest.setRoles(List.of(testAdminRole, testUserRole));
-//        newUserTest.setProfilePictureUrl(testPicture);
-//        newUserTest.setTrips(new ArrayList<>());
-//        newUserTest.setFavouriteTrips(new HashSet<>());
-//
-//        when(userRepositoryMock.existsByUsername(testUser.getUsername())).thenReturn(false);
-//        when(roleRepositoryMock.findByRole(RoleEnum.USER)).thenReturn(Optional.of(testUserRole));
-//        when(modelMapperMock.map(testUserRegisterServiceModel, UserEntity.class)).thenReturn(newUserTest);
-//        when(serviceToTest.registrarUser(testUserRegisterServiceModel)).thenReturn(newUserTest);
-//
-//        UserEntity newUser = serviceToTest.registrarUser(testUserRegisterServiceModel);
-//
-//        assertThat(newUser).isNotNull();
-//
-//        verify(userRepositoryMock, times(1)).save(Mockito.any(UserEntity.class));
+        when(userRepositoryMock.existsByUsername(testUser.getUsername())).thenReturn(false);
+        when(roleRepositoryMock.findByRole(RoleEnum.USER)).thenReturn(Optional.of(testUserRole));
+        when(modelMapperMock.map(testUserRegisterServiceModel, UserEntity.class)).thenReturn(testUser);
+        when(cloudinaryServiceMock.upload(multipartFile)).thenReturn(cloudinaryImageTest);
+        when(passwordEncoderMock.encode(testUser.getPassword())).thenReturn(testUser.getPassword());
+        when(userRepositoryMock.findUserEntityByUsername(testUser.getUsername())).
+                thenReturn(Optional.of(testUser));
 
-        //TODO
+        UserEntity newUser = serviceToTest.registrarUser(testUserRegisterServiceModel);
+
+       assertThat(newUser).isNotNull();
+
+      verify(userRepositoryMock, times(1)).save(Mockito.any(UserEntity.class));
+
+
     }
 
     @DisplayName("Unsuccessful user registration")
@@ -203,9 +210,9 @@ class UserEntityServiceImplTest {
 
         Optional<UserEntity> foundUser = serviceToTest.findUserByUsername(testUser.getUsername());
 
-        assertThat(foundUser).isNotNull();
-
         verify(userRepositoryMock).findUserEntityByUsername(testUser.getUsername());
+
+        assertThat(foundUser).isNotNull();
     }
 
     @DisplayName("User not found by passing username param")
@@ -232,14 +239,6 @@ class UserEntityServiceImplTest {
         assertThat(foundUser).isNull();
 
         verify(userRepositoryMock).findUserEntityByUsername("invalid_username");
-
-    }
-
-    @DisplayName("Upload cloudinary picture")
-    @Test
-    void createPictureEntity() {
-
-        //TODO
 
     }
 }

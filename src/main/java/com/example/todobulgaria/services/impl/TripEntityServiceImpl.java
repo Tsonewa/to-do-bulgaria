@@ -83,7 +83,8 @@ public class TripEntityServiceImpl implements TripEntityService {
                 TownEntity newTown = new TownEntity();
                 newTown.setName(addTripServiceModel.getTownName().get(i));
 
-                townEntityService.saveTown(newTown);
+                TownEntity townEntity = townEntityService.saveTown(newTown);
+                itineraryEntity.setTown(townEntity);
             }
 
             if (breakfastPlaceEntityService.existBreakfastPlaceByName(addTripServiceModel.getBreakfastPlace().get(i))) {
@@ -92,8 +93,8 @@ public class TripEntityServiceImpl implements TripEntityService {
                 BreakfastPlaceEntity newBreakfastPlace = new BreakfastPlaceEntity();
                 newBreakfastPlace.setName(addTripServiceModel.getBreakfastPlace().get(i));
 
-                breakfastPlaceEntityService.saveBreakfastPlace(newBreakfastPlace);
-
+                BreakfastPlaceEntity breakfastPlaceEntity = breakfastPlaceEntityService.saveBreakfastPlace(newBreakfastPlace);
+                itineraryEntity.setBreakfastPlace(breakfastPlaceEntity);
             }
 
             if (coffeePlaceEntityService.existCoffeePlaceByName(addTripServiceModel.getCoffeePlace().get(i))) {
@@ -102,7 +103,8 @@ public class TripEntityServiceImpl implements TripEntityService {
                 CoffeePlaceEntity newCoffeePlace = new CoffeePlaceEntity();
                 newCoffeePlace.setName(addTripServiceModel.getCoffeePlace().get(i));
 
-                coffeePlaceEntityService.saveCoffeePlace(newCoffeePlace);
+                CoffeePlaceEntity coffeePlaceEntity = coffeePlaceEntityService.saveCoffeePlace(newCoffeePlace);
+                itineraryEntity.setCoffeePlaceEntity(coffeePlaceEntity);
             }
 
             if (dinnerPlaceEntityService.existDinnerPlaceByName(addTripServiceModel.getDinnerPlace().get(i))) {
@@ -111,7 +113,8 @@ public class TripEntityServiceImpl implements TripEntityService {
                 DinnerPlaceEntity newDinnerPlace = new DinnerPlaceEntity();
                 newDinnerPlace.setName(addTripServiceModel.getDinnerPlace().get(i));
 
-                dinnerPlaceEntityService.saveDinnerPlace(newDinnerPlace);
+                DinnerPlaceEntity dinnerPlaceEntity = dinnerPlaceEntityService.saveDinnerPlace(newDinnerPlace);
+                itineraryEntity.setDinnerPlaceEntity(dinnerPlaceEntity);
             }
 
             if (hotelEntityService.existHotelEntityByName(addTripServiceModel.getHotel().get(i))) {
@@ -120,15 +123,11 @@ public class TripEntityServiceImpl implements TripEntityService {
                 HotelEntity newHotel = new HotelEntity();
                 newHotel.setName(addTripServiceModel.getHotel().get(i));
 
-                hotelEntityService.saveHotel(newHotel);
+                HotelEntity hotelEntity = hotelEntityService.saveHotel(newHotel);
+                itineraryEntity.setHotelEntity(hotelEntity);
             }
 
-            itineraryEntity.setTown(townEntityService.findTownByName(addTripServiceModel.getTownName().get(i)));
-            itineraryEntity.setBreakfastPlace(breakfastPlaceEntityService.findBreakfastPlaceEntityByName(addTripServiceModel.getBreakfastPlace().get(i)));
             itineraryEntity.setCreatedOn(LocalDate.now());
-            itineraryEntity.setDinnerPlaceEntity(dinnerPlaceEntityService.findDinnerPlaceEntityByName(addTripServiceModel.getDinnerPlace().get(i)));
-            itineraryEntity.setCoffeePlaceEntity(coffeePlaceEntityService.findCoffeePlaceEntityByName(addTripServiceModel.getCoffeePlace().get(i)));
-            itineraryEntity.setHotelEntity(hotelEntityService.findHotelEntityByName(addTripServiceModel.getHotel().get(i)));
 
             itineraryEntity.setTrip(entity);
 
@@ -167,8 +166,6 @@ public class TripEntityServiceImpl implements TripEntityService {
         entity.setPicture(picture);
 
         tripRepository.save(entity);
-
-
     }
 
     private PictureEntity createPictureEntity(MultipartFile file) throws IOException {
