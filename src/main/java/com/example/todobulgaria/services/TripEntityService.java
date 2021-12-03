@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 public interface TripEntityService {
-    void createTrip(AddTripServiceModel addTripServiceModel) throws IOException;
+    TripEntity createTrip(AddTripServiceModel addTripServiceModel) throws IOException;
 
     List<TripsArticleViewModel> findFirstEightBestTripsOrderByRating();
 

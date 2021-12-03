@@ -82,7 +82,7 @@ public class TripController {
     @PostMapping("/add")
     public String addItinerary(@Valid AddTripBindingModel addTripBindingModel,
                                BindingResult bindingResult,
-                               RedirectAttributes redirectAttributes) throws IOException {
+                               RedirectAttributes redirectAttributes, Principal principal) throws IOException {
 
         if(bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("addTripBindingModel", addTripBindingModel);
@@ -99,6 +99,8 @@ public class TripController {
                 .getCategoryName().replace("-", "_"));
 
         trip.setCategoryName(CategoryEnum.valueOf(categoryEnum.name()));
+
+        trip.setCreator(principal.getName());
 
         tripEntityService
                 .createTrip(trip);

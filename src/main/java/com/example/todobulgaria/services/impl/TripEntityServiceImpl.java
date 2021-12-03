@@ -15,8 +15,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -63,7 +61,7 @@ public class TripEntityServiceImpl implements TripEntityService {
     }
 
     @Override
-    public void createTrip(AddTripServiceModel addTripServiceModel) throws IOException {
+    public TripEntity createTrip(AddTripServiceModel addTripServiceModel) throws IOException {
 
         TripEntity entity = modelMapper.map(addTripServiceModel, TripEntity.class);
 
@@ -155,9 +153,7 @@ public class TripEntityServiceImpl implements TripEntityService {
             entity.setDetails(details);
         }
 
-        UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        entity.setUser(userEntityService.findUserByUsername(principal.getUsername()).orElseThrow());
+        entity.setUser(userEntityService.findUserByUsername(addTripServiceModel.getCreator()).orElseThrow());
 
         var picture = createPictureEntity(addTripServiceModel.getUrl());
 
@@ -165,7 +161,7 @@ public class TripEntityServiceImpl implements TripEntityService {
 
         entity.setPicture(picture);
 
-        tripRepository.save(entity);
+      return tripRepository.save(entity);
     }
 
     private PictureEntity createPictureEntity(MultipartFile file) throws IOException {
@@ -176,7 +172,6 @@ public class TripEntityServiceImpl implements TripEntityService {
         picture.setPublicId(uploaded.getPublicId());
         picture.setTitle(file.getName());
         picture.setUrl(uploaded.getUrl());
-
         return picture;
     }
 
@@ -193,14 +188,12 @@ public class TripEntityServiceImpl implements TripEntityService {
                 }).collect(Collectors.toList());
     }
 
-
     private DetailsEntity createDetailsEntity(String equipment, String festivals, String fotoTip) {
 
             DetailsEntity detailsEntity = new DetailsEntity();
             detailsEntity.setEquipment(equipment);
             detailsEntity.setFestivals(festivals);
             detailsEntity.setFotoTips(fotoTip);
-
         return detailsEntity;
     }
 
@@ -323,7 +316,6 @@ public class TripEntityServiceImpl implements TripEntityService {
 
     @Override
     public TripEntity findEntityById(Long id) {
-
         return tripRepository.findById(id)
                 .orElseThrow(() -> new ObjectNotFoundException(id));
 
@@ -331,7 +323,6 @@ public class TripEntityServiceImpl implements TripEntityService {
 
     @Override
     public Integer tripsCount() {
-
         return tripRepository.findAll().size();
     }
 

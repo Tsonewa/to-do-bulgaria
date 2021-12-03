@@ -20,8 +20,17 @@ public class AddTripServiceModel {
     private String equipment;
     private String festivals;
     private String fotoTip;
+    private String creator;
 
     public AddTripServiceModel() {
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 
     public String getStartPoint() {

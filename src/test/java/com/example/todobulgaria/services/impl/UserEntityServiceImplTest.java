@@ -59,9 +59,6 @@ class UserEntityServiceImplTest {
     @Mock
     PictureRepository pictureRepositoryMock;
 
-    @Mock
-    private UserRepository userRepositoryTest;
-
     @InjectMocks
     private UserEntityServiceImpl serviceToTest;
 
