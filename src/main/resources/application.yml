@@ -26,6 +26,14 @@ spring:
             max-file-size: 10MB
             max-request-size: 10MB
 
+#Initialized users authentications:
+	#User:
+		#username: pesho
+		#password: 12345
+	#Admin:
+		#username: admin
+		#password: admin
+
     #Init data
 #    sql:
 #        init:

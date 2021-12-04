@@ -1,3 +1,11 @@
+-- Initialized users authentications:
+-- 	User:
+-- 		username: pesho
+-- 		password: 12345
+-- 	Admin:
+-- 		username: admin
+-- 		password: admin
+
 INSERT INTO  categories (`name`)
 values ('MOUNTAIN'),
        ('CITY'),
@@ -6,7 +14,7 @@ values ('MOUNTAIN'),
 
 INSERT INTO  roles (`role`)
 values ('USER'),
-       ('ADMIN');
+        ('ADMIN');
 
 INSERT INTO pictures (url)
 VALUES ('https://res.cloudinary.com/dabxnbbrp/image/upload/v1637539537/zidyt1xbpr7cjquafp4l.png'),
