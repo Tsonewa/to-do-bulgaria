@@ -4,6 +4,7 @@ import com.example.todobulgaria.models.BaseEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
@@ -12,9 +13,11 @@ public class AttractionEntity extends BaseEntity {
 
     @Column(nullable = false, unique = true)
     private String name;
-    @Column(columnDefinition = "LONGTEXT")
+    @Lob
+    @Column
     private String location;
-    @Column(columnDefinition = "LONGTEXT")
+    @Lob
+    @Column
     private String description;
 
     public AttractionEntity() {

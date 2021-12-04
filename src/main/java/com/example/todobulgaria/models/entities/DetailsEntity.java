@@ -4,6 +4,7 @@ import com.example.todobulgaria.models.BaseEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import java.io.Serializable;
 
@@ -11,11 +12,14 @@ import java.io.Serializable;
 @Table(name = "details")
 public class DetailsEntity extends BaseEntity implements Serializable {
 
-    @Column(columnDefinition = "TEXT")
+    @Lob
+    @Column
     private String equipment;
-    @Column(columnDefinition = "TEXT")
+    @Lob
+    @Column
     private String festivals;
-    @Column(name = "foto_tips",columnDefinition = "TEXT")
+    @Lob
+    @Column(name = "foto_tips")
     private String fotoTips;
 
     public DetailsEntity() {
