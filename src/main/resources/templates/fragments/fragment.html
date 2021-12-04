@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <div class="type-container">
-                    <label th:for="categoryName">Choose type</label>
+                    <label th:for="categoryName" th:text="#{type}">Choose type</label>
                     <select name="categoryName" id="categoryName">
                         <option th:value="MOUNTAIN">Mountain</option>
                         <option th:value="SEASIDE">Seaside</option>
@@ -101,7 +101,7 @@
         </div>
         <div class="bg-container">
             <div class="info-text-wrapper">
-                <h3 class="info-header" ><span class="amazing-span" >Amazing</span> destinations</h3>
+                <h3 class="info-header" ><span class="amazing-span">Amazing</span> destinations</h3>
                 <p class="info" th:text="#{mission}"> There's a travel planning for every kind of traveler, whether you need to build an itinerary, plan a road trip, or coordinate your next vacation. Get your fully customized day by day itinerary for free!</p>
                 <a th:href="@{/trips/all/1}"><button class="wide-btn btn"  th:text="#{allTrips}">All trips</button></a>
             </div>
@@ -112,7 +112,7 @@
 
 <footer th:fragment="footer">
    <ul class="footer-ul">
-       <li  th:text="#{copyRights}">&COPY; -All rights reserved <a th:href="@{'/'}">To-Do-Bulgaria &reg;</a></li>
+       <li  th:text="#{copyRights}">&COPY All rights reserved <a th:href="@{'/'}">To-Do-Bulgaria &reg</a></li>
        <li th:text="#{faq}">FAQ</li>
        <li th:text="#{contact}">Contact us</li>
        <li>

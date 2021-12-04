@@ -237,7 +237,7 @@ nav {
     font-size: 40px;
     flex-wrap: wrap;
     font-weight: 50;
-    padding: 10px 120px;
+    padding: 10px 125px;
     margin: 5px;
     margin-top: 30px;
 }
@@ -250,6 +250,7 @@ nav {
 .searchbar-wrapper {
     font-family: 'Comfortaa';
     color: #FFFFFF;
+    width: 30%;
 }
 
 .fa-search-location {
@@ -440,6 +441,8 @@ hr {
 
 .footer-ul > li{
     list-style: none;
+    padding: 0px 10px;
+    border-right: 1px solid;
 
 }
 
