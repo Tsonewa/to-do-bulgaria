@@ -1,6 +1,7 @@
 package com.example.todobulgaria.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 
 @MappedSuperclass
 public class BasePlaceEntity extends BaseEntity {

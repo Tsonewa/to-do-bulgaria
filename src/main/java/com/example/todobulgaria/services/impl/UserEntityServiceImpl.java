@@ -13,6 +13,7 @@ import com.example.todobulgaria.services.CloudinaryImage;
 import com.example.todobulgaria.services.CloudinaryService;
 import com.example.todobulgaria.services.UserEntityService;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -40,7 +40,7 @@
         </div>
        </th:block>
 
-        <p class="no-match-p" th:unless="${list.size() > 0}"><i class="far fa-frown-open"></i>No matches found.</p>
+        <p class="no-match-p" th:unless="${list.size() > 0}" ><i class="far fa-frown-open" th:text="#{noMatches}"></i></p>
     </div>
 </main>
 <footer th:replace="/fragments/fragment :: footer">
