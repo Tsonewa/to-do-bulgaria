@@ -72,6 +72,8 @@ class TripEntityServiceImplTest {
 
     @InjectMocks
     private TripEntityServiceImpl serviceToTest;
+
+
     private AddTripServiceModel addTripServiceModelTest;
     private MultipartFile multipartFile;
     private CloudinaryImage cloudinaryImageTest;

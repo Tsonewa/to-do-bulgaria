@@ -24,12 +24,13 @@ public class TripEntity extends BaseEntity implements Serializable {
     private CategoryEntity categoryEntity;
     @OneToMany(mappedBy = "trip", targetEntity = ItineraryEntity.class, cascade = CascadeType.ALL)
     private List<ItineraryEntity> itineraries;
-    @Column(columnDefinition = "LONGTEXT")
+    @Lob
+    @Column
     private String description;
     @OneToOne
     private DetailsEntity details;
     @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(mappedBy = "trip", targetEntity = ReviewEntity.class)
+    @OneToMany(mappedBy = "trip", targetEntity = ReviewEntity.class, cascade = CascadeType.ALL)
     private List<ReviewEntity> reviews;
     @Column
     private Integer rating = 0;
