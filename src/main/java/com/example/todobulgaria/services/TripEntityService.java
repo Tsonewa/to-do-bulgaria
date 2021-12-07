@@ -37,7 +37,7 @@ public interface TripEntityService {
 
     List<TripsArticleViewModel> getAllByStartPointAndDuration(String keyword, Integer duration);
     List<TripsArticleViewModel> getAllByStartPoint(String keyword);
-    List<TripsArticleViewModel> getByKeywordDurationAndCategory(String startPoint, int duration, int categoryName);
+    List<TripsArticleViewModel> getAllByStartPointDurationAndCategory(String startPoint, int duration, Long categoryName);
 }
 
 

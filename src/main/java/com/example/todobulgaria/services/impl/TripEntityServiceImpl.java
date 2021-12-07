@@ -381,9 +381,9 @@ public class TripEntityServiceImpl implements TripEntityService {
     }
 
     @Override
-    public List<TripsArticleViewModel> getByKeywordDurationAndCategory(String startPoint, int duration, int categoryName) {
+    public List<TripsArticleViewModel> getAllByStartPointDurationAndCategory(String startPoint, int duration, Long categoryName) {
 
-        return tripRepository.findByKeywordDurationAndCategory(startPoint.trim(), duration, categoryName)
+        return tripRepository.findAllByStartPointAndDurationAndCategoryEntity_Id(startPoint.trim(), duration, categoryName)
                 .stream()
                 .map(t -> {
 

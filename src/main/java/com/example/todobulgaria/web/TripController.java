@@ -307,8 +307,8 @@ public class TripController {
             if(!searchBindingModel.getCategoryName().trim().isEmpty()){
 
                 list = tripEntityService
-                        .getByKeywordDurationAndCategory(searchBindingModel.getStartPoint(),
-                                duration, CategoryEnum.valueOf(searchBindingModel.getCategoryName()).ordinal());
+                        .getAllByStartPointDurationAndCategory(searchBindingModel.getStartPoint(),
+                                duration, (long) CategoryEnum.valueOf(searchBindingModel.getCategoryName()).ordinal());
             }else {
 
                 list = tripEntityService
