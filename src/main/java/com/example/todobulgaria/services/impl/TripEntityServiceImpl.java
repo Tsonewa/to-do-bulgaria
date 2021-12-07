@@ -21,10 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -178,14 +175,17 @@ public class TripEntityServiceImpl implements TripEntityService {
     @Override
     public  List<TripsArticleViewModel> findFirstEightBestTripsOrderByRating() {
 
-        List<TripEntity> bestEightTripsOrderByRating = tripRepository.findBestEightTripsOrderByRating();
+        List<TripEntity> bestEightTripsOrderByRating = tripRepository.findAll();
 
         return bestEightTripsOrderByRating
                 .stream()
                 .map(b -> {
                     TripsArticleViewModel tripsArticleViewModel = asArticleTrip(b);
                     return tripsArticleViewModel;
-                }).collect(Collectors.toList());
+                })
+                .sorted(Comparator.comparing(TripsArticleViewModel::getRating))
+                .limit(8)
+                .collect(Collectors.toList());
     }
 
     private DetailsEntity createDetailsEntity(String equipment, String festivals, String fotoTip) {
