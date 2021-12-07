@@ -351,9 +351,9 @@ public class TripEntityServiceImpl implements TripEntityService {
     }
 
     @Override
-    public List<TripsArticleViewModel> getByKeywordAndDuration(String keyword, int duration){
+    public List<TripsArticleViewModel> getAllByStartPointAndDuration(String keyword, Integer duration){
 
-        return tripRepository.findByKeywordAndDuration(keyword.trim(), duration)
+        return tripRepository.findAllByStartPointAndDuration(keyword.trim(), duration)
                 .stream()
                 .map(t -> {
 
@@ -366,9 +366,9 @@ public class TripEntityServiceImpl implements TripEntityService {
     }
 
     @Override
-    public List<TripsArticleViewModel> getByKeyword(String keyword){
+    public List<TripsArticleViewModel> getAllByStartPoint(String keyword){
 
-        return tripRepository.findByKeyword(keyword.trim())
+        return tripRepository.findAllByStartPoint(keyword.trim())
                 .stream()
                 .map(t -> {
 

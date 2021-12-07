@@ -229,8 +229,9 @@ public class TripController {
         if(townToLowerCase.equals(UnexcitingTownsWeatherAPIEnum.ELENITE.name().toLowerCase())
         || townToLowerCase.equals(UnexcitingTownsWeatherAPIEnum.ЕЛЕНИТЕ.name().toLowerCase())){
             town = "Бургас";
-        }
-
+        } else if(townToLowerCase.equals(UnexcitingTownsWeatherAPIEnum.TATUL.name().toLowerCase())
+                || townToLowerCase.equals(UnexcitingTownsWeatherAPIEnum.ТАТУЛ.name().toLowerCase()))
+            town = "Момчилград";
         return town;
     }
 
@@ -303,7 +304,7 @@ public class TripController {
 
             int duration = (int) DAYS.between(localDateStart, localDateEnd);
 
-            if(searchBindingModel.getCategoryName() != null){
+            if(!searchBindingModel.getCategoryName().trim().isEmpty()){
 
                 list = tripEntityService
                         .getByKeywordDurationAndCategory(searchBindingModel.getStartPoint(),
@@ -311,12 +312,12 @@ public class TripController {
             }else {
 
                 list = tripEntityService
-                        .getByKeywordAndDuration(searchBindingModel.getStartPoint(), duration);
+                        .getAllByStartPointAndDuration(searchBindingModel.getStartPoint(), duration);
             }
             }else {
 
             list = tripEntityService
-                    .getByKeyword(searchBindingModel.getStartPoint());
+                    .getAllByStartPoint(searchBindingModel.getStartPoint());
         }
 
         model.addAttribute("list", list);

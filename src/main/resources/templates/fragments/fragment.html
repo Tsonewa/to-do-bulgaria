@@ -70,6 +70,7 @@
                 <div class="type-container">
                     <label th:for="categoryName" th:text="#{type}">Choose type</label>
                     <select name="categoryName" id="categoryName">
+                        <option value="" selected></option>
                         <option th:value="MOUNTAIN">Mountain</option>
                         <option th:value="SEASIDE">Seaside</option>
                         <option th:value="CITY">City</option>

@@ -35,8 +35,8 @@ public interface TripEntityService {
 
     Integer tripsCount();
 
-    List<TripsArticleViewModel> getByKeywordAndDuration(String keyword, int duration);
-    List<TripsArticleViewModel> getByKeyword(String keyword);
+    List<TripsArticleViewModel> getAllByStartPointAndDuration(String keyword, Integer duration);
+    List<TripsArticleViewModel> getAllByStartPoint(String keyword);
     List<TripsArticleViewModel> getByKeywordDurationAndCategory(String startPoint, int duration, int categoryName);
 }
 
