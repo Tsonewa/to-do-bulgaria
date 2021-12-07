@@ -220,6 +220,13 @@ nav {
     align-self: center;
 }
 
+@media screen and (max-width: 970px){
+
+    .type-cards-wrapper{
+        display: none;
+    }
+}
+
 .type-container {
     align-self: center;
     width: 80%;
