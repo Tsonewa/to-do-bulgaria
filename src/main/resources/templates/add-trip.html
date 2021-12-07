@@ -15,8 +15,8 @@
 
 <main>
     <div>
-    <form th:action="@{/trips/add}" th:method="post" enctype="multipart/form-data" th:object="${addTripBindingModel}" id="msform">
-      <fieldset id="input1-wrapper">
+    <form th:action="@{/trips/add}" th:method="post" enctype="multipart/form-data" th:object="${addTripBindingModel}" id="msform" >
+      <fieldset id="input1-wrapper" >
           <h2 class="fs-title" th:text="#{createTrip}">Създай маршрут</h2>
           <label th:text="#{startLocation}">Начална точка</label>
           <input th:field="*{startPoint}" type="text" name="region" placeholder="South Coast" />

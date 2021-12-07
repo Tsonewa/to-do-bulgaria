@@ -85,7 +85,7 @@ function addDay(){
     div.appendChild(dinnerLabel).appendChild(dinnerInput);
 
     let attractionsLabel = document.createElement('label');
-    attractionsLabel.textContent = "Атракции";
+    attractionsLabel.textContent = `Атракция`;
     let attractionsInput = document.createElement('input');
     attractionsInput.type = "text";
     attractionsInput.name = "attractionsName";

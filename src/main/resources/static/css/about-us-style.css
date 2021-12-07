@@ -28,7 +28,7 @@
 
 .articles-wrapper{
     display: inline-flex;
-    align-items: end;
+    align-items: baseline;
 }
 
 .article{
