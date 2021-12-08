@@ -353,45 +353,32 @@ public class TripEntityServiceImpl implements TripEntityService {
     @Override
     public List<TripsArticleViewModel> getAllByStartPointAndDuration(String keyword, Integer duration){
 
-        return tripRepository.findAllByStartPointAndDuration(keyword.trim(), duration)
-                .stream()
-                .map(t -> {
-
-                    TripsArticleViewModel map = modelMapper.map(t, TripsArticleViewModel.class);
-                    map.setUrl(t.getPicture().getUrl());
-
-                    return map;
-                })
-                .collect(Collectors.toList());
+        return mapTripEntityToTripsArticleModel(tripRepository
+                .findAllByStartPointAndDuration(keyword.trim(), duration));
     }
 
     @Override
     public List<TripsArticleViewModel> getAllByStartPoint(String keyword){
 
-        return tripRepository.findAllByStartPoint(keyword.trim())
-                .stream()
-                .map(t -> {
-
-                    TripsArticleViewModel map = modelMapper.map(t, TripsArticleViewModel.class);
-                    map.setUrl(t.getPicture().getUrl());
-
-                    return map;
-                })
-                .collect(Collectors.toList());
+        return mapTripEntityToTripsArticleModel(tripRepository
+                .findAllByStartPoint(keyword.trim()));
     }
 
     @Override
     public List<TripsArticleViewModel> getAllByStartPointDurationAndCategory(String startPoint, int duration, Long categoryName) {
 
-        return tripRepository.findAllByStartPointAndDurationAndCategoryEntity_Id(startPoint.trim(), duration, categoryName)
-                .stream()
-                .map(t -> {
+        return mapTripEntityToTripsArticleModel(tripRepository
+                .findAllByStartPointAndDurationAndCategoryEntity_Id
+                        (startPoint.trim(), duration, categoryName));
+    }
 
-                    TripsArticleViewModel map = modelMapper.map(t, TripsArticleViewModel.class);
-                    map.setUrl(t.getPicture().getUrl());
+    @Override
+    public List<TripsArticleViewModel> mapTripEntityToTripsArticleModel(List<TripEntity> trips){
 
-                    return map;
-                })
-                .collect(Collectors.toList());
+        return trips.stream().map(t -> {
+            TripsArticleViewModel map = modelMapper.map(t, TripsArticleViewModel.class);
+            map.setUrl(t.getPicture().getUrl());
+            return map;
+        }).collect(Collectors.toList());
     }
 }

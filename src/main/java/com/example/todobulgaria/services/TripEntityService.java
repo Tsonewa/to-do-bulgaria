@@ -38,6 +38,8 @@ public interface TripEntityService {
     List<TripsArticleViewModel> getAllByStartPointAndDuration(String keyword, Integer duration);
     List<TripsArticleViewModel> getAllByStartPoint(String keyword);
     List<TripsArticleViewModel> getAllByStartPointDurationAndCategory(String startPoint, int duration, Long categoryName);
+
+    List<TripsArticleViewModel> mapTripEntityToTripsArticleModel(List<TripEntity> trips);
 }
 
 
