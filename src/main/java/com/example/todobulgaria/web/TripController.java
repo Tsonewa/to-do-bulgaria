@@ -11,8 +11,6 @@ import com.example.todobulgaria.models.enums.UnexcitingTownsWeatherAPIEnum;
 import com.example.todobulgaria.models.service.AddTripServiceModel;
 import com.example.todobulgaria.models.views.TripDetailsView;
 import com.example.todobulgaria.models.views.TripsArticleViewModel;
-import com.example.todobulgaria.repositories.UserRepository;
-import com.example.todobulgaria.services.ItineraryEntityService;
 import com.example.todobulgaria.services.TripEntityService;
 import com.example.todobulgaria.services.UserEntityService;
 import com.google.gson.Gson;
@@ -21,8 +19,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -55,17 +51,13 @@ public class TripController {
 
     private final TripEntityService tripEntityService;
     private final ModelMapper modelMapper;
-    private final ItineraryEntityService itineraryEntityService;
     private final UserEntityService userEntityService;
-    private final UserRepository userRepository;
     private final Gson gson;
 
-    public TripController(TripEntityService tripEntityService, ModelMapper modelMapper, ItineraryEntityService itineraryEntityService, UserEntityService userEntityService, UserRepository userRepository, Gson gson) {
+    public TripController(TripEntityService tripEntityService, ModelMapper modelMapper,  UserEntityService userEntityService,  Gson gson) {
         this.tripEntityService = tripEntityService;
         this.modelMapper = modelMapper;
-        this.itineraryEntityService = itineraryEntityService;
         this.userEntityService = userEntityService;
-        this.userRepository = userRepository;
         this.gson = gson;
     }
 
@@ -87,7 +79,6 @@ public class TripController {
         if(bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("addTripBindingModel", addTripBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addTripBindingModel", bindingResult);
-
 
             return "redirect:add";
         }
@@ -111,9 +102,7 @@ public class TripController {
 
     @GetMapping("/best")
     public String showBestTrips(Model model){
-
         model.addAttribute("bestTrips", tripEntityService.findFirstEightBestTripsOrderByRating());
-//        model.addAttribute("rating", new Rating());
         return "best-trips";
     }
 
@@ -235,7 +224,6 @@ public class TripController {
         return town;
     }
 
-
     @PreAuthorize("isOwner(#id)")
     @DeleteMapping("/{id}/delete")
     @Transactional
@@ -248,14 +236,13 @@ public class TripController {
 
     @Transactional
     @GetMapping("/favourite/{id}")
-    public String addFavouriteTrip(@PathVariable Long id, HttpServletRequest request){
+    public String addFavouriteTrip(@PathVariable Long id, HttpServletRequest request, Principal principal){
 
-        Optional<UserEntity> currentUser = getCurrentUser();
-
-        if(!userEntityService.findUserByUsername(currentUser.get().getUsername()).isPresent()){
+        if(principal.getName().isBlank()){
              throw new ObjectNotFoundException(id);
         }
-        Optional<UserEntity> userByUsername = userEntityService.findUserByUsername(currentUser.get().getUsername());
+
+        Optional<UserEntity> userByUsername = userEntityService.findUserByUsername(principal.getName());
 
         Set<TripEntity> favouriteTrips = userByUsername.get().getFavouriteTrips();
         favouriteTrips.add(tripEntityService.findEntityById(id));
@@ -265,14 +252,6 @@ public class TripController {
         String referer = request.getHeader("Referer");
 
         return "redirect:" + referer;
-    }
-
-    private Optional<UserEntity> getCurrentUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        Optional<UserEntity> userEntity = userEntityService.findUserByUsername(username);
-
-        return userEntity;
     }
 
     public Map<String, Object> jsonToMap(String str) {
@@ -325,6 +304,4 @@ public class TripController {
 
         return "search";
     }
-
-
 }

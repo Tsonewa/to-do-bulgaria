@@ -308,7 +308,6 @@ public class TripEntityServiceImpl implements TripEntityService {
                 .map(m -> modelMapper.map
                         (m, TripCategoryTownDurationViewModel.class))
                 .collect(Collectors.toList());
-
     }
 
     @Override
