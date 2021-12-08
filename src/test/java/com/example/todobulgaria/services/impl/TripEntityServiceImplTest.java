@@ -11,7 +11,6 @@ import com.example.todobulgaria.models.views.TripCategoryTownDurationViewModel;
 import com.example.todobulgaria.models.views.TripDetailsView;
 import com.example.todobulgaria.repositories.PictureRepository;
 import com.example.todobulgaria.repositories.TripRepository;
-import com.example.todobulgaria.repositories.UserRepository;
 import com.example.todobulgaria.services.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -66,19 +65,15 @@ class TripEntityServiceImplTest {
     private HotelEntityService hotelEntityServiceMock;
     @Mock
     private DinnerPlaceEntityService dinnerPlaceEntityServiceMock;
-    @Mock
-    private UserRepository userRepositoryMock;
 
 
     @InjectMocks
     private TripEntityServiceImpl serviceToTest;
 
-
     private AddTripServiceModel addTripServiceModelTest;
     private MultipartFile multipartFile;
     private CloudinaryImage cloudinaryImageTest;
     private FileInputStream fileInputStreamTest;
-    private List<String> townsTest;
     private TownEntity townEntityTest;
     private CoffeePlaceEntity coffeePlaceEntityTest;
     private HotelEntity hotelEntityTest;
@@ -153,7 +148,7 @@ class TripEntityServiceImplTest {
         townEntityTest.setId(1L);
         townEntityTest.setName("townName");
 
-        townsTest = new ArrayList<>();
+        List<String> townsTest = new ArrayList<>();
         townsTest.add(townEntityTest.getName());
 
         breakfastPlaceEntityTest = new BreakfastPlaceEntity();
@@ -367,10 +362,7 @@ class TripEntityServiceImplTest {
     @DisplayName("Get first eight trips order by rating")
     @Test
     void findFirstEightBestTripsOrderByRating() {
-
-
     }
-
 
     @Test
     void getTrips() {

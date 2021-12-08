@@ -1,14 +1,11 @@
 package com.example.todobulgaria.web;
 
-import com.example.todobulgaria.exceptions.ObjectNotFoundException;
 import com.example.todobulgaria.models.entities.UserEntity;
 import com.example.todobulgaria.models.views.TripCategoryTownDurationViewModel;
 import com.example.todobulgaria.models.views.UserProfileViewModel;
 import com.example.todobulgaria.services.TripEntityService;
 import com.example.todobulgaria.services.UserEntityService;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,8 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.transaction.Transactional;
+import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -36,42 +33,40 @@ public class ProfileController {
     }
 
     @GetMapping
-    public String getUserProfile(Model model){
+    public String getUserProfile(Model model, Principal principal){
 
-        Optional<UserEntity> userEntity = getCurrentUser();
+        UserEntity userEntity = userEntityService
+                .findUserByUsername(principal.getName())
+                .orElseThrow(() -> new UsernameNotFoundException
+                        ("User with this username"  + principal.getName() + " does not exist"));
 
         UserProfileViewModel user = new UserProfileViewModel();
-        user.setFirstName(userEntity.get().getFirstName());
-        user.setLastName(userEntity.get().getLastName());
-        user.setProfilePictureUrl(userEntity.get().getProfilePictureUrl().getUrl());
+        user.setFirstName(userEntity.getFirstName());
+        user.setLastName(userEntity.getLastName());
+        user.setProfilePictureUrl(userEntity.getProfilePictureUrl().getUrl());
 
         model.addAttribute("user", user);
 
         return "profile";
     }
 
-    private Optional<UserEntity> getCurrentUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        Optional<UserEntity> userEntity = userEntityService.findUserByUsername(username);
-
-        return userEntity;
-    }
-
     @Transactional
     @GetMapping("/my-trips")
-    public String myTrips(Model model){
+    public String myTrips(Model model, Principal principal){
 
-        Optional<UserEntity> userEntity = getCurrentUser();
-        getUserProfile(model);
+        UserEntity userEntity = userEntityService
+                .findUserByUsername(principal.getName())
+                .orElseThrow(() -> new UsernameNotFoundException
+                        ("User with this username"  + principal.getName() + " does not exist"));
+        getUserProfile(model, principal);
 
         List<TripCategoryTownDurationViewModel> userTrips =
-                tripEntityService.findAllByUserId(userEntity.get()
+                tripEntityService.findAllByUserId(userEntity
                         .getId());
 
         model.addAttribute("userTrips", userTrips);
 
-       Set<TripCategoryTownDurationViewModel> favouriteTrips = userEntity.get().getFavouriteTrips()
+       Set<TripCategoryTownDurationViewModel> favouriteTrips = userEntity.getFavouriteTrips()
                .stream().map(t -> {
 
                    TripCategoryTownDurationViewModel map = modelMapper.map(t, TripCategoryTownDurationViewModel.class);
@@ -86,5 +81,4 @@ public class ProfileController {
 
         return "profile";
     }
-
 }
