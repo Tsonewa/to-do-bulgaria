@@ -179,10 +179,7 @@ public class TripEntityServiceImpl implements TripEntityService {
 
         return bestEightTripsOrderByRating
                 .stream()
-                .map(b -> {
-                    TripsArticleViewModel tripsArticleViewModel = asArticleTrip(b);
-                    return tripsArticleViewModel;
-                })
+                .map(this::asArticleTrip)
                 .sorted(Comparator.comparing(TripsArticleViewModel::getRating))
                 .limit(8)
                 .collect(Collectors.toList());
