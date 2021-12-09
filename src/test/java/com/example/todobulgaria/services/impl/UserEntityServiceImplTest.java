@@ -1,5 +1,6 @@
 package com.example.todobulgaria.services.impl;
 
+import com.example.todobulgaria.config.BaseConfig;
 import com.example.todobulgaria.exceptions.UserDuplicationException;
 import com.example.todobulgaria.models.entities.*;
 import com.example.todobulgaria.models.enums.CategoryEnum;
@@ -20,10 +21,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.test.context.support.WithUserDetails;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileInputStream;
@@ -35,14 +37,14 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-@ContextConfiguration
+@SpringJUnitConfig(classes = {BaseConfig.class})
 class UserEntityServiceImplTest {
 
     @Mock
     private UserRepository userRepositoryMock;
 
-    @Mock
-    private PasswordEncoder passwordEncoderMock;
+    @Autowired
+    public PasswordEncoder passwordEncoder;
 
     @Mock
     private RoleRepository roleRepositoryMock;
@@ -76,7 +78,7 @@ class UserEntityServiceImplTest {
         userDetailsMock = new UserDetailsImpl(userRepositoryMock);
 
         serviceToTest = new UserEntityServiceImpl(userRepositoryMock,
-                passwordEncoderMock, roleRepositoryMock, modelMapperMock,
+                passwordEncoder, roleRepositoryMock, modelMapperMock,
                 userDetailsMock, cloudinaryServiceMock, pictureRepositoryMock);
 
         testUserRole = new RoleEntity();
@@ -123,19 +125,17 @@ class UserEntityServiceImplTest {
         testUserRegisterServiceModel.setPassword("12345");
         testUserRegisterServiceModel.setConfirmPassword("12345");
         testUserRegisterServiceModel.setProfilePictureUrl(multipartFile);
-
     }
 
     @DisplayName("Successful user registration")
     @Test
-    @WithUserDetails
+    @WithMockUser
     void registrarUserSuccess() throws IOException {
 
         when(userRepositoryMock.existsByUsername(testUser.getUsername())).thenReturn(false);
         when(roleRepositoryMock.findByRole(RoleEnum.USER)).thenReturn(Optional.of(testUserRole));
         when(modelMapperMock.map(testUserRegisterServiceModel, UserEntity.class)).thenReturn(testUser);
         when(cloudinaryServiceMock.upload(multipartFile)).thenReturn(cloudinaryImageTest);
-        when(passwordEncoderMock.encode(testUser.getPassword())).thenReturn(testUser.getPassword());
         when(userRepositoryMock.findUserEntityByUsername(testUser.getUsername())).
                 thenReturn(Optional.of(testUser));
 
@@ -143,8 +143,7 @@ class UserEntityServiceImplTest {
 
        assertThat(newUser).isNotNull();
 
-      verify(userRepositoryMock, times(1)).save(Mockito.any(UserEntity.class));
-
+       verify(userRepositoryMock, times(1)).save(Mockito.any(UserEntity.class));
 
     }
 

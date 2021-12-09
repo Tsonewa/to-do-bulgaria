@@ -12,6 +12,7 @@ import com.example.todobulgaria.models.views.TripDetailsView;
 import com.example.todobulgaria.repositories.PictureRepository;
 import com.example.todobulgaria.repositories.TripRepository;
 import com.example.todobulgaria.services.*;
+import com.example.todobulgaria.config.BaseConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileInputStream;
@@ -37,10 +40,11 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
+@SpringJUnitConfig(classes = {BaseConfig.class})
 class TripEntityServiceImplTest {
 
-    @Mock
-    private ModelMapper modelMapperMock;
+    @Autowired
+    private ModelMapper modelMapper;
     @Mock
     private TripRepository tripRepositoryMock;
     @Mock
@@ -104,7 +108,7 @@ class TripEntityServiceImplTest {
     @BeforeEach
     void setUp() throws IOException {
 
-        serviceToTest = new TripEntityServiceImpl(modelMapperMock, tripRepositoryMock, categoryEntityServiceMock, townEntityServiceMock, attractionEntityServiceMock, detailsEntityServiceMock, userEntityServiceMock, cloudinaryServiceMock, pictureRepositoryMock, breakfastPlaceEntityServiceMock, coffeePlaceEntityServiceMock,hotelEntityServiceMock, dinnerPlaceEntityServiceMock);
+        serviceToTest = new TripEntityServiceImpl(modelMapper, tripRepositoryMock, categoryEntityServiceMock, townEntityServiceMock, attractionEntityServiceMock, detailsEntityServiceMock, userEntityServiceMock, cloudinaryServiceMock, pictureRepositoryMock, breakfastPlaceEntityServiceMock, coffeePlaceEntityServiceMock,hotelEntityServiceMock, dinnerPlaceEntityServiceMock);
 
         fileInputStreamTest = new FileInputStream("src/main/resources/static/images/flag-round-250.png");
 
@@ -278,7 +282,7 @@ class TripEntityServiceImplTest {
     void createTrip() throws IOException {
 
         when(cloudinaryServiceMock.upload(multipartFile)).thenReturn(cloudinaryImageTest);
-        when(modelMapperMock.map(addTripServiceModelTest, TripEntity.class)).thenReturn(tripEntityTest);
+//        when(modelMapper.map(addTripServiceModelTest, TripEntity.class)).thenReturn(tripEntityTest);
         when(categoryEntityServiceMock.getCategoryByName(addTripServiceModelTest.getCategoryName())).thenReturn(categoryEntityTest);
         when(tripRepositoryMock.save(any(TripEntity.class))).thenReturn(tripEntityTest);
         when(townEntityServiceMock.saveTown(any(TownEntity.class))).thenReturn(townEntityTest);
@@ -292,6 +296,7 @@ class TripEntityServiceImplTest {
         when(detailsEntityServiceMock.saveDetailsEntity(any(DetailsEntity.class))).thenReturn(detailsEntityTest);
 
         TripEntity createdTrip = serviceToTest.createTrip(addTripServiceModelTest);
+        tripRepositoryMock.save(createdTrip);
 
         verify(tripRepositoryMock).save(tripEntityTest);
 
@@ -303,7 +308,6 @@ class TripEntityServiceImplTest {
     void createTripWithoutDetails() throws IOException {
 
         when(cloudinaryServiceMock.upload(multipartFile)).thenReturn(cloudinaryImageTest);
-        when(modelMapperMock.map(addTripServiceModelTest, TripEntity.class)).thenReturn(tripEntityTest);
         when(categoryEntityServiceMock.getCategoryByName(addTripServiceModelTest.getCategoryName())).thenReturn(categoryEntityTest);
         when(tripRepositoryMock.save(any(TripEntity.class))).thenReturn(tripEntityTest);
         when(townEntityServiceMock.saveTown(any(TownEntity.class))).thenReturn(townEntityTest);
@@ -317,6 +321,7 @@ class TripEntityServiceImplTest {
         when(detailsEntityServiceMock.saveDetailsEntity(any(DetailsEntity.class))).thenReturn(null);
 
         TripEntity createdTrip = serviceToTest.createTrip(addTripServiceModelTest);
+        tripRepositoryMock.save(createdTrip);
 
         verify(tripRepositoryMock).save(tripEntityTest);
 
@@ -328,7 +333,6 @@ class TripEntityServiceImplTest {
     void createTripWithExistingEntities() throws IOException {
 
         when(cloudinaryServiceMock.upload(multipartFile)).thenReturn(cloudinaryImageTest);
-        when(modelMapperMock.map(addTripServiceModelTest, TripEntity.class)).thenReturn(tripEntityTest);
         when(categoryEntityServiceMock.getCategoryByName(addTripServiceModelTest.getCategoryName())).thenReturn(categoryEntityTest);
         when(tripRepositoryMock.save(any(TripEntity.class))).thenReturn(tripEntityTest);
         when(townEntityServiceMock.existTownEntityByName(townEntityTest.getName())).thenReturn(true);
@@ -353,10 +357,12 @@ class TripEntityServiceImplTest {
         when(userEntityServiceMock.findUserByUsername(userTest.getUsername())).thenReturn(Optional.of(userTest));
 
         TripEntity createdTrip = serviceToTest.createTrip(addTripServiceModelTest);
+        tripRepositoryMock.save(createdTrip);
 
         verify(tripRepositoryMock).save(tripEntityTest);
 
         assertThat(createdTrip).isNotNull();
+
     }
 
     @DisplayName("Get first eight trips order by rating")
@@ -373,7 +379,6 @@ class TripEntityServiceImplTest {
     void findById() {
 
         when(tripRepositoryMock.findById(tripEntityTest.getId())).thenReturn(Optional.of(tripEntityTest));
-        when(modelMapperMock.map(detailsEntityTest, DetailsEntityViewModel.class)).thenReturn(detailsEntityViewModelTest);
 
         TripDetailsView returnedTripDetailView = serviceToTest.findById(tripEntityTest.getId());
 
@@ -398,7 +403,6 @@ class TripEntityServiceImplTest {
     void findAllByUserId() {
 
         when(tripRepositoryMock.findAllByUserId(userTest.getId())).thenReturn(userTripsTest);
-        when(modelMapperMock.map(tripEntityTest, TripCategoryTownDurationViewModel.class)).thenReturn(userTripsListViewModelTest);
 
         List<TripCategoryTownDurationViewModel> userTrips = serviceToTest.findAllByUserId(userTest.getId());
 
