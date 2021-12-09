@@ -1,5 +1,6 @@
 package com.example.todobulgaria.services.impl;
 
+import com.example.todobulgaria.config.BaseConfig;
 import com.example.todobulgaria.exceptions.ObjectNotFoundException;
 import com.example.todobulgaria.models.entities.*;
 import com.example.todobulgaria.models.service.ItineraryUpdateServiceModel;
@@ -17,6 +18,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -30,12 +33,14 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
+@SpringJUnitConfig(classes = {BaseConfig.class})
 class ItineraryEntityServiceImplTest {
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Mock
     private ItineraryRepository itineraryRepositoryMock;
-    @Mock
-    private ModelMapper modelMapperMock;
     @Mock
     private BreakfastPlaceEntityService breakfastPlaceEntityServiceMock;
     @Mock
@@ -56,13 +61,12 @@ class ItineraryEntityServiceImplTest {
     private CoffeePlaceEntity coffeePlaceEntityTest;
     private TripEntity tripEntityTest;
     private AttractionEntity attractionEntityTest;
-    private ItinerariesDetailsViewModel itinerariesDetailsViewModelTest;
     private ItineraryUpdateServiceModel itineraryUpdateServiceModelTest;
     private List<AttractionEntity> attractions;
 
     @BeforeEach
     void setUp() {
-        serviceToTest = new ItineraryEntityServiceImpl(itineraryRepositoryMock, modelMapperMock,
+        serviceToTest = new ItineraryEntityServiceImpl(itineraryRepositoryMock, modelMapper,
                 breakfastPlaceEntityServiceMock, dinnerPlaceEntityServiceMock, hotelEntityServiceMock, coffeePlaceEntityServiceMock);
 
         townEntityTest = new TownEntity();
@@ -88,7 +92,6 @@ class ItineraryEntityServiceImplTest {
         tripEntityTest = new TripEntity();
         tripEntityTest.setId(1L);
 
-
         attractionEntityTest = new AttractionEntity();
         attractionEntityTest.setId(1L);
         attractionEntityTest.setName("attractionName");
@@ -107,16 +110,6 @@ class ItineraryEntityServiceImplTest {
         itineraryEntityTest.setBreakfastPlace(breakfastPlaceEntityTest);
         itineraryEntityTest.setTrip(tripEntityTest);
         itineraryEntityTest.setAttractions(attractions);
-
-        itinerariesDetailsViewModelTest = new ItinerariesDetailsViewModel();
-        itinerariesDetailsViewModelTest.setBreakfastPlace(breakfastPlaceEntityTest.getName());
-        itinerariesDetailsViewModelTest.setAttractionName("attractionName");
-        itinerariesDetailsViewModelTest.setCoffeePlace(coffeePlaceEntityTest.getName());
-        itinerariesDetailsViewModelTest.setDay("1");
-        itinerariesDetailsViewModelTest.setId(1L);
-        itinerariesDetailsViewModelTest.setDinnerPlace(dinnerPlaceEntityTest.getName());
-        itinerariesDetailsViewModelTest.setHotel(hotelEntityTest.getName());
-        itinerariesDetailsViewModelTest.setTownName(townEntityTest.getName());
 
         itineraryUpdateServiceModelTest = new ItineraryUpdateServiceModel();
         itineraryUpdateServiceModelTest.setBreakfastPlace(breakfastPlaceEntityTest.getName());
@@ -147,8 +140,6 @@ class ItineraryEntityServiceImplTest {
     void findById() {
 
         when(itineraryRepositoryMock.findById(any(Long.class))).thenReturn(Optional.of(itineraryEntityTest));
-        when(modelMapperMock.map(itineraryEntityTest, ItinerariesDetailsViewModel.class)).thenReturn(itinerariesDetailsViewModelTest);
-        when(modelMapperMock.map(itinerariesDetailsViewModelTest, ItineraryUpdateServiceModel.class)).thenReturn(itineraryUpdateServiceModelTest);
 
         ItineraryUpdateServiceModel itineraryFindById = serviceToTest.findById(itineraryEntityTest.getId());
 

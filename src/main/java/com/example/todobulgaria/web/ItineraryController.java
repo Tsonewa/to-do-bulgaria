@@ -23,7 +23,7 @@ import java.security.Principal;
 @Controller
 public class ItineraryController {
 
-    private ItineraryEntityService itineraryEntityService;
+    private final ItineraryEntityService itineraryEntityService;
     private final TripEntityService tripEntityService;
     private final ModelMapper modelMapper;
 
