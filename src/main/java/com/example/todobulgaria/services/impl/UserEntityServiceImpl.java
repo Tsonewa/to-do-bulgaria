@@ -5,6 +5,7 @@ import com.example.todobulgaria.models.entities.PictureEntity;
 import com.example.todobulgaria.models.entities.UserEntity;
 import com.example.todobulgaria.models.enums.RoleEnum;
 import com.example.todobulgaria.models.service.UserRegisterServiceModel;
+import com.example.todobulgaria.models.views.TripCategoryTownDurationViewModel;
 import com.example.todobulgaria.repositories.PictureRepository;
 import com.example.todobulgaria.repositories.RoleRepository;
 import com.example.todobulgaria.repositories.UserRepository;
@@ -25,6 +26,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UserEntityServiceImpl implements UserEntityService {
@@ -107,5 +110,19 @@ public class UserEntityServiceImpl implements UserEntityService {
     public Optional<UserEntity> findUserByUsername(String username) {
 
         return userRepository.findUserEntityByUsername(username);
+    }
+
+    @Override
+    public Set<TripCategoryTownDurationViewModel> getTripCategoryTownDurationViewModels(UserEntity userEntity) {
+        return userEntity.getFavouriteTrips()
+                .stream().map(t -> {
+
+                    TripCategoryTownDurationViewModel map = modelMapper.map(t, TripCategoryTownDurationViewModel.class);
+                    map.setStartPoint(t.getStartPoint());
+
+                    return map;
+
+                })
+                .collect(Collectors.toSet());
     }
 }

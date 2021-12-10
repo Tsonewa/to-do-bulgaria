@@ -2,10 +2,12 @@ package com.example.todobulgaria.services;
 
 import com.example.todobulgaria.models.entities.UserEntity;
 import com.example.todobulgaria.models.service.UserRegisterServiceModel;
+import com.example.todobulgaria.models.views.TripCategoryTownDurationViewModel;
 
 import java.io.IOException;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 public interface UserEntityService {
 
@@ -16,6 +18,7 @@ public interface UserEntityService {
 
     void updateUser(UserEntity userByUsername);
 
+    Set<TripCategoryTownDurationViewModel> getTripCategoryTownDurationViewModels(UserEntity userEntity);
 }
 
 

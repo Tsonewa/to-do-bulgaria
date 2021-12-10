@@ -66,19 +66,13 @@ public class ProfileController {
 
         model.addAttribute("userTrips", userTrips);
 
-       Set<TripCategoryTownDurationViewModel> favouriteTrips = userEntity.getFavouriteTrips()
-               .stream().map(t -> {
-
-                   TripCategoryTownDurationViewModel map = modelMapper.map(t, TripCategoryTownDurationViewModel.class);
-                map.setStartPoint(t.getStartPoint());
-
-                return map;
-
-               })
-               .collect(Collectors.toSet());
+        Set<TripCategoryTownDurationViewModel> favouriteTrips = userEntityService
+                .getTripCategoryTownDurationViewModels(userEntity);
 
         model.addAttribute("userFavouriteTrips", favouriteTrips);
 
         return "profile";
     }
+
+
 }

@@ -45,6 +45,7 @@ class TripEntityServiceImplTest {
 
     @Autowired
     private ModelMapper modelMapper;
+
     @Mock
     private TripRepository tripRepositoryMock;
     @Mock
@@ -282,7 +283,6 @@ class TripEntityServiceImplTest {
     void createTrip() throws IOException {
 
         when(cloudinaryServiceMock.upload(multipartFile)).thenReturn(cloudinaryImageTest);
-//        when(modelMapper.map(addTripServiceModelTest, TripEntity.class)).thenReturn(tripEntityTest);
         when(categoryEntityServiceMock.getCategoryByName(addTripServiceModelTest.getCategoryName())).thenReturn(categoryEntityTest);
         when(tripRepositoryMock.save(any(TripEntity.class))).thenReturn(tripEntityTest);
         when(townEntityServiceMock.saveTown(any(TownEntity.class))).thenReturn(townEntityTest);
