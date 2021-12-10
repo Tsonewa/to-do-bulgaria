@@ -24,12 +24,10 @@ import java.security.Principal;
 public class ItineraryController {
 
     private final ItineraryEntityService itineraryEntityService;
-    private final TripEntityService tripEntityService;
     private final ModelMapper modelMapper;
 
-    public ItineraryController(ItineraryEntityService itineraryEntityService, TripEntityService tripEntityService, ModelMapper modelMapper) {
+    public ItineraryController(ItineraryEntityService itineraryEntityService, ModelMapper modelMapper) {
         this.itineraryEntityService = itineraryEntityService;
-        this.tripEntityService = tripEntityService;
         this.modelMapper = modelMapper;
     }
 

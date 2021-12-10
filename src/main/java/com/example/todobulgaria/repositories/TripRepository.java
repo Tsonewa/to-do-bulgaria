@@ -16,11 +16,15 @@ import java.util.Optional;
 @Repository
 public interface TripRepository extends JpaRepository<TripEntity, Long> {
 
+    //Find all trips created by certain user
     List<TripEntity> findAllByUserId(Long id);
 
+    //Find trips by start point and duration
     List<TripEntity> findAllByStartPointAndDuration(String startPoint, Integer duration);
 
+    //Find trips by start point
     List<TripEntity> findAllByStartPoint(String startPoint);
 
+    //Find trip by category and duration or start point, category and duration
     List<TripEntity>  findAllByStartPointAndDurationAndCategoryEntity_Id(String startPoint, Integer duration, Long categoryEntity_id);
 }

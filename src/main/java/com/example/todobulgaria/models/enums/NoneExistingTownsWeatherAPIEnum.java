@@ -1,6 +1,6 @@
 package com.example.todobulgaria.models.enums;
 
-public enum UnexcitingTownsWeatherAPIEnum {
+public enum NoneExistingTownsWeatherAPIEnum {
 
     ELENITE,
     ЕЛЕНИТЕ,

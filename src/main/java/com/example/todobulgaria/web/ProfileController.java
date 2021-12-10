@@ -5,7 +5,6 @@ import com.example.todobulgaria.models.views.TripCategoryTownDurationViewModel;
 import com.example.todobulgaria.models.views.UserProfileViewModel;
 import com.example.todobulgaria.services.TripEntityService;
 import com.example.todobulgaria.services.UserEntityService;
-import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +15,6 @@ import javax.transaction.Transactional;
 import java.security.Principal;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/profile")
@@ -24,12 +22,10 @@ public class ProfileController {
 
     private final UserEntityService userEntityService;
     private final TripEntityService tripEntityService;
-    private final ModelMapper modelMapper;
 
-    public ProfileController(UserEntityService userEntityService, TripEntityService tripEntityService, ModelMapper modelMapper) {
+    public ProfileController(UserEntityService userEntityService, TripEntityService tripEntityService) {
         this.userEntityService = userEntityService;
         this.tripEntityService = tripEntityService;
-        this.modelMapper = modelMapper;
     }
 
     @GetMapping
