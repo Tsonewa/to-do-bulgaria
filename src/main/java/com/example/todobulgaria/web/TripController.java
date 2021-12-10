@@ -19,6 +19,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -238,16 +239,14 @@ public class TripController {
     @GetMapping("/favourite/{id}")
     public String addFavouriteTrip(@PathVariable Long id, HttpServletRequest request, Principal principal){
 
-        if(principal.getName().isBlank()){
-             throw new ObjectNotFoundException(id);
-        }
+        UserEntity userByUsername = userEntityService.findUserByUsername(principal.getName())
+                .orElseThrow(() -> new UsernameNotFoundException
+                        ("User with username " + principal.getName() + " does not exist"));
 
-        Optional<UserEntity> userByUsername = userEntityService.findUserByUsername(principal.getName());
-
-        Set<TripEntity> favouriteTrips = userByUsername.get().getFavouriteTrips();
+        Set<TripEntity> favouriteTrips = userByUsername.getFavouriteTrips();
         favouriteTrips.add(tripEntityService.findEntityById(id));
 
-        userEntityService.updateUser(userByUsername.orElse(null));
+        userEntityService.updateUser(userByUsername);
 
         String referer = request.getHeader("Referer");
 
@@ -256,12 +255,10 @@ public class TripController {
 
     public Map<String, Object> jsonToMap(String str) {
 
-        Map<String, Object> map = gson.fromJson(str,
+        return gson.fromJson(str,
                 new TypeToken<HashMap<String, Object>>() {
                 }
                         .getType());
-
-        return map;
     }
 
 
